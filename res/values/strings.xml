@@ -25,5 +25,7 @@
     <string name="prefs_fullscreen_title">Pełny ekran</string>
     <string name="prefs_fullscreen_summary_off">Nie wyświetla na pełnym ekranie</string>
     <string name="prefs_fullscreen_summary_on">Wyświetla na pełnym ekranie</string>
+    <string name="event_title">P.I.W.O. na SkyTower</string>
+    <string name="event_address">SkyTower, ul. Powstańców Śląskich 73-95</string>
     
 </resources>
