@@ -26,50 +26,55 @@ public class NAPWr extends Activity implements OnClickListener {
 		setContentView(R.layout.main);
 
 		// odszukujemy przyciski i podpinamy pod nie listenery
-		Button top10 = (Button) findViewById(R.id.button_top10);
+		Button top10 = (Button) findViewById(R.id.main_button_top10);
 		top10.setOnClickListener(this);
-		Button today = (Button) findViewById(R.id.button_today);
+		Button today = (Button) findViewById(R.id.main_button_today);
 		today.setOnClickListener(this);
-		Button tommorow = (Button) findViewById(R.id.button_tommorow);
+		Button tommorow = (Button) findViewById(R.id.main_button_tommorow);
 		tommorow.setOnClickListener(this);
-		Button callendar = (Button) findViewById(R.id.button_callendar);
+		Button callendar = (Button) findViewById(R.id.main_button_callendar);
 		callendar.setOnClickListener(this);
-		Button favourites = (Button) findViewById(R.id.button_favourites);
+		Button favourites = (Button) findViewById(R.id.main_button_favourites);
 		favourites.setOnClickListener(this);
-		Button login = (Button) findViewById(R.id.button_login);
+		Button login = (Button) findViewById(R.id.main_button_login);
 		login.setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
 
-		// Wykonywanie akcji w przypadku naci�ni�cia kt�rego� z przycisk�w
+		// Wykonywanie akcji w przypadku nacisniecia ktoregos z przyciskow
 		switch (v.getId()) {
-		case R.id.button_top10:
-			// tre��
+		case R.id.main_button_top10:
+			startList("Top 10");
 			break;
 
-		case R.id.button_today:
-			// tre��
+		case R.id.main_button_today:
+			startList("Dzisiaj");
 			break;
 
-		case R.id.button_tommorow:
-			// tre��
+		case R.id.main_button_tommorow:
+			startList("Jutro");
 			break;
 
-		case R.id.button_callendar:
-			// tre��
+		case R.id.main_button_callendar:
+			startList("Kalendarz");
 			break;
 
-		case R.id.button_favourites:
-			// tre��
+		case R.id.main_button_favourites:
+			startActivity(new Intent(this, Login.class));
 			break;
 
-		case R.id.button_login:
-			Intent i = new Intent(this, Login.class);
-			startActivity(i);
+		case R.id.main_button_login:
+			startActivity(new Intent(this, Login.class));
 			break;
 		}
+	}
+	
+	public void startList(String name){
+		Intent i = new Intent(this, EventList.class);
+		i.putExtra(EventList.LIST_TITLE, name);
+		startActivity(i);
 	}
 
 	@Override

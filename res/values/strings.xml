@@ -7,13 +7,13 @@
     <string name="menu_exit">Wyjdź</string>
     
     <!-- Main -->
-    <string name="button_top10">TOP 10</string>
-    <string name="button_today">Dzisiaj</string>
-    <string name="button_tommorow">Jutro</string>
-    <string name="button_callendar">Kalendarz</string>
-    <string name="button_favourites">Ulubione</string>
-    <string name="button_login">Zaloguj się</string>
-    <string name="button_logout">Wyloguj się</string>
+    <string name="label_top10">TOP 10</string>
+    <string name="label_today">Dzisiaj</string>
+    <string name="label_tommorow">Jutro</string>
+    <string name="label_callendar">Kalendarz</string>
+    <string name="label_favourites">Ulubione</string>
+    <string name="label_login2">Zaloguj się</string>
+    <string name="label_logout">Wyloguj się</string>
     
     <!-- Login -->
     <string name="login_title">Zaloguj się NAPWr</string>

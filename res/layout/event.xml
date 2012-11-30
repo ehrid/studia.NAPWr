@@ -4,14 +4,14 @@
     android:layout_height="wrap_content"
     android:gravity="left"
     android:orientation="vertical"
-    android:padding="10dip" >
+    android:padding="10sp" >
 
     <RelativeLayout
-        android:layout_width="300dp"
+        android:layout_width="300sp"
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/event_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -20,21 +20,24 @@
             android:text="Back" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/event_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:focusableInTouchMode="false"
             android:text="Share" />
-
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="307dp"
+        android:layout_width="307sp"
         android:layout_height="wrap_content"
-        android:background="@drawable/event_border"
         android:orientation="vertical" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2sp"
+            android:background="#000000" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -42,12 +45,13 @@
             android:background="#FFFFFF" >
 
             <ToggleButton
-                android:id="@+id/toggleButton1"
+                android:id="@+id/event_likeit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/btn_star_big_on" />
 
             <TextView
+                android:id="@+id/event_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/toggleButton1"
@@ -55,144 +59,106 @@
                 android:layout_centerHorizontal="true"
                 android:text="@string/event_title" />
         </RelativeLayout>
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/event_border"
         android:orientation="vertical" >
 
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2sp"
+            android:background="#000000" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp" >
+            android:paddingBottom="5sp"
+            android:paddingTop="5sp" >
 
             <ImageView
-                android:id="@+id/imageView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="28dp"
-                android:layout_toRightOf="@+id/datePicker1"
+                android:layout_marginLeft="28sp"
                 android:src="@drawable/arrow_date" />
 
-            <DatePicker
-                android:id="@+id/datePicker2"
+            <TextView
+                android:id="@+id/event_fromDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginRight="22dp" />
-
-            <DatePicker
-                android:id="@+id/datePicker1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView1"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="16dp" />
+                android:text="27.11.2012 19:00" />
 
+            <TextView
+                android:id="@+id/event_toDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView2"
+                android:layout_alignBottom="@+id/textView2"
+                android:layout_alignParentRight="true"
+                android:text="27.11.2012 19:45" />
         </RelativeLayout>
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/event_border" >
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2sp"
+            android:background="#000000" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp" >
+            android:paddingBottom="5sp"
+            android:paddingTop="5sp" >
 
             <TextView
+                android:id="@+id/event_adres"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="@string/event_address" />
         </RelativeLayout>
-
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2sp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/event_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="TextView" />
+        </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             android:src="@drawable/img_tab" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <TabHost
-            android:id="@android:id/tabhost"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" >
-
-                <TabWidget
-                    android:id="@android:id/tabs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-                </TabWidget>
-
-                <FrameLayout
-                    android:id="@android:id/tabcontent"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <LinearLayout
-                        android:id="@id/tab1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/tab2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/tab3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
-                    </LinearLayout>
-                    <LinearLayout
-                        android:id="@+id/tab4"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
-                    </LinearLayout>
-                    <LinearLayout
-                        android:id="@+id/tab5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
-                    </LinearLayout>
-                </FrameLayout>
-            </LinearLayout>
-        </TabHost>
-
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

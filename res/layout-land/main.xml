@@ -5,16 +5,13 @@
     android:orientation="horizontal" >
 
     <ImageView
-        
-        android:id="@+id/imageView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"        
+        android:layout_centerHorizontal="true"
         android:background="@color/default_NAPWr"
         android:src="@drawable/napwr_logo" />
 
     <LinearLayout
-        android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -35,20 +32,18 @@
                 android:orientation="vertical" >
 
                 <Button
-                    android:id="@+id/button_top10"
+                    android:id="@+id/main_button_top10"
                     android:layout_width="@dimen/horizontal_button_size"
-                    android:layout_height="@dimen/horizontal_button_size"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/custom_button"
-                    android:text=" " />
+                    android:background="@drawable/custom_button" />
 
                 <TextView
-                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/button_top10" />
+                    android:text="@string/label_top10" />
             </LinearLayout>
 
             <LinearLayout
@@ -59,20 +54,18 @@
                 android:orientation="vertical" >
 
                 <Button
-                    android:id="@+id/button_today"
+                    android:id="@+id/main_button_today"
                     android:layout_width="@dimen/horizontal_button_size"
-                    android:layout_height="@dimen/horizontal_button_size"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/custom_button"
-                    android:text=" " />
+                    android:background="@drawable/custom_button" />
 
                 <TextView
-                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/button_today" />
+                    android:text="@string/label_today" />
             </LinearLayout>
 
             <LinearLayout
@@ -83,20 +76,18 @@
                 android:orientation="vertical" >
 
                 <Button
-                    android:id="@+id/button_tommorow"
+                    android:id="@+id/main_button_tommorow"
                     android:layout_width="@dimen/horizontal_button_size"
-                    android:layout_height="@dimen/horizontal_button_size"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/custom_button"
-                    android:text=" " />
+                    android:background="@drawable/custom_button" />
 
                 <TextView
-                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/button_tommorow" />
+                    android:text="@string/label_tommorow" />
             </LinearLayout>
         </LinearLayout>
 
@@ -112,20 +103,18 @@
                 android:orientation="vertical" >
 
                 <Button
-                    android:id="@+id/button_callendar"
+                    android:id="@+id/main_button_callendar"
                     android:layout_width="@dimen/horizontal_button_size"
-                    android:layout_height="@dimen/horizontal_button_size"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/custom_button"
-                    android:text=" " />
+                    android:background="@drawable/custom_button" />
 
                 <TextView
-                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/button_callendar" />
+                    android:text="@string/label_callendar" />
             </LinearLayout>
 
             <LinearLayout
@@ -136,20 +125,18 @@
                 android:orientation="vertical" >
 
                 <Button
-                    android:id="@+id/button_favourites"
+                    android:id="@+id/main_button_favourites"
                     android:layout_width="@dimen/horizontal_button_size"
-                    android:layout_height="@dimen/horizontal_button_size"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/custom_button"
-                    android:text=" " />
+                    android:background="@drawable/custom_button" />
 
                 <TextView
-                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/button_favourites" />
+                    android:text="@string/label_favourites" />
             </LinearLayout>
 
             <LinearLayout
@@ -160,20 +147,18 @@
                 android:orientation="vertical" >
 
                 <Button
-                    android:id="@+id/button_login"
+                    android:id="@+id/main_button_login"
                     android:layout_width="@dimen/horizontal_button_size"
-                    android:layout_height="@dimen/horizontal_button_size"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/custom_button"
-                    android:text=" " />
+                    android:background="@drawable/custom_button" />
 
                 <TextView
-                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/button_login" />
+                    android:text="@string/label_login2" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

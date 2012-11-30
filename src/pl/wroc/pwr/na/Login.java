@@ -21,10 +21,10 @@ public class Login extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 
-		// Wykonywanie akcji w przypadku naci�ni�cia kt�rego� z przycisk�w
+		// Wykonywanie akcji w przypadku nacisniecia ktoregos z przyciskow
 		switch (v.getId()) {
-		case R.id.button_login2: // wci�ni�cie przycisku zalog�j
-			// logowanie
+		case R.id.button_login2: // wcisniecie przycisku zaloguj
+			// TODO logowanie
 			break;
 		}
 	}
