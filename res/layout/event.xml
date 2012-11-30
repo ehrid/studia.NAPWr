@@ -58,6 +58,7 @@
                 android:layout_alignBottom="@+id/toggleButton1"
                 android:layout_centerHorizontal="true"
                 android:text="@string/event_title" />
+
         </RelativeLayout>
     </LinearLayout>
 
