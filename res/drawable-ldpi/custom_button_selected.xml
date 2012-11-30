@@ -1,0 +1,53 @@
+<selector
+xmlns:android="http://schemas.android.com/apk/res/android">
+
+<item android:state_pressed="true" >
+    <shape 
+        android:shape="ring"
+    	android:innerRadiusRatio="3"
+    	android:thicknessRatio="8" 
+    	android:useLevel="false">
+	    <size android:width="48dip" 
+	        android:height="48dip" />
+	    <solid
+        android:color="@color/button_active" />
+	    <stroke
+        android:width="2dip"
+        android:color="@color/button_stroke"/>
+	</shape>
+</item>
+
+<item android:state_focused="true" >
+    <shape>
+        <shape 
+        android:shape="ring"
+    	android:innerRadiusRatio="3"
+    	android:thicknessRatio="8" 
+    	android:useLevel="false">
+	    <size android:width="48dip" 
+	        android:height="48dip" />
+	    <solid
+        android:color="@color/button_active" />
+	    <stroke
+        android:width="2dip"
+        android:color="@color/button_stroke"/>
+	</shape>
+    </shape>
+</item>
+
+<item>        
+    <shape 
+        android:shape="ring"
+    	android:innerRadiusRatio="3"
+    	android:thicknessRatio="8" 
+    	android:useLevel="false">
+	    <size android:width="48dip" 
+	        android:height="48dip" />
+	    <solid
+        android:color="@color/button_active" />
+	    <stroke
+        android:width="2dip"
+        android:color="@color/button_stroke"/>
+	</shape>
+</item>
+</selector>
