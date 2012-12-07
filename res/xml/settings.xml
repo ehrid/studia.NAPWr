@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="fulscreen"
+        android:summaryOn="@string/prefs_fullscreen_summary_on"
+        android:summaryOff="@string/prefs_fullscreen_summary_off"
+        android:title="@string/prefs_fullscreen_title" />
+
+</PreferenceScreen>

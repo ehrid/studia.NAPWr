@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/event_list_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nazwa wydarzenia" />
+    
+    <View
+        android:layout_width="fill_parent"
+    	android:layout_height="@dimen/stroke_size"
+    	android:background="@color/background_gray"
+        />
+
+</LinearLayout>

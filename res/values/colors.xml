@@ -1,0 +1,32 @@
+<resources>
+
+    <!-- Default Colors -->
+    <color name="default_background">#FFFFFF</color>
+    <color name="default_NAPWr">#27a7df</color>
+
+    <!-- Splash Screen Loading -->
+    <color name="splash_loading1">#0088cd</color>
+    <color name="splash_loading2">#009ee0</color>
+    <color name="splash_loading3">#50c6ef</color>
+
+    <!-- Buttons -->
+    <color name="button_active">#27a7df</color>
+    <color name="button_unactive">#ffffff</color>
+    <color name="button_stroke">#000000</color>
+
+    <!-- Text colors -->
+	<color name="text_white">#FFFFFF</color>
+	<color name="text_black">#000000</color>
+	<color name="text_gray">#717171</color>
+
+    <!-- Backgrounds -->
+	<color name="background_white">#FFFFFF</color>
+	<color name="background_black">#000000</color>
+	<color name="background_gray">#717171</color>
+	
+    <!-- Overlays -->
+    <color name="overlay_white">#FFFFFF</color>
+	<color name="overlay_black">#000000</color>
+	<color name="overlay_gray">#717171</color>
+
+</resources>
