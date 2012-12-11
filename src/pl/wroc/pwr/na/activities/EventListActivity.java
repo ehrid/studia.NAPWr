@@ -76,13 +76,11 @@ public class EventListActivity extends Activity implements OnClickListener {
 	public void addEvents() {
 		ArrayList<EventObject> eventList = new ArrayList<EventObject>();
 
-		eventList.add(new EventObject("Wydarznie1", 1));
-		eventList.add(new EventObject("Wydarznie2", 2));
-		eventList.add(new EventObject("Wydarznie3", 3));
-		eventList.add(new EventObject("Wydarznie4", 4));
-		eventList.add(new EventObject("Wydarznie5", 5));
-		eventList.add(new EventObject("Wydarznie6", 6));
-		eventList.add(new EventObject("Wydarznie7", 7));
+		for(int i=1; i < 10; i++)
+		{
+			eventList.add(new EventObject("Wydarznie"+i, i));
+		}
+		
 
 		adapter = new EventListAdapter(this, R.layout.item_event_list,
 				eventList);
