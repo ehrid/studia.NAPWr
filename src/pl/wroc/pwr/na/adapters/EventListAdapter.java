@@ -52,6 +52,30 @@ public class EventListAdapter extends ArrayAdapter<EventObject> {
 
 		// Assign the appropriate data from our alert object above
 		name.setText(event.name);
+		
+		//the same for number of likes:
+		// Get the text boxes from the listitem.xml file
+		TextView likeSum = (TextView) alertView
+				.findViewById(R.id.event_list_item_like_sum);
+
+		// Assign the appropriate data from our alert object above
+		likeSum.setText(Integer.toString(event.likeSum));
+		
+		//the same for content:
+		// Get the text boxes from the listitem.xml file
+		TextView content = (TextView) alertView
+				.findViewById(R.id.event_list_item_content);
+
+		// Assign the appropriate data from our alert object above
+		content.setText(event.content);
+		
+		//the same for start date:
+		// Get the text boxes from the listitem.xml file
+		TextView startDate = (TextView) alertView
+				.findViewById(R.id.event_list_item_start_date);
+
+		// Assign the appropriate data from our alert object above
+		startDate.setText(event.startDate.toString());
 
 		return alertView;
 	}

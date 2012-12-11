@@ -12,13 +12,25 @@
     
     <TextView
         android:id="@+id/event_list_item_like_sum"
-        android:layout_width="match_parent"
+        android:layout_width="46dp"
         android:layout_height="match_parent"
         android:text="Suma lików" />
 
     <TextView
+        android:id="@+id/event_list_item_start_date"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:text="Data początku" />
+    
+    <TextView
+        android:id="@+id/event_list_item_content"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:text="Treść wydarzenia" />
+    
+    <TextView
         android:id="@+id/event_list_item_name"
-        android:layout_width="match_parent"
+        android:layout_width="74dp"
         android:layout_height="match_parent"
         android:text="Nazwa wydarzenia" />
     

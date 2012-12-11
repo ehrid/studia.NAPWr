@@ -1,6 +1,7 @@
 package pl.wroc.pwr.na.activities;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import pl.wroc.pwr.na.R;
@@ -78,7 +79,7 @@ public class EventListActivity extends Activity implements OnClickListener {
 
 		for(int i=1; i < 10; i++)
 		{
-			eventList.add(new EventObject("Wydarznie"+i, i, 'Lorem ipsum dolor sit amet' true));
+			eventList.add(new EventObject("Wydarznie"+i, i, "Lorem ipsum dolor sit amet","http://www.obrazek.pl",7*i, new Date()));
 		}
 		
 
