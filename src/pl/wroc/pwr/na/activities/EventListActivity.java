@@ -33,11 +33,19 @@ public class EventListActivity extends Activity implements OnClickListener {
 	private EventListAdapter adapter;
 	private Context context;
 
+	public EventObject event;
+
+	private static EventListActivity singleInstance = null;
+
+	public static EventListActivity getInstance() {
+		return singleInstance;
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_list);
-		
+
 		context = this.getApplicationContext();
 
 		title = (TextView) findViewById(R.id.eventlist_title);
@@ -45,16 +53,15 @@ public class EventListActivity extends Activity implements OnClickListener {
 		eventListView = (ListView) findViewById(R.id.event_list_events);
 		addEvents();
 
+		singleInstance = this;
+
 		eventListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 
-				EventObject event = adapter.getEvent(position);
+				event = adapter.getEvent(position);
 
-				Intent i = new Intent(context, LoginActivity.class);
-				i.putExtra(EventActivity.CURRENT_EVENT_OBJECT, ""+event.id);
-				
 				startActivity(new Intent(context, EventActivity.class));
 			}
 		});
@@ -77,7 +84,8 @@ public class EventListActivity extends Activity implements OnClickListener {
 		eventList.add(new EventObject("Wydarznie6", 6));
 		eventList.add(new EventObject("Wydarznie7", 7));
 
-		adapter = new EventListAdapter(this, R.layout.item_event_list, eventList);
+		adapter = new EventListAdapter(this, R.layout.item_event_list,
+				eventList);
 		eventListView.setAdapter(adapter);
 	}
 

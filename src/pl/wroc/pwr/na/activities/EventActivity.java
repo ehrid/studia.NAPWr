@@ -10,15 +10,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class EventActivity extends Activity implements OnClickListener{
-	
-	public final static String CURRENT_EVENT_OBJECT = "pl.wroc.pwr.na.current_event";
+public class EventActivity extends Activity implements OnClickListener {
 
-	//Header
+	// Header
 	Button back;
 	Button share;
-	
-	//Event
+
+	// Event
 	Button likeit;
 	TextView title;
 	TextView fromDate;
@@ -27,14 +25,18 @@ public class EventActivity extends Activity implements OnClickListener{
 	TextView content;
 	ImageView poster;
 
+	EventObject event;
+	
+	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event);
-		
+
 		back = (Button) findViewById(R.id.back);
 		share = (Button) findViewById(R.id.share);
-		
+
 		title = (TextView) findViewById(R.id.event_title);
 		likeit = (Button) findViewById(R.id.event_likeit);
 		fromDate = (TextView) findViewById(R.id.event_fromDate);
@@ -42,13 +44,17 @@ public class EventActivity extends Activity implements OnClickListener{
 		address = (TextView) findViewById(R.id.event_address);
 		content = (TextView) findViewById(R.id.event_content);
 		poster = (ImageView) findViewById(R.id.event_poster);
-		
+
+		event = ((EventListActivity)((EventListActivity.getInstance()))).event;
+
+		content.setText(event.name);
+
 	}
-	
+
 	@Override
 	public void onClick(View arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

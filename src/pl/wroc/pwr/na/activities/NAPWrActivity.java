@@ -11,10 +11,12 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class NAPWrActivity extends Activity implements OnClickListener {
 
 	private int ACTIVE_OPTION;
+	private boolean LOOGED_IN;
 
 	Button top10;
 	Button today;
@@ -22,12 +24,20 @@ public class NAPWrActivity extends Activity implements OnClickListener {
 	Button callendar;
 	Button favourites;
 	Button login;
+	TextView loginText;
+
+	private static NAPWrActivity singleInstance = null;
+
+	public static NAPWrActivity getInstance() {
+		return singleInstance;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		ACTIVE_OPTION = 2;
+		setLOOGED_IN(false);
 
 		if (PreferencesActivity.getFulscreen(this)) {
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -50,11 +60,21 @@ public class NAPWrActivity extends Activity implements OnClickListener {
 		favourites.setOnClickListener(this);
 		login = (Button) findViewById(R.id.main_button_login);
 		login.setOnClickListener(this);
-		
+		loginText = (TextView) findViewById(R.id.main_textView_login);
+
+		singleInstance = this;
+
+		makeAtive(ACTIVE_OPTION);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
 		makeAtive(ACTIVE_OPTION);
 	}
 
 	public void makeAtive(int i) {
+		makeBasicBackground();
 		Button b = today;
 		switch (i) {
 		case 1:
@@ -77,9 +97,13 @@ public class NAPWrActivity extends Activity implements OnClickListener {
 			break;
 		}
 		b.setBackgroundResource(R.drawable.custom_button_selected);
+
+		if (isLOOGED_IN()) {
+			login.setBackgroundResource(R.drawable.custom_button_selected);
+		}
 	}
-	
-	public void makeBasicBackground(){
+
+	public void makeBasicBackground() {
 		top10.setBackgroundResource(R.drawable.custom_button);
 		today.setBackgroundResource(R.drawable.custom_button);
 		tommorow.setBackgroundResource(R.drawable.custom_button);
@@ -110,11 +134,21 @@ public class NAPWrActivity extends Activity implements OnClickListener {
 			break;
 
 		case R.id.main_button_favourites:
+			if (LOOGED_IN) {
+				startList("Ulubione");
+			} else {
 			startActivity(new Intent(this, LoginActivity.class));
+			}
 			break;
 
 		case R.id.main_button_login:
-			startActivity(new Intent(this, LoginActivity.class));
+			if (LOOGED_IN) {
+				setLOOGED_IN(false);
+				setLogedInLabel(false);
+				makeAtive(ACTIVE_OPTION);
+			} else {
+				startActivity(new Intent(this, LoginActivity.class));
+			}
 			break;
 		}
 	}
@@ -147,4 +181,21 @@ public class NAPWrActivity extends Activity implements OnClickListener {
 		}
 		return false;
 	}
+
+	public boolean isLOOGED_IN() {
+		return LOOGED_IN;
+	}
+
+	public void setLOOGED_IN(boolean LOOGED_IN) {
+		this.LOOGED_IN = LOOGED_IN;
+	}
+
+	public void setLogedInLabel(boolean logged) {
+		if (logged) {
+			loginText.setText(R.string.label_logout);
+		} else {
+			loginText.setText(R.string.label_login2);
+		}
+	}
+
 }
