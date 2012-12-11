@@ -78,7 +78,7 @@ public class EventListActivity extends Activity implements OnClickListener {
 
 		for(int i=1; i < 10; i++)
 		{
-			eventList.add(new EventObject("Wydarznie"+i, i));
+			eventList.add(new EventObject("Wydarznie"+i, i, 'Lorem ipsum dolor sit amet' true));
 		}
 		
 

@@ -19,6 +19,7 @@ public class EventObject {
 	public CharSequence tag4;
 	public CharSequence tag5;
 	public int likeSum;
+	public boolean isLiked;
 	public Date startDate;
 	public Date endDate;
 	public Date addedDate;
@@ -51,7 +52,13 @@ public class EventObject {
 		this.id = id;
 	}
 
-
+	public EventObject(CharSequence name, int id, boolean isLiked) {
+		super();
+		this.name = name;
+		this.id = id;
+		this.isLiked = isLiked;
+	}
+	
 	public EventObject(CharSequence name, int id, CharSequence content,
 			CharSequence externalLink, OrganizationObject organization,
 			AddressObject address, DepartmentObject department,
@@ -107,6 +114,17 @@ public class EventObject {
 		this.speaker3 = speaker3;
 		this.googlePlusLink = googlePlusLink;
 		this.agendaLink = agendaLink;
+	}
+
+	public EventObject(CharSequence name, int id, CharSequence content,
+			CharSequence poster, int likeSum, Date startDate) {
+		super();
+		this.name = name;
+		this.id = id;
+		this.content = content;
+		this.poster = poster;
+		this.likeSum = likeSum;
+		this.startDate = startDate;
 	}
 
 }
