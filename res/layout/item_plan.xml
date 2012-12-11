@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    
+        <TextView
+        android:id="@+id/event_list_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nazwa przedmiotu,budynek(sala)"
+        android:textColor="#2B60DE" />
+    
+    <View
+        android:layout_width="fill_parent"
+    	android:layout_height="@dimen/stroke_size"
+    	android:background="#2B60DE"
+        />
+    
+    </LinearLayout>
