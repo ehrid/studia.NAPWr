@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activitiesLoginActivity"
+            android:name=".activities.LoginActivity"
             android:label="@string/login_title"
             android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".activities.NAPWrActivity" />
