@@ -79,7 +79,9 @@ public class EventListActivity extends Activity implements OnClickListener {
 
 		for(int i=1; i < 10; i++)
 		{
-			eventList.add(new EventObject("Wydarznie"+i, i, "Lorem ipsum dolor sit amet","http://www.obrazek.pl",7*i, new Date()));
+			eventList.add(new EventObject("Wydarznie nr: "+i, i,
+					"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in pretium eros. Integer enim dolor, suscipit eget cursus a, fringilla sit amet justo. Aenean vel lorem ipsum, id tristique nulla. Proin eu felis enim, eu congue tortor... ",
+					"http://www.na.pwr.wroc.pl/Symfony/web/bundles/cona/img/plakaty/small-5733534440398.jpg",7*i, new Date()));
 		}
 		
 

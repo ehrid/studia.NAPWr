@@ -8,6 +8,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -76,6 +77,13 @@ public class EventListAdapter extends ArrayAdapter<EventObject> {
 
 		// Assign the appropriate data from our alert object above
 		startDate.setText(event.startDate.toString());
+		
+		
+		//the same for image url:
+				// Get the text boxes from the listitem.xml file
+		WebView myWebView = (WebView) alertView.findViewById(R.id.webview);
+		myWebView.loadUrl(event.poster.toString());
+		
 
 		return alertView;
 	}
