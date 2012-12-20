@@ -27,10 +27,13 @@
             android:name=".activities.LoginActivity"
             android:label="@string/login_title"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".activities.NAPWrActivity" />
+        <activity android:name=".activities.NAPWrActivity" 
+            android:screenOrientation="portrait"/>
         <activity android:name=".activities.PreferencesActivity" />
-        <activity android:name=".activities.EventListActivity" />
-        <activity android:name=".activities.EventActivity" />
+        <activity android:name=".activities.EventListActivity" 
+            android:configChanges="orientation|keyboardHidden|keyboard"/>
+        <activity android:name=".activities.EventActivity" 
+            android:configChanges="orientation|keyboardHidden|keyboard"/>
     </application>
 
 </manifest>

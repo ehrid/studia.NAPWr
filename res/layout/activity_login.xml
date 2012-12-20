@@ -10,14 +10,14 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
-        android:text="@string/label_login" />
+        android:hint="@string/label_login" />
 
     <EditText
         android:id="@+id/login_editText_password"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:text="@string/label_password" />
+        android:hint="@string/label_password" />
 
     <Button
         android:id="@+id/login_button_login"

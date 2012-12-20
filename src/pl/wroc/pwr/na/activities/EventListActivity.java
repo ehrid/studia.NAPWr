@@ -4,16 +4,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,24 +19,17 @@ import org.json.JSONObject;
 import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.adapters.EventListAdapter;
 import pl.wroc.pwr.na.objects.EventObject;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class EventListActivity extends Activity implements OnClickListener {
 
@@ -78,7 +68,6 @@ public class EventListActivity extends Activity implements OnClickListener {
 					int position, long id) {
 
 				event = adapter.getEvent(position);
-
 				startActivity(new Intent(context, EventActivity.class));
 			}
 		});

@@ -47,7 +47,11 @@ public class EventActivity extends Activity implements OnClickListener {
 
 		event = ((EventListActivity)((EventListActivity.getInstance()))).event;
 
-		content.setText(event.name);
+		if(event.name != null) title.setText(event.name.toString());
+		if(event.startDate != null) fromDate.setText(event.startDate.toString());
+		if(event.endDate != null) toDate.setText(event.endDate.toString());
+		if(event.address != null) address.setText(event.address.toString());
+		if(event.content != null) content.setText(event.content.toString());
 
 	}
 

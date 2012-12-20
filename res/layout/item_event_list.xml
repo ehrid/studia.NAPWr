@@ -2,7 +2,13 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal" >
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/stroke_size"
+        android:background="@color/background_gray" />
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -21,36 +27,30 @@
         <TextView
             android:id="@+id/event_list_item_like_sum"
             android:layout_width="23dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="fill_vertical"
-            android:text="Suma lików" />
+            android:text="S" />
 
         <TextView
             android:id="@+id/event_list_item_start_date"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Data początku" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/stroke_size"
-            android:background="@color/background_gray" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/event_list_item_name"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/first_row"
         android:text="Nazwa wydarzenia" />
 
     <RelativeLayout
-        android:id="@+id/bottom_row"
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/bottom_row"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/event_list_item_name"
-         >
+        android:layout_below="@+id/event_list_item_name" >
 
         <WebView
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -64,8 +64,8 @@
             android:id="@+id/event_list_item_content"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="Treść wydarzenia" 
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:text="Treść wydarzenia" />
     </RelativeLayout>
 
 </RelativeLayout>

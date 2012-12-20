@@ -1,35 +1,37 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/default_background"
-    android:orientation="horizontal" >
+    android:orientation="vertical" >
 
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:background="@color/default_NAPWr"
         android:src="@drawable/napwr_logo" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+        
+        <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/default_margin"
+        android:layout_centerInParent="true"
         android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="horizontal" >
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_margin="@dimen/vertical_button_margin"
-                android:layout_weight="1"
                 android:orientation="vertical" >
 
                 <Button
@@ -37,7 +39,6 @@
                     android:layout_width="@dimen/vertical_button_size"
                     android:layout_height="@dimen/vertical_button_size"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
                     android:background="@drawable/custom_button" />
 
                 <TextView
@@ -51,7 +52,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_margin="@dimen/vertical_button_margin"
-                android:layout_weight="1"
                 android:orientation="vertical" >
 
                 <Button
@@ -59,7 +59,6 @@
                     android:layout_width="@dimen/vertical_button_size"
                     android:layout_height="@dimen/vertical_button_size"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
                     android:background="@drawable/custom_button" />
 
                 <TextView
@@ -73,7 +72,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_margin="@dimen/vertical_button_margin"
-                android:layout_weight="1"
                 android:orientation="vertical" >
 
                 <Button
@@ -81,7 +79,6 @@
                     android:layout_width="@dimen/vertical_button_size"
                     android:layout_height="@dimen/vertical_button_size"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
                     android:background="@drawable/custom_button" />
 
                 <TextView
@@ -94,13 +91,13 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+            android:gravity="center_horizontal">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_margin="@dimen/vertical_button_margin"
-                android:layout_weight="1"
                 android:orientation="vertical" >
 
                 <Button
@@ -108,7 +105,6 @@
                     android:layout_width="@dimen/vertical_button_size"
                     android:layout_height="@dimen/vertical_button_size"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
                     android:background="@drawable/custom_button" />
 
                 <TextView
@@ -122,7 +118,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_margin="@dimen/vertical_button_margin"
-                android:layout_weight="1"
                 android:orientation="vertical" >
 
                 <Button
@@ -130,7 +125,6 @@
                     android:layout_width="@dimen/vertical_button_size"
                     android:layout_height="@dimen/vertical_button_size"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
                     android:background="@drawable/custom_button" />
 
                 <TextView
@@ -144,7 +138,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_margin="@dimen/vertical_button_margin"
-                android:layout_weight="1"
                 android:orientation="vertical" >
 
                 <Button
@@ -152,7 +145,6 @@
                     android:layout_width="@dimen/vertical_button_size"
                     android:layout_height="@dimen/vertical_button_size"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
                     android:background="@drawable/custom_button" />
 
                 <TextView
@@ -164,5 +156,8 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+    </RelativeLayout>
 
-</RelativeLayout>
+    
+
+</LinearLayout>
