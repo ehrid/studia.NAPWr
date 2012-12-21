@@ -128,13 +128,13 @@
                 android:text="Treść wydarznia" />
         </LinearLayout>
 
-        <ImageView
+        <Button
             android:id="@+id/event_poster"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/img_tab" />
+            android:background="@drawable/img_tab" />
     </RelativeLayout>
 
 </LinearLayout>

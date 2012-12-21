@@ -72,6 +72,7 @@ public final class R {
     public static final class id {
         public static final int back=0x7f0a0015;
         public static final int bottom_row=0x7f0a001f;
+        public static final int close=0x7f0a0023;
         public static final int event_address=0x7f0a0005;
         public static final int event_content=0x7f0a0006;
         public static final int event_fromDate=0x7f0a0003;
@@ -100,8 +101,9 @@ public final class R {
         public static final int main_button_tommorow=0x7f0a000e;
         public static final int main_button_top10=0x7f0a000c;
         public static final int main_textView_login=0x7f0a0012;
-        public static final int menu_exit=0x7f0a0023;
-        public static final int menu_settings=0x7f0a0022;
+        public static final int menu_exit=0x7f0a0025;
+        public static final int menu_settings=0x7f0a0024;
+        public static final int popup_event_img=0x7f0a0022;
         public static final int share=0x7f0a0016;
         public static final int textView1=0x7f0a0019;
         public static final int textView2=0x7f0a0018;
@@ -119,7 +121,7 @@ public final class R {
         public static final int header_plan=0x7f030008;
         public static final int item_event_list=0x7f030009;
         public static final int item_plan=0x7f03000a;
-        public static final int main=0x7f03000b;
+        public static final int item_popup_img=0x7f03000b;
     }
     public static final class menu {
         public static final int main=0x7f090000;
