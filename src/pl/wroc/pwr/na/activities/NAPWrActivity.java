@@ -64,44 +64,44 @@ public class NAPWrActivity extends Activity implements OnClickListener {
 
 		singleInstance = this;
 
-		makeAtive(ACTIVE_OPTION);
+		// makeAtive(ACTIVE_OPTION);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		makeAtive(ACTIVE_OPTION);
+		// makeAtive(ACTIVE_OPTION);
 	}
 
-	public void makeAtive(int i) {
-		makeBasicBackground();
-		Button b = today;
-		switch (i) {
-		case 1:
-			b = top10;
-			break;
-		case 2:
-			b = today;
-			break;
-		case 3:
-			b = tommorow;
-			break;
-		case 4:
-			b = callendar;
-			break;
-		case 5:
-			b = favourites;
-			break;
-		case 6:
-			b = login;
-			break;
-		}
-		b.setBackgroundResource(R.drawable.custom_button_selected);
-
-		if (isLOOGED_IN()) {
-			login.setBackgroundResource(R.drawable.custom_button_selected);
-		}
-	}
+//	public void makeAtive(int i) {
+//		makeBasicBackground();
+//		Button b = today;
+//		switch (i) {
+//		case 1:
+//			b = top10;
+//			break;
+//		case 2:
+//			b = today;
+//			break;
+//		case 3:
+//			b = tommorow;
+//			break;
+//		case 4:
+//			b = callendar;
+//			break;
+//		case 5:
+//			b = favourites;
+//			break;
+//		case 6:
+//			b = login;
+//			break;
+//		}
+//		b.setBackgroundResource(R.drawable.custom_button_selected);
+//
+//		if (isLOOGED_IN()) {
+//			login.setBackgroundResource(R.drawable.custom_button_selected);
+//		}
+//	}
 
 	public void makeBasicBackground() {
 		top10.setBackgroundResource(R.drawable.custom_button);
@@ -112,7 +112,6 @@ public class NAPWrActivity extends Activity implements OnClickListener {
 		login.setBackgroundResource(R.drawable.custom_button);
 	}
 
-	@Override
 	public void onClick(View v) {
 
 		// Wykonywanie akcji w przypadku nacisniecia ktoregos z przyciskow
@@ -145,7 +144,7 @@ public class NAPWrActivity extends Activity implements OnClickListener {
 			if (LOOGED_IN) {
 				setLOOGED_IN(false);
 				setLogedInLabel(false);
-				makeAtive(ACTIVE_OPTION);
+				// makeAtive(ACTIVE_OPTION);
 			} else {
 				startActivity(new Intent(this, LoginActivity.class));
 			}
