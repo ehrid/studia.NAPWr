@@ -84,6 +84,8 @@ public class EventListActivity extends Activity implements OnClickListener {
 		String wydarzenieTresc = "sciema";
 		int wydarzenieSumaLajkow = 0;
 		Date wydarzenieDataPoczatek = new Date();
+		String linkToSmallPoster = "sciema";
+		
 		JSONObject event;
 		
 		JSONArray completeJSONArr = null;
@@ -105,7 +107,7 @@ public class EventListActivity extends Activity implements OnClickListener {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
-			// Log.d(TAG, "httpclient.execute failed");
+			
 			e.printStackTrace();
 			
 		}
@@ -118,10 +120,11 @@ public class EventListActivity extends Activity implements OnClickListener {
 				event = completeJSONArr.getJSONObject(i);
 				wydarzenieTytul = event.getString("wydarzenieTytul");
 				wydarzenieTresc = event.getString("wydarzenieTresc");
+				linkToSmallPoster = event.getJSONObject("plakat").getString("plakatMiniatura");
 				
 				wydarzenieSumaLajkow = event.getInt("wydarzenieSumaLajkow");
 				
-				//wydarzenieDataPoczatek = event.get("wydarzenieDataPoczatek");
+				wydarzenieDataPoczatek = (Date) event.getJSONObject("wydarzenieDataPoczatek").get("date");
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -133,8 +136,11 @@ public class EventListActivity extends Activity implements OnClickListener {
 							wydarzenieTytul,
 							i,
 							wydarzenieTresc,
-							"http://www.na.pwr.wroc.pl/Symfony/web/bundles/cona/img/plakaty/small-5733534440398.jpg",
-							wydarzenieSumaLajkow, new Date()));
+							linkToSmallPoster,
+							wydarzenieSumaLajkow,
+							wydarzenieDataPoczatek
+							)
+					);
 		}
 
 		adapter = new EventListAdapter(this, R.layout.item_event_list,
