@@ -58,16 +58,35 @@ public final class R {
     }
     public static final class drawable {
         public static final int arrow_date=0x7f020000;
-        public static final int custom_button=0x7f020001;
-        public static final int custom_button_selected=0x7f020002;
-        public static final int event_border=0x7f020003;
-        public static final int ic_action_search=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int img_tab=0x7f020006;
-        public static final int liked_star=0x7f020007;
-        public static final int logo_splashscreen=0x7f020008;
-        public static final int napwr_logo=0x7f020009;
-        public static final int unliked_star=0x7f02000a;
+        public static final int btn_main_favourites_default=0x7f020001;
+        public static final int btn_main_favourites_focused=0x7f020002;
+        public static final int btn_main_favourites_pressed=0x7f020003;
+        public static final int btn_main_fovourites=0x7f020004;
+        public static final int btn_main_kalendarz_default=0x7f020005;
+        public static final int btn_main_kalendarz_focused=0x7f020006;
+        public static final int btn_main_kalendarz_pressed=0x7f020007;
+        public static final int btn_main_login_default=0x7f020008;
+        public static final int btn_main_login_focused=0x7f020009;
+        public static final int btn_main_login_pressed=0x7f02000a;
+        public static final int btn_main_today_default=0x7f02000b;
+        public static final int btn_main_today_focused=0x7f02000c;
+        public static final int btn_main_today_pressed=0x7f02000d;
+        public static final int btn_main_tomorrow_default=0x7f02000e;
+        public static final int btn_main_tomorrow_focused=0x7f02000f;
+        public static final int btn_main_tomorrow_pressed=0x7f020010;
+        public static final int btn_main_top10_default=0x7f020011;
+        public static final int btn_main_top10_focused=0x7f020012;
+        public static final int btn_main_top10_pressed=0x7f020013;
+        public static final int custom_button=0x7f020014;
+        public static final int custom_button_selected=0x7f020015;
+        public static final int event_border=0x7f020016;
+        public static final int ic_action_search=0x7f020017;
+        public static final int ic_launcher=0x7f020018;
+        public static final int img_tab=0x7f020019;
+        public static final int liked_star=0x7f02001a;
+        public static final int logo_splashscreen=0x7f02001b;
+        public static final int napwr_logo=0x7f02001c;
+        public static final int unliked_star=0x7f02001d;
     }
     public static final class id {
         public static final int back=0x7f0a0015;
@@ -121,7 +140,10 @@ public final class R {
         public static final int header_plan=0x7f030008;
         public static final int item_event_list=0x7f030009;
         public static final int item_plan=0x7f03000a;
+<<<<<<< HEAD
         public static final int item_popup_img=0x7f03000b;
+=======
+>>>>>>> 9a833d328423f2ffd5243105c8dbcae5e882b1ec
     }
     public static final class menu {
         public static final int main=0x7f090000;
