@@ -79,36 +79,68 @@ public class EventListActivity extends Activity implements OnClickListener {
 
 	}
 
-	public void addEvents() {
+	public void addEvents(){
 		String wydarzenieTytul = "sciema";
 		String wydarzenieTresc = "sciema";
+		int wydarzenieSumaLajkow = 0;
+		Date wydarzenieDataPoczatek = new Date();
+		String linkToSmallPoster = "sciema";
+		
+		JSONObject event;
+		
+		JSONArray completeJSONArr = null;
 		try {
 			//new RequestTask().execute("http://na.pwr.wroc.pl/mobile/wydarzenia/jutro");
 			
-			JSONArray completeJSONArr = new JSONArray((String) new RequestTask().execute("http://na.pwr.wroc.pl/mobile/wydarzenia/jutro").get());
-			JSONObject object = completeJSONArr.getJSONObject(0);
-			wydarzenieTytul = object.getString("wydarzenieTytul");
-			wydarzenieTresc = object.getString("wydarzenieTresc");
+			if(getIntent().getStringExtra(LIST_TITLE).equals("Dzisiaj"))
+			{
+				completeJSONArr = new JSONArray((String) new RequestTask().execute("http://na.pwr.wroc.pl/mobile/wydarzenia/dzis").get());
+			}
+			else
+			{
+				completeJSONArr = new JSONArray((String) new RequestTask().execute("http://na.pwr.wroc.pl/mobile/wydarzenia/jutro").get());
+			}
+			
+
 			
 			
 		} catch (JSONException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
-			// Log.d(TAG, "httpclient.execute failed");
+			
 			e.printStackTrace();
 			
 		}
 
 		ArrayList<EventObject> eventList = new ArrayList<EventObject>();
 
-		for (int i = 1; i < 10; i++) {
+		for (int i = 0; i < completeJSONArr.length(); i++) {
+			
+			try {
+				event = completeJSONArr.getJSONObject(i);
+				wydarzenieTytul = event.getString("wydarzenieTytul");
+				wydarzenieTresc = event.getString("wydarzenieTresc");
+				linkToSmallPoster = event.getJSONObject("plakat").getString("plakatMiniatura");
+				
+				wydarzenieSumaLajkow = event.getInt("wydarzenieSumaLajkow");
+				
+				wydarzenieDataPoczatek = (Date) event.getJSONObject("wydarzenieDataPoczatek").get("date");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			
 			eventList
 					.add(new EventObject(
 							wydarzenieTytul,
 							i,
 							wydarzenieTresc,
-							"http://www.na.pwr.wroc.pl/Symfony/web/bundles/cona/img/plakaty/small-5733534440398.jpg",
-							7 * i, new Date()));
+							linkToSmallPoster,
+							wydarzenieSumaLajkow,
+							wydarzenieDataPoczatek
+							)
+					);
 		}
 
 		adapter = new EventListAdapter(this, R.layout.item_event_list,
