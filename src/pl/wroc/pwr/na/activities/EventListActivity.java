@@ -83,7 +83,7 @@ public class EventListActivity extends Activity implements OnClickListener {
 		String wydarzenieTytul = "sciema";
 		String wydarzenieTresc = "sciema";
 		int wydarzenieSumaLajkow = 0;
-		Date wydarzenieDataPoczatek = new Date();
+		String wydarzenieDataPoczatek = "sciema";
 		String linkToSmallPoster = "sciema";
 		
 		JSONObject event;
@@ -124,7 +124,7 @@ public class EventListActivity extends Activity implements OnClickListener {
 				
 				wydarzenieSumaLajkow = event.getInt("wydarzenieSumaLajkow");
 				
-				wydarzenieDataPoczatek = (Date) event.getJSONObject("wydarzenieDataPoczatek").get("date");
+				wydarzenieDataPoczatek = (String) event.getJSONObject("wydarzenieDataPoczatek").get("date");
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
