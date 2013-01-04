@@ -83,6 +83,8 @@ public class EventListActivity extends Activity implements OnClickListener {
 		String wydarzenieTytul = "sciema";
 		String wydarzenieTresc = "sciema";
 		int wydarzenieSumaLajkow = 0;
+		int wydarzenieWartoscPriorytet = 0;
+		int wydarzeniePrzeczytalo = 0;
 		String wydarzenieDataPoczatek = "sciema";
 		String linkToSmallPoster = "sciema";
 		
@@ -123,6 +125,8 @@ public class EventListActivity extends Activity implements OnClickListener {
 				linkToSmallPoster = event.getJSONObject("plakat").getString("plakatMiniatura");
 				
 				wydarzenieSumaLajkow = event.getInt("wydarzenieSumaLajkow");
+				wydarzenieWartoscPriorytet = event.getInt("wydarzenieWartoscPriorytet");
+				wydarzeniePrzeczytalo = event.getInt("wydarzeniePrzeczytalo");
 				
 				wydarzenieDataPoczatek = (String) event.getJSONObject("wydarzenieDataPoczatek").get("date");
 			} catch (JSONException e) {
@@ -135,9 +139,9 @@ public class EventListActivity extends Activity implements OnClickListener {
 					.add(new EventObject(
 							wydarzenieTytul,
 							i,
-							wydarzenieTresc,
-							linkToSmallPoster,
-							wydarzenieSumaLajkow,
+							wydarzenieTresc, //wydarzenieTresc.substring(0, 200) + "...", //obcięcie treści wydarzenia do 200 znaków
+							"http://www.na.pwr.wroc.pl/" + linkToSmallPoster,
+							wydarzenieSumaLajkow + wydarzenieWartoscPriorytet + wydarzeniePrzeczytalo / 4,
 							wydarzenieDataPoczatek
 							)
 					);

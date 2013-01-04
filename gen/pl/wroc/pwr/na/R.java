@@ -140,10 +140,7 @@ public final class R {
         public static final int header_plan=0x7f030008;
         public static final int item_event_list=0x7f030009;
         public static final int item_plan=0x7f03000a;
-<<<<<<< HEAD
         public static final int item_popup_img=0x7f03000b;
-=======
->>>>>>> 9a833d328423f2ffd5243105c8dbcae5e882b1ec
     }
     public static final class menu {
         public static final int main=0x7f090000;
