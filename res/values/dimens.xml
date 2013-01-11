@@ -14,4 +14,12 @@
 	
 	<!-- Simple items -->
 	<dimen name="stroke_size">1sp</dimen>
+	
+	<!-- Item Event List (wyswietlanie wydarzenia) -->
+	<dimen name="event_list_item_content_width">250sp</dimen>
+	<dimen name="event_list_item_button_star_width">21sp</dimen>
+	<dimen name="event_list_item_button_star_height">24sp</dimen>
+
+
+            
 </resources>

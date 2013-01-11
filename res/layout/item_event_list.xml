@@ -19,9 +19,9 @@
         android:orientation="horizontal" >
 
         <ImageButton
-            android:id="@+id/imageButton1"
-            android:layout_width="21dp"
-            android:layout_height="24dp"
+            android:id="@+id/event_list_item_button_star"
+            android:layout_width="@dimen/event_list_item_button_star_width"
+            android:layout_height="@dimen/event_list_item_button_star_height"
             android:src="@drawable/liked_star" />
 
         <TextView
@@ -64,10 +64,12 @@
 
         <TextView
             android:id="@+id/event_list_item_content"
-            android:layout_width="250dp"
+            android:layout_width="@dimen/event_list_item_content_width"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:text="Treść wydarzenia" />
+
     </RelativeLayout>
 
 </RelativeLayout>

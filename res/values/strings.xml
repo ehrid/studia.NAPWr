@@ -11,17 +11,19 @@
     <!-- Main -->
     <string name="label_top10">TOP 10</string>
     <string name="label_today">Dzisiaj</string>
-    <string name="label_tommorow">Jutro</string>
+    <string name="label_tomorrow">Jutro</string>
     <string name="label_callendar">Kalendarz</string>
     <string name="label_favourites">Ulubione</string>
     <string name="label_login2">Zaloguj się</string>
     <string name="label_logout">Wyloguj się</string>
     
     <!-- Login -->
-    <string name="login_title">Zaloguj się NAPWr</string>
+    <string name="login_title">Zaloguj się NA PWr</string>
     <string name="label_login">Adres e-mail</string>
     <string name="label_password">Hasło </string>
     <string name="button_login2">Zaloguj się</string>
+    <string name="login_email_error">Wpisz adres e-mail</string>
+    <string name="login_password_error">Nieprawidłowe hasło</string>
     
     <!-- Preferences -->
     <string name="prefs_fullscreen_title">Pełny ekran</string>

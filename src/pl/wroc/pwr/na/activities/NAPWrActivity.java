@@ -20,8 +20,8 @@ public class NAPWrActivity extends Activity implements OnClickListener {
 
 	Button top10;
 	Button today;
-	Button tommorow;
-	Button callendar;
+	Button tomorrow;
+	Button calendar;
 	Button favourites;
 	Button login;
 	TextView loginText;
@@ -52,10 +52,10 @@ public class NAPWrActivity extends Activity implements OnClickListener {
 		top10.setOnClickListener(this);
 		today = (Button) findViewById(R.id.main_button_today);
 		today.setOnClickListener(this);
-		tommorow = (Button) findViewById(R.id.main_button_tommorow);
-		tommorow.setOnClickListener(this);
-		callendar = (Button) findViewById(R.id.main_button_callendar);
-		callendar.setOnClickListener(this);
+		tomorrow = (Button) findViewById(R.id.main_button_tomorrow);
+		tomorrow.setOnClickListener(this);
+		calendar = (Button) findViewById(R.id.main_button_calendar);
+		calendar.setOnClickListener(this);
 		favourites = (Button) findViewById(R.id.main_button_favourites);
 		favourites.setOnClickListener(this);
 		login = (Button) findViewById(R.id.main_button_login);
@@ -84,10 +84,10 @@ public class NAPWrActivity extends Activity implements OnClickListener {
 //			b = today;
 //			break;
 //		case 3:
-//			b = tommorow;
+//			b = tomorrow;
 //			break;
 //		case 4:
-//			b = callendar;
+//			b = calendar;
 //			break;
 //		case 5:
 //			b = favourites;
@@ -106,8 +106,8 @@ public class NAPWrActivity extends Activity implements OnClickListener {
 	public void makeBasicBackground() {
 		top10.setBackgroundResource(R.drawable.custom_button);
 		today.setBackgroundResource(R.drawable.custom_button);
-		tommorow.setBackgroundResource(R.drawable.custom_button);
-		callendar.setBackgroundResource(R.drawable.custom_button);
+		tomorrow.setBackgroundResource(R.drawable.custom_button);
+		calendar.setBackgroundResource(R.drawable.custom_button);
 		favourites.setBackgroundResource(R.drawable.custom_button);
 		login.setBackgroundResource(R.drawable.custom_button);
 	}
@@ -124,11 +124,11 @@ public class NAPWrActivity extends Activity implements OnClickListener {
 			startList("Dzisiaj");
 			break;
 
-		case R.id.main_button_tommorow:
+		case R.id.main_button_tomorrow:
 			startList("Jutro");
 			break;
 
-		case R.id.main_button_callendar:
+		case R.id.main_button_calendar:
 			startList("Kalendarz");
 			break;
 

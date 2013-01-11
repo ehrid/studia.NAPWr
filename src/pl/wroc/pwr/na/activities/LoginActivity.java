@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginActivity extends Activity implements OnClickListener {
 
@@ -15,6 +16,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 	private EditText password;
 	private String userPassword;
 	private EditText login;
+	Button loginButton;
 
 	public static LoginActivity getInstance() {
 		return singleInstance;
@@ -27,7 +29,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 		singleInstance = this;
 
-		Button loginButton = (Button) findViewById(R.id.login_button_login);
+		loginButton = (Button) findViewById(R.id.login_button_login);
 		login = (EditText) findViewById(R.id.login_editText_login);
 		password = (EditText) findViewById(R.id.login_editText_password);
 
@@ -44,7 +46,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 				((NAPWrActivity)((NAPWrActivity.getInstance()))).setLogedInLabel(true);
 				finish();
 			} else {
-				//TODO notyfikacja po błedzie
+				password.setError(getResources().getString(R.string.login_password_error));
 			}
 			break;
 		}
@@ -55,6 +57,9 @@ public class LoginActivity extends Activity implements OnClickListener {
 		//TODO pobieranie danych użytkownika
 		if(loginToCheck.equals("zygol")){
 			userPassword = "conadata";
+		} else {
+			login.setError(getResources().getString(R.string.login_email_error));
+			
 		}
 	}
 }
