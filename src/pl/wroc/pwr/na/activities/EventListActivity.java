@@ -98,6 +98,10 @@ public class EventListActivity extends Activity implements OnClickListener {
 			{
 				completeJSONArr = new JSONArray((String) new RequestTask().execute("http://na.pwr.wroc.pl/mobile/wydarzenia/dzis").get());
 			}
+			else if(getIntent().getStringExtra(LIST_TITLE).equals("Top 10"))
+			{
+				completeJSONArr = new JSONArray((String) new RequestTask().execute("http://na.pwr.wroc.pl/json/topten").get());
+			}
 			else
 			{
 				completeJSONArr = new JSONArray((String) new RequestTask().execute("http://na.pwr.wroc.pl/mobile/wydarzenia/jutro").get());
