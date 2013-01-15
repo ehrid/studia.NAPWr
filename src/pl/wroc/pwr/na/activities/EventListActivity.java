@@ -41,6 +41,7 @@ public class EventListActivity extends Activity implements OnClickListener {
 	private Context context;
 
 	public EventObject event;
+	public ArrayList<EventObject> eventList;
 
 	private static EventListActivity singleInstance = null;
 
@@ -118,7 +119,7 @@ public class EventListActivity extends Activity implements OnClickListener {
 			
 		}
 
-		ArrayList<EventObject> eventList = new ArrayList<EventObject>();
+		eventList = new ArrayList<EventObject>();
 
 		for (int i = 0; i < completeJSONArr.length(); i++) {
 			
