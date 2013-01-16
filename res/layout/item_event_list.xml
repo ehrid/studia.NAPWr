@@ -65,11 +65,13 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/bottom_row"
         android:layout_marginTop="49dp"
-        android:text="Treść wydarzenia"
+        android:text="Treść wydarzenia Lorem ipsum dolor sit amet rahid emono space torgit vividae monolapati nowoaspuce romolovitem. Epi simi tod. Lorem ipsum dolor sit amet vivid mahumti fores"
         android:paddingLeft="10px"
         android:paddingRight="10px"
         android:typeface="serif"
-        android:textSize="16sp" />
+        android:textSize="16sp" 
+        te
+        />
 
     <WebView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -80,11 +82,20 @@
         android:layout_below="@+id/first_row" />
 
     <TextView
+        android:id="@+id/event_list_item_like_sum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/event_list_item_button_star"
+        android:layout_alignParentLeft="true"
+        android:layout_weight="0.18"
+        android:text="S" />
+
+    <TextView
         android:id="@+id/event_list_item_start_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/bottom_row"
+        android:layout_below="@+id/event_list_item_organization_name"
         android:layout_weight="0.73"
         android:text="Data początku" />
 
@@ -93,16 +104,7 @@
         android:layout_width="@dimen/event_list_item_button_star_width"
         android:layout_height="@dimen/event_list_item_button_star_height"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/event_list_item_start_date"
+        android:layout_below="@+id/event_list_item_organization_name"
         android:src="@drawable/liked_star" />
-
-    <TextView
-        android:id="@+id/event_list_item_like_sum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/event_list_item_button_star"
-        android:layout_alignParentLeft="true"
-        android:layout_weight="0.18"
-        android:text="S" />
 
 </RelativeLayout>
