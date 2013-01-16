@@ -25,22 +25,46 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 public class SplashScreenActivity extends Activity {
+	
+	ImageView loading1;
+	ImageView loading2;
+	ImageView loading3;
+	ImageView loading4;
+	ImageView loading5;
+	
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.activity_splash);
 
+		loading1 = (ImageView) findViewById(R.id.splash_loading1);
+		loading2 = (ImageView) findViewById(R.id.splash_loading2);
+		loading3 = (ImageView) findViewById(R.id.splash_loading3);
+		loading4 = (ImageView) findViewById(R.id.splash_loading4);
+		loading5 = (ImageView) findViewById(R.id.splash_loading5);
+		
 		Handler handler = new Handler();
 
-		// run a thread after 2 seconds to start the home screen
 		handler.postDelayed(new Runnable() {
 
 			@Override
 			public void run() {
-				
+
+				// Collect data
+				addEvents();
+
+			}
+
+		}, 400);
+
+		handler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+
 				// Collect data
 				addEvents();
 
@@ -60,7 +84,7 @@ public class SplashScreenActivity extends Activity {
 					// the run() method will be called
 
 	}
-	
+
 	public void addEvents() {
 		JSONArray completeJSONArr = null;
 		try {
@@ -68,17 +92,32 @@ public class SplashScreenActivity extends Activity {
 			completeJSONArr = new JSONArray((String) new RequestTask().execute(
 					"http://na.pwr.wroc.pl/mobile/wydarzenia/dzis").get());
 			((NAPWrApplication) getApplication()).dzisiaj = getEvents(completeJSONArr);
+			
+			loading1.setImageResource(R.drawable.loading_on);
 
 			// TOP10
 			completeJSONArr = new JSONArray((String) new RequestTask().execute(
 					"http://na.pwr.wroc.pl/json/topten").get());
 			((NAPWrApplication) getApplication()).top10 = getEvents(completeJSONArr);
+			
+			loading2.setImageResource(R.drawable.loading_on);
 
 			// JUTRO
 			completeJSONArr = new JSONArray((String) new RequestTask().execute(
 					"http://na.pwr.wroc.pl/mobile/wydarzenia/jutro").get());
 			((NAPWrApplication) getApplication()).jutro = getEvents(completeJSONArr);
+			
+			loading3.setImageResource(R.drawable.loading_on);
 
+			// KALENDARZ
+			((NAPWrApplication) getApplication()).kalendarz = new ArrayList<EventObject>();
+			
+			loading4.setImageResource(R.drawable.loading_on);
+
+			// ULUBIONE
+			((NAPWrApplication) getApplication()).ulubione = new ArrayList<EventObject>();
+			
+			loading5.setImageResource(R.drawable.loading_on);
 
 		} catch (JSONException e) {
 			e.printStackTrace();

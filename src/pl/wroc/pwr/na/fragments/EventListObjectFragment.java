@@ -70,6 +70,8 @@ public class EventListObjectFragment extends Fragment {
 			eventList = ((MenuActivity) (MenuActivity.activityMain)).jutro;
 		} else if (args.getString(LIST_TITLE).equals("Kalendarz")) {
 			eventList = ((MenuActivity) (MenuActivity.activityMain)).kalendarz;
+		} else if (args.getString(LIST_TITLE).equals("Ulubione")) {
+			eventList = ((MenuActivity) (MenuActivity.activityMain)).ulubione;
 		}
 
 		adapter = new EventListAdapter(context, R.layout.item_event_list,

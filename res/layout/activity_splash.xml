@@ -12,4 +12,53 @@
         android:layout_centerVertical="true"      
         android:src="@drawable/logo_splashscreen" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginTop="10sp"
+        android:layout_centerHorizontal="true" >
+
+        <ImageView
+            android:id="@+id/splash_loading1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/loading_off" 
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"/>
+        
+        <ImageView
+            android:id="@+id/splash_loading2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/loading_off" 
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"/>
+        
+        <ImageView
+            android:id="@+id/splash_loading3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/loading_off" 
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"/>
+        
+        <ImageView
+            android:id="@+id/splash_loading4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/loading_off" 
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"/>
+        
+        <ImageView
+            android:id="@+id/splash_loading5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/loading_off" 
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"/>
+
+    </LinearLayout>
+
 </RelativeLayout>

@@ -19,6 +19,7 @@ public class MenuActivity extends FragmentActivity {
 	public ArrayList<EventObject> dzisiaj;
 	public ArrayList<EventObject> jutro;
 	public ArrayList<EventObject> kalendarz;
+	public ArrayList<EventObject> ulubione;
 
 	MenuCollectionPagerAdapter mCollectionPagerAdapter;
 	public ViewPager mViewPager;
@@ -51,6 +52,7 @@ public class MenuActivity extends FragmentActivity {
 		dzisiaj = ((NAPWrApplication) getApplication()).dzisiaj;
 		jutro = ((NAPWrApplication) getApplication()).jutro;
 		kalendarz = ((NAPWrApplication) getApplication()).kalendarz;
+		ulubione = ((NAPWrApplication) getApplication()).ulubione;
 	}
 
 }
