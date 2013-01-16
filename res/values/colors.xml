@@ -28,5 +28,10 @@
     <color name="overlay_white">#FFFFFF</color>
 	<color name="overlay_black">#000000</color>
 	<color name="overlay_gray">#717171</color>
-
+	
+	<!-- Dialogs -->
+	<color name="dialog_background">#FFFFFF</color>
+	<color name="dialog_stroke">#27a7df</color>
+	<color name="dialog_title">#000000</color>
+	
 </resources>

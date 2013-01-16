@@ -42,6 +42,10 @@
     <!-- Event List -->
     <string name="event_list_name">Nazwa listy</string>
     
-    <!-- ITEMS -->
+    <!-- Dialogs -->
+    <string name="dialog_yes">Tak</string>
+    <string name="dialog_no">Nie</string>
+    <string name="dialog_text">Czy napewno chesz wykonać tą czynność?</string>
+    <string name="dialog_close">Wyłączyć aplikację?</string>
     
 </resources>

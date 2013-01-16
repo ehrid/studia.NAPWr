@@ -2,9 +2,11 @@ package pl.wroc.pwr.na.activities;
 
 import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.adapters.EventCollectionPagerAdapter;
+import pl.wroc.pwr.na.tools.CloseAppDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 
 public class EventActivity extends FragmentActivity {
 	public static final String START_ITEM = "list_title";
@@ -35,6 +37,16 @@ public class EventActivity extends FragmentActivity {
 		
 		
 	}
+    
+    public boolean onKeyDown(int keyCode, android.view.KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_MENU) {
+			finish();
+			((MenuActivity) (MenuActivity.activityMain)).mViewPager.setCurrentItem(0);
+			return true;
+		} else {
+			return super.onKeyDown(keyCode, event);
+		}
+	};
 	
 //	//Pawel
 //			Button btn_show = (Button) findViewById(R.id.event_poster);

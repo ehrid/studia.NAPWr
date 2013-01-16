@@ -6,9 +6,11 @@ import pl.wroc.pwr.na.NAPWrApplication;
 import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.adapters.MenuCollectionPagerAdapter;
 import pl.wroc.pwr.na.objects.EventObject;
+import pl.wroc.pwr.na.tools.CloseAppDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -53,6 +55,23 @@ public class MenuActivity extends FragmentActivity {
 		jutro = ((NAPWrApplication) getApplication()).jutro;
 		kalendarz = ((NAPWrApplication) getApplication()).kalendarz;
 		ulubione = ((NAPWrApplication) getApplication()).ulubione;
+	}
+	
+	public boolean onKeyDown(int keyCode, android.view.KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_MENU) {
+			mViewPager.setCurrentItem(0);
+			return true;
+		} if (keyCode == KeyEvent.KEYCODE_BACK) {
+			new CloseAppDialog(this).show();
+			return true;
+		}
+		else {
+			return super.onKeyDown(keyCode, event);
+		}
+	};
+	
+	public void closeApplication(){
+		finish();
 	}
 
 }

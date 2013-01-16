@@ -19,7 +19,14 @@
 	<dimen name="event_list_item_content_width">250sp</dimen>
 	<dimen name="event_list_item_button_star_width">21sp</dimen>
 	<dimen name="event_list_item_button_star_height">24sp</dimen>
-
+	
+	<!-- Dialogs -->
+	<dimen name="dialog_stroke">5sp</dimen>
+	<dimen name="dialog_width">270sp</dimen>
+	<dimen name="dialog_padding">10sp</dimen>
+	<dimen name="dialog_margins">10sp</dimen>
+	<dimen name="dialog_title_size">18sp</dimen>
+	<dimen name="dialog_space_between_buttons">5sp</dimen>
 
             
 </resources>
