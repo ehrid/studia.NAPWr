@@ -1,6 +1,6 @@
 package pl.wroc.pwr.na.adapters;
 
-import pl.wroc.pwr.na.activities.EventListActivity;
+import pl.wroc.pwr.na.activities.MenuActivity;
 import pl.wroc.pwr.na.fragments.EventObjectFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,7 +16,6 @@ public class EventCollectionPagerAdapter extends FragmentStatePagerAdapter {
 	public Fragment getItem(int i) {
 		Fragment fragment = new EventObjectFragment();
 		Bundle args = new Bundle();
-		// Our object is just an integer :-P
 		args.putInt(EventObjectFragment.ARG_OBJECT, i);
 		fragment.setArguments(args);
 		return fragment;
@@ -24,12 +23,12 @@ public class EventCollectionPagerAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public int getCount() {
-		return ((EventListActivity) ((EventListActivity.getInstance()))).eventList.size();
+		return ((MenuActivity) (MenuActivity.activityMain)).current.size();
 	}
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-		String title = (String) ((EventListActivity) ((EventListActivity.getInstance()))).eventList.get(position).name;
+		String title = (String) ((MenuActivity) (MenuActivity.activityMain)).current.get(position).name;
 		
 		if(title.length() > 18){
 			title = title.substring(0, 15);

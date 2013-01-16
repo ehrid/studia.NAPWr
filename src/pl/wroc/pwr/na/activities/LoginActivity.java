@@ -1,6 +1,7 @@
 package pl.wroc.pwr.na.activities;
 
 import pl.wroc.pwr.na.R;
+import pl.wroc.pwr.na.fragments.MenuObjectFragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -42,8 +43,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 		case R.id.login_button_login:
 			getUser(login.getText().toString());
 			if(password.getText().toString().equals(userPassword)){
-				((NAPWrActivity)((NAPWrActivity.getInstance()))).setLOOGED_IN(true);
-				((NAPWrActivity)((NAPWrActivity.getInstance()))).setLogedInLabel(true);
+				((MenuObjectFragment)((MenuObjectFragment.getInstance()))).setLOOGED_IN(true);
+				((MenuObjectFragment)((MenuObjectFragment.getInstance()))).setLogedInLabel(true);
 				finish();
 			} else {
 				password.setError(getResources().getString(R.string.login_password_error));

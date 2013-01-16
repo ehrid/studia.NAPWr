@@ -2,7 +2,7 @@ package pl.wroc.pwr.na.fragments;
 
 import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.activities.EventActivity;
-import pl.wroc.pwr.na.activities.EventListActivity;
+import pl.wroc.pwr.na.activities.MenuActivity;
 import pl.wroc.pwr.na.objects.EventObject;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class EventObjectFragment extends Fragment {
@@ -37,7 +36,7 @@ public class EventObjectFragment extends Fragment {
 			Bundle savedInstanceState) {
 		// The last two arguments ensure LayoutParams are inflated
 		// properly.
-		final View rootView = inflater.inflate(R.layout.item_event, container,
+		final View rootView = inflater.inflate(R.layout.fragment_event, container,
 				false);
 
 		back = (Button) rootView.findViewById(R.id.back);
@@ -52,7 +51,7 @@ public class EventObjectFragment extends Fragment {
 		poster = (Button) rootView.findViewById(R.id.event_poster);
 		
 		Bundle args = getArguments();
-		event = ((EventListActivity) ((EventListActivity.getInstance()))).eventList.get(args.getInt(ARG_OBJECT));
+		event = ((MenuActivity) (MenuActivity.activityMain)).current.get(args.getInt(ARG_OBJECT));
 
 		if (event.name != null)
 			title.setText(event.name.toString());

@@ -5,10 +5,10 @@ import pl.wroc.pwr.na.adapters.EventCollectionPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.widget.Button;
 
 public class EventActivity extends FragmentActivity {
-
+	public static final String START_ITEM = "list_title";
+	
     EventCollectionPagerAdapter mCollectionPagerAdapter;
     ViewPager mViewPager;
     
@@ -28,6 +28,8 @@ public class EventActivity extends FragmentActivity {
         // Set up the ViewPager, attaching the adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mCollectionPagerAdapter);
+        
+        mViewPager.setCurrentItem(getIntent().getExtras().getInt("START_ITEM"));
         
         activityMain = this;
 		
