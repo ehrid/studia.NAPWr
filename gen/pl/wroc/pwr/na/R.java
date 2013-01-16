@@ -35,6 +35,9 @@ public final class R {
         /**  Overlays 
          */
         public static final int overlay_white=0x7f05000e;
+        /**  Shadows 
+         */
+        public static final int shadow_blue=0x7f050014;
         /**  Splash Screen Loading 
          */
         public static final int splash_loading1=0x7f050002;
@@ -113,57 +116,58 @@ public final class R {
         public static final int unliked_star=0x7f020023;
     }
     public static final class id {
-        public static final int back=0x7f0a0022;
-        public static final int bottom_row=0x7f0a002c;
-        public static final int close=0x7f0a0030;
-        public static final int dialog_logout_no=0x7f0a0010;
-        public static final int dialog_logout_yes=0x7f0a000f;
+        public static final int back=0x7f0a0023;
+        public static final int bottom_row=0x7f0a002d;
+        public static final int close=0x7f0a0031;
+        public static final int dialog_logout_hide=0x7f0a000f;
+        public static final int dialog_logout_no=0x7f0a0011;
+        public static final int dialog_logout_yes=0x7f0a0010;
         public static final int dialog_title=0x7f0a000e;
-        public static final int event_address=0x7f0a0016;
-        public static final int event_content=0x7f0a0017;
-        public static final int event_fromDate=0x7f0a0014;
-        public static final int event_likeit=0x7f0a0012;
-        public static final int event_list_events=0x7f0a0019;
-        public static final int event_list_header=0x7f0a0011;
-        public static final int event_list_item_button_star=0x7f0a0028;
-        public static final int event_list_item_content=0x7f0a002e;
-        public static final int event_list_item_like_sum=0x7f0a0029;
-        public static final int event_list_item_name=0x7f0a002b;
-        public static final int event_list_item_start_date=0x7f0a002a;
-        public static final int event_poster=0x7f0a0018;
-        public static final int event_title=0x7f0a0013;
-        public static final int event_toDate=0x7f0a0015;
-        public static final int eventlist_title=0x7f0a0024;
-        public static final int first_row=0x7f0a0027;
+        public static final int event_address=0x7f0a0017;
+        public static final int event_content=0x7f0a0018;
+        public static final int event_fromDate=0x7f0a0015;
+        public static final int event_likeit=0x7f0a0013;
+        public static final int event_list_events=0x7f0a001a;
+        public static final int event_list_header=0x7f0a0012;
+        public static final int event_list_item_button_star=0x7f0a0029;
+        public static final int event_list_item_content=0x7f0a002f;
+        public static final int event_list_item_like_sum=0x7f0a002a;
+        public static final int event_list_item_name=0x7f0a002c;
+        public static final int event_list_item_start_date=0x7f0a002b;
+        public static final int event_poster=0x7f0a0019;
+        public static final int event_title=0x7f0a0014;
+        public static final int event_toDate=0x7f0a0016;
+        public static final int eventlist_title=0x7f0a0025;
+        public static final int first_row=0x7f0a0028;
         public static final int imageView1=0x7f0a0007;
         public static final int layout_root=0x7f0a000d;
         public static final int listView1=0x7f0a0006;
         public static final int login_button_login=0x7f0a0004;
         public static final int login_editText_login=0x7f0a0002;
         public static final int login_editText_password=0x7f0a0003;
-        public static final int main_button_calendar=0x7f0a001e;
-        public static final int main_button_favourites=0x7f0a001f;
-        public static final int main_button_login=0x7f0a0020;
-        public static final int main_button_today=0x7f0a001c;
-        public static final int main_button_tomorrow=0x7f0a001d;
-        public static final int main_button_top10=0x7f0a001b;
-        public static final int main_layout_buttons=0x7f0a001a;
-        public static final int main_textView_login=0x7f0a0021;
-        public static final int menu_exit=0x7f0a0032;
-        public static final int menu_settings=0x7f0a0031;
+        public static final int main_button_calendar=0x7f0a001f;
+        public static final int main_button_favourites=0x7f0a0020;
+        public static final int main_button_login=0x7f0a0021;
+        public static final int main_button_today=0x7f0a001d;
+        public static final int main_button_tomorrow=0x7f0a001e;
+        public static final int main_button_top10=0x7f0a001c;
+        public static final int main_layout_buttons=0x7f0a001b;
+        public static final int main_textView_login=0x7f0a0022;
+        public static final int menu_exit=0x7f0a0033;
+        public static final int menu_settings=0x7f0a0032;
         public static final int pager=0x7f0a0000;
         public static final int pager_menu=0x7f0a0005;
         public static final int pager_title_strip=0x7f0a0001;
-        public static final int popup_event_img=0x7f0a002f;
-        public static final int share=0x7f0a0023;
+        public static final int popup_event_img=0x7f0a0030;
+        public static final int share=0x7f0a0024;
         public static final int splash_loading1=0x7f0a0008;
         public static final int splash_loading2=0x7f0a0009;
         public static final int splash_loading3=0x7f0a000a;
         public static final int splash_loading4=0x7f0a000b;
         public static final int splash_loading5=0x7f0a000c;
-        public static final int textView1=0x7f0a0026;
-        public static final int textView2=0x7f0a0025;
-        public static final int webview=0x7f0a002d;
+        public static final int textView1=0x7f0a0027;
+        public static final int textView2=0x7f0a0026;
+        public static final int webview=0x7f0a002e;
     }
     public static final class layout {
         public static final int activity_event=0x7f030000;
@@ -188,9 +192,12 @@ public final class R {
     public static final class string {
         public static final int app_name=0x7f070000;
         public static final int button_login2=0x7f07000d;
-        public static final int dialog_close=0x7f07001c;
+        public static final int dialog_cancel=0x7f07001d;
+        public static final int dialog_close=0x7f07001b;
+        public static final int dialog_close_text=0x7f07001f;
+        public static final int dialog_hide=0x7f07001c;
         public static final int dialog_no=0x7f07001a;
-        public static final int dialog_text=0x7f07001b;
+        public static final int dialog_text=0x7f07001e;
         /**  Dialogs 
          */
         public static final int dialog_yes=0x7f070019;

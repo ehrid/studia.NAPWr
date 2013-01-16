@@ -57,9 +57,8 @@
         android:id="@+id/imageView1"
         android:layout_width="253dp"
         android:layout_height="265dp"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="67dp"
+        android:layout_centerVertical="true"
         android:src="@drawable/logo_splashscreen" />
 
 </RelativeLayout>

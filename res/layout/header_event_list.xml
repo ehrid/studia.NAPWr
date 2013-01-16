@@ -6,9 +6,18 @@
         android:id="@+id/eventlist_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="right"
         android:text="@string/event_list_name"
         android:textSize="25sp"
-        android:layout_marginTop="30dp" />
+        android:background="@color/default_NAPWr"
+        android:textColor="@color/text_white"
+        android:paddingTop="17sp"
+        android:paddingBottom="17sp" 
+        android:paddingRight="20sp"
+		android:shadowColor="@color/shadow_blue"  
+		android:shadowDx="0sp"
+		android:shadowDy="5sp"
+		android:shadowRadius="5sp" 
+		   />
 
 </RelativeLayout>

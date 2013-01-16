@@ -34,4 +34,6 @@
 	<color name="dialog_stroke">#27a7df</color>
 	<color name="dialog_title">#000000</color>
 	
+	<!-- Shadows -->
+	<color name="shadow_blue">#27a7df</color>
 </resources>

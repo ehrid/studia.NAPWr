@@ -165,10 +165,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/default_NAPWr"
-
+				android:contentDescription="@string/content_description_logo_napwr"
                 android:src="@drawable/napwr_logo" 
                 android:layout_centerVertical="true" 
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true" >
+            </ImageView>
 
         </RelativeLayout>
 

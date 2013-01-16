@@ -25,7 +25,7 @@
 	<dimen name="dialog_width">270sp</dimen>
 	<dimen name="dialog_padding">10sp</dimen>
 	<dimen name="dialog_margins">10sp</dimen>
-	<dimen name="dialog_title_size">18sp</dimen>
+	<dimen name="dialog_title_size">16sp</dimen>
 	<dimen name="dialog_space_between_buttons">5sp</dimen>
 
             

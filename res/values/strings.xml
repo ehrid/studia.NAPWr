@@ -45,7 +45,13 @@
     <!-- Dialogs -->
     <string name="dialog_yes">Tak</string>
     <string name="dialog_no">Nie</string>
-    <string name="dialog_text">Czy napewno chesz wykonać tą czynność?</string>
-    <string name="dialog_close">Wyłączyć aplikację?</string>
+    <string name="dialog_close">Wyłącz</string>
+    <string name="dialog_hide">Działaj w tle</string>
+    <string name="dialog_cancel">Anuluj</string>
+    <string name="dialog_text">Możesz ukryć lub wyłączyć aplikację</string>
+    <string name="dialog_close_text">Wyłączyć aplikację?</string>
+    
+    <!--  Images Content Description -->
+    <string name="content_description_logo_napwr">Logo NA PWr</string>
     
 </resources>
