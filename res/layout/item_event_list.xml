@@ -1,8 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
     android:descendantFocusability="blocksDescendants"
+    android:gravity="center_horizontal"
     android:orientation="horizontal" >
 
     <View
@@ -17,35 +17,36 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:orientation="horizontal" >
-
-        <ImageButton
-            android:id="@+id/event_list_item_button_star"
-            android:layout_width="@dimen/event_list_item_button_star_width"
-            android:layout_height="@dimen/event_list_item_button_star_height"
-            android:src="@drawable/liked_star" />
-
-        <TextView
-            android:id="@+id/event_list_item_like_sum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="fill_vertical"
-            android:layout_weight="0.18"
-            android:text="S" />
-
-        <TextView
-            android:id="@+id/event_list_item_start_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.73"
-            android:text="Data początku" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/event_list_item_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/first_row"
-        android:text="Nazwa wydarzenia" />
+        android:layout_below="@+id/webview"
+        android:text="Tytul wydarzenia" 
+        android:background="@color/background_event_title"
+        android:textColor="@color/text_white"
+        android:textSize="17sp"
+        android:paddingTop="10sp"
+        android:paddingLeft="10sp"
+        android:paddingBottom="0sp"
+        />
+    <TextView
+        android:id="@+id/event_list_item_organization_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/event_list_item_name"
+        android:text="Nazwa organizacji" 
+        android:background="@color/background_event_title"
+        android:textColor="@color/text_white"
+        android:textSize="9sp"
+                android:paddingLeft="10sp"
+        
+        android:paddingTop="0sp"
+        android:paddingBottom="4sp"
+        />
+    
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -54,22 +55,54 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/event_list_item_name" >
 
-        <WebView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/webview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/event_list_item_content" />
-
-        <TextView
-            android:id="@+id/event_list_item_content"
-            android:layout_width="@dimen/event_list_item_content_width"
-            android:layout_height="100dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="Treść wydarzenia" />
-
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/event_list_item_content"
+        android:layout_width="@dimen/event_list_item_content_width"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/bottom_row"
+        android:layout_marginTop="49dp"
+        android:text="Treść wydarzenia"
+        android:paddingLeft="10px"
+        android:paddingRight="10px"
+        android:typeface="serif"
+        android:textSize="16sp" />
+
+    <WebView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/webview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/first_row" />
+
+    <TextView
+        android:id="@+id/event_list_item_start_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/bottom_row"
+        android:layout_weight="0.73"
+        android:text="Data początku" />
+
+    <ImageButton
+        android:id="@+id/event_list_item_button_star"
+        android:layout_width="@dimen/event_list_item_button_star_width"
+        android:layout_height="@dimen/event_list_item_button_star_height"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/event_list_item_start_date"
+        android:src="@drawable/liked_star" />
+
+    <TextView
+        android:id="@+id/event_list_item_like_sum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/event_list_item_button_star"
+        android:layout_alignParentLeft="true"
+        android:layout_weight="0.18"
+        android:text="S" />
 
 </RelativeLayout>

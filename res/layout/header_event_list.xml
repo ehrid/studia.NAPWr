@@ -15,9 +15,9 @@
         android:paddingBottom="17sp" 
         android:paddingRight="20sp"
 		android:shadowColor="@color/shadow_blue"  
-		android:shadowDx="0sp"
-		android:shadowDy="5sp"
-		android:shadowRadius="5sp" 
-		   />
+		android:shadowDx="0"
+		android:shadowDy="5"
+		android:shadowRadius="5" 
+/>
 
 </RelativeLayout>

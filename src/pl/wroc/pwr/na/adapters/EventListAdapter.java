@@ -80,7 +80,7 @@ public class EventListAdapter extends ArrayAdapter<EventObject> {
 		
 		
 		//the same for image url:
-				// Get the text boxes from the listitem.xml file
+		// Get the text boxes from the listitem.xml file
 		WebView myWebView = (WebView) alertView.findViewById(R.id.webview);
 		myWebView.loadUrl(event.poster.toString());
 		

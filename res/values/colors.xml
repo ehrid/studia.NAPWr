@@ -23,7 +23,13 @@
 	<color name="background_white">#FFFFFF</color>
 	<color name="background_black">#000000</color>
 	<color name="background_gray">#717171</color>
-	
+    <color name="background_blue">#27a7df</color>
+    <color name="background_top10">#27a7df</color>
+    <color name="background_today">#a7df27</color>
+    <color name="background_tomorrow">#a727df</color>
+    <color name="background_plan">#27a7df</color>
+    <color name="background_event_title">#27a7df</color>
+    		
     <!-- Overlays -->
     <color name="overlay_white">#FFFFFF</color>
 	<color name="overlay_black">#000000</color>

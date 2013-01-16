@@ -12,7 +12,13 @@ public final class R {
     }
     public static final class color {
         public static final int background_black=0x7f05000c;
+        public static final int background_blue=0x7f05000e;
+        public static final int background_event_title=0x7f050013;
         public static final int background_gray=0x7f05000d;
+        public static final int background_plan=0x7f050012;
+        public static final int background_today=0x7f050010;
+        public static final int background_tomorrow=0x7f050011;
+        public static final int background_top10=0x7f05000f;
         /**  Backgrounds 
          */
         public static final int background_white=0x7f05000b;
@@ -27,17 +33,17 @@ public final class R {
         public static final int default_background=0x7f050000;
         /**  Dialogs 
          */
-        public static final int dialog_background=0x7f050011;
-        public static final int dialog_stroke=0x7f050012;
-        public static final int dialog_title=0x7f050013;
-        public static final int overlay_black=0x7f05000f;
-        public static final int overlay_gray=0x7f050010;
+        public static final int dialog_background=0x7f050017;
+        public static final int dialog_stroke=0x7f050018;
+        public static final int dialog_title=0x7f050019;
+        public static final int overlay_black=0x7f050015;
+        public static final int overlay_gray=0x7f050016;
         /**  Overlays 
          */
-        public static final int overlay_white=0x7f05000e;
+        public static final int overlay_white=0x7f050014;
         /**  Shadows 
          */
-        public static final int shadow_blue=0x7f050014;
+        public static final int shadow_blue=0x7f05001a;
         /**  Splash Screen Loading 
          */
         public static final int splash_loading1=0x7f050002;
@@ -117,8 +123,8 @@ public final class R {
     }
     public static final class id {
         public static final int back=0x7f0a0023;
-        public static final int bottom_row=0x7f0a002d;
-        public static final int close=0x7f0a0031;
+        public static final int bottom_row=0x7f0a002e;
+        public static final int close=0x7f0a0032;
         public static final int dialog_logout_hide=0x7f0a000f;
         public static final int dialog_logout_no=0x7f0a0011;
         public static final int dialog_logout_yes=0x7f0a0010;
@@ -130,9 +136,10 @@ public final class R {
         public static final int event_list_events=0x7f0a001a;
         public static final int event_list_header=0x7f0a0012;
         public static final int event_list_item_button_star=0x7f0a0029;
-        public static final int event_list_item_content=0x7f0a002f;
+        public static final int event_list_item_content=0x7f0a0030;
         public static final int event_list_item_like_sum=0x7f0a002a;
         public static final int event_list_item_name=0x7f0a002c;
+        public static final int event_list_item_organization_name=0x7f0a002d;
         public static final int event_list_item_start_date=0x7f0a002b;
         public static final int event_poster=0x7f0a0019;
         public static final int event_title=0x7f0a0014;
@@ -153,12 +160,12 @@ public final class R {
         public static final int main_button_top10=0x7f0a001c;
         public static final int main_layout_buttons=0x7f0a001b;
         public static final int main_textView_login=0x7f0a0022;
-        public static final int menu_exit=0x7f0a0033;
-        public static final int menu_settings=0x7f0a0032;
+        public static final int menu_exit=0x7f0a0034;
+        public static final int menu_settings=0x7f0a0033;
         public static final int pager=0x7f0a0000;
         public static final int pager_menu=0x7f0a0005;
         public static final int pager_title_strip=0x7f0a0001;
-        public static final int popup_event_img=0x7f0a0030;
+        public static final int popup_event_img=0x7f0a0031;
         public static final int share=0x7f0a0024;
         public static final int splash_loading1=0x7f0a0008;
         public static final int splash_loading2=0x7f0a0009;
@@ -167,7 +174,7 @@ public final class R {
         public static final int splash_loading5=0x7f0a000c;
         public static final int textView1=0x7f0a0027;
         public static final int textView2=0x7f0a0026;
-        public static final int webview=0x7f0a002e;
+        public static final int webview=0x7f0a002f;
     }
     public static final class layout {
         public static final int activity_event=0x7f030000;
@@ -192,6 +199,9 @@ public final class R {
     public static final class string {
         public static final int app_name=0x7f070000;
         public static final int button_login2=0x7f07000d;
+        /**   Images Content Description 
+         */
+        public static final int content_description_logo_napwr=0x7f070020;
         public static final int dialog_cancel=0x7f07001d;
         public static final int dialog_close=0x7f07001b;
         public static final int dialog_close_text=0x7f07001f;
