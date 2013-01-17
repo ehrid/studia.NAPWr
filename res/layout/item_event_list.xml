@@ -70,7 +70,6 @@
         android:paddingRight="10px"
         android:typeface="serif"
         android:textSize="16sp" 
-        te
         />
 
     <WebView

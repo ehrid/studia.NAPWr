@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -57,6 +58,10 @@ public class EventListObjectFragment extends Fragment {
 				((MenuActivity) (MenuActivity.activityMain)).current = eventList;
 			}
 		});
+		
+		if(eventList.isEmpty()){
+			rootView.findViewById(R.id.no_events_popup).setVisibility(View.VISIBLE);
+		}
 
 		return rootView;
 	}

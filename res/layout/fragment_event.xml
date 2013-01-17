@@ -116,7 +116,7 @@
             android:layout_height="@dimen/stroke_size"
             android:background="@color/background_black" />
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical" >
@@ -126,7 +126,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:text="Treść wydarznia" />
-        </LinearLayout>
+        </ScrollView>
 
         <Button
             android:id="@+id/event_poster"
