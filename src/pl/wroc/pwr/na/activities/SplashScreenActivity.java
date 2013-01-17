@@ -167,7 +167,7 @@ public class SplashScreenActivity extends Activity {
 				nazwaOrganizacji = (String) event.getJSONObject(
 						"organizacja").getJSONObject("uzytkownik").get("uzytkownikNazwaWyswietlana");
 				
-				organizacja.setOrganizationName(nazwaOrganizacji);
+				organizacja = new OrganizationObject(nazwaOrganizacji);
 				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
