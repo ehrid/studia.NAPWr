@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import pl.wroc.pwr.na.NAPWrApplication;
 import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.objects.EventObject;
+import pl.wroc.pwr.na.objects.OrganizationObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -134,7 +135,10 @@ public class SplashScreenActivity extends Activity {
 		int wydarzenieWartoscPriorytet = 0;
 		int wydarzeniePrzeczytalo = 0;
 		String wydarzenieDataPoczatek = "";
+		String wydarzenieDataKoniec = "";
 		String linkToSmallPoster = "";
+		String nazwaOrganizacji = "";
+		OrganizationObject organizacja = new OrganizationObject("");
 
 		JSONObject event;
 
@@ -156,6 +160,15 @@ public class SplashScreenActivity extends Activity {
 
 				wydarzenieDataPoczatek = (String) event.getJSONObject(
 						"wydarzenieDataPoczatek").get("date");
+				
+				wydarzenieDataKoniec = (String) event.getJSONObject(
+						"wydarzenieDataKoniec").get("date");
+				
+				nazwaOrganizacji = (String) event.getJSONObject(
+						"organizacja").getJSONObject("uzytkownik").get("uzytkownikNazwaWyswietlana");
+				
+				organizacja.setOrganizationName(nazwaOrganizacji);
+				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -172,7 +185,7 @@ public class SplashScreenActivity extends Activity {
 							"http://www.na.pwr.wroc.pl/" + linkToSmallPoster,
 							wydarzenieSumaLajkow + wydarzenieWartoscPriorytet
 									+ wydarzeniePrzeczytalo / 4,
-							wydarzenieDataPoczatek));
+							wydarzenieDataPoczatek, wydarzenieDataKoniec, organizacja));
 		}
 
 		return eventList;

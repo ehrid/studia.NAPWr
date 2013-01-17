@@ -78,8 +78,26 @@ public class EventListAdapter extends ArrayAdapter<EventObject> {
 		// Assign the appropriate data from our alert object above
 		startDate.setText(event.startDate.toString());
 		
+//		//the same for end date:
+//		// Get the text boxes from the listitem.xml file
+//		TextView endDate = (TextView) alertView
+//				.findViewById(R.id.event_toDate);
+//
+//		// Assign the appropriate data from our alert object above
+//		endDate.setText(event.endDate.toString());
 		
-		//the same for image url:
+		
+		
+		//the same for organization:
+		// Get the text boxes from the listitem.xml file
+		TextView organization = (TextView) alertView
+				.findViewById(R.id.event_list_item_organization_name);
+
+		// Assign the appropriate data from our alert object above
+		organization.setText(event.organization.organizationName);
+		
+		
+		//the same for small poster url:
 		// Get the text boxes from the listitem.xml file
 		WebView myWebView = (WebView) alertView.findViewById(R.id.webview);
 		myWebView.loadUrl(event.poster.toString());

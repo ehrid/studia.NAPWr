@@ -21,7 +21,7 @@ public class EventObject {
 	public int likeSum;
 	public boolean isLiked;
 	public String startDate;
-	public Date endDate;
+	public String endDate;
 	public Date addedDate;
 	public Date publicationDate;
 	public boolean isPayable;
@@ -64,7 +64,7 @@ public class EventObject {
 			AddressObject address, DepartmentObject department,
 			CharSequence poster, CharSequence tag1, CharSequence tag2,
 			CharSequence tag3, CharSequence tag4, CharSequence tag5,
-			int likeSum, String startDate, Date endDate, Date addedDate,
+			int likeSum, String startDate, String endDate, Date addedDate,
 			Date publicationDate, boolean isPayable, Double price,
 			CharSequence room, Date actualizationDate, boolean enrollment,
 			Date enrollmentStartDate, Date enrollmentEndDate,
@@ -117,7 +117,7 @@ public class EventObject {
 	}
 
 	public EventObject(CharSequence name, int id, CharSequence content,
-			CharSequence poster, int likeSum, String startDate) {
+			CharSequence poster, int likeSum, String startDate, String endDate, OrganizationObject organization) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -125,6 +125,8 @@ public class EventObject {
 		this.poster = poster;
 		this.likeSum = likeSum;
 		this.startDate = startDate;
+		this.endDate = endDate;
+		this.organization = organization;
 	}
 
 }
