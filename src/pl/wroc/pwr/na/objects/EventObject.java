@@ -13,6 +13,7 @@ public class EventObject {
 	public AddressObject address;
 	public DepartmentObject department;
 	public CharSequence poster;
+	public CharSequence bigPoster;
 	public CharSequence tag1;
 	public CharSequence tag2;
 	public CharSequence tag3;
@@ -117,7 +118,7 @@ public class EventObject {
 	}
 
 	public EventObject(CharSequence name, int id, CharSequence content,
-			CharSequence poster, int likeSum, String startDate, String endDate, OrganizationObject organization) {
+			CharSequence poster, CharSequence bigPoster, int likeSum, String startDate, String endDate, OrganizationObject organization) {
 		super();
 		this.name = name;
 		this.id = id;

@@ -137,6 +137,7 @@ public class SplashScreenActivity extends Activity {
 		String wydarzenieDataPoczatek = "";
 		String wydarzenieDataKoniec = "";
 		String linkToSmallPoster = "";
+		String linkToBigPoster = "";
 		String nazwaOrganizacji = "";
 		OrganizationObject organizacja = new OrganizationObject("");
 
@@ -152,6 +153,9 @@ public class SplashScreenActivity extends Activity {
 				wydarzenieTresc = event.getString("wydarzenieTresc");
 				linkToSmallPoster = event.getJSONObject("plakat").getString(
 						"plakatMiniatura");
+				
+				linkToBigPoster = event.getJSONObject("plakat").getString(
+						"plakatPlik");
 
 				wydarzenieSumaLajkow = event.getInt("wydarzenieSumaLajkow");
 				wydarzenieWartoscPriorytet = event
@@ -183,6 +187,7 @@ public class SplashScreenActivity extends Activity {
 												// treści wydarzenia do 200
 												// znaków
 							"http://www.na.pwr.wroc.pl/" + linkToSmallPoster,
+							"http://www.na.pwr.wroc.pl/" + linkToBigPoster,
 							wydarzenieSumaLajkow + wydarzenieWartoscPriorytet
 									+ wydarzeniePrzeczytalo / 4,
 							wydarzenieDataPoczatek, wydarzenieDataKoniec, organizacja));
