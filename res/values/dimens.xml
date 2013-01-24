@@ -22,7 +22,7 @@
 	
 	<!-- Dialogs -->
 	<dimen name="dialog_stroke">5sp</dimen>
-	<dimen name="dialog_width">270sp</dimen>
+	<dimen name="dialog_width">300sp</dimen>
 	<dimen name="dialog_padding">10sp</dimen>
 	<dimen name="dialog_margins">10sp</dimen>
 	<dimen name="dialog_title_size">16sp</dimen>

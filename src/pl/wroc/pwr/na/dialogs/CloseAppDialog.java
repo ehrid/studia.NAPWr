@@ -1,4 +1,4 @@
-package pl.wroc.pwr.na.tools;
+package pl.wroc.pwr.na.dialogs;
 
 import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.activities.MenuActivity;

@@ -3,6 +3,7 @@ package pl.wroc.pwr.na.fragments;
 import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.activities.EventActivity;
 import pl.wroc.pwr.na.activities.MenuActivity;
+import pl.wroc.pwr.na.dialogs.ShowPosterDialog;
 import pl.wroc.pwr.na.objects.EventObject;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -73,6 +74,17 @@ public class EventObjectFragment extends Fragment {
 		share.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+			}
+		});
+		poster.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				Bundle args = getArguments();
+				
+				new ShowPosterDialog(((EventActivity) (EventActivity.activityMain)),args.getInt(ARG_OBJECT)).show();
+				
 			}
 		});
 		return rootView;

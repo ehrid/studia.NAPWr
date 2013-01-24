@@ -76,9 +76,10 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/webview"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100sp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/first_row" />
+        android:layout_below="@+id/first_row"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/event_list_item_like_sum"

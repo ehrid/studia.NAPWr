@@ -33,6 +33,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 		loginButton = (Button) findViewById(R.id.login_button_login);
 		login = (EditText) findViewById(R.id.login_editText_login);
 		password = (EditText) findViewById(R.id.login_editText_password);
+		
+		this.findViewById(android.R.id.title).setVisibility(View.GONE);
 
 		loginButton.setOnClickListener(this);
 	}

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import pl.wroc.pwr.na.NAPWrApplication;
 import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.adapters.MenuCollectionPagerAdapter;
+import pl.wroc.pwr.na.dialogs.CloseAppDialog;
 import pl.wroc.pwr.na.objects.EventObject;
-import pl.wroc.pwr.na.tools.CloseAppDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -50,6 +50,16 @@ public class MenuActivity extends FragmentActivity {
 
 		activityMain = this;
 
+		top10 = ((NAPWrApplication) getApplication()).top10;
+		dzisiaj = ((NAPWrApplication) getApplication()).dzisiaj;
+		jutro = ((NAPWrApplication) getApplication()).jutro;
+		kalendarz = ((NAPWrApplication) getApplication()).kalendarz;
+		ulubione = ((NAPWrApplication) getApplication()).ulubione;
+	}
+	
+	@Override
+	protected void onResume() {	
+		super.onResume();
 		top10 = ((NAPWrApplication) getApplication()).top10;
 		dzisiaj = ((NAPWrApplication) getApplication()).dzisiaj;
 		jutro = ((NAPWrApplication) getApplication()).jutro;
