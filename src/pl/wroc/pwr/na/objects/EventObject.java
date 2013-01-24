@@ -124,6 +124,7 @@ public class EventObject {
 		this.id = id;
 		this.content = content;
 		this.poster = poster;
+		this.bigPoster = bigPoster;
 		this.likeSum = likeSum;
 		this.startDate = startDate;
 		this.endDate = endDate;

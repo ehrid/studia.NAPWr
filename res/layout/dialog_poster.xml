@@ -1,17 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout_root"
-    android:layout_width="@dimen/dialog_width"
-    android:layout_height="wrap_content"
-    android:background="@drawable/dialog_body"
-    android:orientation="vertical"
-    android:padding="@dimen/dialog_padding" >
-    
-
-    <WebView
-        android:id="@+id/dialog_poster_poster"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:layout_gravity="center_horizontal"/>
-
-</LinearLayout>
+<LinearLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:orientation="vertical"
+      android:layout_width="300sp"
+      android:layout_height="400sp">
+      <WebView  
+          android:id="@+id/dialog_poster_poster"
+          android:layout_width="fill_parent" 
+          android:layout_height="fill_parent"/>
+  </LinearLayout>
