@@ -48,7 +48,7 @@
     <string name="dialog_close">Wyłącz</string>
     <string name="dialog_hide">Działaj w tle</string>
     <string name="dialog_cancel">Anuluj</string>
-    <string name="dialog_text">Możesz ukryć lub wyłączyć aplikację</string>
+    <string name="dialog_text">Czy wyłączyć aplikację?</string>
     <string name="dialog_close_text">Wyłączyć aplikację?</string>
     
     <!--  Images Content Description -->

@@ -1,4 +1,4 @@
-package pl.wroc.pwr.na.dialogs;
+package pl.wroc.pwr.na.tools;
 
 import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.activities.MenuActivity;
@@ -35,7 +35,7 @@ public class CloseAppDialog extends Dialog implements
 		no.setOnClickListener(this);
 		this.findViewById(android.R.id.title).setVisibility(View.GONE);
 		
-		title.setText(rootView.getResources().getString(R.string.dialog_close_text));
+		title.setText(rootView.getResources().getString(R.string.dialog_close));
 
 //		yes.setBackgroundResource(R.drawable.send);
 //		yes.setTextSize(20);

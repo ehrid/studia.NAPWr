@@ -27,6 +27,10 @@
 	<dimen name="dialog_margins">10sp</dimen>
 	<dimen name="dialog_title_size">16sp</dimen>
 	<dimen name="dialog_space_between_buttons">5sp</dimen>
+	
+	<!-- Buttons -->
+	<dimen name="btn_default_text_size">15sp</dimen>
+	<dimen name="btn_default_margin">10sp</dimen>
 
             
 </resources>

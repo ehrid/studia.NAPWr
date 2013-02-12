@@ -1,6 +1,11 @@
 package pl.wroc.pwr.na.objects;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.Date;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 public class EventObject {
 
@@ -14,6 +19,7 @@ public class EventObject {
 	public DepartmentObject department;
 	public CharSequence poster;
 	public CharSequence bigPoster;
+	public Bitmap imagePoster;
 	public CharSequence tag1;
 	public CharSequence tag2;
 	public CharSequence tag3;
@@ -115,6 +121,15 @@ public class EventObject {
 		this.speaker3 = speaker3;
 		this.googlePlusLink = googlePlusLink;
 		this.agendaLink = agendaLink;
+		
+		try {
+			URL newurl = new URL((String) bigPoster);
+			imagePoster = BitmapFactory.decodeStream(newurl
+					.openConnection().getInputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public EventObject(CharSequence name, int id, CharSequence content,
@@ -129,6 +144,15 @@ public class EventObject {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.organization = organization;
+		
+		try {
+			URL newurl = new URL((String) bigPoster);
+			imagePoster = BitmapFactory.decodeStream(newurl
+					.openConnection().getInputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -1,5 +1,15 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="AppTheme" parent="android:Theme.Light" />
+    <style name="AppTheme" parent="android:Theme.Light.NoTitleBar">
+        <item name="android:buttonStyle">@style/MyButtonStyle</item>
+    </style>
+    
+    <style name="MyButtonStyle" parent="android:style/Widget.Button">
+        <item name="android:padding">@dimen/btn_default_margin</item>
+        <item name="android:background">@drawable/btn_default</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/btn_default_text_size</item>
+        <item name="android:textColor">@color/text_white</item>
+    </style>
 
 </resources>

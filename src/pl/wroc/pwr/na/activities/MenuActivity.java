@@ -28,7 +28,7 @@ public class MenuActivity extends FragmentActivity {
 	Button login;
 	TextView loginText;
 
-	public static MenuActivity activityMain;	
+	public static MenuActivity activityMain;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,16 +49,16 @@ public class MenuActivity extends FragmentActivity {
 		mViewPager.setAdapter(mCollectionPagerAdapter);
 
 		activityMain = this;
-
+		
 		top10 = ((NAPWrApplication) getApplication()).top10;
 		dzisiaj = ((NAPWrApplication) getApplication()).dzisiaj;
 		jutro = ((NAPWrApplication) getApplication()).jutro;
 		kalendarz = ((NAPWrApplication) getApplication()).kalendarz;
 		ulubione = ((NAPWrApplication) getApplication()).ulubione;
 	}
-	
+
 	@Override
-	protected void onResume() {	
+	protected void onResume() {
 		super.onResume();
 		top10 = ((NAPWrApplication) getApplication()).top10;
 		dzisiaj = ((NAPWrApplication) getApplication()).dzisiaj;
@@ -66,21 +66,25 @@ public class MenuActivity extends FragmentActivity {
 		kalendarz = ((NAPWrApplication) getApplication()).kalendarz;
 		ulubione = ((NAPWrApplication) getApplication()).ulubione;
 	}
-	
+
 	public boolean onKeyDown(int keyCode, android.view.KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_MENU) {
 			mViewPager.setCurrentItem(0);
 			return true;
-		} if (keyCode == KeyEvent.KEYCODE_BACK) {
-			new CloseAppDialog(this).show();
-			return true;
 		}
-		else {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if (mViewPager.getCurrentItem() == 0) {
+				new CloseAppDialog(this).show();
+			} else {
+				mViewPager.setCurrentItem(0);
+			}
+			return true;
+		} else {
 			return super.onKeyDown(keyCode, event);
 		}
 	};
-	
-	public void closeApplication(){
+
+	public void closeApplication() {
 		finish();
 	}
 

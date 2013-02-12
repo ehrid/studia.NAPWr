@@ -2,7 +2,6 @@ package pl.wroc.pwr.na.activities;
 
 import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.adapters.EventCollectionPagerAdapter;
-import pl.wroc.pwr.na.dialogs.CloseAppDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;

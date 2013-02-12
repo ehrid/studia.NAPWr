@@ -33,31 +33,30 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/dialog_logout_hide"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dialog_space_between_buttons"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:text="@string/dialog_hide" />
-
-        <Button
             android:id="@+id/dialog_logout_yes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="@dimen/dialog_space_between_buttons"
             android:layout_marginRight="@dimen/dialog_space_between_buttons"
+            android:layout_weight="1"
             android:clickable="true"
-            android:text="@string/dialog_close" />
+            android:background="@drawable/btn_default"
+            android:textColor="@color/text_white"
+            android:text="@string/dialog_close"
+            android:textSize="20sp"/>
 
         <Button
             android:id="@+id/dialog_logout_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dialog_space_between_buttons"
+            android:layout_weight="1"
             android:clickable="true"
-            android:text="@string/dialog_cancel" />
+            android:background="@drawable/btn_default"
+            android:textColor="@color/text_white"
+            android:text="@string/dialog_cancel"
+            android:textSize="20sp"/>
     </LinearLayout>
 
 </LinearLayout>
