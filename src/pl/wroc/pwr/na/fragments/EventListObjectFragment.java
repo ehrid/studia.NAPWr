@@ -43,7 +43,8 @@ public class EventListObjectFragment extends Fragment {
 
 		title = (TextView) rootView.findViewById(R.id.eventlist_title);
 		title.setText(args.getString(LIST_TITLE));
-		eventListView = (ListView) rootView.findViewById(R.id.event_list_events);
+		eventListView = (ListView) rootView
+				.findViewById(R.id.event_list_events);
 		addEvents();
 
 		eventListView.setOnItemClickListener(new OnItemClickListener() {
@@ -57,9 +58,10 @@ public class EventListObjectFragment extends Fragment {
 				((MenuActivity) (MenuActivity.activityMain)).current = eventList;
 			}
 		});
-		
-		if(eventList.isEmpty()){
-			rootView.findViewById(R.id.no_events_popup).setVisibility(View.VISIBLE);
+
+		if (eventList.isEmpty()) {
+			rootView.findViewById(R.id.no_events_popup).setVisibility(
+					View.VISIBLE);
 		}
 
 		return rootView;
@@ -72,8 +74,6 @@ public class EventListObjectFragment extends Fragment {
 			eventList = ((MenuActivity) (MenuActivity.activityMain)).dzisiaj;
 		} else if (args.getString(LIST_TITLE).equals("Jutro")) {
 			eventList = ((MenuActivity) (MenuActivity.activityMain)).jutro;
-		} else if (args.getString(LIST_TITLE).equals("Kalendarz")) {
-			eventList = ((MenuActivity) (MenuActivity.activityMain)).kalendarz;
 		} else if (args.getString(LIST_TITLE).equals("Ulubione")) {
 			eventList = ((MenuActivity) (MenuActivity.activityMain)).ulubione;
 		}

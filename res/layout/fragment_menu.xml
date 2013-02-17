@@ -11,7 +11,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_margin"
-        android:paddingBottom="10sp"
+        android:paddingBottom="@dimen/default_margin"
 		android:layout_alignParentBottom="true"
 		android:layout_centerHorizontal="true"
         android:orientation="vertical" >
@@ -159,7 +159,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:background="@color/default_NAPWr"
-            android:layout_marginBottom="10sp" >
+            android:layout_marginBottom="@dimen/default_margin" >
 
             <ImageView
                 android:layout_width="wrap_content"

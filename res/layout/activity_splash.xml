@@ -16,47 +16,47 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/loading_off" 
-            android:layout_marginLeft="10sp"
-            android:layout_marginRight="10sp"/>
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"/>
         
         <ImageView
             android:id="@+id/splash_loading2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/loading_off" 
-            android:layout_marginLeft="10sp"
-            android:layout_marginRight="10sp"/>
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"/>
         
         <ImageView
             android:id="@+id/splash_loading3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/loading_off" 
-            android:layout_marginLeft="10sp"
-            android:layout_marginRight="10sp"/>
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"/>
         
         <ImageView
             android:id="@+id/splash_loading4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/loading_off" 
-            android:layout_marginLeft="10sp"
-            android:layout_marginRight="10sp"/>
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"/>
         
         <ImageView
             android:id="@+id/splash_loading5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/loading_off" 
-            android:layout_marginLeft="10sp"
-            android:layout_marginRight="10sp"/>
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"/>
 
     </LinearLayout>
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="253dp"
-        android:layout_height="265dp"
+        android:layout_width="253sp"
+        android:layout_height="265sp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:src="@drawable/logo_splashscreen" />

@@ -23,6 +23,7 @@ public class EventObjectFragment extends Fragment {
 
 	// Event
 	ImageView likeit;
+	TextView likeitSum;
 	TextView title;
 	TextView fromDate;
 	TextView toDate;
@@ -52,11 +53,13 @@ public class EventObjectFragment extends Fragment {
 		organizaer = (TextView) rootView.findViewById(R.id.event_organizer);
 		content = (TextView) rootView.findViewById(R.id.event_content);
 		poster = (ImageView) rootView.findViewById(R.id.event_poster);
+		likeitSum = (TextView) rootView.findViewById(R.id.event_likeit_sum);
 
 		Bundle args = getArguments();
 		event = ((MenuActivity) (MenuActivity.activityMain)).current.get(args
 				.getInt(ARG_OBJECT));
-
+		
+		likeitSum.setText(event.likeSum + "");
 		if (event.name != null)
 			title.setText(event.name.toString());
 		if (event.startDate != null) {
@@ -70,12 +73,12 @@ public class EventObjectFragment extends Fragment {
 			toDate.setVisibility(View.GONE);
 		}
 		if (event.address != null) {
-			address.setText("Adres: " + event.address.toString());
+			address.setText("Adres: " + event.address.address);
 		} else {
 			address.setVisibility(View.GONE);
 		}
 		if (event.organization != null) {
-			organizaer.setText("Organizator: " + event.organization.toString());
+			organizaer.setText("Organizator: " + event.organization.name);
 		} else {
 			organizaer.setVisibility(View.GONE);
 		}

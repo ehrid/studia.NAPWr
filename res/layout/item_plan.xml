@@ -1,19 +1,75 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
-    
-        <TextView
-        android:id="@+id/event_list_item_name"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:id="@+id/plan_item"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nazwa przedmiotu,budynek(sala)"
-        android:textColor="#2B60DE" />
-    
-    <View
-        android:layout_width="fill_parent"
-    	android:layout_height="@dimen/stroke_size"
-    	android:background="#2B60DE"
-        />
-    
+        android:background="@drawable/plan_projekt"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/default_margin_small">
+
+        <TextView
+            android:id="@+id/plan_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="@string/plan_time" />
+
+        <TextView
+            android:id="@+id/plan_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:text="@string/plan_title"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/plan_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:text="@string/plan_place" />
+
+        <TextView
+            android:id="@+id/plan_teacher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:text="@string/plan_teacher" />
+
+        <TextView
+            android:id="@+id/plan_type"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:gravity="right"
+            android:text="@string/plan_type" />
     </LinearLayout>
+    
+     <LinearLayout
+        android:id="@+id/plan_separator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/default_NAPWr"
+        android:orientation="vertical" 
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/plan_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:shadowColor="@color/shadow_blue"
+            android:text="@string/plan_date"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/default_text"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

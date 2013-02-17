@@ -24,24 +24,55 @@
         </ListView>
     </LinearLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/no_events_popup"
-
+        android:layout_width="@dimen/dialog_width"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-            android:layout_width="@dimen/dialog_width"
-    android:layout_height="wrap_content"
-    android:background="@drawable/dialog_body"
-    android:orientation="vertical"
-    android:padding="@dimen/dialog_padding"
-        android:visibility="gone">
+        android:background="@drawable/dialog_body"
+        android:orientation="vertical"
+        android:padding="@dimen/dialog_padding"
+        android:visibility="gone" 
+        android:gravity="center_horizontal">
 
         <TextView
-            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Brak wydarzeń"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="@string/event_list_no_events"
+            android:textSize="@dimen/default_text" />
+    </LinearLayout>
+    
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/no_plan_popup"
+        android:layout_width="@dimen/dialog_width"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/dialog_body"
+        android:orientation="vertical"
+        android:padding="@dimen/dialog_padding"
+        android:visibility="gone" 
+        android:gravity="center_horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/event_list_no_plan"
+            android:textSize="@dimen/default_text_small" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/event_list_no_plan2"
+            android:textSize="@dimen/default_text_small" />
+        <TextView
+            android:id="@+id/no_plan_popup_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/event_list_no_plan3"
+            android:textStyle="bold"
+            android:textColor="@color/background_blue"
+            android:textSize="@dimen/default_text"/>
     </LinearLayout>
 
 </RelativeLayout>

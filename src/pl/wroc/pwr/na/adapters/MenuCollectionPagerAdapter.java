@@ -1,7 +1,9 @@
 package pl.wroc.pwr.na.adapters;
 
+import pl.wroc.pwr.na.activities.MenuActivity;
 import pl.wroc.pwr.na.fragments.EventListObjectFragment;
 import pl.wroc.pwr.na.fragments.MenuObjectFragment;
+import pl.wroc.pwr.na.fragments.PlanObjectFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -30,8 +32,7 @@ public class MenuCollectionPagerAdapter extends FragmentStatePagerAdapter {
 				title = "Jutro";
 				break;
 			case 4:
-				title = "Kalendarz";
-				break;
+				return new PlanObjectFragment();
 			case 5:
 				title = "Ulubione";
 				break;
@@ -46,7 +47,7 @@ public class MenuCollectionPagerAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public int getCount() {
-		return 6;
+		return ((MenuActivity) (MenuActivity.activityMain)).ifLogedin() ? 6 : 4;
 	}
 
 	@Override

@@ -42,4 +42,24 @@
 	
 	<!-- Shadows -->
 	<color name="shadow_blue">#27a7df</color>
+	
+	<!-- Plan -->
+	<color name="plan_wyklad_border">#e69e9c</color>
+	<color name="plan_wyklad_inside">#f3b6b7</color>
+	
+	<color name="plan_cwiczenia_border">#aeed91</color>
+	<color name="plan_cwiczenia_inside">#8fd472</color>
+	
+	<color name="plan_seminarium_border">#f4be92</color>
+	<color name="plan_seminarium_inside">#f5dcc1</color>
+	
+	<color name="plan_laborki_border">#90b2ed</color>
+	<color name="plan_laborki_inside">#a5c4f7</color>
+	
+	<color name="plan_projekt_border">#d39bd4</color>
+	<color name="plan_projekt_inside">#efbcf0</color>
+	
+	<color name="plan_inne_border">#aface1</color>
+	<color name="plan_inne_inside">#cdc2ec</color>
+	
 </resources>

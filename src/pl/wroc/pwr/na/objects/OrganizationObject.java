@@ -1,16 +1,11 @@
 package pl.wroc.pwr.na.objects;
 
 public class OrganizationObject {
+	public String name;
 
-	public String organizationName;
-	public String organizationShortName;
-	
-	public OrganizationObject(String organizationName) {
-		this.organizationName = organizationName;
+	public OrganizationObject(String name) {
+		super();
+		this.name = name;
 	}
 
-	public void setOrganizationName(String organizationName) {
-		this.organizationName = organizationName;
-	}
-	
 }

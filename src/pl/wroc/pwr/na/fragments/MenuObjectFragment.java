@@ -23,8 +23,6 @@ public class MenuObjectFragment extends Fragment {
 	Button login;
 	TextView loginText;
 
-	private boolean LOOGED_IN;
-
 	private static MenuObjectFragment singleInstance = null;
 
 	public static MenuObjectFragment getInstance() {
@@ -38,8 +36,6 @@ public class MenuObjectFragment extends Fragment {
 		// properly.
 		final View rootView = inflater.inflate(R.layout.fragment_menu,
 				container, false);
-
-		setLOOGED_IN(false);
 
 		top10 = (Button) rootView.findViewById(R.id.main_button_top10);
 		today = (Button) rootView.findViewById(R.id.main_button_today);
@@ -74,7 +70,7 @@ public class MenuObjectFragment extends Fragment {
 		calendar.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (LOOGED_IN) {
+				if (((MenuActivity) (MenuActivity.activityMain)).ifLogedin()) {
 					((MenuActivity) (MenuActivity.activityMain)).mViewPager
 							.setCurrentItem(4);
 				} else {
@@ -86,7 +82,7 @@ public class MenuObjectFragment extends Fragment {
 		favourites.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (LOOGED_IN) {
+				if (((MenuActivity) (MenuActivity.activityMain)).ifLogedin()) {
 					((MenuActivity) (MenuActivity.activityMain)).mViewPager
 							.setCurrentItem(5);
 				} else {
@@ -99,8 +95,9 @@ public class MenuObjectFragment extends Fragment {
 		login.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (LOOGED_IN) {
-					setLOOGED_IN(false);
+				if (((MenuActivity) (MenuActivity.activityMain)).ifLogedin()) {
+					((MenuActivity) (MenuActivity.activityMain)).logoff();
+					
 					setLogedInLabel(false);
 				} else {
 					startActivity(new Intent(rootView.getContext(),
@@ -108,18 +105,14 @@ public class MenuObjectFragment extends Fragment {
 				}
 			}
 		});
+		
+		if(((MenuActivity) (MenuActivity.activityMain)).ifLogedin()){
+			setLogedInLabel(true);
+		}
 
 		singleInstance = this;
 
 		return rootView;
-	}
-
-	public boolean isLOOGED_IN() {
-		return LOOGED_IN;
-	}
-
-	public void setLOOGED_IN(boolean LOOGED_IN) {
-		this.LOOGED_IN = LOOGED_IN;
 	}
 
 	public void setLogedInLabel(boolean logged) {

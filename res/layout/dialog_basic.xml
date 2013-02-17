@@ -44,7 +44,7 @@
             android:background="@drawable/btn_default"
             android:textColor="@color/text_white"
             android:text="@string/dialog_close"
-            android:textSize="20sp"/>
+            android:textSize="@dimen/default_text"/>
 
         <Button
             android:id="@+id/dialog_logout_no"
@@ -56,7 +56,7 @@
             android:background="@drawable/btn_default"
             android:textColor="@color/text_white"
             android:text="@string/dialog_cancel"
-            android:textSize="20sp"/>
+            android:textSize="@dimen/default_text"/>
     </LinearLayout>
 
 </LinearLayout>

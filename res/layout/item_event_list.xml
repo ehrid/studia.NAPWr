@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="5sp"
+    android:layout_marginBottom="@dimen/default_margin_small"
     android:background="@color/background_event_title"
     android:gravity="center_horizontal"
     android:orientation="vertical" >
@@ -10,16 +10,16 @@
         android:id="@+id/event_list_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5sp"
+        android:layout_margin="@dimen/default_margin_small"
         android:gravity="center_horizontal"
-        android:text="Tytuł wydarzenia"
+        android:text="@string/event_title"
         android:textColor="@color/text_white"
         android:textSize="20sp" />
 
     <ImageView
         android:id="@+id/event_list_item_poster"
         android:layout_width="wrap_content"
-        android:layout_height="150sp"
+        android:layout_height="@dimen/event_poster_preview"
         android:scaleType="center"
         android:src="@drawable/logo_splashscreen"/>
 
@@ -32,15 +32,15 @@
             android:layout_height="wrap_content" >
 
             <View
-                android:layout_width="100sp"
-                android:layout_height="80sp"
-                android:layout_marginTop="10sp"
+                android:layout_width="@dimen/event_view_dimension_a"
+                android:layout_height="@dimen/event_view_dimension_c"
+                android:layout_marginTop="@dimen/event_view_dimension_b"
                 android:background="@color/background_white" />
 
             <ImageView
                 android:id="@+id/event_list_item_button_star"
-                android:layout_width="100sp"
-                android:layout_height="100sp"
+                android:layout_width="@dimen/event_view_dimension_a"
+                android:layout_height="@dimen/event_view_dimension_a"
                 android:src="@drawable/like_star_on" />
 
             <TextView
@@ -48,8 +48,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="123"
-                android:textSize="20sp" />
+                android:text="@string/event_star"
+                android:textSize="@dimen/default_text" />
         </RelativeLayout>
 
         <LinearLayout
@@ -59,21 +59,21 @@
 
             <View
                 android:layout_width="fill_parent"
-                android:layout_height="10sp" />
+                android:layout_height="@dimen/event_view_dimension_b" />
 
             <TextView
                 android:id="@+id/event_list_item_content"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_marginBottom="10sp"
+                android:layout_marginBottom="@dimen/event_view_dimension_b"
                 android:background="@color/background_white"
                 android:lines="4"
-                android:text="Treść wydarzenia"
+                android:text="@string/event_content"
                 android:textSize="15sp" />
 
             <View
                 android:layout_width="fill_parent"
-                android:layout_height="10sp" />
+                android:layout_height="@dimen/event_view_dimension_b" />
         </LinearLayout>
     </LinearLayout>
 
@@ -82,13 +82,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:layout_marginLeft="10sp"
+        android:layout_marginLeft="@dimen/default_margin"
         android:text="Data"
         android:textColor="@color/text_white"
         android:textSize="15sp" />
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="10sp" />
+        android:layout_height="@dimen/event_view_dimension_b" />
 
 </LinearLayout>

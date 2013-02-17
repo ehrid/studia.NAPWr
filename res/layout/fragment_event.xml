@@ -14,11 +14,11 @@
             android:id="@+id/event_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5sp"
+            android:layout_margin="@dimen/default_margin_small"
             android:gravity="center_horizontal"
-            android:text="Tytuł wydarzenia"
+            android:text="@string/event_title"
             android:textColor="@color/text_white"
-            android:textSize="20sp" />
+            android:textSize="@dimen/default_text" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,15 +29,15 @@
                 android:layout_height="wrap_content" >
 
                 <View
-                    android:layout_width="100sp"
-                    android:layout_height="10sp"
-                    android:layout_marginTop="90sp"
+                    android:layout_width="@dimen/event_view_dimension_a"
+                    android:layout_height="@dimen/event_view_dimension_b"
+                    android:layout_marginTop="@dimen/event_view_dimension_d"
                     android:background="@color/background_white" />
 
                 <ImageView
                     android:id="@+id/event_likeit"
-                    android:layout_width="100sp"
-                    android:layout_height="100sp"
+                    android:layout_width="@dimen/event_view_dimension_a"
+                    android:layout_height="@dimen/event_view_dimension_a"
                     android:src="@drawable/like_star_on" />
 
                 <TextView
@@ -45,8 +45,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="123"
-                    android:textSize="20sp" />
+                    android:text="@string/event_star"
+                    android:textSize="@dimen/default_text" />
             </RelativeLayout>
 
             <LinearLayout
@@ -56,49 +56,49 @@
 
                 <View
                     android:layout_width="fill_parent"
-                    android:layout_height="10sp" />
+                    android:layout_height="@dimen/event_view_dimension_b" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="80sp"
+                    android:layout_height="@dimen/event_view_dimension_c"
                     android:orientation="vertical" >
 
                     <TextView
                         android:id="@+id/event_fromDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Od: "
+                        android:text="@string/event_from"
                         android:textColor="@color/text_white"
-                        android:textSize="10sp" />
+                        android:textSize="@dimen/default_text_small" />
 
                     <TextView
                         android:id="@+id/event_toDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Do:"
+                        android:text="@string/event_to"
                         android:textColor="@color/text_white"
-                        android:textSize="10sp" />
+                        android:textSize="@dimen/default_text_small" />
 
                     <TextView
                         android:id="@+id/event_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Miejsce: "
+                        android:text="@string/event_address"
                         android:textColor="@color/text_white"
-                        android:textSize="10sp" />
+                        android:textSize="@dimen/default_text_small" />
 
                     <TextView
                         android:id="@+id/event_organizer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Organizator: "
+                        android:text="@string/event_organier"
                         android:textColor="@color/text_white"
-                        android:textSize="10sp" />
+                        android:textSize="@dimen/default_text_small" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="fill_parent"
-                    android:layout_height="10sp"
+                    android:layout_height="@dimen/event_view_dimension_b"
                     android:background="@color/background_white" />
             </LinearLayout>
         </LinearLayout>
@@ -115,14 +115,14 @@
         <TextView
             android:id="@+id/event_content"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="Treść wydarznia" />
+            android:layout_height="wrap_content"
+            android:text="@string/event_content" />
     </ScrollView>
 
     <ImageView
         android:id="@+id/event_poster"
-        android:layout_width="70sp"
-        android:layout_height="70sp"
+        android:layout_width="@dimen/event_button_poster"
+        android:layout_height="@dimen/event_button_poster"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:src="@drawable/img_tab" />
