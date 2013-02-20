@@ -48,6 +48,9 @@ public class PlanObjectFragment extends Fragment {
 			Linkify.addLinks(
 					(TextView) rootView.findViewById(R.id.no_plan_popup_link),
 					Linkify.ALL);
+			Linkify.addLinks(
+					(TextView) rootView.findViewById(R.id.no_plan_popup_link2),
+					Linkify.ALL);
 		}
 
 		return rootView;

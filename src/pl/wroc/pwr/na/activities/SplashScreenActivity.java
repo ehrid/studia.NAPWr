@@ -28,49 +28,81 @@ public class SplashScreenActivity extends Activity {
 		loading5 = (ImageView) findViewById(R.id.splash_loading5);
 
 		Handler handler = new Handler();
+		final EventController ep = new EventController();
+		final NAPWrApplication app = (NAPWrApplication) getApplication();
 
 		handler.postDelayed(new Runnable() {
 
 			@Override
 			public void run() {
 
-				// Collect data
-				addEvents();
+				ep.addDzisiaj(app);
+				loading1.setImageResource(R.drawable.loading_on);
+				Handler handler = new Handler();
+				
+				handler.postDelayed(new Runnable() {
 
+					@Override
+					public void run() {
+						
+						ep.addTop(app);
+						loading2.setImageResource(R.drawable.loading_on);
+						Handler handler = new Handler();
+						
+						handler.postDelayed(new Runnable() {
+
+							@Override
+							public void run() {
+								
+								ep.addJutro(app);
+								loading3.setImageResource(R.drawable.loading_on);
+								Handler handler = new Handler();
+								
+								handler.postDelayed(new Runnable() {
+
+									@Override
+									public void run() {
+
+										ep.addKalendarz(app);
+										loading4.setImageResource(R.drawable.loading_on);
+										Handler handler = new Handler();
+										
+										handler.postDelayed(new Runnable() {
+
+											@Override
+											public void run() {
+
+												ep.addUlubione(app);
+												loading5.setImageResource(R.drawable.loading_on);
+												
+												finish();
+												// start the home screen
+
+												Intent intent = new Intent(SplashScreenActivity.this,
+														MenuActivity.class);
+												SplashScreenActivity.this.startActivity(intent);
+												
+											}
+
+										}, 400);
+									}
+
+								}, 400);
+							}
+
+						}, 400);
+					}
+
+				}, 400);
 			}
 
 		}, 400);
-
-		handler.postDelayed(new Runnable() {
-
-			@Override
-			public void run() {
-
-				// Collect data
-				addEvents();
-
-				// make sure we close the splash screen so the user won't come
-				// back when it presses back key
-
-				finish();
-				// start the home screen
-
-				Intent intent = new Intent(SplashScreenActivity.this,
-						MenuActivity.class);
-				SplashScreenActivity.this.startActivity(intent);
-
-			}
-
-		}, 400); // time in milliseconds (1 second = 1000 milliseconds) until
-					// the run() method will be called
 
 	}
 
 	public void addEvents() {
 		EventController ep = new EventController();
 		NAPWrApplication app = (NAPWrApplication) getApplication();
-		
-		app.restoreUser();
 
 		// DZISIAJ
 		ep.addDzisiaj(app);

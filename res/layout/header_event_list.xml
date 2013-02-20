@@ -6,18 +6,22 @@
         android:id="@+id/eventlist_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="right"
-        android:text="@string/event_list_name"
-        android:textSize="25sp"
         android:background="@color/default_NAPWr"
-        android:textColor="@color/text_white"
-        android:paddingTop="17sp"
-        android:paddingBottom="17sp" 
+        android:gravity="right"
+        android:paddingBottom="17sp"
         android:paddingRight="20sp"
-		android:shadowColor="@color/shadow_blue"  
-		android:shadowDx="0"
-		android:shadowDy="5"
-		android:shadowRadius="5" 
-/>
+        android:paddingTop="17sp"
+        android:shadowColor="@color/shadow_blue"
+        android:shadowDx="0"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="@string/event_list_name"
+        android:textColor="@color/text_white"
+        android:textSize="25sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/default_margin_small"
+        android:layout_below="@+id/eventlist_title" />
 
 </RelativeLayout>

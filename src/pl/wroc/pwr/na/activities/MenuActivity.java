@@ -12,6 +12,7 @@ import pl.wroc.pwr.na.objects.PlanObject;
 import pl.wroc.pwr.na.tools.EventController;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -67,7 +68,9 @@ public class MenuActivity extends FragmentActivity {
 	protected void onResume() {
 		super.onResume();
 		if(((NAPWrApplication) getApplication()).top10.size() == 0){
-			eventDownload();
+			finish();
+			startActivity(new Intent(this,
+					SplashScreenActivity.class));
 		}
 	}
 

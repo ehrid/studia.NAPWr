@@ -310,6 +310,7 @@ public class EventController {
 		// w planie 0 - T, 1 - TN, 2 - TP
 		// w day 0 - niedziela, 1 - poniedzialek, ... , 6 - sobota
 
+		day--;
 		for (int i = 0; i < 3; i++) {
 			Log.d("Day", dayIncremented+"");
 			do {
@@ -341,7 +342,7 @@ public class EventController {
 		try {
 			if (app.logedin) {
 
-				completeJSONArr = new JSONArray((String) new RequestTask()
+				completeJSONArr = new JSONArray((String) new RequestTaskString()
 						.execute(
 								"http://www.napwr.pl/mobile/wydarzenia/ulubione/"
 										+ app.userId).get());
@@ -362,7 +363,7 @@ public class EventController {
 	public void addDzisiaj(NAPWrApplication app) {
 		JSONArray completeJSONArr = null;
 		try {
-			completeJSONArr = new JSONArray((String) new RequestTask().execute(
+			completeJSONArr = new JSONArray((String) new RequestTaskString().execute(
 					"http://www.napwr.pl/mobile/wydarzenia/dzis").get());
 			app.dzisiaj = getEvents(completeJSONArr);
 		} catch (JSONException e) {
@@ -377,7 +378,7 @@ public class EventController {
 	public void addJutro(NAPWrApplication app) {
 		JSONArray completeJSONArr = null;
 		try {
-			completeJSONArr = new JSONArray((String) new RequestTask().execute(
+			completeJSONArr = new JSONArray((String) new RequestTaskString().execute(
 					"http://www.napwr.pl/mobile/wydarzenia/jutro").get());
 			app.jutro = getEvents(completeJSONArr);
 		} catch (JSONException e) {
@@ -394,7 +395,7 @@ public class EventController {
 		try {
 			if (app.logedin) {
 				completeObject = new JSONObject(
-						(String) new RequestTask()
+						(String) new RequestTaskString()
 								.execute(
 										"http://www.napwr.pl/mobile/plan/"
 												+ app.userId).get());
@@ -416,7 +417,7 @@ public class EventController {
 		JSONArray completeJSONArr = null;
 		EventController ep = new EventController();
 		try {
-			completeJSONArr = new JSONArray((String) new RequestTask().execute(
+			completeJSONArr = new JSONArray((String) new RequestTaskString().execute(
 					"http://www.napwr.pl/json/topten").get());
 			app.top10 = ep.getEvents(completeJSONArr);
 

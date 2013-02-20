@@ -5,7 +5,7 @@
     <!-- ACTIVITIES -->
     
     <!-- Menu -->
-    <string name="menu_refresh">Odświerz wydarzenia</string>
+    <string name="menu_refresh">Odśwież wydarzenia</string>
     <string name="menu_exit">Wyjdź</string>
     
     <!-- Main -->
@@ -44,9 +44,12 @@
     <!-- Event List -->
     <string name="event_list_name">Nazwa listy</string>
     <string name="event_list_no_events">Brak wydarzeń</string>
-    <string name="event_list_no_plan">Brak dodanego planu.</string>
-    <string name="event_list_no_plan2">Plan możesz dodać w ustawieniach konta na</string>
-    <string name="event_list_no_plan3">www.na.pwr.wroc.pl</string>
+    <string name="event_list_no_plan">Twój plan zajęć zawsze pod ręką.</string>
+    <string name="event_list_no_plan2">Zaloguj się NA PWr:</string>
+    <string name="event_list_no_plan3">www.napwr.pl</string>
+    <string name="event_list_no_plan4">i w ustawieniach swojego konta</string>
+    <string name="event_list_no_plan5">dodaj link swojego planu ze strony</string>
+    <string name="event_list_no_plan6">plan-pwr.pl</string>
     
     <!-- Dialogs -->
     <string name="dialog_yes">Tak</string>

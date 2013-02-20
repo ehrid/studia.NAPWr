@@ -1,10 +1,9 @@
 package pl.wroc.pwr.na.objects;
 
-import java.io.IOException;
-import java.net.URL;
+import java.util.concurrent.ExecutionException;
 
+import pl.wroc.pwr.na.tools.RequestTaskBitmap;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 public class EventObject {
 	public CharSequence name;
@@ -36,11 +35,12 @@ public class EventObject {
 		this.organization = organization;
 		this.address = address;
 		
+		
 		try {
-			URL newurl = new URL((String) bigPoster);
-			imagePoster = BitmapFactory.decodeStream(newurl
-					.openConnection().getInputStream());
-		} catch (IOException e) {
+			imagePoster = (Bitmap) new RequestTaskBitmap().execute((String) bigPoster).get();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
 	}

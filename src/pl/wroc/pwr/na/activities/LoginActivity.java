@@ -10,7 +10,7 @@ import pl.wroc.pwr.na.NAPWrApplication;
 import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.fragments.MenuObjectFragment;
 import pl.wroc.pwr.na.tools.EventController;
-import pl.wroc.pwr.na.tools.RequestTask;
+import pl.wroc.pwr.na.tools.RequestTaskString;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -76,7 +76,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 		pd.show();
 
 		try {
-			String s = (String) new RequestTask().execute(
+			String s = (String) new RequestTaskString().execute(
 					"http://www.napwr.pl/mobile/login/"
 							+ login.getText().toString() + "/"
 							+ password.getText().toString()).get();
@@ -87,7 +87,6 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 			((NAPWrApplication) getApplication()).rememberUser(event.getInt("id"));
 
-			pd.dismiss();
 			if (event.getBoolean("approved")) {
 				((MenuObjectFragment) ((MenuObjectFragment.getInstance())))
 						.setLogedInLabel(true);
@@ -114,17 +113,6 @@ public class LoginActivity extends Activity implements OnClickListener {
 	}
 
 	public void ulubione() {
-		pd = new ProgressDialog(this);
-		pd.setMessage("Trwa pobieranie ulubionych");
-		pd.setOnCancelListener(new OnCancelListener() {
-
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				pd.dismiss();
-			}
-		});
-		pd.show();
-
 		EventController ep = new EventController();
 
 		NAPWrApplication app = (NAPWrApplication) getApplication();
@@ -136,7 +124,5 @@ public class LoginActivity extends Activity implements OnClickListener {
 		((MenuActivity) (MenuActivity.activityMain)).kalendarz = app.kalendarz;
 		((MenuActivity) (MenuActivity.activityMain)).mViewPager
 				.refreshDrawableState();
-
-		pd.dismiss();
 	}
 }

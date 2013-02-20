@@ -37,7 +37,7 @@
 	
 	<!-- Events -->
 	<dimen name="event_button_poster">70sp</dimen>
-	<dimen name="event_poster_preview">150sp</dimen>
+	<dimen name="event_poster_preview">170sp</dimen>
 	<dimen name="event_view_dimension_a">100sp</dimen> <!-- a = 2*b+c -->
 	<dimen name="event_view_dimension_b">10sp</dimen>
 	<dimen name="event_view_dimension_c">80sp</dimen>
