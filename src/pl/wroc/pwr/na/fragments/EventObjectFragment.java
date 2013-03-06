@@ -85,28 +85,19 @@ public class EventObjectFragment extends Fragment {
 		if (event.content != null)
 			content.setText(event.content.toString());
 
-		// back.setOnClickListener(new OnClickListener() {
-		// @Override
-		// public void onClick(View v) {
-		// EventActivity.activityMain.finish();
-		// }
-		// });
-		// share.setOnClickListener(new OnClickListener() {
-		// @Override
-		// public void onClick(View v) {
-		// }
-		// });
-		poster.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Bundle args = getArguments();
-
-				new ShowPosterDialog(
-						((EventActivity) (EventActivity.activityMain)), args
-								.getInt(ARG_OBJECT)).show();
-			}
-		});
+//		poster.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				Bundle args = getArguments();
+//
+//				new ShowPosterDialog(
+//						((EventActivity) (EventActivity.activityMain)), args
+//								.getInt(ARG_OBJECT), ((MenuActivity) (MenuActivity.activityMain)).getApplicationContext()).show();
+//			}
+//		});
+//		
+//		event.setImagePoster(((MenuActivity) (MenuActivity.activityMain)).getApplicationContext());
 
 		return rootView;
 	}

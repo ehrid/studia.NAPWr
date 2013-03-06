@@ -74,8 +74,9 @@ public class MenuObjectFragment extends Fragment {
 					((MenuActivity) (MenuActivity.activityMain)).mViewPager
 							.setCurrentItem(4);
 				} else {
-					startActivity(new Intent(rootView.getContext(),
-							LoginActivity.class));
+					if(((MenuActivity) (MenuActivity.activityMain)).isLoginAvailable()){
+						startActivity(new Intent(rootView.getContext(),
+								LoginActivity.class));}
 				}
 			}
 		});
@@ -86,8 +87,9 @@ public class MenuObjectFragment extends Fragment {
 					((MenuActivity) (MenuActivity.activityMain)).mViewPager
 							.setCurrentItem(5);
 				} else {
-					startActivity(new Intent(rootView.getContext(),
-							LoginActivity.class));
+					if(((MenuActivity) (MenuActivity.activityMain)).isLoginAvailable()){
+						startActivity(new Intent(rootView.getContext(),
+								LoginActivity.class));}
 				}
 
 			}
@@ -100,8 +102,9 @@ public class MenuObjectFragment extends Fragment {
 					
 					setLogedInLabel(false);
 				} else {
+					if(((MenuActivity) (MenuActivity.activityMain)).isLoginAvailable()){
 					startActivity(new Intent(rootView.getContext(),
-							LoginActivity.class));
+							LoginActivity.class));}
 				}
 			}
 		});

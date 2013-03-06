@@ -79,7 +79,7 @@ public class EventListObjectFragment extends Fragment {
 		}
 
 		adapter = new EventListAdapter(context, R.layout.item_event_list,
-				eventList);
+				eventList, ((MenuActivity) (MenuActivity.activityMain)).getApplicationContext());
 		eventListView.setAdapter(adapter);
 	}
 }

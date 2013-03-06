@@ -1,6 +1,9 @@
 package pl.wroc.pwr.na.objects;
 
-public class AddressObject {
+import java.io.Serializable;
+
+public class AddressObject implements Serializable{
+	private static final long serialVersionUID = -1130811590154913844L;
 	
 	public String address;
 

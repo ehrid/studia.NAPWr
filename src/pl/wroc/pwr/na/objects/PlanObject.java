@@ -1,6 +1,10 @@
 package pl.wroc.pwr.na.objects;
 
-public class PlanObject {
+import java.io.Serializable;
+
+public class PlanObject implements Serializable {
+	private static final long serialVersionUID = 5650591533076865127L;
+	
 	public String time;
 	public String title;
 	public String place;

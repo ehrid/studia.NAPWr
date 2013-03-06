@@ -125,6 +125,7 @@
         android:layout_height="@dimen/event_button_poster"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/img_tab" />
+        android:src="@drawable/img_tab" 
+        android:visibility="gone"/>
 
 </RelativeLayout>

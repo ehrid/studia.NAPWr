@@ -1,8 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@color/background_event_title"
     android:layout_marginBottom="@dimen/default_margin_small"
+    android:background="@color/background_event_title"
     android:gravity="center_horizontal"
     android:orientation="vertical" >
 
@@ -17,78 +17,50 @@
         android:textSize="20sp" />
 
     <ImageView
+        android:contentDescription="@string/event_poster_description"
         android:id="@+id/event_list_item_poster"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/event_poster_preview"
         android:scaleType="center"
-        android:src="@drawable/logo_splashscreen"/>
+        android:src="@drawable/logo_splashscreen" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/event_view_dimension_b"
+        android:background="@color/background_white"
+        android:orientation="vertical" >
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <View
-                android:layout_width="@dimen/event_view_dimension_a"
-                android:layout_height="@dimen/event_view_dimension_c"
-                android:layout_marginTop="@dimen/event_view_dimension_b"
-                android:background="@color/background_white" />
-
-            <ImageView
-                android:id="@+id/event_list_item_button_star"
-                android:layout_width="@dimen/event_view_dimension_a"
-                android:layout_height="@dimen/event_view_dimension_a"
-                android:src="@drawable/like_star_on" />
-
-            <TextView
-                android:id="@+id/event_list_item_like_sum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/event_star"
-                android:textSize="@dimen/default_text" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/event_view_dimension_b" />
-
-            <TextView
-                android:id="@+id/event_list_item_content"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginBottom="@dimen/event_view_dimension_b"
-                android:background="@color/background_white"
-                android:lines="4"
-                android:text="@string/event_content"
-                android:textSize="15sp" />
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/event_view_dimension_b" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/event_list_item_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="@dimen/event_view_dimension_b"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"
+            android:lines="4"
+            android:text="@string/event_content"
+            android:textSize="15sp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_lightgray"
+        android:orientation="vertical" >
+        
     <TextView
+        android:layout_marginBottom="@dimen/event_view_dimension_b"
+        android:layout_marginTop="@dimen/event_view_dimension_b"
         android:id="@+id/event_list_item_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:layout_marginLeft="@dimen/default_margin"
-        android:text="Data"
-        android:textColor="@color/text_white"
+        android:text="@string/event_date"
+        android:textColor="@color/text_gray"
         android:textSize="15sp" />
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/event_view_dimension_b" />
+    </LinearLayout>
 
 </LinearLayout>

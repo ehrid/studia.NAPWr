@@ -11,6 +11,7 @@ import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.fragments.MenuObjectFragment;
 import pl.wroc.pwr.na.tools.EventController;
 import pl.wroc.pwr.na.tools.RequestTaskString;
+import pl.wroc.pwr.na.tools.UseInternalStorage;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -24,6 +25,7 @@ import android.widget.EditText;
 
 public class LoginActivity extends Activity implements OnClickListener {
 	private static LoginActivity singleInstance = null;
+	UseInternalStorage uis;
 
 	private EditText password;
 	private EditText login;
@@ -39,6 +41,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_login);
 
 		singleInstance = this;
+
+		uis = new UseInternalStorage(getApplicationContext());
 
 		loginButton = (Button) findViewById(R.id.login_button_login);
 		login = (EditText) findViewById(R.id.login_editText_login);
@@ -74,7 +78,21 @@ public class LoginActivity extends Activity implements OnClickListener {
 			}
 		});
 		pd.show();
+		
+		boolean ifLogin = true;
+		if (password.getText().toString().equals("")) {
+			password.setError(getResources().getString(
+					R.string.login_password_error));
+			ifLogin = false;
 
+		}
+		if (login.getText().toString().equals("")) {
+			login.setError(getResources().getString(R.string.login_email_error));
+			ifLogin = false;
+		}
+		if (!ifLogin) {
+			return false;
+		}
 		try {
 			String s = (String) new RequestTaskString().execute(
 					"http://www.napwr.pl/mobile/login/"
@@ -85,12 +103,13 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 			JSONObject event = completeJSONArr.getJSONObject(0);
 
-			((NAPWrApplication) getApplication()).rememberUser(event.getInt("id"));
+			((NAPWrApplication) getApplication()).rememberUser(event
+					.getInt("id"));
 
 			if (event.getBoolean("approved")) {
 				((MenuObjectFragment) ((MenuObjectFragment.getInstance())))
 						.setLogedInLabel(true);
-				ulubione();
+				downloadUserData();
 				return true;
 			} else if (event.getBoolean("login")) {
 				password.setError(getResources().getString(
@@ -112,17 +131,24 @@ public class LoginActivity extends Activity implements OnClickListener {
 		return false;
 	}
 
-	public void ulubione() {
+	public void downloadUserData() {
 		EventController ep = new EventController();
 
 		NAPWrApplication app = (NAPWrApplication) getApplication();
 
 		ep.addUlubione(app);
+		uis.writeObject(app.ulubione, "ulubione");
 		ep.addKalendarz(app);
+		uis.writeObject(app.kalendarz, "kalendarz");
 
 		((MenuActivity) (MenuActivity.activityMain)).ulubione = app.ulubione;
 		((MenuActivity) (MenuActivity.activityMain)).kalendarz = app.kalendarz;
 		((MenuActivity) (MenuActivity.activityMain)).mViewPager
 				.refreshDrawableState();
+		
+		if (app.ulubione.size() > 0) {
+			app.ulubione.get(0).setImagePoster(
+					getApplicationContext());
+		}
 	}
 }

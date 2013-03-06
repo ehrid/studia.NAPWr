@@ -18,10 +18,11 @@ public class EventListAdapter extends ArrayAdapter<EventObject> {
 	int resource;
 	String response;
 	Context context;
+	Context appContext;
 
 	// Initialize adapter
 	public EventListAdapter(Context context, int resource,
-			List<EventObject> items) {
+			List<EventObject> items, Context appContext) {
 		super(context, resource, items);
 		this.resource = resource;
 
@@ -54,14 +55,6 @@ public class EventListAdapter extends ArrayAdapter<EventObject> {
 		// Assign the appropriate data from our alert object above
 		name.setText(event.name);
 
-		// the same for number of likes:
-		// Get the text boxes from the listitem.xml file
-		TextView likeSum = (TextView) alertView
-				.findViewById(R.id.event_list_item_like_sum);
-
-		// Assign the appropriate data from our alert object above
-		likeSum.setText(Integer.toString(event.likeSum));
-
 		// the same for content:
 		// Get the text boxes from the listitem.xml file
 		TextView content = (TextView) alertView
@@ -71,8 +64,8 @@ public class EventListAdapter extends ArrayAdapter<EventObject> {
 
 		String eventContent = (String) event.content;
 
-		if (eventContent.length() > 103) {
-			eventContent = eventContent.substring(0, 100);
+		if (eventContent.length() > 153) {
+			eventContent = eventContent.substring(0, 150);
 			eventContent += "...";
 		}
 
@@ -92,7 +85,7 @@ public class EventListAdapter extends ArrayAdapter<EventObject> {
 		ImageView poster = (ImageView) alertView
 				.findViewById(R.id.event_list_item_poster);
 		if (position == 0) {
-			poster.setImageBitmap(event.imagePoster);
+			poster.setImageBitmap(event.getImagePoster(appContext));
 			poster.setVisibility(View.VISIBLE);
 		} else {
 			poster.setVisibility(View.GONE);

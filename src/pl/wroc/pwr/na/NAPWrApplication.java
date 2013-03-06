@@ -14,6 +14,8 @@ public class NAPWrApplication extends Application {
 	
 	String PREFS = "MyPrefs";
 	SharedPreferences mPrefs;
+	
+	public boolean firstLoad = false;
 
 	public ArrayList<EventObject> top10 = new ArrayList<EventObject>();
 	public ArrayList<EventObject> dzisiaj = new ArrayList<EventObject>();

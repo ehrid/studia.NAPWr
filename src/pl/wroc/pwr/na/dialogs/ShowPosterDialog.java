@@ -14,11 +14,13 @@ import android.widget.ImageView;
 public class ShowPosterDialog extends Dialog implements
 		android.view.View.OnClickListener {
 	EventActivity rootView;
+	Context context;
 	int possition;
 
-	public ShowPosterDialog(Context context, int possition) {
+	public ShowPosterDialog(Context context, int possition, Context appContext) {
 		super(context);
 		rootView = (EventActivity) context;
+		this.context = appContext;
 		this.possition = possition;
 	}
 
@@ -38,7 +40,7 @@ public class ShowPosterDialog extends Dialog implements
 		int xSize = displaymetrics.widthPixels - 30;
 
 		Bitmap bitmapPoster = ((MenuActivity) (MenuActivity.activityMain)).current
-				.get(possition).imagePoster;
+				.get(possition).getImagePoster(context);
 		bitmapPoster = Bitmap.createScaledBitmap(bitmapPoster, xSize,
 				bitmapPoster.getHeight() * xSize / bitmapPoster.getWidth(),
 				true);

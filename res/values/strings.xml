@@ -36,10 +36,12 @@
     <string name="event_from">Data poczatku</string>
     <string name="event_to">Data końca</string>
     <string name="event_address">Adres</string>
+    <string name="event_date">Data</string>
     <string name="event_organier">Organizator</string>
     <string name="event_star">Liki</string>
     <string name="event_content">Treść wydarzenia</string>
     <string name="event_button_share">SHARE</string>
+    <string name="event_poster_description">plakt wydarzenia</string>
     
     <!-- Event List -->
     <string name="event_list_name">Nazwa listy</string>

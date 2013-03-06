@@ -23,6 +23,7 @@
 	<color name="background_white">#FFFFFF</color>
 	<color name="background_black">#000000</color>
 	<color name="background_gray">#717171</color>
+	<color name="background_lightgray">#d7d7d7</color>
     <color name="background_blue">#27a7df</color>
     <color name="background_top10">#27a7df</color>
     <color name="background_today">#a7df27</color>

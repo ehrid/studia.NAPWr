@@ -6,20 +6,24 @@ import pl.wroc.pwr.na.NAPWrApplication;
 import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.adapters.MenuCollectionPagerAdapter;
 import pl.wroc.pwr.na.dialogs.CloseAppDialog;
-import pl.wroc.pwr.na.dialogs.MenuDialog;
 import pl.wroc.pwr.na.objects.EventObject;
 import pl.wroc.pwr.na.objects.PlanObject;
 import pl.wroc.pwr.na.tools.EventController;
+import pl.wroc.pwr.na.tools.UseInternalStorage;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
-import android.content.DialogInterface.OnCancelListener;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MenuActivity extends FragmentActivity {
 
@@ -40,6 +44,7 @@ public class MenuActivity extends FragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 		// Create an adapter that when requested, will return a fragment
 		// representing an object in
@@ -62,22 +67,22 @@ public class MenuActivity extends FragmentActivity {
 		jutro = ((NAPWrApplication) getApplication()).jutro;
 		kalendarz = ((NAPWrApplication) getApplication()).kalendarz;
 		ulubione = ((NAPWrApplication) getApplication()).ulubione;
+
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if(((NAPWrApplication) getApplication()).top10.size() == 0){
+		if (((NAPWrApplication) getApplication()).top10.size() == 0) {
 			finish();
-			startActivity(new Intent(this,
-					SplashScreenActivity.class));
+			startActivity(new Intent(this, SplashScreenActivity.class));
 		}
 	}
 
 	public boolean onKeyDown(int keyCode, android.view.KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_MENU) {
 			if (mViewPager.getCurrentItem() == 0) {
-				new MenuDialog(this).show();
+				// new MenuDialog(this).show();
 			} else {
 				mViewPager.setCurrentItem(0);
 			}
@@ -108,20 +113,10 @@ public class MenuActivity extends FragmentActivity {
 		return ((NAPWrApplication) getApplication()).logedin;
 	}
 
-	ProgressDialog pd;
+	ProgressDialog progressDialog;
 
 	public void eventDownload() {
-		pd = new ProgressDialog(this);
-		pd.setMessage("Trwa pobieranie wudarzeń");
-		pd.setOnCancelListener(new OnCancelListener() {
-
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				pd.dismiss();
-			}
-		});
-		pd.show();
-
+		UseInternalStorage uis = new UseInternalStorage(getApplicationContext());
 		EventController ep = new EventController();
 
 		NAPWrApplication app = (NAPWrApplication) getApplication();
@@ -132,15 +127,63 @@ public class MenuActivity extends FragmentActivity {
 		ep.addUlubione(app);
 		ep.addKalendarz(app);
 
-		ulubione = app.ulubione;
-		kalendarz = app.kalendarz;
 		dzisiaj = app.dzisiaj;
 		jutro = app.jutro;
 		top10 = app.top10;
+		ulubione = app.ulubione;
+		kalendarz = app.kalendarz;
+		
+		uis.writeObject(app.dzisiaj, "dzisiaj");
+		uis.writeObject(app.jutro, "jutro");
+		uis.writeObject(app.top10, "top10");
+		uis.writeObject(app.ulubione, "ulubione");
+		uis.writeObject(app.kalendarz, "kalendarz");
 
 		mViewPager.refreshDrawableState();
+	}
 
-		pd.dismiss();
+	public boolean isLoginAvailable() {
+		boolean networkAvailable = isNetworkAvailable();
+		if (!networkAvailable) {
+			Toast.makeText(getApplicationContext(),
+					"Brak aktywnego połączenia", 1000).show();
+		}
+		return networkAvailable;
+	}
+	
+	private boolean isNetworkAvailable() {
+		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetworkInfo = connectivityManager
+				.getActiveNetworkInfo();
+		return activeNetworkInfo != null;
+	}
+
+	// To use the AsyncTask, it must be subclassed
+	private class LoadViewTask extends AsyncTask<Void, Integer, Void> {
+		// Before running code in separate thread
+		@Override
+		protected void onPreExecute() {
+			// Create a new progress dialog
+			progressDialog = new ProgressDialog(MenuActivity.this);
+			progressDialog
+					.setMessage("Odświeżanie listy wydarzeń.\nAby anulować naciśnij wstecz.");
+			progressDialog.setIndeterminate(false);
+			progressDialog.show();
+		}
+
+		// The code to be executed in a background thread.
+		@Override
+		protected Void doInBackground(Void... params) {
+			eventDownload();
+			return null;
+		}
+
+		// after executing the code in the thread
+		@Override
+		protected void onPostExecute(Void result) {
+			// close the progress dialog
+			progressDialog.dismiss();
+		}
 	}
 
 }

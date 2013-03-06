@@ -18,7 +18,7 @@ import pl.wroc.pwr.na.objects.OrganizationObject;
 import pl.wroc.pwr.na.objects.PlanObject;
 
 public class EventController {
-
+	
 	private EventObject parser(JSONObject event, int i) {
 		String wydarzenieTytul = "";
 		String wydarzenieTresc = "";
@@ -48,11 +48,14 @@ public class EventController {
 					.getInt("wydarzenieWartoscPriorytet");
 			wydarzeniePrzeczytalo = event.getInt("wydarzeniePrzeczytalo");
 
-			wydarzenieDataPoczatek = (String) event.getJSONObject(
-					"wydarzenieDataPoczatek").get("date");
+			String s = (String) event.getJSONObject("wydarzenieDataPoczatek")
+					.get("date");
 
-			wydarzenieDataKoniec = (String) event.getJSONObject(
-					"wydarzenieDataKoniec").get("date");
+			wydarzenieDataPoczatek = s.substring(0, s.length() - 3);
+
+			s = (String) event.getJSONObject("wydarzenieDataKoniec")
+					.get("date");
+			wydarzenieDataKoniec = s.substring(0, s.length() - 3);
 
 			nazwaOrganizacji = (String) event.getJSONObject("organizacja")
 					.getJSONObject("uzytkownik")
@@ -134,16 +137,17 @@ public class EventController {
 		try {
 			startHour = event.getInt("start_hour");
 
-			time = event.getInt("start_hour") + ":" + event.getInt("start_min");
+			time = event.getInt("start_hour") + ":";
 
 			if (event.getInt("start_min") < 10)
 				time += "0";
-
-			time += " - " + event.getInt("end_hour") + ":"
-					+ event.getInt("end_min");
+			
+			time += event.getInt("start_min") + " - " + event.getInt("end_hour") + ":";
 
 			if (event.getInt("end_min") < 10)
 				time += "0";
+			
+			time += event.getInt("end_min");
 
 			title = event.getString("course_name");
 			place = event.getString("building") + " / "
@@ -232,7 +236,7 @@ public class EventController {
 	}
 
 	@SuppressWarnings("unchecked")
-	private ArrayList<PlanObject> getPlan(JSONObject completeObject) {
+	public ArrayList<PlanObject> getPlan(JSONObject completeObject) {
 		JSONObject event;
 		ArrayList<PlanObject> planList = new ArrayList<PlanObject>();
 
@@ -311,9 +315,15 @@ public class EventController {
 		// w day 0 - niedziela, 1 - poniedzialek, ... , 6 - sobota
 
 		day--;
-		for (int i = 0; i < 3; i++) {
+		dayIncremented--;
+		if (day < 0) {
+			day = 6;
+			week = Math.abs(week - 1);
+			
+		}
+		for (int i = 0; i < 7; i++) {
 			Log.d("Day", dayIncremented+"");
-			do {
+			//do {
 				if (day > 6) {
 					day = 0;
 					week = (week + 1) % 2;
@@ -331,7 +341,7 @@ public class EventController {
 				}
 				day++;
 				dayIncremented++;
-			} while (vaildDaysInPlanDay(((ArrayList<PlanObject>) dayOfWeek[day-1]), week) == 0);
+			//} while (vaildDaysInPlanDay(((ArrayList<PlanObject>) dayOfWeek[day-1]), week) == 0);
 		}
 
 		return plan;
@@ -341,7 +351,6 @@ public class EventController {
 		JSONArray completeJSONArr = null;
 		try {
 			if (app.logedin) {
-
 				completeJSONArr = new JSONArray((String) new RequestTaskString()
 						.execute(
 								"http://www.napwr.pl/mobile/wydarzenia/ulubione/"
@@ -365,6 +374,7 @@ public class EventController {
 		try {
 			completeJSONArr = new JSONArray((String) new RequestTaskString().execute(
 					"http://www.napwr.pl/mobile/wydarzenia/dzis").get());
+			
 			app.dzisiaj = getEvents(completeJSONArr);
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -380,6 +390,7 @@ public class EventController {
 		try {
 			completeJSONArr = new JSONArray((String) new RequestTaskString().execute(
 					"http://www.napwr.pl/mobile/wydarzenia/jutro").get());
+			
 			app.jutro = getEvents(completeJSONArr);
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -419,8 +430,8 @@ public class EventController {
 		try {
 			completeJSONArr = new JSONArray((String) new RequestTaskString().execute(
 					"http://www.napwr.pl/json/topten").get());
+			
 			app.top10 = ep.getEvents(completeJSONArr);
-
 		} catch (JSONException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {

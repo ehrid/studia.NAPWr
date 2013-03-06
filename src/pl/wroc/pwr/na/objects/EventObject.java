@@ -1,11 +1,19 @@
 package pl.wroc.pwr.na.objects;
 
+import java.io.ByteArrayOutputStream;
+import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 
 import pl.wroc.pwr.na.tools.RequestTaskBitmap;
+import pl.wroc.pwr.na.tools.UseInternalStorage;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 
-public class EventObject {
+public class EventObject implements Serializable {
+	private static final long serialVersionUID = 8758719650084506599L;
+
 	public CharSequence name;
 	public int id;
 	public CharSequence content;
@@ -17,12 +25,13 @@ public class EventObject {
 	public boolean isLiked;
 	public String startDate;
 	public String endDate;
-	
-	public Bitmap imagePoster;
 
+	BitmapDataObject bdo_poster;
 
 	public EventObject(CharSequence name, int id, CharSequence content,
-			CharSequence poster, CharSequence bigPoster, int likeSum, String startDate, String endDate, OrganizationObject organization, AddressObject address) {
+			CharSequence poster, CharSequence bigPoster, int likeSum,
+			String startDate, String endDate, OrganizationObject organization,
+			AddressObject address) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -34,15 +43,71 @@ public class EventObject {
 		this.endDate = endDate;
 		this.organization = organization;
 		this.address = address;
-		
-		
+	}
+
+	public Bitmap getImagePoster(Context context) {
+
+		if (bdo_poster != null) {
+			return BitmapFactory.decodeByteArray(bdo_poster.imageByteArray, 0,
+					bdo_poster.imageByteArray.length);
+		}
+		Bitmap poster = readPoster(context);
+		if (poster == null) {
+			poster = writePoster(context);
+		}
+		return poster;
+	}
+
+	public void setImagePoster(Context context) {
+		if (bdo_poster == null) {
+			writePoster(context);
+		}
+	}
+
+	private Bitmap writePoster(Context context) {
 		try {
-			imagePoster = (Bitmap) new RequestTaskBitmap().execute((String) bigPoster).get();
+			Bitmap imagePoster = (Bitmap) new RequestTaskBitmap().execute(
+					(String) bigPoster).get();
+
+			Log.d("ZAPISYWANIE OBRAZU", imagePoster.toString());
+			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			imagePoster.compress(Bitmap.CompressFormat.PNG, 100, stream);
+			BitmapDataObject bdo = new BitmapDataObject();
+			bdo.imageByteArray = stream.toByteArray();
+
+			UseInternalStorage uis = new UseInternalStorage(context);
+			uis.writeObject(bdo, "plakat_" + id);
+
+			bdo_poster = bdo;
+			return BitmapFactory.decodeByteArray(bdo.imageByteArray, 0,
+					bdo.imageByteArray.length);
+
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	private Bitmap readPoster(Context context) {
+		UseInternalStorage uis = new UseInternalStorage(context);
+		BitmapDataObject bdo = (BitmapDataObject) uis
+				.readObject("plakat_" + id);
+
+		if (bdo == null) {
+			return null;
+		} else {
+			return BitmapFactory.decodeByteArray(bdo.imageByteArray, 0,
+					bdo.imageByteArray.length);
+		}
+
+	}
+
+	protected class BitmapDataObject implements Serializable {
+		private static final long serialVersionUID = 6022430163107957510L;
+
+		public byte[] imageByteArray;
 	}
 
 }
