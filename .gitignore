@@ -183,11 +183,3 @@ local.properties
 # Eclipse project files
 .classpath
 .project
-
-#android .gitignore
-# built application files
-*.apk
-*.ap_
-
-# Local configuration file (sdk path, etc)
-local.properties

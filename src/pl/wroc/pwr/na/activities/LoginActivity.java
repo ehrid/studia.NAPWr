@@ -14,8 +14,6 @@ import pl.wroc.pwr.na.tools.RequestTaskString;
 import pl.wroc.pwr.na.tools.UseInternalStorage;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -68,17 +66,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 	ProgressDialog pd;
 
 	public boolean login() {
-		pd = new ProgressDialog(this);
-		pd.setMessage("Trwa logowanie");
-		pd.setOnCancelListener(new OnCancelListener() {
 
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				pd.dismiss();
-			}
-		});
-		pd.show();
-		
 		boolean ifLogin = true;
 		if (password.getText().toString().equals("")) {
 			password.setError(getResources().getString(
@@ -146,9 +134,9 @@ public class LoginActivity extends Activity implements OnClickListener {
 		((MenuActivity) (MenuActivity.activityMain)).mViewPager
 				.refreshDrawableState();
 		
-		if (app.ulubione.size() > 0) {
-			app.ulubione.get(0).setImagePoster(
-					getApplicationContext());
-		}
+//		if (app.ulubione.size() > 0) {
+//			app.ulubione.get(0).setImagePoster(
+//					getApplicationContext());
+//		}
 	}
 }

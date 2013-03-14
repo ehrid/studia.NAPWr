@@ -38,6 +38,9 @@ public class UseInternalStorage {
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
+		} catch (NullPointerException e){
+			e.printStackTrace();
+			return false;
 		}
 
 		return true;
@@ -63,6 +66,9 @@ public class UseInternalStorage {
 			e.printStackTrace();
 			return null;
 		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		} catch (NullPointerException e){
 			e.printStackTrace();
 			return null;
 		}

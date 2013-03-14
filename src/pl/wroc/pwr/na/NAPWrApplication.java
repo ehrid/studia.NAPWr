@@ -16,6 +16,7 @@ public class NAPWrApplication extends Application {
 	SharedPreferences mPrefs;
 	
 	public boolean firstLoad = false;
+	public int downloadDay = -1;
 
 	public ArrayList<EventObject> top10 = new ArrayList<EventObject>();
 	public ArrayList<EventObject> dzisiaj = new ArrayList<EventObject>();
@@ -29,6 +30,7 @@ public class NAPWrApplication extends Application {
 		mPrefs = getSharedPreferences(PREFS, 0);
 		
 		boolean rememberMe = mPrefs.getBoolean("rememberMe", false);
+		downloadDay = mPrefs.getInt("dowanloadDay", -1);
 
 	    if(rememberMe == true){
 	        //get previously stored login details
@@ -50,6 +52,12 @@ public class NAPWrApplication extends Application {
 		removeLoginDetails();
 		logedin = false;
 		userId = 0;
+	}
+	
+	public void saveDownloadDay(){
+	    Editor e = mPrefs.edit();
+	    e.putInt("downloadDay", downloadDay);
+	    e.commit();
 	}
 	
 	private void saveLoginDetails(int id){

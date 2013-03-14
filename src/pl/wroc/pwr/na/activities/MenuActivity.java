@@ -158,32 +158,4 @@ public class MenuActivity extends FragmentActivity {
 		return activeNetworkInfo != null;
 	}
 
-	// To use the AsyncTask, it must be subclassed
-	private class LoadViewTask extends AsyncTask<Void, Integer, Void> {
-		// Before running code in separate thread
-		@Override
-		protected void onPreExecute() {
-			// Create a new progress dialog
-			progressDialog = new ProgressDialog(MenuActivity.this);
-			progressDialog
-					.setMessage("Odświeżanie listy wydarzeń.\nAby anulować naciśnij wstecz.");
-			progressDialog.setIndeterminate(false);
-			progressDialog.show();
-		}
-
-		// The code to be executed in a background thread.
-		@Override
-		protected Void doInBackground(Void... params) {
-			eventDownload();
-			return null;
-		}
-
-		// after executing the code in the thread
-		@Override
-		protected void onPostExecute(Void result) {
-			// close the progress dialog
-			progressDialog.dismiss();
-		}
-	}
-
 }

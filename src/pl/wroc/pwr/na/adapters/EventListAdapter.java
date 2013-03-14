@@ -84,12 +84,14 @@ public class EventListAdapter extends ArrayAdapter<EventObject> {
 		// Get the text boxes from the listitem.xml file
 		ImageView poster = (ImageView) alertView
 				.findViewById(R.id.event_list_item_poster);
-		if (position == 0) {
-			poster.setImageBitmap(event.getImagePoster(appContext));
-			poster.setVisibility(View.VISIBLE);
-		} else {
-			poster.setVisibility(View.GONE);
-		}
+		
+		poster.setVisibility(View.GONE);
+//		if (position == 0) {
+//			poster.setImageBitmap(event.getImagePoster(appContext));
+//			poster.setVisibility(View.VISIBLE);
+//		} else {
+//			poster.setVisibility(View.GONE);
+//		}
 
 		// //the same for start date:
 		// // Get the text boxes from the listitem.xml file

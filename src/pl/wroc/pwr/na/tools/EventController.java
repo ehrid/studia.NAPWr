@@ -18,8 +18,9 @@ import pl.wroc.pwr.na.objects.OrganizationObject;
 import pl.wroc.pwr.na.objects.PlanObject;
 
 public class EventController {
-	
+
 	private EventObject parser(JSONObject event, int i) {
+		int wydarzenieId = 0;
 		String wydarzenieTytul = "";
 		String wydarzenieTresc = "";
 		int wydarzenieSumaLajkow = 0;
@@ -35,6 +36,7 @@ public class EventController {
 		OrganizationObject organizacja = new OrganizationObject("");
 
 		try {
+			wydarzenieId = event.getInt("wydarzenieId");
 			wydarzenieTytul = event.getString("wydarzenieTytul");
 			wydarzenieTresc = event.getString("wydarzenieTresc");
 			linkToSmallPoster = event.getJSONObject("plakat").getString(
@@ -74,11 +76,8 @@ public class EventController {
 
 		return new EventObject(
 				wydarzenieTytul,
-				i,
-				wydarzenieTresc, // wydarzenieTresc.substring(0,
-									// 200) + "...", //obcięcie
-									// treści wydarzenia do 200
-									// znaków
+				wydarzenieId,
+				wydarzenieTresc,
 				"http://www.napwr.pl/" + linkToSmallPoster,
 				"http://www.napwr.pl/" + linkToBigPoster, wydarzenieSumaLajkow
 						+ wydarzenieWartoscPriorytet + wydarzeniePrzeczytalo
@@ -141,12 +140,13 @@ public class EventController {
 
 			if (event.getInt("start_min") < 10)
 				time += "0";
-			
-			time += event.getInt("start_min") + " - " + event.getInt("end_hour") + ":";
+
+			time += event.getInt("start_min") + " - "
+					+ event.getInt("end_hour") + ":";
 
 			if (event.getInt("end_min") < 10)
 				time += "0";
-			
+
 			time += event.getInt("end_min");
 
 			title = event.getString("course_name");
@@ -189,7 +189,7 @@ public class EventController {
 		return sorted;
 	}
 
-	private String getSeparatorName(int day, int dayIncremented) {
+	private String getSeparatorName(int day, int week, int dayIncremented) {
 		String separatorName = "";
 
 		switch (day) {
@@ -216,6 +216,15 @@ public class EventController {
 			break;
 		}
 
+		switch (week) {
+		case 0:
+			separatorName += "TP, ";
+			break;
+		case 1:
+			separatorName += "TN, ";
+			break;
+		}
+
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DATE, dayIncremented); // number of days to add
@@ -223,12 +232,11 @@ public class EventController {
 
 		return separatorName;
 	}
-	
-	private int vaildDaysInPlanDay(ArrayList<PlanObject> planDay, int week){
+
+	private int vaildDaysInPlanDay(ArrayList<PlanObject> planDay, int week) {
 		int vaildDays = 0;
 		for (PlanObject po : planDay) {
-			if (po.week == 0 || po.week == week
-					|| po.week % 2 == week) {
+			if (po.week == 0 || po.week == week || po.week % 2 == week) {
 				vaildDays++;
 			}
 		}
@@ -319,29 +327,31 @@ public class EventController {
 		if (day < 0) {
 			day = 6;
 			week = Math.abs(week - 1);
-			
+
 		}
 		for (int i = 0; i < 7; i++) {
-			Log.d("Day", dayIncremented+"");
-			//do {
-				if (day > 6) {
-					day = 0;
-					week = (week + 1) % 2;
-				}
-				
-				Log.d("plan", day + " " + dayIncremented);
-				if(vaildDaysInPlanDay(((ArrayList<PlanObject>) dayOfWeek[day]), week) > 0){
-					plan.add(new PlanObject("separator", getSeparatorName(day,dayIncremented)));
-					for (PlanObject po : ((ArrayList<PlanObject>) dayOfWeek[day])) {
-						if (po.week == 0 || po.week == week
-								|| po.week % 2 == week) {
-							plan.add(po);
-						}
+			//Log.d("Day", dayIncremented + "");
+			// do {
+			if (day > 6) {
+				day = 0;
+				week = (week + 1) % 2;
+			}
+
+			Log.d("plan", day + " " + dayIncremented);
+			if (vaildDaysInPlanDay(((ArrayList<PlanObject>) dayOfWeek[day]),
+					week) > 0) {
+				plan.add(new PlanObject("separator", getSeparatorName(day,
+						week, dayIncremented)));
+				for (PlanObject po : ((ArrayList<PlanObject>) dayOfWeek[day])) {
+					if (po.week == 0 || po.week == week || po.week % 2 == week) {
+						plan.add(po);
 					}
 				}
-				day++;
-				dayIncremented++;
-			//} while (vaildDaysInPlanDay(((ArrayList<PlanObject>) dayOfWeek[day-1]), week) == 0);
+			}
+			day++;
+			dayIncremented++;
+			// } while (vaildDaysInPlanDay(((ArrayList<PlanObject>)
+			// dayOfWeek[day-1]), week) == 0);
 		}
 
 		return plan;
@@ -351,8 +361,8 @@ public class EventController {
 		JSONArray completeJSONArr = null;
 		try {
 			if (app.logedin) {
-				completeJSONArr = new JSONArray((String) new RequestTaskString()
-						.execute(
+				completeJSONArr = new JSONArray(
+						(String) new RequestTaskString().execute(
 								"http://www.napwr.pl/mobile/wydarzenia/ulubione/"
 										+ app.userId).get());
 
@@ -372,9 +382,10 @@ public class EventController {
 	public void addDzisiaj(NAPWrApplication app) {
 		JSONArray completeJSONArr = null;
 		try {
-			completeJSONArr = new JSONArray((String) new RequestTaskString().execute(
-					"http://www.napwr.pl/mobile/wydarzenia/dzis").get());
-			
+			completeJSONArr = new JSONArray((String) new RequestTaskString()
+					.execute("http://www.napwr.pl/mobile/wydarzenia/dzis")
+					.get());
+
 			app.dzisiaj = getEvents(completeJSONArr);
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -388,9 +399,10 @@ public class EventController {
 	public void addJutro(NAPWrApplication app) {
 		JSONArray completeJSONArr = null;
 		try {
-			completeJSONArr = new JSONArray((String) new RequestTaskString().execute(
-					"http://www.napwr.pl/mobile/wydarzenia/jutro").get());
-			
+			completeJSONArr = new JSONArray((String) new RequestTaskString()
+					.execute("http://www.napwr.pl/mobile/wydarzenia/jutro")
+					.get());
+
 			app.jutro = getEvents(completeJSONArr);
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -428,9 +440,9 @@ public class EventController {
 		JSONArray completeJSONArr = null;
 		EventController ep = new EventController();
 		try {
-			completeJSONArr = new JSONArray((String) new RequestTaskString().execute(
-					"http://www.napwr.pl/json/topten").get());
-			
+			completeJSONArr = new JSONArray((String) new RequestTaskString()
+					.execute("http://www.napwr.pl/json/topten").get());
+
 			app.top10 = ep.getEvents(completeJSONArr);
 		} catch (JSONException e) {
 			e.printStackTrace();

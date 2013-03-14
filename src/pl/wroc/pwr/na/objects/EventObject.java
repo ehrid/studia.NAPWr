@@ -50,17 +50,20 @@ public class EventObject implements Serializable {
 		if (bdo_poster != null) {
 			return BitmapFactory.decodeByteArray(bdo_poster.imageByteArray, 0,
 					bdo_poster.imageByteArray.length);
+		} else {
+			Bitmap poster = readPoster(context);
+			if (poster == null) {
+				poster = writePoster(context);
+			}
+			return poster;
 		}
-		Bitmap poster = readPoster(context);
-		if (poster == null) {
-			poster = writePoster(context);
-		}
-		return poster;
 	}
 
 	public void setImagePoster(Context context) {
 		if (bdo_poster == null) {
-			writePoster(context);
+			if (readPoster(context) == null) {
+				writePoster(context);
+			}
 		}
 	}
 
@@ -98,6 +101,7 @@ public class EventObject implements Serializable {
 		if (bdo == null) {
 			return null;
 		} else {
+			bdo_poster = bdo;
 			return BitmapFactory.decodeByteArray(bdo.imageByteArray, 0,
 					bdo.imageByteArray.length);
 		}

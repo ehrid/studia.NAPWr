@@ -1,6 +1,7 @@
 package pl.wroc.pwr.na.activities;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
 import org.json.JSONArray;
@@ -23,8 +24,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class SplashScreenActivity extends Activity {
@@ -38,6 +37,8 @@ public class SplashScreenActivity extends Activity {
 	UseInternalStorage uis;
 	EventController ep;
 	NAPWrApplication app;
+
+	int day;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,22 +55,19 @@ public class SplashScreenActivity extends Activity {
 
 		ep = new EventController();
 		app = (NAPWrApplication) getApplication();
+		Calendar calendar = Calendar.getInstance();
+		day = calendar.get(Calendar.DAY_OF_WEEK);
+		loading1.setImageResource(R.drawable.loading_on);
 
 		if (uis.readObject("dzisiaj") == null && !isNetworkAvailable()) {
 			finish();
 			Toast.makeText(getApplicationContext(),
 					"Aplikacja wymaga aktywnego połaczenia z internetm", 5000)
 					.show();
-		}
-		if (uis.readObject("dzisiaj") != null && !isNetworkAvailable()) {
+		} else if (uis.readObject("dzisiaj") != null && !isNetworkAvailable()) {
 			loading();
-		} else if (uis.readObject("dzisiaj") == null) {
-			Toast.makeText(getApplicationContext(),
-					"Pełne ładowanie aplikacji, proszę czekać.", 5000).show();
-			downloadEvents();
 		} else {
 			downloadEvents();
-			// loading();
 		}
 
 	}
@@ -86,7 +84,7 @@ public class SplashScreenActivity extends Activity {
 				if (app.dzisiaj == null) {
 					app.dzisiaj = new ArrayList<EventObject>();
 				}
-				loading1.setImageResource(R.drawable.loading_on);
+				loading2.setImageResource(R.drawable.loading_on);
 
 				Handler handler = new Handler();
 				handler.postDelayed(new Runnable() {
@@ -99,7 +97,7 @@ public class SplashScreenActivity extends Activity {
 						if (app.top10 == null) {
 							app.top10 = new ArrayList<EventObject>();
 						}
-						loading2.setImageResource(R.drawable.loading_on);
+						loading3.setImageResource(R.drawable.loading_on);
 
 						Handler handler = new Handler();
 						handler.postDelayed(new Runnable() {
@@ -112,7 +110,7 @@ public class SplashScreenActivity extends Activity {
 								if (app.jutro == null) {
 									app.jutro = new ArrayList<EventObject>();
 								}
-								loading3.setImageResource(R.drawable.loading_on);
+								loading4.setImageResource(R.drawable.loading_on);
 
 								Handler handler = new Handler();
 								handler.postDelayed(new Runnable() {
@@ -125,7 +123,7 @@ public class SplashScreenActivity extends Activity {
 										if (app.kalendarz == null) {
 											app.kalendarz = new ArrayList<PlanObject>();
 										}
-										loading4.setImageResource(R.drawable.loading_on);
+										loading5.setImageResource(R.drawable.loading_on);
 
 										Handler handler = new Handler();
 										handler.postDelayed(new Runnable() {
@@ -138,7 +136,6 @@ public class SplashScreenActivity extends Activity {
 												if (app.ulubione == null) {
 													app.ulubione = new ArrayList<EventObject>();
 												}
-												loading5.setImageResource(R.drawable.loading_on);
 
 												finish();
 												// start the home screen
@@ -170,7 +167,6 @@ public class SplashScreenActivity extends Activity {
 		Handler handler = new Handler();
 		handler.postDelayed(new Runnable() {
 
-			@SuppressWarnings("unchecked")
 			public void run() {
 				try {
 					JSONArray completeJSONArr = new JSONArray(
@@ -180,12 +176,12 @@ public class SplashScreenActivity extends Activity {
 									.get());
 
 					app.dzisiaj = ep.getEvents(completeJSONArr);
-					if (app.dzisiaj != null) {
-						app.dzisiaj.get(0).setImagePoster(
-								getApplicationContext());
-					}
+//					if (app.dzisiaj != null) {
+//						app.dzisiaj.get(0).setImagePoster(
+//								getApplicationContext());
+//					}
 					uis.writeObject(app.dzisiaj, "dzisiaj");
-					loading1.setImageResource(R.drawable.loading_on);
+					loading2.setImageResource(R.drawable.loading_on);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				} catch (InterruptedException e) {
@@ -205,12 +201,12 @@ public class SplashScreenActivity extends Activity {
 											.get());
 
 							app.top10 = ep.getEvents(completeJSONArr);
-							if (app.top10 != null) {
-								app.top10.get(0).setImagePoster(
-										getApplicationContext());
-							}
+//							if (app.top10 != null) {
+//								app.top10.get(0).setImagePoster(
+//										getApplicationContext());
+//							}
 							uis.writeObject(app.top10, "top10");
-							loading2.setImageResource(R.drawable.loading_on);
+							loading3.setImageResource(R.drawable.loading_on);
 						} catch (JSONException e) {
 							e.printStackTrace();
 						} catch (InterruptedException e) {
@@ -231,12 +227,12 @@ public class SplashScreenActivity extends Activity {
 													.get());
 
 									app.jutro = ep.getEvents(completeJSONArr);
+//									if (app.jutro != null) {
+//										app.jutro.get(0).setImagePoster(
+//												getApplicationContext());
+//									}
 									uis.writeObject(app.jutro, "jutro");
-									if (app.jutro != null) {
-										app.jutro.get(0).setImagePoster(
-												getApplicationContext());
-									}
-									loading3.setImageResource(R.drawable.loading_on);
+									loading4.setImageResource(R.drawable.loading_on);
 
 								} catch (JSONException e) {
 									e.printStackTrace();
@@ -266,7 +262,7 @@ public class SplashScreenActivity extends Activity {
 											}
 											uis.writeObject(app.kalendarz,
 													"kalendarz");
-											loading4.setImageResource(R.drawable.loading_on);
+											loading5.setImageResource(R.drawable.loading_on);
 										} catch (JSONException e) {
 											e.printStackTrace();
 										} catch (InterruptedException e) {
@@ -295,17 +291,17 @@ public class SplashScreenActivity extends Activity {
 														app.ulubione = new ArrayList<EventObject>();
 													}
 
-													if (app.ulubione.size() > 0) {
-														app.ulubione
-																.get(0)
-																.setImagePoster(
-																		getApplicationContext());
-													}
+//													if (app.ulubione.size() > 0) {
+//														app.ulubione
+//																.get(0)
+//																.setImagePoster(
+//																		getApplicationContext());
+//													}
 
 													uis.writeObject(
 															app.ulubione,
 															"ulubione");
-													loading5.setImageResource(R.drawable.loading_on);
+													
 												} catch (JSONException e) {
 													e.printStackTrace();
 												} catch (InterruptedException e) {
@@ -314,6 +310,7 @@ public class SplashScreenActivity extends Activity {
 													e.printStackTrace();
 												}
 
+												app.downloadDay = day;
 												finish();
 												// start the home screen
 
@@ -324,127 +321,20 @@ public class SplashScreenActivity extends Activity {
 
 											}
 
-										}, 50);
+										}, 200);
 									}
 
-								}, 50);
+								}, 200);
 							}
 
-						}, 50);
+						}, 200);
 					}
 
-				}, 50);
+				}, 200);
 			}
 
-		}, 50);
+		}, 200);
 
-	}
-
-	private void downloadEvents2() {
-		((NAPWrApplication) getApplication()).firstLoad = true;
-		// Toast.makeText(getApplicationContext(),
-		// "Pełne ładowanie aplikacji, proszę czekać.", 5000).show();
-
-		Handler handler = new Handler();
-		handler.postDelayed(new Runnable() {
-
-			public void run() {
-				JSONArray completeJSONArr = null;
-				JSONObject completeObject = null;
-				try {
-					completeJSONArr = new JSONArray(
-							(String) new RequestTaskString()
-									.execute(
-											"http://www.napwr.pl/mobile/wydarzenia/dzis")
-									.get());
-
-					app.dzisiaj = ep.getEvents(completeJSONArr);
-					if (app.dzisiaj != null) {
-						app.dzisiaj.get(0).setImagePoster(
-								getApplicationContext());
-					}
-					uis.writeObject(app.dzisiaj, "dzisiaj");
-					loading1.setImageResource(R.drawable.loading_on);
-					loading1.invalidate();
-
-					completeJSONArr = new JSONArray(
-							(String) new RequestTaskString().execute(
-									"http://www.napwr.pl/json/topten").get());
-
-					app.top10 = ep.getEvents(completeJSONArr);
-					if (app.top10 != null) {
-						app.top10.get(0)
-								.setImagePoster(getApplicationContext());
-					}
-					uis.writeObject(app.top10, "top10");
-					loading2.setImageResource(R.drawable.loading_on);
-					loading2.invalidate();
-
-					completeJSONArr = new JSONArray(
-							(String) new RequestTaskString()
-									.execute(
-											"http://www.napwr.pl/mobile/wydarzenia/jutro")
-									.get());
-
-					app.jutro = ep.getEvents(completeJSONArr);
-					uis.writeObject(app.jutro, "jutro");
-					if (app.jutro != null) {
-						app.jutro.get(0)
-								.setImagePoster(getApplicationContext());
-					}
-					loading3.setImageResource(R.drawable.loading_on);
-					loading3.invalidate();
-
-					if (app.logedin) {
-						completeObject = new JSONObject(
-								(String) new RequestTaskString().execute(
-										"http://www.napwr.pl/mobile/plan/"
-												+ app.userId).get());
-
-						app.kalendarz = ep.getPlan(completeObject);
-					} else {
-						app.kalendarz = new ArrayList<PlanObject>();
-					}
-					uis.writeObject(app.kalendarz, "kalendarz");
-					loading4.setImageResource(R.drawable.loading_on);
-					loading4.invalidate();
-
-					if (app.logedin) {
-						completeJSONArr = new JSONArray(
-								(String) new RequestTaskString().execute(
-										"http://www.napwr.pl/mobile/wydarzenia/ulubione/"
-												+ app.userId).get());
-
-						app.ulubione = ep.getEventsUlubione(completeJSONArr);
-					} else {
-						app.ulubione = new ArrayList<EventObject>();
-					}
-
-					if (app.ulubione.size() > 0) {
-						app.ulubione.get(0).setImagePoster(
-								getApplicationContext());
-					}
-
-					uis.writeObject(app.ulubione, "ulubione");
-					loading5.setImageResource(R.drawable.loading_on);
-					loading5.invalidate();
-
-					finish();
-					// start the home screen
-
-					SplashScreenActivity.this.startActivity(new Intent(
-							SplashScreenActivity.this, MenuActivity.class));
-
-				} catch (JSONException e) {
-					e.printStackTrace();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				} catch (ExecutionException e) {
-					e.printStackTrace();
-				}
-			}
-
-		}, 100);
 	}
 
 	private boolean isNetworkAvailable() {
