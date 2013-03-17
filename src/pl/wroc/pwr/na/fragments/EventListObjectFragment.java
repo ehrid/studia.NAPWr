@@ -16,14 +16,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class EventListObjectFragment extends Fragment {
 
 	public static final String LIST_TITLE = "list_title";
+	public static final String LIST_MINIATURE = "list_miniature";
 
 	private TextView title;
+	private ImageView miniature;
 	private ListView eventListView;
 	private EventListAdapter adapter;
 	private Context context;
@@ -43,6 +46,10 @@ public class EventListObjectFragment extends Fragment {
 
 		title = (TextView) rootView.findViewById(R.id.eventlist_title);
 		title.setText(args.getString(LIST_TITLE));
+		
+		miniature = (ImageView) rootView.findViewById(R.id.eventlist_miniature);
+		miniature.setImageResource(args.getInt(LIST_MINIATURE));
+		
 		eventListView = (ListView) rootView
 				.findViewById(R.id.event_list_events);
 		addEvents();

@@ -133,10 +133,5 @@ public class LoginActivity extends Activity implements OnClickListener {
 		((MenuActivity) (MenuActivity.activityMain)).kalendarz = app.kalendarz;
 		((MenuActivity) (MenuActivity.activityMain)).mViewPager
 				.refreshDrawableState();
-		
-//		if (app.ulubione.size() > 0) {
-//			app.ulubione.get(0).setImagePoster(
-//					getApplicationContext());
-//		}
 	}
 }

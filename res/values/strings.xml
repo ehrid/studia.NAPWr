@@ -73,4 +73,9 @@
     <string name="plan_type">Typ</string>
     <string name="plan_date">Data</string>
     
+    <!-- connection_error -->
+    <string name="connection_error_reconnect">Połącz ponownie</string>
+    <string name="connection_error_offline">Tryb offline</string>
+    <string name="connection_error_info">Brak połączenia z internetem</string>
+    
 </resources>

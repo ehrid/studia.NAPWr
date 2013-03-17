@@ -13,12 +13,14 @@ import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class PlanObjectFragment extends Fragment {
 
 	private TextView title;
+	private ImageView miniature;
 	private ListView eventListView;
 	private PlanAdapter adapter;
 	private Context context;
@@ -38,6 +40,10 @@ public class PlanObjectFragment extends Fragment {
 
 		title = (TextView) rootView.findViewById(R.id.eventlist_title);
 		title.setText("Plan PWr");
+		
+		miniature = (ImageView) rootView.findViewById(R.id.eventlist_miniature);
+		miniature.setImageResource(R.drawable.miniature_calendar);
+		
 		eventListView = (ListView) rootView
 				.findViewById(R.id.event_list_events);
 		addEvents();

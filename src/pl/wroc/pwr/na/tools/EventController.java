@@ -209,7 +209,7 @@ public class EventController {
 			separatorName += "Czwartek, ";
 			break;
 		case 5:
-			separatorName += "Piatek, ";
+			separatorName += "Piątek, ";
 			break;
 		case 6:
 			separatorName += "Sobota, ";

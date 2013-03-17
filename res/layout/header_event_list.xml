@@ -1,12 +1,20 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:background="@color/default_NAPWr"
+    android:gravity="center_vertical|right" >
+
+    <ImageView
+        android:id="@+id/eventlist_miniature"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:layout_marginLeft="114dp"
+        android:src="@drawable/miniature_top10" />
 
     <TextView
         android:id="@+id/eventlist_title"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/default_NAPWr"
         android:gravity="right"
         android:paddingBottom="17sp"
         android:paddingRight="20sp"
@@ -19,9 +27,4 @@
         android:textColor="@color/text_white"
         android:textSize="25sp" />
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/default_margin_small"
-        android:layout_below="@+id/eventlist_title" />
-
-</RelativeLayout>
+</LinearLayout>

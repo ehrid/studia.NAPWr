@@ -1,7 +1,6 @@
 package pl.wroc.pwr.na.activities;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
 import org.json.JSONArray;
@@ -22,9 +21,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class SplashScreenActivity extends Activity {
 
@@ -37,8 +36,6 @@ public class SplashScreenActivity extends Activity {
 	UseInternalStorage uis;
 	EventController ep;
 	NAPWrApplication app;
-
-	int day;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,111 +52,28 @@ public class SplashScreenActivity extends Activity {
 
 		ep = new EventController();
 		app = (NAPWrApplication) getApplication();
-		Calendar calendar = Calendar.getInstance();
-		day = calendar.get(Calendar.DAY_OF_WEEK);
 		loading1.setImageResource(R.drawable.loading_on);
 
-		if (uis.readObject("dzisiaj") == null && !isNetworkAvailable()) {
-			finish();
-			Toast.makeText(getApplicationContext(),
-					"Aplikacja wymaga aktywnego połaczenia z internetm", 5000)
-					.show();
-		} else if (uis.readObject("dzisiaj") != null && !isNetworkAvailable()) {
-			loading();
+		if (!isNetworkAvailable()) {
+			goRobot();
 		} else {
 			downloadEvents();
 		}
 
 	}
 
-	private void loading() {
+	private void goRobot() {
 		Handler handler = new Handler();
 		handler.postDelayed(new Runnable() {
 
-			@SuppressWarnings("unchecked")
 			public void run() {
-
-				app.dzisiaj = (ArrayList<EventObject>) uis
-						.readObject("dzisiaj");
-				if (app.dzisiaj == null) {
-					app.dzisiaj = new ArrayList<EventObject>();
-				}
-				loading2.setImageResource(R.drawable.loading_on);
-
-				Handler handler = new Handler();
-				handler.postDelayed(new Runnable() {
-
-					@Override
-					public void run() {
-
-						app.top10 = (ArrayList<EventObject>) uis
-								.readObject("top10");
-						if (app.top10 == null) {
-							app.top10 = new ArrayList<EventObject>();
-						}
-						loading3.setImageResource(R.drawable.loading_on);
-
-						Handler handler = new Handler();
-						handler.postDelayed(new Runnable() {
-
-							@Override
-							public void run() {
-
-								app.jutro = (ArrayList<EventObject>) uis
-										.readObject("jutro");
-								if (app.jutro == null) {
-									app.jutro = new ArrayList<EventObject>();
-								}
-								loading4.setImageResource(R.drawable.loading_on);
-
-								Handler handler = new Handler();
-								handler.postDelayed(new Runnable() {
-
-									@Override
-									public void run() {
-
-										app.kalendarz = (ArrayList<PlanObject>) uis
-												.readObject("kalendarz");
-										if (app.kalendarz == null) {
-											app.kalendarz = new ArrayList<PlanObject>();
-										}
-										loading5.setImageResource(R.drawable.loading_on);
-
-										Handler handler = new Handler();
-										handler.postDelayed(new Runnable() {
-
-											@Override
-											public void run() {
-
-												app.ulubione = (ArrayList<EventObject>) uis
-														.readObject("ulubione");
-												if (app.ulubione == null) {
-													app.ulubione = new ArrayList<EventObject>();
-												}
-
-												finish();
-												// start the home screen
-
-												SplashScreenActivity.this
-														.startActivity(new Intent(
-																SplashScreenActivity.this,
-																MenuActivity.class));
-
-											}
-
-										}, 400);
-									}
-
-								}, 400);
-							}
-
-						}, 400);
-					}
-
-				}, 400);
+				finish();
+				SplashScreenActivity.this.startActivity(new Intent(
+						SplashScreenActivity.this,
+						ConnectionErrorActivity.class));
 			}
 
-		}, 400);
+		}, 1000);
 	}
 
 	private void downloadEvents() {
@@ -176,10 +90,10 @@ public class SplashScreenActivity extends Activity {
 									.get());
 
 					app.dzisiaj = ep.getEvents(completeJSONArr);
-//					if (app.dzisiaj != null) {
-//						app.dzisiaj.get(0).setImagePoster(
-//								getApplicationContext());
-//					}
+					// if (app.dzisiaj != null) {
+					// app.dzisiaj.get(0).setImagePoster(
+					// getApplicationContext());
+					// }
 					uis.writeObject(app.dzisiaj, "dzisiaj");
 					loading2.setImageResource(R.drawable.loading_on);
 				} catch (JSONException e) {
@@ -201,10 +115,10 @@ public class SplashScreenActivity extends Activity {
 											.get());
 
 							app.top10 = ep.getEvents(completeJSONArr);
-//							if (app.top10 != null) {
-//								app.top10.get(0).setImagePoster(
-//										getApplicationContext());
-//							}
+							// if (app.top10 != null) {
+							// app.top10.get(0).setImagePoster(
+							// getApplicationContext());
+							// }
 							uis.writeObject(app.top10, "top10");
 							loading3.setImageResource(R.drawable.loading_on);
 						} catch (JSONException e) {
@@ -227,10 +141,10 @@ public class SplashScreenActivity extends Activity {
 													.get());
 
 									app.jutro = ep.getEvents(completeJSONArr);
-//									if (app.jutro != null) {
-//										app.jutro.get(0).setImagePoster(
-//												getApplicationContext());
-//									}
+									// if (app.jutro != null) {
+									// app.jutro.get(0).setImagePoster(
+									// getApplicationContext());
+									// }
 									uis.writeObject(app.jutro, "jutro");
 									loading4.setImageResource(R.drawable.loading_on);
 
@@ -291,17 +205,18 @@ public class SplashScreenActivity extends Activity {
 														app.ulubione = new ArrayList<EventObject>();
 													}
 
-//													if (app.ulubione.size() > 0) {
-//														app.ulubione
-//																.get(0)
-//																.setImagePoster(
-//																		getApplicationContext());
-//													}
+													// if (app.ulubione.size() >
+													// 0) {
+													// app.ulubione
+													// .get(0)
+													// .setImagePoster(
+													// getApplicationContext());
+													// }
 
 													uis.writeObject(
 															app.ulubione,
 															"ulubione");
-													
+
 												} catch (JSONException e) {
 													e.printStackTrace();
 												} catch (InterruptedException e) {
@@ -310,7 +225,6 @@ public class SplashScreenActivity extends Activity {
 													e.printStackTrace();
 												}
 
-												app.downloadDay = day;
 												finish();
 												// start the home screen
 
@@ -338,10 +252,34 @@ public class SplashScreenActivity extends Activity {
 	}
 
 	private boolean isNetworkAvailable() {
-		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo activeNetworkInfo = connectivityManager
-				.getActiveNetworkInfo();
-		return activeNetworkInfo != null;
+		boolean haveConnectedWifi = false;
+		boolean haveConnectedMobile = false;
+
+		ConnectivityManager cm = (ConnectivityManager) SplashScreenActivity.this
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+		NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+		for (NetworkInfo ni : netInfo) {
+			if (ni.getTypeName().equalsIgnoreCase("WIFI")) {
+				if (ni.isConnected()) {
+					haveConnectedWifi = true;
+					Log.d("Internt Connection", "WIFI CONNECTION AVAILABLE");
+				} else {
+					Log.d("Internt Connection", "WIFI CONNECTION NOT AVAILABLE");
+				}
+			}
+			if (ni.getTypeName().equalsIgnoreCase("MOBILE")) {
+				if (ni.isConnected()) {
+					haveConnectedMobile = true;
+					Log.d("Internt Connection",
+							"MOBILE INTERNET CONNECTION AVAILABLE");
+				} else {
+					Log.d("Internt Connection",
+							"MOBILE INTERNET CONNECTION NOT AVAILABLE");
+				}
+			}
+		}
+		return haveConnectedWifi || haveConnectedMobile;
 	}
 
 }

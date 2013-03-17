@@ -10,15 +10,16 @@ import pl.wroc.pwr.na.objects.EventObject;
 import pl.wroc.pwr.na.objects.PlanObject;
 import pl.wroc.pwr.na.tools.EventController;
 import pl.wroc.pwr.na.tools.UseInternalStorage;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -90,7 +91,7 @@ public class MenuActivity extends FragmentActivity {
 		}
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if (mViewPager.getCurrentItem() == 0) {
-				new CloseAppDialog(this).show();
+				moveTaskToBack(true);
 			} else {
 				mViewPager.setCurrentItem(0);
 			}
@@ -132,7 +133,7 @@ public class MenuActivity extends FragmentActivity {
 		top10 = app.top10;
 		ulubione = app.ulubione;
 		kalendarz = app.kalendarz;
-		
+
 		uis.writeObject(app.dzisiaj, "dzisiaj");
 		uis.writeObject(app.jutro, "jutro");
 		uis.writeObject(app.top10, "top10");
@@ -142,20 +143,45 @@ public class MenuActivity extends FragmentActivity {
 		mViewPager.refreshDrawableState();
 	}
 
+	@SuppressLint("ShowToast")
 	public boolean isLoginAvailable() {
 		boolean networkAvailable = isNetworkAvailable();
 		if (!networkAvailable) {
 			Toast.makeText(getApplicationContext(),
-					"Brak aktywnego połączenia", 1000).show();
+					"Brak aktywnego połączenia", 2000).show();
 		}
 		return networkAvailable;
 	}
-	
+
 	private boolean isNetworkAvailable() {
-		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo activeNetworkInfo = connectivityManager
-				.getActiveNetworkInfo();
-		return activeNetworkInfo != null;
+		boolean haveConnectedWifi = false;
+		boolean haveConnectedMobile = false;
+
+		ConnectivityManager cm = (ConnectivityManager) MenuActivity.this
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+		NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+		for (NetworkInfo ni : netInfo) {
+			if (ni.getTypeName().equalsIgnoreCase("WIFI")) {
+				if (ni.isConnected()) {
+					haveConnectedWifi = true;
+					Log.d("Internt Connection", "WIFI CONNECTION AVAILABLE");
+				} else {
+					Log.d("Internt Connection", "WIFI CONNECTION NOT AVAILABLE");
+				}
+			}
+			if (ni.getTypeName().equalsIgnoreCase("MOBILE")) {
+				if (ni.isConnected()) {
+					haveConnectedMobile = true;
+					Log.d("Internt Connection",
+							"MOBILE INTERNET CONNECTION AVAILABLE");
+				} else {
+					Log.d("Internt Connection",
+							"MOBILE INTERNET CONNECTION NOT AVAILABLE");
+				}
+			}
+		}
+		return haveConnectedWifi || haveConnectedMobile;
 	}
 
 }

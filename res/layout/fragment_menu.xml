@@ -159,7 +159,9 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:background="@color/default_NAPWr"
-            android:layout_marginBottom="@dimen/default_margin" >
+            android:layout_marginBottom="@dimen/default_margin"
+            android:paddingLeft="@dimen/default_margin"
+            android:paddingRight="@dimen/default_margin">
 
             <ImageView
                 android:layout_width="wrap_content"
