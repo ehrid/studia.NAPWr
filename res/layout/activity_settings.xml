@@ -1,0 +1,140 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/default_NAPWr"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/event_list_header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/header_event_list" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/default_margin"
+        android:paddingRight="@dimen/default_margin" 
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:text="Ustaw swój plan zajęć"
+                android:textSize="@dimen/default_text_medium" />
+
+            <EditText
+                android:id="@+id/settings_plan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30sp"
+                android:text="http://plan-pwr.pl/[xXxXxXxXx]" >
+
+                <requestFocus />
+            </EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:text="Ustaw swój wydział"
+                android:textSize="@dimen/default_text_medium" />
+
+            <Spinner
+                android:id="@+id/settings_facultity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:text="Oszczędzanie transferu danych"
+                android:textSize="@dimen/default_text_medium" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:text="Przycisk Zamknij"
+                android:textSize="@dimen/default_text_medium" />
+
+            <RadioGroup
+                android:id="@+id/settings_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:layout_marginLeft="30sp">
+
+                <RadioButton
+                    android:id="@+id/radio0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wyłącza aplikację" />
+
+                <RadioButton
+                    android:id="@+id/radio1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Minimalizuje" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:text="Powiadomienia"
+                android:textSize="@dimen/default_text_medium" />
+
+            <CheckBox
+                android:id="@+id/settings_notifications"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:layout_marginLeft="30sp"
+                android:text="Włącz powiadomienia" 
+                android:checked="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:text="Odświeżanie wydarzeń"
+                android:textSize="@dimen/default_text_medium" />
+
+            <RadioGroup
+                android:id="@+id/settings_refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:layout_marginLeft="30sp">
+
+                <RadioButton
+                    android:id="@+id/radio2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Podczas uruchamiania" />
+
+                <RadioButton
+                    android:id="@+id/radio3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Co godzinę" />
+
+                <RadioButton
+                    android:id="@+id/radio4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Co 12 godzin" />
+            </RadioGroup>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

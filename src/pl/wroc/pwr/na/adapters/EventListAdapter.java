@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -79,19 +78,6 @@ public class EventListAdapter extends ArrayAdapter<EventObject> {
 		// Assign the appropriate data from our alert object above
 		dateAndPlace.setText(event.startDate.toString() + " - "
 				+ event.endDate.toString());
-
-		// the same for small poster url:
-		// Get the text boxes from the listitem.xml file
-		ImageView poster = (ImageView) alertView
-				.findViewById(R.id.event_list_item_poster);
-		
-		poster.setVisibility(View.GONE);
-//		if (position == 0) {
-//			poster.setImageBitmap(event.getImagePoster(appContext));
-//			poster.setVisibility(View.VISIBLE);
-//		} else {
-//			poster.setVisibility(View.GONE);
-//		}
 
 		// //the same for start date:
 		// // Get the text boxes from the listitem.xml file

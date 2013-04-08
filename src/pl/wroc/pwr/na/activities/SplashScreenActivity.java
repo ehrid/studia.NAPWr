@@ -53,6 +53,10 @@ public class SplashScreenActivity extends Activity {
 		ep = new EventController();
 		app = (NAPWrApplication) getApplication();
 		loading1.setImageResource(R.drawable.loading_on);
+		
+		if (app.shouldStartAleready) {
+			goRobotFast();
+		}
 
 		if (!isNetworkAvailable()) {
 			goRobot();
@@ -60,6 +64,12 @@ public class SplashScreenActivity extends Activity {
 			downloadEvents();
 		}
 
+	}
+
+	private void goRobotFast() {
+		finish();
+		SplashScreenActivity.this.startActivity(new Intent(
+				SplashScreenActivity.this, ConnectionErrorActivity.class));
 	}
 
 	private void goRobot() {
@@ -73,7 +83,7 @@ public class SplashScreenActivity extends Activity {
 						ConnectionErrorActivity.class));
 			}
 
-		}, 1000);
+		}, 600);
 	}
 
 	private void downloadEvents() {
@@ -82,173 +92,174 @@ public class SplashScreenActivity extends Activity {
 		handler.postDelayed(new Runnable() {
 
 			public void run() {
-				try {
-					JSONArray completeJSONArr = new JSONArray(
-							(String) new RequestTaskString()
-									.execute(
-											"http://www.napwr.pl/mobile/wydarzenia/dzis")
-									.get());
-
-					app.dzisiaj = ep.getEvents(completeJSONArr);
-					// if (app.dzisiaj != null) {
-					// app.dzisiaj.get(0).setImagePoster(
-					// getApplicationContext());
-					// }
-					uis.writeObject(app.dzisiaj, "dzisiaj");
+				if (!getTop10()) {
+					goRobot();
+				} else {
 					loading2.setImageResource(R.drawable.loading_on);
-				} catch (JSONException e) {
-					e.printStackTrace();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				} catch (ExecutionException e) {
-					e.printStackTrace();
-				}
-				Handler handler = new Handler();
-				handler.postDelayed(new Runnable() {
+					Handler handler = new Handler();
+					handler.postDelayed(new Runnable() {
 
-					@Override
-					public void run() {
-						try {
-							JSONArray completeJSONArr = new JSONArray(
-									(String) new RequestTaskString().execute(
-											"http://www.napwr.pl/json/topten")
-											.get());
-
-							app.top10 = ep.getEvents(completeJSONArr);
-							// if (app.top10 != null) {
-							// app.top10.get(0).setImagePoster(
-							// getApplicationContext());
-							// }
-							uis.writeObject(app.top10, "top10");
+						@Override
+						public void run() {
+							getDzisiaj();
 							loading3.setImageResource(R.drawable.loading_on);
-						} catch (JSONException e) {
-							e.printStackTrace();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						} catch (ExecutionException e) {
-							e.printStackTrace();
-						}
-						Handler handler = new Handler();
-						handler.postDelayed(new Runnable() {
+							Handler handler = new Handler();
+							handler.postDelayed(new Runnable() {
 
-							@Override
-							public void run() {
-								try {
-									JSONArray completeJSONArr = new JSONArray(
-											(String) new RequestTaskString()
-													.execute(
-															"http://www.napwr.pl/mobile/wydarzenia/jutro")
-													.get());
-
-									app.jutro = ep.getEvents(completeJSONArr);
-									// if (app.jutro != null) {
-									// app.jutro.get(0).setImagePoster(
-									// getApplicationContext());
-									// }
-									uis.writeObject(app.jutro, "jutro");
+								@Override
+								public void run() {
+									getJutro();
 									loading4.setImageResource(R.drawable.loading_on);
+									Handler handler = new Handler();
+									handler.postDelayed(new Runnable() {
 
-								} catch (JSONException e) {
-									e.printStackTrace();
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								} catch (ExecutionException e) {
-									e.printStackTrace();
-								}
-								Handler handler = new Handler();
-								handler.postDelayed(new Runnable() {
-
-									@Override
-									public void run() {
-										try {
-											if (app.logedin) {
-												JSONObject completeObject = new JSONObject(
-														(String) new RequestTaskString()
-																.execute(
-																		"http://www.napwr.pl/mobile/plan/"
-																				+ app.userId)
-																.get());
-
-												app.kalendarz = ep
-														.getPlan(completeObject);
-											} else {
-												app.kalendarz = new ArrayList<PlanObject>();
-											}
-											uis.writeObject(app.kalendarz,
-													"kalendarz");
+										@Override
+										public void run() {
+											getPlan();
 											loading5.setImageResource(R.drawable.loading_on);
-										} catch (JSONException e) {
-											e.printStackTrace();
-										} catch (InterruptedException e) {
-											e.printStackTrace();
-										} catch (ExecutionException e) {
-											e.printStackTrace();
-										}
+											app.shouldStartAleready = true;
+											Handler handler = new Handler();
+											handler.postDelayed(new Runnable() {
 
-										Handler handler = new Handler();
-										handler.postDelayed(new Runnable() {
-
-											@Override
-											public void run() {
-												try {
-													if (app.logedin) {
-														JSONArray completeJSONArr = new JSONArray(
-																(String) new RequestTaskString()
-																		.execute(
-																				"http://www.napwr.pl/mobile/wydarzenia/ulubione/"
-																						+ app.userId)
-																		.get());
-
-														app.ulubione = ep
-																.getEventsUlubione(completeJSONArr);
-													} else {
-														app.ulubione = new ArrayList<EventObject>();
-													}
-
-													// if (app.ulubione.size() >
-													// 0) {
-													// app.ulubione
-													// .get(0)
-													// .setImagePoster(
-													// getApplicationContext());
-													// }
-
-													uis.writeObject(
-															app.ulubione,
-															"ulubione");
-
-												} catch (JSONException e) {
-													e.printStackTrace();
-												} catch (InterruptedException e) {
-													e.printStackTrace();
-												} catch (ExecutionException e) {
-													e.printStackTrace();
+												@Override
+												public void run() {
+													getUlubione();
+													startMain();
 												}
 
-												finish();
-												// start the home screen
+											}, 200);
+										}
 
-												SplashScreenActivity.this
-														.startActivity(new Intent(
-																SplashScreenActivity.this,
-																MenuActivity.class));
+									}, 200);
+								}
 
-											}
+							}, 200);
+						}
 
-										}, 200);
-									}
-
-								}, 200);
-							}
-
-						}, 200);
-					}
-
-				}, 200);
+					}, 200);
+				}
 			}
 
 		}, 200);
 
+	}
+
+	private boolean getDzisiaj() {
+		JSONArray completeJSONArr = null;
+		try {
+			completeJSONArr = new JSONArray((String) new RequestTaskString()
+					.execute("http://www.napwr.pl/mobile/wydarzenia/dzis")
+					.get());
+
+			app.dzisiaj = ep.getEvents(completeJSONArr);
+			uis.writeObject(app.dzisiaj, "dzisiaj");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+		return completeJSONArr != null;
+	}
+
+	private boolean getTop10() {
+		JSONArray completeJSONArr = null;
+		try {
+			completeJSONArr = new JSONArray((String) new RequestTaskString()
+					.execute("http://www.napwr.pl/json/topten").get());
+
+			app.top10 = ep.getEvents(completeJSONArr);
+
+			uis.writeObject(app.top10, "top10");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+		return completeJSONArr != null;
+	}
+
+	private boolean getJutro() {
+		JSONArray completeJSONArr = null;
+		try {
+			completeJSONArr = new JSONArray((String) new RequestTaskString()
+					.execute("http://www.napwr.pl/mobile/wydarzenia/jutro")
+					.get());
+
+			app.jutro = ep.getEvents(completeJSONArr);
+			uis.writeObject(app.jutro, "jutro");
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+
+		return completeJSONArr != null;
+	}
+
+	private boolean getPlan() {
+		JSONObject completeObject = null;
+		try {
+			if (app.logedin) {
+				completeObject = new JSONObject(
+						(String) new RequestTaskString()
+								.execute(
+										"http://www.napwr.pl/mobile/plan/"
+												+ app.userId).get());
+
+				app.kalendarz = ep.getPlan(completeObject);
+			} else {
+				app.kalendarz = new ArrayList<PlanObject>();
+			}
+			uis.writeObject(app.kalendarz, "kalendarz");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+		return completeObject != null;
+	}
+
+	private boolean getUlubione() {
+		JSONArray completeJSONArr = null;
+		try {
+			if (app.logedin) {
+				completeJSONArr = new JSONArray(
+						(String) new RequestTaskString().execute(
+								"http://www.napwr.pl/mobile/wydarzenia/ulubione/"
+										+ app.userId).get());
+
+				app.ulubione = ep.getEventsUlubione(completeJSONArr);
+			} else {
+				app.ulubione = new ArrayList<EventObject>();
+			}
+
+			uis.writeObject(app.ulubione, "ulubione");
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+
+		return completeJSONArr != null;
+	}
+
+	private void startMain() {
+		finish();
+
+		SplashScreenActivity.this.startActivity(new Intent(
+				SplashScreenActivity.this, MenuActivity.class));
 	}
 
 	private boolean isNetworkAvailable() {

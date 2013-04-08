@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/default_background"
+    android:background="@color/background_lightgray2"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -25,7 +25,6 @@
     </LinearLayout>
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/no_events_popup"
         android:layout_width="@dimen/dialog_width"
         android:layout_height="wrap_content"
@@ -44,7 +43,6 @@
     </LinearLayout>
     
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/no_plan_popup"
         android:layout_width="@dimen/dialog_width"
         android:layout_height="wrap_content"

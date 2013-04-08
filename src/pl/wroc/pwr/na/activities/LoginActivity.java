@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 import pl.wroc.pwr.na.NAPWrApplication;
 import pl.wroc.pwr.na.R;
-import pl.wroc.pwr.na.fragments.MenuObjectFragment;
 import pl.wroc.pwr.na.tools.EventController;
 import pl.wroc.pwr.na.tools.RequestTaskString;
 import pl.wroc.pwr.na.tools.UseInternalStorage;
@@ -95,8 +94,9 @@ public class LoginActivity extends Activity implements OnClickListener {
 					.getInt("id"));
 
 			if (event.getBoolean("approved")) {
-				((MenuObjectFragment) ((MenuObjectFragment.getInstance())))
-						.setLogedInLabel(true);
+				//((MenuObjectFragment) ((MenuObjectFragment.getInstance()))).setLogedInLabel(true);
+				((MenuActivity) (MenuActivity.activityMain)).btn_login.setText(getResources().getString(R.string.menu_logout));
+				((MenuActivity) (MenuActivity.activityMain)).addItemsOnLogIn();
 				downloadUserData();
 				return true;
 			} else if (event.getBoolean("login")) {

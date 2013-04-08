@@ -1,0 +1,232 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="200sp"
+        android:layout_height="fill_parent"
+        android:background="@color/default_NAPWr"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="200sp"
+            android:layout_height="86sp"
+            android:contentDescription="@string/menu_logo"
+            android:src="@drawable/napwr_logo" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0sp"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_size"
+                    android:background="@color/background_gray" />
+
+                <TextView
+                    android:id="@+id/menu_juwenalia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_margin"
+                    android:text="@string/menu_juwenalia"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/default_text_medium"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/stroke_juwenalia"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_size"
+                    android:background="@color/background_gray" />
+
+                <TextView
+                    android:id="@+id/menu_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_margin"
+                    android:text="@string/menu_user"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/default_text_medium"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/stroke_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_size"
+                    android:background="@color/background_gray" />
+
+                <TextView
+                    android:id="@+id/menu_today"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_margin"
+                    android:text="@string/menu_today"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/default_text_medium"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/stroke_today"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_size"
+                    android:background="@color/background_gray" />
+
+                <TextView
+                    android:id="@+id/menu_tomorrow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_margin"
+                    android:text="@string/menu_tomorrow"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/default_text_medium"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/stroke_tomorrow"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_size"
+                    android:background="@color/background_gray" />
+
+                <TextView
+                    android:id="@+id/menu_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_margin"
+                    android:text="@string/menu_category"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/default_text_medium"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/stroke_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_size"
+                    android:background="@color/background_gray" />
+
+                <TextView
+                    android:id="@+id/menu_top10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_margin"
+                    android:text="@string/menu_top10"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/default_text_medium"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/stroke_top10"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_size"
+                    android:background="@color/background_gray" />
+
+                <TextView
+                    android:id="@+id/menu_refresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_margin"
+                    android:text="@string/menu_refresh"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/default_text_medium"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/stroke_refresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_size"
+                    android:background="@color/background_gray" />
+
+                <TextView
+                    android:id="@+id/menu_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_margin"
+                    android:text="@string/menu_settings"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/default_text_medium"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/stroke_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_size"
+                    android:background="@color/background_gray" />
+
+                <TextView
+                    android:id="@+id/menu_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_margin"
+                    android:text="@string/menu_login"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/default_text_medium"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/stroke_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_size"
+                    android:background="@color/background_gray" />
+
+                <TextView
+                    android:id="@+id/menu_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_margin"
+                    android:text="@string/menu_about"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/default_text_medium"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/stroke_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_size"
+                    android:background="@color/background_gray" />
+
+                <TextView
+                    android:id="@+id/menu_sponsor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_margin"
+                    android:text="@string/menu_sponsor"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/default_text_medium"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/stroke_sponsor"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_size"
+                    android:background="@color/background_gray" />
+
+                <TextView
+                    android:id="@+id/menu_exit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_margin"
+                    android:text="@string/menu_exit"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/default_text_medium"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/stroke_exit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_size"
+                    android:background="@color/background_gray" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <View
+        android:layout_width="5sp"
+        android:layout_height="match_parent"
+        android:background="@drawable/drop_shadow" />
+
+</LinearLayout>

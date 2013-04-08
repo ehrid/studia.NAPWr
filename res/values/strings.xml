@@ -1,13 +1,9 @@
 <resources>
 
     <string name="app_name">NA PWr</string>
-    
+
     <!-- ACTIVITIES -->
-    
-    <!-- Menu -->
-    <string name="menu_refresh">Odśwież wydarzenia</string>
-    <string name="menu_exit">Wyjdź</string>
-    
+
     <!-- Main -->
     <string name="label_top10">TOP 10</string>
     <string name="label_today">Dzisiaj</string>
@@ -16,7 +12,7 @@
     <string name="label_favourites">Ulubione</string>
     <string name="label_login2">Zaloguj się</string>
     <string name="label_logout">Wyloguj się</string>
-    
+
     <!-- Login -->
     <string name="login_title">Zaloguj się NA PWr</string>
     <string name="label_login">Adres e-mail</string>
@@ -24,13 +20,13 @@
     <string name="button_login2">Zaloguj się</string>
     <string name="login_email_error">Wpisz adres e-mail</string>
     <string name="login_password_error">Nieprawidłowe hasło</string>
-    
+
     <!-- Preferences -->
     <string name="prefs_fullscreen_title">Pełny ekran</string>
     <string name="prefs_fullscreen_summary_off">Nie wyświetla na pełnym ekranie</string>
     <string name="prefs_fullscreen_summary_on">Wyświetla na pełnym ekranie</string>
     <string name="today_events">Dzisiejsze wydarzenia</string>
-    
+
     <!-- Event -->
     <string name="event_title">Tytuł wydarzenia</string>
     <string name="event_from">Data poczatku</string>
@@ -42,7 +38,7 @@
     <string name="event_content">Treść wydarzenia</string>
     <string name="event_button_share">SHARE</string>
     <string name="event_poster_description">plakt wydarzenia</string>
-    
+
     <!-- Event List -->
     <string name="event_list_name">Nazwa listy</string>
     <string name="event_list_no_events">Brak wydarzeń</string>
@@ -52,7 +48,7 @@
     <string name="event_list_no_plan4">i w ustawieniach swojego konta</string>
     <string name="event_list_no_plan5">dodaj link swojego planu ze strony</string>
     <string name="event_list_no_plan6">plan-pwr.pl</string>
-    
+
     <!-- Dialogs -->
     <string name="dialog_yes">Tak</string>
     <string name="dialog_no">Nie</string>
@@ -61,10 +57,10 @@
     <string name="dialog_cancel">Anuluj</string>
     <string name="dialog_text">Czy wyłączyć aplikację?</string>
     <string name="dialog_close_text">Wyłączyć aplikację?</string>
-    
-    <!--  Images Content Description -->
+
+    <!-- Images Content Description -->
     <string name="content_description_logo_napwr">Logo NA PWr</string>
-    
+
     <!-- Plan -->
     <string name="plan_time">Czas</string>
     <string name="plan_title">Tytuł</string>
@@ -72,10 +68,27 @@
     <string name="plan_teacher">Prowadzący</string>
     <string name="plan_type">Typ</string>
     <string name="plan_date">Data</string>
-    
+
     <!-- connection_error -->
     <string name="connection_error_reconnect">Połącz ponownie</string>
     <string name="connection_error_offline">Tryb offline</string>
     <string name="connection_error_info">Brak połączenia z internetem</string>
-    
+
+    <!-- MENU -->
+    <string name="menu_logo">Logo NAPWr</string>
+    <string name="menu_item">item_name</string>
+    <string name="menu_juwenalia">JUWENALIA</string>
+    <string name="menu_user">user_name</string>
+    <string name="menu_today">DZIŚ</string>
+    <string name="menu_tomorrow">JUTRO</string>
+    <string name="menu_category">KATEGORIE</string>
+    <string name="menu_top10">TOP 10</string>
+    <string name="menu_refresh">ODŚWIERZ WYDARZENIA</string>
+    <string name="menu_settings">USTAWIENIA</string>
+    <string name="menu_login">ZALOGÓJ SIĘ</string>
+    <string name="menu_logout">WYLOGÓJ SIĘ</string>
+    <string name="menu_about">TWÓRCY NA PWr</string>
+    <string name="menu_sponsor">SPONSORZY</string>
+    <string name="menu_exit">ZAMKNIJ</string>
+
 </resources>

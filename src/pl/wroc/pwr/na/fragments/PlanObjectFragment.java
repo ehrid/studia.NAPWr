@@ -13,6 +13,7 @@ import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ public class PlanObjectFragment extends Fragment {
 	private PlanAdapter adapter;
 	private Context context;
 	ArrayList<PlanObject> eventList;
+	ImageView menu;
 	Bundle args;
 
 	@Override
@@ -39,7 +41,7 @@ public class PlanObjectFragment extends Fragment {
 		context = rootView.getContext();
 
 		title = (TextView) rootView.findViewById(R.id.eventlist_title);
-		title.setText("Plan PWr");
+		title.setText("Plan zajęć");
 		
 		miniature = (ImageView) rootView.findViewById(R.id.eventlist_miniature);
 		miniature.setImageResource(R.drawable.miniature_calendar);
@@ -58,7 +60,17 @@ public class PlanObjectFragment extends Fragment {
 					(TextView) rootView.findViewById(R.id.no_plan_popup_link2),
 					Linkify.ALL);
 		}
+		
+		menu = (ImageView) rootView.findViewById(R.id.eventlist_menu);
+		menu.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				((MenuActivity) (MenuActivity.activityMain)).openMenu();
+			}
+		});
 
+		
 		return rootView;
 	}
 

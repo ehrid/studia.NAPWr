@@ -23,6 +23,7 @@ public class NAPWrApplication extends Application {
 	public ArrayList<EventObject> jutro = new ArrayList<EventObject>();
 	public ArrayList<PlanObject> kalendarz = new ArrayList<PlanObject>();
 	public ArrayList<EventObject> ulubione = new ArrayList<EventObject>();
+	public boolean shouldStartAleready = false;
 
 	@Override
 	public void onCreate() {

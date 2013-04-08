@@ -67,6 +67,10 @@ public class EventController {
 
 			adresWydarzenia = (String) event.getJSONObject("adres").get(
 					"adresBudynek");
+			if(adresWydarzenia.equals("")){
+				adresWydarzenia = (String) event.getJSONObject("adres").get(
+						"adresMiasto");
+			}
 
 			address = new AddressObject(adresWydarzenia);
 

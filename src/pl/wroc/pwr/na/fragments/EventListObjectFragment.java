@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -27,6 +28,7 @@ public class EventListObjectFragment extends Fragment {
 
 	private TextView title;
 	private ImageView miniature;
+	private ImageView menu;
 	private ListView eventListView;
 	private EventListAdapter adapter;
 	private Context context;
@@ -49,6 +51,15 @@ public class EventListObjectFragment extends Fragment {
 		
 		miniature = (ImageView) rootView.findViewById(R.id.eventlist_miniature);
 		miniature.setImageResource(args.getInt(LIST_MINIATURE));
+		
+		menu = (ImageView) rootView.findViewById(R.id.eventlist_menu);
+		menu.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				((MenuActivity) (MenuActivity.activityMain)).openMenu();
+			}
+		});
 		
 		eventListView = (ListView) rootView
 				.findViewById(R.id.event_list_events);
@@ -85,7 +96,7 @@ public class EventListObjectFragment extends Fragment {
 			eventList = ((MenuActivity) (MenuActivity.activityMain)).ulubione;
 		}
 
-		adapter = new EventListAdapter(context, R.layout.item_event_list,
+		adapter = new EventListAdapter(context, R.layout.item_event_list_2,
 				eventList, ((MenuActivity) (MenuActivity.activityMain)).getApplicationContext());
 		eventListView.setAdapter(adapter);
 	}
