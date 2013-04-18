@@ -64,9 +64,13 @@ public class EventListObjectFragment extends Fragment {
 
 		type = args.getInt(LIST_TYPE);
 		url = args.getString(LIST_URL);
-
+		
 		miniature = (ImageView) rootView.findViewById(R.id.eventlist_miniature);
-		miniature.setImageResource(args.getInt(LIST_MINIATURE));
+		if(args.getInt(LIST_MINIATURE) != 0) {	
+			miniature.setImageResource(args.getInt(LIST_MINIATURE));
+		} else {
+			miniature.setVisibility(View.GONE);
+		}
 
 		loading = (ProgressBar) rootView.findViewById(R.id.event_list_loading);
 

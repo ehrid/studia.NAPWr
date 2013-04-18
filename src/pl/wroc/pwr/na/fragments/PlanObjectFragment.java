@@ -6,7 +6,6 @@ import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.activities.MenuActivity;
 import pl.wroc.pwr.na.adapters.PlanAdapter;
 import pl.wroc.pwr.na.objects.PlanObject;
-import pl.wroc.pwr.na.tools.PlanParser;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;

@@ -37,6 +37,7 @@
         android:textColor="@color/text_white"
         android:textSize="25sp" 
         android:layout_toRightOf="@+id/eventlist_miniature"
+        android:paddingLeft="@dimen/default_margin"
         />
 
 </RelativeLayout>

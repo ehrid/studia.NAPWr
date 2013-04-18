@@ -2,6 +2,14 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" 
     android:background="@color/default_NAPWr">
+
+    <ImageView
+        android:id="@+id/fragment_event_poster_poster"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:src="@drawable/juwenalia_portiat" 
+        android:visibility="gone"/>
     
     <ImageView
         android:id="@+id/fragment_event_poster_menu"
@@ -12,15 +20,5 @@
         android:layout_height="50sp"
         android:layout_alignParentRight="true"
         android:src="@drawable/btn_menu" />
-
-    <TextView
-        android:id="@+id/fragment_event_poster_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_margin="30sp"
-        android:text="@string/menu_item"
-        android:textSize="@dimen/default_text" />
 
 </RelativeLayout>
