@@ -4,16 +4,20 @@ import pl.wroc.pwr.na.NAPWrApplication;
 import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.tools.JSONParser;
 import pl.wroc.pwr.na.tools.PlanParser;
+import pl.wroc.pwr.na.tools.PosterController;
 import pl.wroc.pwr.na.tools.RSSParser;
 import pl.wroc.pwr.na.tools.UseInternalStorage;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
@@ -59,7 +63,7 @@ public class SplashScreenActivity extends Activity {
 		} else {
 			downloadEvents();
 		}
-
+		saveJuwenalia();
 	}
 
 	private void goRobot() {
@@ -75,6 +79,27 @@ public class SplashScreenActivity extends Activity {
 			}
 
 		}, 1500);
+	}
+	
+	private void saveJuwenalia() {
+
+		Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+
+			public void run() {
+				PosterController pc = new PosterController();
+				pc.writePoster(BitmapFactory.decodeResource(getResources(),
+						R.drawable.juwenalia_portiat),
+						getResources().getString(R.string.menu_juwenalia) + "_portiat",
+						getApplicationContext(), getWidthOfScreen(), 1);
+				
+				pc.writePoster(BitmapFactory.decodeResource(getResources(),
+						R.drawable.juwenalia_landscape),
+						getResources().getString(R.string.menu_juwenalia) + "_landscape",
+						getApplicationContext(), getWidthOfScreen(), 2);
+			}
+
+		}, 100);
 	}
 
 	private void downloadEvents() {
@@ -161,6 +186,20 @@ public class SplashScreenActivity extends Activity {
 			}
 		}
 		return haveConnectedWifi || haveConnectedMobile;
+	}
+	
+	public int getWidthOfScreen(){
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		
+		return metrics.widthPixels;
+	}
+	
+	public int getHeightOfScreen(){
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		
+		return metrics.heightPixels;
 	}
 
 }

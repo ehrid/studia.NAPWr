@@ -10,15 +10,20 @@ import pl.wroc.pwr.na.objects.EventObject;
 import pl.wroc.pwr.na.objects.ListItemObject;
 import pl.wroc.pwr.na.objects.PlanObject;
 import pl.wroc.pwr.na.tools.PlanParser;
+import pl.wroc.pwr.na.tools.PosterController;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -75,7 +80,6 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 
 		findViewById(R.id.left_menu).bringToFront();
 		findViewById(R.id.left_menu).setVisibility(View.VISIBLE);
-
 		setMenu();
 	}
 
@@ -174,25 +178,61 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		return haveConnectedWifi || haveConnectedMobile;
 	}
 
+	/*
+	 * ELEMENTY DO POBIERANIA DYNAMICZNEGO
+	 */
+
 	public void addEventItem(String key, ArrayList<EventObject> value) {
 		app.eventList.put(key, value);
 		eventList.put(key, value);
 		mViewPager.refreshDrawableState();
 	}
-	
+
 	public void addPlanItem(ArrayList<PlanObject> value) {
 		app.kalendarz = value;
 		kalendarz = value;
 		mViewPager.refreshDrawableState();
 	}
-	
-	public void getPlan(){
+
+	public void getPlan() {
 		PlanParser planParser = new PlanParser();
 		addPlanItem(planParser.getPlan(app));
 	}
 
 	public boolean haveToDownload(String key) {
 		return !app.eventList.containsKey(key);
+	}
+
+	public Bitmap getBitmapFromUIS(String key) {
+		PosterController pc = new PosterController();
+		return pc.readPoster(key, getApplicationContext());
+	}
+
+	public Bitmap saveBitmapToUIS(String key) {
+		PosterController pc = new PosterController();
+		return pc.writePoster(key, getApplicationContext());
+	}
+
+	public int getScreenOrientation() {
+		Display getOrient = getWindowManager().getDefaultDisplay();
+		int orientation = Configuration.ORIENTATION_UNDEFINED;
+		if (getOrient.getWidth() == getOrient.getHeight()) {
+			orientation = Configuration.ORIENTATION_SQUARE;
+		} else {
+			if (getOrient.getWidth() < getOrient.getHeight()) {
+				orientation = Configuration.ORIENTATION_PORTRAIT;
+			} else {
+				orientation = Configuration.ORIENTATION_LANDSCAPE;
+			}
+		}
+		return orientation;
+	}
+	
+	public int getWidthOfScreen(){
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+		return metrics.widthPixels;
 	}
 
 	/*
@@ -230,10 +270,11 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		listItems.add(new ListItemObject(2, getResources().getString(
 				R.string.menu_juwenalia), 0, ""));
 		listItems.add(new ListItemObject(1, getResources().getString(
-				R.string.menu_juwenalia_sub), R.drawable.ic_launcher,
+				R.string.menu_juwenalia_sub), 0,
 				"http://www.napwr.pl/rss/20/kategorie/juwenalia/"));
 		if (ifLogedin()) {
-			listItems.add(new ListItemObject(2, app.userName, 0, ""));
+			listItems.add(new ListItemObject(2, getResources().getString(
+					R.string.menu_user), 0, ""));
 			listItems
 					.add(new ListItemObject(3, getResources().getString(
 							R.string.menu_user_plan),
