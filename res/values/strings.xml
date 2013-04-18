@@ -88,14 +88,34 @@
     <string name="menu_tomorrow">JUTRO</string>
     <string name="menu_tomorrow_sub">Jutro</string>
     <string name="menu_category">KATEGORIE</string>
-    <string name="menu_top10">TOP 10</string>
+    <string name="menu_top10">TOP10</string>
     <string name="menu_top10_sub">Top 10</string>
     <string name="menu_refresh">ODŚWIERZ WYDARZENIA</string>
     <string name="menu_settings">USTAWIENIA</string>
-    <string name="menu_login">ZALOGÓJ SIĘ</string>
-    <string name="menu_logout">WYLOGÓJ SIĘ</string>
+    <string name="menu_login">ZALOGUJ SIĘ</string>
+    <string name="menu_logout">WYLOGUJ SIĘ</string>
     <string name="menu_about">TWÓRCY NA PWr</string>
     <string name="menu_sponsor">SPONSORZY</string>
     <string name="menu_exit">ZAMKNIJ</string>
+
+	<string name="cover_informatyka">cover_informatyka</string>
+	<string name="cover_juwenalia">cover_juwenalia</string>
+	<string name="cover_kultura">cover_kultura</string>
+	<string name="cover_sport">cover_sport</string>
+	<string name="cover_today">cover_today</string>	
+	<string name="cover_tomorrow">cover_tomorrow</string>
+	<string name="cover_top10">cover_top10</string>
+	<string name="cover_user_facultity">cover_user_facultity</string>
+	<string name="cover_user_favourities">cover_user_favourities</string>
+	<string name="cover_user_plan">cover_user_plan</string>
+	<string name="cover_user">cover_user</string>
+    
+	
+	<string name="cover_kalendarz">cover_kalendarz</string>
+	<string name="cover_imprezy">cover_imprezy</string>
+	<string name="cover_szkolenia">cover_szkolenia</string>
+	<string name="cover_kariera">cover_kariera</string>
+	<string name="cover_teki">cover_teki</string>
+	
 
 </resources>
