@@ -10,6 +10,7 @@ import pl.wroc.pwr.na.tools.UseInternalStorage;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -50,17 +51,34 @@ public class ConnectionErrorActivity extends Activity {
 				@SuppressWarnings("unchecked")
 				@Override
 				public void onClick(View v) {
-					app.dzisiaj = (ArrayList<EventObject>) uis
-							.readObject("dzisiaj");
-					app.top10 = (ArrayList<EventObject>) uis
-							.readObject("top10");
-					app.jutro = (ArrayList<EventObject>) uis
-							.readObject("jutro");
+					app.eventList.put(
+							getResources().getString(R.string.menu_top10_sub),
+							(ArrayList<EventObject>) uis
+									.readObject(getResources().getString(
+											R.string.menu_today_sub)));
+					app.eventList.put(
+							getResources().getString(R.string.menu_today_sub),
+							(ArrayList<EventObject>) uis
+									.readObject(getResources().getString(
+											R.string.menu_today_sub)));
+					app.eventList.put(
+							getResources()
+									.getString(R.string.menu_tomorrow_sub),
+							(ArrayList<EventObject>) uis
+									.readObject(getResources().getString(
+											R.string.menu_tomorrow_sub)));
+
 					if (app.logedin) {
 						app.kalendarz = (ArrayList<PlanObject>) uis
-								.readObject("kalendarz");
-						app.ulubione = (ArrayList<EventObject>) uis
-								.readObject("ulubione");
+								.readObject(getResources().getString(
+										R.string.menu_user_plan));
+						app.eventList
+								.put(getResources().getString(
+										R.string.menu_user_favourities),
+										(ArrayList<EventObject>) uis
+												.readObject(getResources()
+														.getString(
+																R.string.menu_user_favourities)));
 					}
 
 					finish();
@@ -70,5 +88,14 @@ public class ConnectionErrorActivity extends Activity {
 			});
 		}
 	}
+	
+	public boolean onKeyDown(int keyCode, android.view.KeyEvent event) {
 
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			finish();
+			return true;
+		} else {
+			return super.onKeyDown(keyCode, event);
+		}
+	};
 }

@@ -49,7 +49,6 @@ public class EventObjectFragment extends Fragment {
 		address = (TextView) rootView.findViewById(R.id.event_address);
 		organizaer = (TextView) rootView.findViewById(R.id.event_organizer);
 		content = (TextView) rootView.findViewById(R.id.event_content);
-		poster = (ImageView) rootView.findViewById(R.id.event_poster);
 		likeitSum = (TextView) rootView.findViewById(R.id.event_likeit_sum);
 
 		Bundle args = getArguments();

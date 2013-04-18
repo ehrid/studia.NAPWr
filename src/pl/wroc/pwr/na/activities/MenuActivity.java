@@ -1,6 +1,7 @@
 package pl.wroc.pwr.na.activities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import pl.wroc.pwr.na.NAPWrApplication;
 import pl.wroc.pwr.na.R;
@@ -8,10 +9,8 @@ import pl.wroc.pwr.na.adapters.MenuCollectionPagerAdapter;
 import pl.wroc.pwr.na.objects.EventObject;
 import pl.wroc.pwr.na.objects.ListItemObject;
 import pl.wroc.pwr.na.objects.PlanObject;
-import pl.wroc.pwr.na.tools.EventController;
-import pl.wroc.pwr.na.tools.UseInternalStorage;
+import pl.wroc.pwr.na.tools.PlanParser;
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -31,19 +30,20 @@ import android.widget.Toast;
 public class MenuActivity extends FragmentActivity implements OnClickListener {
 
 	public ArrayList<EventObject> current = new ArrayList<EventObject>();
-	public ArrayList<EventObject> top10;
-	public ArrayList<EventObject> dzisiaj;
-	public ArrayList<EventObject> jutro;
+
 	public ArrayList<PlanObject> kalendarz;
-	public ArrayList<EventObject> ulubione;
+
+	public HashMap<String, ArrayList<EventObject>> eventList = new HashMap<String, ArrayList<EventObject>>();
 	public ArrayList<ListItemObject> listItems;
 
-	private boolean openMenu = false;
+	private boolean openMenu = true;
 
 	MenuCollectionPagerAdapter mCollectionPagerAdapter;
 	public ViewPager mViewPager;
 	Button login;
 	TextView loginText;
+
+	public NAPWrApplication app;
 
 	public static MenuActivity activityMain;
 
@@ -51,6 +51,9 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+		app = (NAPWrApplication) getApplication();
+		activityMain = this;
 
 		// Create an adapter that when requested, will return a fragment
 		// representing an object in
@@ -67,15 +70,11 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		mViewPager = (ViewPager) findViewById(R.id.pager_menu);
 		mViewPager.setAdapter(mCollectionPagerAdapter);
 
-		activityMain = this;
-
-		top10 = ((NAPWrApplication) getApplication()).top10;
-		dzisiaj = ((NAPWrApplication) getApplication()).dzisiaj;
-		jutro = ((NAPWrApplication) getApplication()).jutro;
-		kalendarz = ((NAPWrApplication) getApplication()).kalendarz;
-		ulubione = ((NAPWrApplication) getApplication()).ulubione;
+		eventList = app.eventList;
+		kalendarz = app.kalendarz;
 
 		findViewById(R.id.left_menu).bringToFront();
+		findViewById(R.id.left_menu).setVisibility(View.VISIBLE);
 
 		setMenu();
 	}
@@ -98,10 +97,6 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (((NAPWrApplication) getApplication()).top10.size() == 0) {
-			finish();
-			startActivity(new Intent(this, SplashScreenActivity.class));
-		}
 	}
 
 	public boolean onKeyDown(int keyCode, android.view.KeyEvent event) {
@@ -136,35 +131,6 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 
 	public boolean ifLogedin() {
 		return ((NAPWrApplication) getApplication()).logedin;
-	}
-
-	ProgressDialog progressDialog;
-
-	public void eventDownload() {
-		UseInternalStorage uis = new UseInternalStorage(getApplicationContext());
-		EventController ep = new EventController();
-
-		NAPWrApplication app = (NAPWrApplication) getApplication();
-
-		ep.addDzisiaj(app);
-		ep.addJutro(app);
-		ep.addTop(app);
-		ep.addUlubione(app);
-		ep.addKalendarz(app);
-
-		dzisiaj = app.dzisiaj;
-		jutro = app.jutro;
-		top10 = app.top10;
-		ulubione = app.ulubione;
-		kalendarz = app.kalendarz;
-
-		uis.writeObject(app.dzisiaj, "dzisiaj");
-		uis.writeObject(app.jutro, "jutro");
-		uis.writeObject(app.top10, "top10");
-		uis.writeObject(app.ulubione, "ulubione");
-		uis.writeObject(app.kalendarz, "kalendarz");
-
-		mViewPager.refreshDrawableState();
 	}
 
 	@SuppressLint("ShowToast")
@@ -208,10 +174,32 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		return haveConnectedWifi || haveConnectedMobile;
 	}
 
+	public void addEventItem(String key, ArrayList<EventObject> value) {
+		app.eventList.put(key, value);
+		eventList.put(key, value);
+		mViewPager.refreshDrawableState();
+	}
+	
+	public void addPlanItem(ArrayList<PlanObject> value) {
+		app.kalendarz = value;
+		kalendarz = value;
+		mViewPager.refreshDrawableState();
+	}
+	
+	public void getPlan(){
+		PlanParser planParser = new PlanParser();
+		addPlanItem(planParser.getPlan(app));
+	}
+
+	public boolean haveToDownload(String key) {
+		return !app.eventList.containsKey(key);
+	}
+
 	/*
 	 * LOGIKA DZIAŁANIA MENU
 	 */
 
+	// MAIN
 	TextView btn_juwenalia;
 	TextView btn_user;
 	TextView btn_today;
@@ -225,35 +213,52 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 	TextView btn_sponsor;
 	TextView btn_exit;
 
+	// ADDITIONAL
+	TextView btn_user_plan;
+	TextView btn_user_favourities;
+	TextView btn_user_facultity;
+	boolean userOptionsOpen = false;
+
 	private void makeItemList() {
 		/*
-		 * TYPE: 
-		 * 0 - LISTA WYDARZEŃ JSON 
-		 * 1 - LISTA WYDARZEŃ RSS 
-		 * 2 - POSTER 
-		 * 3 - PLAN ZAJĘĆ
+		 * TYPE: 0 - LISTA WYDARZEŃ JSON 1 - LISTA WYDARZEŃ RSS 2 - POSTER 3 -
+		 * PLAN ZAJĘĆ
 		 * 
 		 * new ListItemObject(type, title, miniature)
 		 */
 		listItems = new ArrayList<ListItemObject>();
-		listItems.add(new ListItemObject(2, "JUWENALIA", 0));
+		listItems.add(new ListItemObject(2, getResources().getString(
+				R.string.menu_juwenalia), 0, ""));
+		listItems.add(new ListItemObject(1, getResources().getString(
+				R.string.menu_juwenalia_sub), R.drawable.ic_launcher,
+				"http://www.napwr.pl/rss/20/kategorie/juwenalia/"));
 		if (ifLogedin()) {
-			listItems.add(new ListItemObject(2, "user_name", 0));
-			listItems.add(new ListItemObject(3, "Plan zajęć",
-					R.drawable.miniature_calendar));
-			listItems.add(new ListItemObject(0, "Ulubione",
-					R.drawable.miniature_favourites));
+			listItems.add(new ListItemObject(2, app.userName, 0, ""));
+			listItems
+					.add(new ListItemObject(3, getResources().getString(
+							R.string.menu_user_plan),
+							R.drawable.miniature_calendar, ""));
+			// listItems.add(new ListItemObject(0,
+			// getResources().getString(R.string.menu_user_favourities),R.drawable.miniature_favourites,
+			// ""));
 		}
-		listItems.add(new ListItemObject(2, "DZISIAJ", 0));
-		listItems.add(new ListItemObject(0, "Dzisiaj",
-				R.drawable.miniature_today));
-		listItems.add(new ListItemObject(2, "JUTRO", 0));
-		listItems.add(new ListItemObject(0, "Jutro",
-				R.drawable.miniature_tommorow));
-		listItems.add(new ListItemObject(2, "KATEGORIE", 0));
-		listItems.add(new ListItemObject(2, "TOP 10", 0));
-		listItems.add(new ListItemObject(0, "Top 10",
-				R.drawable.miniature_top10));
+		listItems.add(new ListItemObject(2, getResources().getString(
+				R.string.menu_today), 0, ""));
+		listItems.add(new ListItemObject(0, getResources().getString(
+				R.string.menu_today_sub), R.drawable.miniature_today,
+				"http://www.napwr.pl/mobile/wydarzenia/dzis"));
+		listItems.add(new ListItemObject(2, getResources().getString(
+				R.string.menu_tomorrow), 0, ""));
+		listItems.add(new ListItemObject(0, getResources().getString(
+				R.string.menu_tomorrow_sub), R.drawable.miniature_tommorow,
+				"http://www.napwr.pl/mobile/wydarzenia/jutro"));
+		listItems.add(new ListItemObject(2, getResources().getString(
+				R.string.menu_category), 0, ""));
+		listItems.add(new ListItemObject(2, getResources().getString(
+				R.string.menu_top10), 0, ""));
+		listItems.add(new ListItemObject(0, getResources().getString(
+				R.string.menu_top10_sub), R.drawable.miniature_top10,
+				"http://www.napwr.pl/json/topten"));
 	}
 
 	void addItemsOnLogIn() {
@@ -275,7 +280,12 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		btn_sponsor = (TextView) findViewById(R.id.menu_sponsor);
 		btn_exit = (TextView) findViewById(R.id.menu_exit);
 
+		btn_user_plan = (TextView) findViewById(R.id.menu_user_plan);
+		btn_user_favourities = (TextView) findViewById(R.id.menu_user_favourities);
+		btn_user_facultity = (TextView) findViewById(R.id.menu_user_facultity);
+
 		if (ifLogedin()) {
+			btn_user.setText(app.userName);
 			btn_login.setText(getResources().getString(R.string.menu_logout));
 		}
 
@@ -292,10 +302,17 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		btn_sponsor.setOnClickListener(this);
 		btn_exit.setOnClickListener(this);
 
-		if (ifLogedin()) {
+		btn_user_plan.setOnClickListener(this);
+		btn_user_favourities.setOnClickListener(this);
+		btn_user_facultity.setOnClickListener(this);
+
+		if (!ifLogedin()) {
 			btn_user.setVisibility(View.GONE);
 			findViewById(R.id.stroke_user).setVisibility(View.GONE);
 		}
+		btn_user_plan.setVisibility(View.GONE);
+		btn_user_favourities.setVisibility(View.GONE);
+		btn_user_facultity.setVisibility(View.GONE);
 
 		btn_refesh.setVisibility(View.GONE);
 		findViewById(R.id.stroke_refresh).setVisibility(View.GONE);
@@ -307,32 +324,57 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		findViewById(R.id.stroke_sponsor).setVisibility(View.GONE);
 	}
 
+	public void showUserOptions() {
+		if (userOptionsOpen) {
+			btn_user_plan.setVisibility(View.GONE);
+			btn_user_favourities.setVisibility(View.GONE);
+			btn_user_facultity.setVisibility(View.GONE);
+		} else {
+			btn_user_plan.setVisibility(View.VISIBLE);
+			btn_user_favourities.setVisibility(View.VISIBLE);
+			btn_user_facultity.setVisibility(View.GONE);
+		}
+		userOptionsOpen = !userOptionsOpen;
+	}
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.menu_juwenalia:
 			closeMenu();
-			setItem("JUWENALIA");
+			setItem(getResources().getString(R.string.menu_juwenalia));
 			break;
 		case R.id.menu_user:
+			showUserOptions();
+			setItem(app.userName);
+			break;
+		case R.id.menu_user_plan:
 			closeMenu();
-			setItem("user_name");
+			setItem(getResources().getString(R.string.menu_user_plan));
+			break;
+		case R.id.menu_user_favourities:
+			closeMenu();
+			setItem(getResources().getString(R.string.menu_user_favourities));
+			break;
+		case R.id.menu_user_facultity:
+			closeMenu();
+			setItem(getResources().getString(R.string.menu_user_facultity));
 			break;
 		case R.id.menu_today:
 			closeMenu();
-			setItem("DZISIAJ");
+			setItem(getResources().getString(R.string.menu_today));
 			break;
 		case R.id.menu_tomorrow:
 			closeMenu();
-			setItem("JUTRO");
+			setItem(getResources().getString(R.string.menu_tomorrow));
 			break;
 		case R.id.menu_category:
 			closeMenu();
-			setItem("KATEGORIE");
+			setItem(getResources().getString(R.string.menu_category));
 			break;
 		case R.id.menu_top10:
 			closeMenu();
-			setItem("TOP 10");
+			setItem(getResources().getString(R.string.menu_top10));
 			break;
 		case R.id.menu_refresh:
 			closeMenu();
@@ -347,6 +389,7 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 				logoff();
 				btn_login
 						.setText(getResources().getString(R.string.menu_login));
+				addItemsOnLogIn();
 			} else {
 				if (isLoginAvailable()) {
 					startActivity(new Intent(this, LoginActivity.class));

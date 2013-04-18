@@ -119,13 +119,5 @@
             android:text="@string/event_content" />
     </ScrollView>
 
-    <ImageView
-        android:id="@+id/event_poster"
-        android:layout_width="@dimen/event_button_poster"
-        android:layout_height="@dimen/event_button_poster"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/img_tab" 
-        android:visibility="gone"/>
 
 </RelativeLayout>

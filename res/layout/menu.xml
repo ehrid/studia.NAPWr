@@ -55,6 +55,42 @@
                     android:textSize="@dimen/default_text_medium"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/menu_user_plan"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30sp"
+                    android:paddingTop="@dimen/default_margin_small"
+                    android:paddingBottom="@dimen/default_margin_small"
+                    android:text="@string/menu_user_plan"
+                    android:textSize="@dimen/default_text_medium" 
+                    android:textColor="@color/text_white"
+                    android:textStyle="bold"/>
+                
+                <TextView
+                    android:id="@+id/menu_user_favourities"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30sp"
+                    android:paddingTop="@dimen/default_margin_small"
+                    android:paddingBottom="@dimen/default_margin_small"
+                    android:text="@string/menu_user_favourities"
+                    android:textSize="@dimen/default_text_medium" 
+                    android:textColor="@color/text_white"
+                    android:textStyle="bold"/>
+                
+                <TextView
+                    android:id="@+id/menu_user_facultity"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30sp"
+                    android:paddingTop="@dimen/default_margin_small"
+                    android:paddingBottom="@dimen/default_margin_small"
+                    android:text="@string/menu_user_facultity"
+                    android:textSize="@dimen/default_text_medium" 
+                    android:textColor="@color/text_white"
+                    android:textStyle="bold"/>
+
                 <View
                     android:id="@+id/stroke_user"
                     android:layout_width="match_parent"

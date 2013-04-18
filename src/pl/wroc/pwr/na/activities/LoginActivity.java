@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 import pl.wroc.pwr.na.NAPWrApplication;
 import pl.wroc.pwr.na.R;
-import pl.wroc.pwr.na.tools.EventController;
 import pl.wroc.pwr.na.tools.RequestTaskString;
 import pl.wroc.pwr.na.tools.UseInternalStorage;
 import android.app.Activity;
@@ -90,14 +89,16 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 			JSONObject event = completeJSONArr.getJSONObject(0);
 
-			((NAPWrApplication) getApplication()).rememberUser(event
-					.getInt("id"));
+			Log.d("NIK", event.getString("nik"));
+			((NAPWrApplication) getApplication()).rememberUser(
+					event.getInt("id"), event.getString("nik"));
 
 			if (event.getBoolean("approved")) {
-				//((MenuObjectFragment) ((MenuObjectFragment.getInstance()))).setLogedInLabel(true);
-				((MenuActivity) (MenuActivity.activityMain)).btn_login.setText(getResources().getString(R.string.menu_logout));
+				// ((MenuObjectFragment)
+				// ((MenuObjectFragment.getInstance()))).setLogedInLabel(true);
+				((MenuActivity) (MenuActivity.activityMain)).btn_login
+						.setText(getResources().getString(R.string.menu_logout));
 				((MenuActivity) (MenuActivity.activityMain)).addItemsOnLogIn();
-				downloadUserData();
 				return true;
 			} else if (event.getBoolean("login")) {
 				password.setError(getResources().getString(
@@ -117,21 +118,5 @@ public class LoginActivity extends Activity implements OnClickListener {
 			e.printStackTrace();
 		}
 		return false;
-	}
-
-	public void downloadUserData() {
-		EventController ep = new EventController();
-
-		NAPWrApplication app = (NAPWrApplication) getApplication();
-
-		ep.addUlubione(app);
-		uis.writeObject(app.ulubione, "ulubione");
-		ep.addKalendarz(app);
-		uis.writeObject(app.kalendarz, "kalendarz");
-
-		((MenuActivity) (MenuActivity.activityMain)).ulubione = app.ulubione;
-		((MenuActivity) (MenuActivity.activityMain)).kalendarz = app.kalendarz;
-		((MenuActivity) (MenuActivity.activityMain)).mViewPager
-				.refreshDrawableState();
 	}
 }

@@ -36,8 +36,15 @@ public class MenuCollectionPagerAdapter extends FragmentStatePagerAdapter {
 			fragment = new EventListObjectFragment();
 			args.putString(EventListObjectFragment.LIST_TITLE, obj.title);
 			args.putInt(EventListObjectFragment.LIST_MINIATURE, obj.miniature);
+			args.putInt(EventListObjectFragment.LIST_TYPE, obj.type);
+			args.putString(EventListObjectFragment.LIST_URL, obj.url);
 			break;
 		case 1:
+			fragment = new EventListObjectFragment();
+			args.putString(EventListObjectFragment.LIST_TITLE, obj.title);
+			args.putInt(EventListObjectFragment.LIST_MINIATURE, obj.miniature);
+			args.putInt(EventListObjectFragment.LIST_TYPE, obj.type);
+			args.putString(EventListObjectFragment.LIST_URL, obj.url);
 			break;
 		case 2:
 			fragment = new EventListPosterFragment();
@@ -49,67 +56,11 @@ public class MenuCollectionPagerAdapter extends FragmentStatePagerAdapter {
 		
 		fragment.setArguments(args);
 		return fragment;
-
-//		boolean isPoster = false;
-//		switch (i) {
-//		case 0:
-//			// return new MenuObjectFragment();
-//			title = "TOP 10";
-//			isPoster = true;
-//			break;
-//		case 1:
-//			title = "Top 10";
-//			miniature = R.drawable.miniature_top10;
-//			break;
-//		case 2:
-//			title = "DZISIAJ";
-//			isPoster = true;
-//			break;
-//		case 3:
-//			title = "Dzisiaj";
-//			miniature = R.drawable.miniature_today;
-//			break;
-//		case 4:
-//			title = "JUTRO";
-//			isPoster = true;
-//			break;
-//		case 5:
-//			title = "Jutro";
-//			miniature = R.drawable.miniature_tommorow;
-//			break;
-//		case 6:
-//			title = "PLAN ZAJĘĆ";
-//			isPoster = true;
-//			break;
-//		case 7:
-//			return new PlanObjectFragment();
-//		case 8:
-//			title = "ULUBIONE";
-//			isPoster = true;
-//			break;
-//		case 9:
-//			title = "Ulubione";
-//			miniature = R.drawable.miniature_favourites;
-//			break;
-//		}
-//
-//		if (isPoster) {
-//			fragment = new EventListPosterFragment();
-//			args.putString(EventListPosterFragment.LIST_TITLE, title);
-//		} else {
-//			fragment = new EventListObjectFragment();
-//			args.putString(EventListObjectFragment.LIST_TITLE, title);
-//			args.putInt(EventListObjectFragment.LIST_MINIATURE, miniature);
-//		}
-//		fragment.setArguments(args);
-//		
-//		return fragment;
 	}
 
 	@Override
 	public int getCount() {
 		return listItems.size();
-		//return ((MenuActivity) (MenuActivity.activityMain)).ifLogedin() ? 10 : 6;
 	}
 
 	@Override
