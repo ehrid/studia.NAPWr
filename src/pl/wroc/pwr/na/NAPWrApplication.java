@@ -38,6 +38,16 @@ public class NAPWrApplication extends Application {
 			userName = mPrefs.getString("name", "");
 		}
 	}
+	
+	public boolean getFirstLoad(){
+		return mPrefs.getBoolean("firstLoad", false);
+	}
+	
+	public void makeFirstLoad(){
+		Editor e = mPrefs.edit();
+		e.putBoolean("firstLoad", true);
+		e.commit();
+	}
 
 	public void rememberUser(int id, String name) {
 		saveLoginDetails(id, name);

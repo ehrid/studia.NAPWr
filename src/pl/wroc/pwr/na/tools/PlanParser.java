@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import pl.wroc.pwr.na.NAPWrApplication;
+import pl.wroc.pwr.na.activities.MenuActivity;
 import pl.wroc.pwr.na.objects.PlanObject;
 import android.util.Log;
 
@@ -134,27 +135,40 @@ public class PlanParser {
 		return vaildDays;
 	}
 
-	@SuppressWarnings("unchecked")
 	public ArrayList<PlanObject> getPlan(JSONObject completeObject) {
 		JSONObject event;
-		ArrayList<PlanObject> planList = new ArrayList<PlanObject>();
 
-		JSONArray completeJSONArr;
-		try {
-			completeJSONArr = completeObject.getJSONObject("schedule")
-					.getJSONArray("entries");
+		ArrayList<PlanObject> planList = ((MenuActivity) (MenuActivity.activityMain)).getPlanObject();
 
-			for (int i = 0; i < completeJSONArr.length(); i++) {
-				event = completeJSONArr.getJSONObject(i);
-				planList.add(planParser(event));
+		if (planList == null) {
+			Log.d("PLAN READER", "wczytuję plan");
+			planList = new ArrayList<PlanObject>();
+
+			JSONArray completeJSONArr;
+			try {
+				completeJSONArr = completeObject.getJSONObject("schedule")
+						.getJSONArray("entries");
+
+				for (int i = 0; i < completeJSONArr.length(); i++) {
+					event = completeJSONArr.getJSONObject(i);
+					planList.add(planParser(event));
+				}
+			} catch (JSONException e1) {
+				e1.printStackTrace();
 			}
-		} catch (JSONException e1) {
-			e1.printStackTrace();
+			
+			((MenuActivity) (MenuActivity.activityMain)).savePlanObject(planList);
 		}
 
 		if (planList.size() == 0) {
 			return null;
+		} else {
+			return preparePlan(planList);
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public ArrayList<PlanObject> preparePlan(ArrayList<PlanObject> planList) {
 
 		// inicjalizowanie
 		Object[] dayOfWeek = new Object[7];
@@ -247,7 +261,7 @@ public class PlanParser {
 
 		return plan;
 	}
-	
+
 	public ArrayList<PlanObject> getPlan(NAPWrApplication app) {
 		JSONObject completeObject = null;
 		try {
@@ -271,7 +285,7 @@ public class PlanParser {
 		}
 		return null;
 	}
-	
+
 	public void addKalendarz(NAPWrApplication app) {
 		JSONObject completeObject = null;
 		try {
@@ -294,5 +308,5 @@ public class PlanParser {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

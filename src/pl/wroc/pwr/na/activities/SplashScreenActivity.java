@@ -17,7 +17,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
@@ -80,26 +79,27 @@ public class SplashScreenActivity extends Activity {
 
 		}, 1500);
 	}
-	
+
 	private void saveJuwenalia() {
+		if (app.getFirstLoad()) {
+			Handler handler = new Handler();
+			handler.postDelayed(new Runnable() {
 
-		Handler handler = new Handler();
-		handler.postDelayed(new Runnable() {
+				public void run() {
+					PosterController pc = new PosterController();
+					pc.writePoster(BitmapFactory.decodeResource(getResources(),
+							R.drawable.juwenalia_portiat), getResources()
+							.getString(R.string.menu_juwenalia) + "_portiat",
+							getApplicationContext(), getWidthOfScreen(), 1);
 
-			public void run() {
-				PosterController pc = new PosterController();
-				pc.writePoster(BitmapFactory.decodeResource(getResources(),
-						R.drawable.juwenalia_portiat),
-						getResources().getString(R.string.menu_juwenalia) + "_portiat",
-						getApplicationContext(), getWidthOfScreen(), 1);
-				
-				pc.writePoster(BitmapFactory.decodeResource(getResources(),
-						R.drawable.juwenalia_landscape),
-						getResources().getString(R.string.menu_juwenalia) + "_landscape",
-						getApplicationContext(), getWidthOfScreen(), 2);
-			}
+					pc.writePoster(BitmapFactory.decodeResource(getResources(),
+							R.drawable.juwenalia_landscape), getResources()
+							.getString(R.string.menu_juwenalia) + "_landscape",
+							getApplicationContext(), getWidthOfScreen(), 2);
+				}
 
-		}, 100);
+			}, 100);
+		}
 	}
 
 	private void downloadEvents() {
@@ -132,6 +132,8 @@ public class SplashScreenActivity extends Activity {
 												@Override
 												public void run() {
 													finish();
+													
+													app.makeFirstLoad();
 
 													SplashScreenActivity.this
 															.startActivity(new Intent(
@@ -187,18 +189,18 @@ public class SplashScreenActivity extends Activity {
 		}
 		return haveConnectedWifi || haveConnectedMobile;
 	}
-	
-	public int getWidthOfScreen(){
+
+	public int getWidthOfScreen() {
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
-		
+
 		return metrics.widthPixels;
 	}
-	
-	public int getHeightOfScreen(){
+
+	public int getHeightOfScreen() {
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
-		
+
 		return metrics.heightPixels;
 	}
 

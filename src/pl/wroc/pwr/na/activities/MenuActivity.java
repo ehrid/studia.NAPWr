@@ -11,6 +11,7 @@ import pl.wroc.pwr.na.objects.ListItemObject;
 import pl.wroc.pwr.na.objects.PlanObject;
 import pl.wroc.pwr.na.tools.PlanParser;
 import pl.wroc.pwr.na.tools.PosterController;
+import pl.wroc.pwr.na.tools.UseInternalStorage;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -130,6 +131,7 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 
 	public void logoff() {
 		((NAPWrApplication) getApplication()).forgetUser();
+		removePlanObject();
 		mViewPager.refreshDrawableState();
 	}
 
@@ -231,8 +233,23 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 	public int getWidthOfScreen(){
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
 		return metrics.widthPixels;
+	}
+	
+	public void savePlanObject(ArrayList<PlanObject> plan){
+		UseInternalStorage uis = new UseInternalStorage(getApplicationContext());
+		uis.writeObject(plan, "PlanZajecNAPWr");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public ArrayList<PlanObject> getPlanObject(){
+		UseInternalStorage uis = new UseInternalStorage(getApplicationContext());
+		return (ArrayList<PlanObject>) uis.readObject("PlanZajecNAPWr");
+	}
+	
+	public void removePlanObject(){
+		UseInternalStorage uis = new UseInternalStorage(getApplicationContext());
+		uis.writeObject(null, "PlanZajecNAPWr");
 	}
 
 	/*
