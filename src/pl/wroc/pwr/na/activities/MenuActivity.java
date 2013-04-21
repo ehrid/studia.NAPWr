@@ -11,7 +11,6 @@ import pl.wroc.pwr.na.objects.ListItemObject;
 import pl.wroc.pwr.na.objects.PlanObject;
 import pl.wroc.pwr.na.tools.PlanParser;
 import pl.wroc.pwr.na.tools.PosterController;
-import pl.wroc.pwr.na.tools.UseInternalStorage;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -37,9 +36,6 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 
 	public ArrayList<EventObject> current = new ArrayList<EventObject>();
 
-	public ArrayList<PlanObject> kalendarz;
-
-	public HashMap<String, ArrayList<EventObject>> eventList = new HashMap<String, ArrayList<EventObject>>();
 	public ArrayList<ListItemObject> listItems;
 
 	private boolean openMenu = true;
@@ -76,9 +72,6 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		mViewPager = (ViewPager) findViewById(R.id.pager_menu);
 		mViewPager.setAdapter(mCollectionPagerAdapter);
 
-		eventList = app.eventList;
-		kalendarz = app.kalendarz;
-
 		findViewById(R.id.left_menu).bringToFront();
 		findViewById(R.id.left_menu).setVisibility(View.VISIBLE);
 		setMenu();
@@ -114,7 +107,7 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 				closeMenu();
 			} else {
 				if (mViewPager.getCurrentItem() == 0) {
-					moveTaskToBack(true);
+					closeApplication();
 				} else {
 					mViewPager.setCurrentItem(0);
 				}
@@ -126,7 +119,11 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 	};
 
 	public void closeApplication() {
-		finish();
+		if (app.getSettingsZamknij() == 0) {
+			finish();
+		} else {
+			moveTaskToBack(true);
+		}
 	}
 
 	public void logoff() {
@@ -183,16 +180,23 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 	/*
 	 * ELEMENTY DO POBIERANIA DYNAMICZNEGO
 	 */
+	public HashMap<String, ArrayList<EventObject>> getEventList() {
+		return app.eventList;
+	}
 
 	public void addEventItem(String key, ArrayList<EventObject> value) {
 		app.eventList.put(key, value);
-		eventList.put(key, value);
+		app.eventListUpdateTime.put(key, System.currentTimeMillis());
+		app.saveEventList();
 		mViewPager.refreshDrawableState();
+	}
+
+	public ArrayList<PlanObject> getKalendarz() {
+		return app.kalendarz;
 	}
 
 	public void addPlanItem(ArrayList<PlanObject> value) {
 		app.kalendarz = value;
-		kalendarz = value;
 		mViewPager.refreshDrawableState();
 	}
 
@@ -202,7 +206,25 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 	}
 
 	public boolean haveToDownload(String key) {
-		return !app.eventList.containsKey(key);
+		if (app.eventList.containsKey(key)) {
+			int refreshType = app.getSettingsOdswierzanie();
+			int difference = 3600000;
+			if (refreshType != 0) {
+
+				if (refreshType == 2) {
+					difference *= 12;
+				}
+
+				Log.d("TIME",
+						(System.currentTimeMillis() - app.eventListUpdateTime
+								.get(key)) + "");
+				if ((System.currentTimeMillis() - app.eventListUpdateTime
+						.get(key)) < difference) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	public Bitmap getBitmapFromUIS(String key) {
@@ -229,27 +251,23 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		}
 		return orientation;
 	}
-	
-	public int getWidthOfScreen(){
+
+	public int getWidthOfScreen() {
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		return metrics.widthPixels;
 	}
-	
-	public void savePlanObject(ArrayList<PlanObject> plan){
-		UseInternalStorage uis = new UseInternalStorage(getApplicationContext());
-		uis.writeObject(plan, "PlanZajecNAPWr");
+
+	public void savePlanObject(ArrayList<PlanObject> plan) {
+		app.savePlanObject(plan);
 	}
-	
-	@SuppressWarnings("unchecked")
-	public ArrayList<PlanObject> getPlanObject(){
-		UseInternalStorage uis = new UseInternalStorage(getApplicationContext());
-		return (ArrayList<PlanObject>) uis.readObject("PlanZajecNAPWr");
+
+	public ArrayList<PlanObject> getPlanObject() {
+		return app.getPlanObject();
 	}
-	
-	public void removePlanObject(){
-		UseInternalStorage uis = new UseInternalStorage(getApplicationContext());
-		uis.writeObject(null, "PlanZajecNAPWr");
+
+	public void removePlanObject() {
+		app.removePlanObject();
 	}
 
 	/*
@@ -462,7 +480,7 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 			break;
 		case R.id.menu_exit:
 			closeMenu();
-			finish();
+			closeApplication();
 			break;
 		}
 	}

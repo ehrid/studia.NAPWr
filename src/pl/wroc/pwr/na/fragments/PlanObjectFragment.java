@@ -67,7 +67,7 @@ public class PlanObjectFragment extends Fragment {
 	}
 
 	public void addEvents() {
-		eventList = ((MenuActivity) (MenuActivity.activityMain)).kalendarz;
+		eventList = ((MenuActivity) (MenuActivity.activityMain)).getKalendarz();
 		
 		adapter = new PlanAdapter(context, R.layout.item_plan,
 				eventList);
@@ -109,7 +109,7 @@ public class PlanObjectFragment extends Fragment {
 
 		@Override
 		protected String doInBackground(String... params) {
-			if(((MenuActivity) (MenuActivity.activityMain)).kalendarz == null){
+			if(((MenuActivity) (MenuActivity.activityMain)).getKalendarz() == null){
 				((MenuActivity) (MenuActivity.activityMain)).getPlan();
 			}
 			return "Executed";

@@ -92,7 +92,7 @@ public class EventListObjectFragment extends Fragment {
 	}
 
 	private void addEvents() {
-		eventList = ((MenuActivity) (MenuActivity.activityMain)).eventList
+		eventList = ((MenuActivity) (MenuActivity.activityMain)).getEventList()
 				.get(args.getString(LIST_TITLE));
 
 		adapter = new EventListAdapter(context, R.layout.item_event_list_2,

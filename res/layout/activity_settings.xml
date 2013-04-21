@@ -27,14 +27,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
                 android:text="Ustaw swój plan zajęć"
-                android:textSize="@dimen/default_text_medium" />
+                android:textSize="@dimen/default_text_medium" 
+                android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/settings_plan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30sp"
-                android:text="http://plan-pwr.pl/[xXxXxXxXx]" >
+                android:text="http://plan-pwr.pl/[xXxXxXxXx]" 
+                android:visibility="gone">
 
                 <requestFocus />
             </EditText>
@@ -57,7 +59,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
                 android:text="Oszczędzanie transferu danych"
-                android:textSize="@dimen/default_text_medium" />
+                android:textSize="@dimen/default_text_medium" 
+                android:visibility="gone"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -91,14 +95,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
                 android:text="Powiadomienia"
-                android:textSize="@dimen/default_text_medium" />
+                android:textSize="@dimen/default_text_medium" 
+                android:visibility="gone"/>
 
             <CheckBox
                 android:id="@+id/settings_notifications"
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
                 android:layout_marginLeft="30sp"
-                android:text="Włącz powiadomienia" />
+                android:text="Włącz powiadomienia" 
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="wrap_content"

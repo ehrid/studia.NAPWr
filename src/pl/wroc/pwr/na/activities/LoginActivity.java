@@ -88,17 +88,22 @@ public class LoginActivity extends Activity implements OnClickListener {
 			JSONArray completeJSONArr = new JSONArray("[" + s + "]");
 
 			JSONObject event = completeJSONArr.getJSONObject(0);
-
-			Log.d("NIK", event.getString("nik"));
-			((NAPWrApplication) getApplication()).rememberUser(
-					event.getInt("id"), event.getString("nik"));
-
 			if (event.getBoolean("approved")) {
-				// ((MenuObjectFragment)
-				// ((MenuObjectFragment.getInstance()))).setLogedInLabel(true);
+				
+				String wydzial = event.getString("wydzial");
+				if (wydzial.contains("W-")) {
+					wydzial = wydzial.substring(2);
+					((NAPWrApplication) getApplication()).setWydzial(Integer.parseInt(wydzial));
+				}
+
+				((NAPWrApplication) getApplication()).rememberUser(
+						event.getInt("id"), event.getString("nik"));
+
 				((MenuActivity) (MenuActivity.activityMain)).btn_login
 						.setText(getResources().getString(R.string.menu_logout));
 				((MenuActivity) (MenuActivity.activityMain)).addItemsOnLogIn();
+
+				
 				return true;
 			} else if (event.getBoolean("login")) {
 				password.setError(getResources().getString(
