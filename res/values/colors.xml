@@ -2,7 +2,8 @@
 
     <!-- Default Colors -->
     <color name="default_background">#FFFFFF</color>
-    <color name="default_NAPWr">#27a7df</color>
+    <color name="default_NAPWr">#1f870f</color>
+    <!-- #27a7df -->
 
     <!-- Splash Screen Loading -->
     <color name="splash_loading1">#0088cd</color>

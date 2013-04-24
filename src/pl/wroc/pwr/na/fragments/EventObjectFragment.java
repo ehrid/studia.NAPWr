@@ -19,8 +19,8 @@ public class EventObjectFragment extends Fragment {
 	// Button share;
 
 	// Event
-	ImageView likeit;
-	TextView likeitSum;
+	//ImageView likeit;
+	//TextView likeitSum;
 	TextView title;
 	TextView fromDate;
 	TextView toDate;
@@ -43,19 +43,19 @@ public class EventObjectFragment extends Fragment {
 		// share = (Button) rootView.findViewById(R.id.share);
 
 		title = (TextView) rootView.findViewById(R.id.event_title);
-		likeit = (ImageView) rootView.findViewById(R.id.event_likeit);
+		//likeit = (ImageView) rootView.findViewById(R.id.event_likeit);
 		fromDate = (TextView) rootView.findViewById(R.id.event_fromDate);
 		toDate = (TextView) rootView.findViewById(R.id.event_toDate);
 		address = (TextView) rootView.findViewById(R.id.event_address);
 		organizaer = (TextView) rootView.findViewById(R.id.event_organizer);
 		content = (TextView) rootView.findViewById(R.id.event_content);
-		likeitSum = (TextView) rootView.findViewById(R.id.event_likeit_sum);
+		//likeitSum = (TextView) rootView.findViewById(R.id.event_likeit_sum);
 
 		Bundle args = getArguments();
 		event = ((MenuActivity) (MenuActivity.activityMain)).current.get(args
 				.getInt(ARG_OBJECT));
 		
-		likeitSum.setText(event.likeSum + "");
+		//likeitSum.setText(event.likeSum + "");
 		if (event.name != null)
 			title.setText(event.name.toString());
 		if (event.startDate != null) {

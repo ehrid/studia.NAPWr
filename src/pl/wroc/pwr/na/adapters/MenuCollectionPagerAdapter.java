@@ -49,6 +49,7 @@ public class MenuCollectionPagerAdapter extends FragmentStatePagerAdapter {
 		case 2:
 			fragment = new EventListPosterFragment();
 			args.putString(EventListPosterFragment.LIST_TITLE, obj.title);
+			args.putString(EventListPosterFragment.LIST_URL, obj.url);
 			break;
 		case 3: 
 			return new PlanObjectFragment();

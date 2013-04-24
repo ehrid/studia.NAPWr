@@ -7,8 +7,11 @@ import pl.wroc.pwr.na.objects.EventObject;
 import pl.wroc.pwr.na.objects.PlanObject;
 import pl.wroc.pwr.na.tools.UseInternalStorage;
 import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 public class NAPWrApplication extends Application {
@@ -20,6 +23,8 @@ public class NAPWrApplication extends Application {
 	SharedPreferences mPrefs;
 
 	public boolean firstLoad = false;
+	public boolean started = false;
+	public boolean offline = false;
 
 	public HashMap<String, ArrayList<EventObject>> eventList;
 	public HashMap<String, Long> eventListUpdateTime;
@@ -40,13 +45,44 @@ public class NAPWrApplication extends Application {
 			userName = mPrefs.getString("name", "");
 		}
 
-		if (getSettingsOdswierzanie() == 0
+		if ((getSettingsOdswierzanie() == 0 && isNetworkAvailable())
 				|| (eventList = getEventList()) != null) {
 			eventListUpdateTime = new HashMap<String, Long>();
 			eventList = new HashMap<String, ArrayList<EventObject>>();
 		} else {
 			eventListUpdateTime = getEventListTimeUpdate();
 		}
+	}
+	
+	private boolean isNetworkAvailable() {
+		boolean haveConnectedWifi = false;
+		boolean haveConnectedMobile = false;
+
+		ConnectivityManager cm = (ConnectivityManager) NAPWrApplication.this
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+		NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+		for (NetworkInfo ni : netInfo) {
+			if (ni.getTypeName().equalsIgnoreCase("WIFI")) {
+				if (ni.isConnected()) {
+					haveConnectedWifi = true;
+					Log.d("Internt Connection", "WIFI CONNECTION AVAILABLE");
+				} else {
+					Log.d("Internt Connection", "WIFI CONNECTION NOT AVAILABLE");
+				}
+			}
+			if (ni.getTypeName().equalsIgnoreCase("MOBILE")) {
+				if (ni.isConnected()) {
+					haveConnectedMobile = true;
+					Log.d("Internt Connection",
+							"MOBILE INTERNET CONNECTION AVAILABLE");
+				} else {
+					Log.d("Internt Connection",
+							"MOBILE INTERNET CONNECTION NOT AVAILABLE");
+				}
+			}
+		}
+		return haveConnectedWifi || haveConnectedMobile;
 	}
 
 	/*

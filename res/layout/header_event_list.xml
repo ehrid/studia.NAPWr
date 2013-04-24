@@ -1,13 +1,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@color/default_NAPWr">
+    android:background="@drawable/header_top_green">
 
     <ImageView
         android:id="@+id/eventlist_menu"
         android:layout_marginRight="8sp"
         android:layout_marginTop="8sp"
-        android:padding="10sp"
         android:layout_width="50sp"
         android:layout_height="50sp"
         android:src="@drawable/btn_menu" 

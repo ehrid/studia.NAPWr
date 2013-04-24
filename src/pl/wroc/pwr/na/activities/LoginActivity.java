@@ -10,8 +10,10 @@ import pl.wroc.pwr.na.NAPWrApplication;
 import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.tools.RequestTaskString;
 import pl.wroc.pwr.na.tools.UseInternalStorage;
+import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -61,7 +63,23 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 	}
 
-	ProgressDialog pd;
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	// API 11
+	String startMyTask(String s) {
+		try {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+				return (String) new RequestTaskString().executeOnExecutor(
+						AsyncTask.THREAD_POOL_EXECUTOR, s).get();
+			else
+
+				return (String) new RequestTaskString().execute(s).get();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
 
 	public boolean login() {
 
@@ -80,20 +98,21 @@ public class LoginActivity extends Activity implements OnClickListener {
 			return false;
 		}
 		try {
-			String s = (String) new RequestTaskString().execute(
-					"http://www.napwr.pl/mobile/login/"
-							+ login.getText().toString() + "/"
-							+ password.getText().toString()).get();
+			String s = "http://www.napwr.pl/mobile/login/"
+					+ login.getText().toString() + "/"
+					+ password.getText().toString();
+			s = startMyTask(s);
 			Log.d("login", s);
 			JSONArray completeJSONArr = new JSONArray("[" + s + "]");
 
 			JSONObject event = completeJSONArr.getJSONObject(0);
 			if (event.getBoolean("approved")) {
-				
+
 				String wydzial = event.getString("wydzial");
 				if (wydzial.contains("W-")) {
 					wydzial = wydzial.substring(2);
-					((NAPWrApplication) getApplication()).setWydzial(Integer.parseInt(wydzial));
+					((NAPWrApplication) getApplication()).setWydzial(Integer
+							.parseInt(wydzial));
 				}
 
 				((NAPWrApplication) getApplication()).rememberUser(
@@ -103,7 +122,6 @@ public class LoginActivity extends Activity implements OnClickListener {
 						.setText(getResources().getString(R.string.menu_logout));
 				((MenuActivity) (MenuActivity.activityMain)).addItemsOnLogIn();
 
-				
 				return true;
 			} else if (event.getBoolean("login")) {
 				password.setError(getResources().getString(
@@ -116,10 +134,6 @@ public class LoginActivity extends Activity implements OnClickListener {
 			}
 
 		} catch (JSONException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
 		return false;

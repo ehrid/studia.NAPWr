@@ -17,7 +17,8 @@ public class PosterController implements Serializable {
 	BitmapDataObject bdo_poster;
 
 	public Bitmap writePoster(String name, Context context) {
-		String URL = "" + name;
+		String URL = "http://www.napwr.pl/img/mobile/covers/" + name + ".jpg";
+		Log.d("DOWNLOADING POSTER", URL);
 		Bitmap imagePoster = null;
 
 		try {

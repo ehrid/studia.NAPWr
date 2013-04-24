@@ -1,11 +1,7 @@
 package pl.wroc.pwr.na.activities;
 
-import java.util.ArrayList;
-
 import pl.wroc.pwr.na.NAPWrApplication;
 import pl.wroc.pwr.na.R;
-import pl.wroc.pwr.na.objects.EventObject;
-import pl.wroc.pwr.na.objects.PlanObject;
 import pl.wroc.pwr.na.tools.UseInternalStorage;
 import android.app.Activity;
 import android.content.Intent;
@@ -44,42 +40,17 @@ public class ConnectionErrorActivity extends Activity {
 			}
 		});
 
-		if (uis.readObject("dzisiaj") == null) {
+		if (uis.readObject("WydarzeniaNAPWr") == null) {
 			offline.setVisibility(View.GONE);
 		} else {
+
 			offline.setOnClickListener(new OnClickListener() {
-				@SuppressWarnings("unchecked")
 				@Override
 				public void onClick(View v) {
-					app.eventList.put(
-							getResources().getString(R.string.menu_top10_sub),
-							(ArrayList<EventObject>) uis
-									.readObject(getResources().getString(
-											R.string.menu_today_sub)));
-					app.eventList.put(
-							getResources().getString(R.string.menu_today_sub),
-							(ArrayList<EventObject>) uis
-									.readObject(getResources().getString(
-											R.string.menu_today_sub)));
-					app.eventList.put(
-							getResources()
-									.getString(R.string.menu_tomorrow_sub),
-							(ArrayList<EventObject>) uis
-									.readObject(getResources().getString(
-											R.string.menu_tomorrow_sub)));
-
-					if (app.logedin) {
-						app.kalendarz = (ArrayList<PlanObject>) uis
-								.readObject(getResources().getString(
-										R.string.menu_user_plan));
-						app.eventList
-								.put(getResources().getString(
-										R.string.menu_user_favourities),
-										(ArrayList<EventObject>) uis
-												.readObject(getResources()
-														.getString(
-																R.string.menu_user_favourities)));
-					}
+					app.offline = true;
+					
+					app.eventList = app.getEventList();
+					app.eventListUpdateTime = app.getEventListTimeUpdate();
 
 					finish();
 					ConnectionErrorActivity.this.startActivity(new Intent(
@@ -88,7 +59,7 @@ public class ConnectionErrorActivity extends Activity {
 			});
 		}
 	}
-	
+
 	public boolean onKeyDown(int keyCode, android.view.KeyEvent event) {
 
 		if (keyCode == KeyEvent.KEYCODE_BACK) {

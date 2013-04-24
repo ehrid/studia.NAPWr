@@ -9,11 +9,14 @@ import pl.wroc.pwr.na.adapters.EventListAdapter;
 import pl.wroc.pwr.na.objects.EventObject;
 import pl.wroc.pwr.na.tools.JSONParser;
 import pl.wroc.pwr.na.tools.RSSParser;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -46,6 +49,7 @@ public class EventListObjectFragment extends Fragment {
 	Bundle args;
 
 	View rootView;
+	LongOperation asyncTask;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,9 +68,9 @@ public class EventListObjectFragment extends Fragment {
 
 		type = args.getInt(LIST_TYPE);
 		url = args.getString(LIST_URL);
-		
+
 		miniature = (ImageView) rootView.findViewById(R.id.eventlist_miniature);
-		if(args.getInt(LIST_MINIATURE) != 0) {	
+		if (args.getInt(LIST_MINIATURE) != 0) {
 			miniature.setImageResource(args.getInt(LIST_MINIATURE));
 		} else {
 			miniature.setVisibility(View.GONE);
@@ -86,20 +90,34 @@ public class EventListObjectFragment extends Fragment {
 		eventListView = (ListView) rootView
 				.findViewById(R.id.event_list_events);
 
-		new LongOperation().execute("");
+		Log.d("EVENTS", "STARTING ASYNC TASK");
+		asyncTask = new LongOperation();
+		startMyTask();
 
 		return rootView;
 	}
 
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	// API 11
+	void startMyTask() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+			asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		else
+			asyncTask.execute();
+	}
+
 	private void addEvents() {
+		asyncTask.cancel(true);
 		eventList = ((MenuActivity) (MenuActivity.activityMain)).getEventList()
 				.get(args.getString(LIST_TITLE));
 
-		adapter = new EventListAdapter(context, R.layout.item_event_list_2,
-				eventList,
-				((MenuActivity) (MenuActivity.activityMain))
-						.getApplicationContext());
-		eventListView.setAdapter(adapter);
+		if (eventList != null) {
+			adapter = new EventListAdapter(context, R.layout.item_event_list_2,
+					eventList,
+					((MenuActivity) (MenuActivity.activityMain))
+							.getApplicationContext());
+			eventListView.setAdapter(adapter);
+		}
 	}
 
 	private void addListeners() {
@@ -115,7 +133,12 @@ public class EventListObjectFragment extends Fragment {
 			}
 		});
 
-		if (eventList.isEmpty()) {
+		if (eventList != null) {
+			if (eventList.isEmpty()) {
+				rootView.findViewById(R.id.no_events_popup).setVisibility(
+						View.VISIBLE);
+			}
+		} else {
 			rootView.findViewById(R.id.no_events_popup).setVisibility(
 					View.VISIBLE);
 		}
@@ -130,22 +153,34 @@ public class EventListObjectFragment extends Fragment {
 	}
 
 	private class LongOperation extends AsyncTask<String, Void, String> {
+		boolean running = true;
 
 		@Override
 		protected String doInBackground(String... params) {
-			if (((MenuActivity) (MenuActivity.activityMain))
-					.haveToDownload(args.getString(LIST_TITLE))) {
-				if (type == 1) {
-					RSSParser rssParser = new RSSParser();
-					((MenuActivity) (MenuActivity.activityMain)).addEventItem(
-							args.getString(LIST_TITLE),
-							rssParser.getEventsRSS(url));
-				} else {
-					JSONParser jsonParser = new JSONParser();
-					((MenuActivity) (MenuActivity.activityMain)).addEventItem(
-							args.getString(LIST_TITLE),
-							jsonParser.getEventsJSON(url));
+			while (running) {
+				if (((MenuActivity) (MenuActivity.activityMain))
+						.haveToDownload(args.getString(LIST_TITLE))) {
+					Log.d("EVENTS", "DOWNLOADING EVENTS - " +args.getString(LIST_TITLE));
+					try {
+					Log.d("EVENTS", "SIZE - " + ((MenuActivity) (MenuActivity.activityMain)).getEventList().get(args.getString(LIST_TITLE)).size());
+					} catch (Exception e){
+						Log.d("EVENTS", "SIZE - 0");
+					}
+					if (type == 1) {
+						RSSParser rssParser = new RSSParser();
+						((MenuActivity) (MenuActivity.activityMain))
+								.addEventItem(args.getString(LIST_TITLE),
+										rssParser.getEventsRSS(url));
+					} else {
+						JSONParser jsonParser = new JSONParser();
+						((MenuActivity) (MenuActivity.activityMain))
+								.addEventItem(args.getString(LIST_TITLE),
+										jsonParser.getEventsJSON(url));
+					}
 				}
+				running = false;
+				if (isCancelled())
+					break;
 			}
 			return "Executed";
 		}

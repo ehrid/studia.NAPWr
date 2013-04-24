@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu"
     android:layout_width="wrap_content"
     android:layout_height="fill_parent" >
 
@@ -12,7 +13,8 @@
             android:layout_width="200sp"
             android:layout_height="86sp"
             android:contentDescription="@string/menu_logo"
-            android:src="@drawable/napwr_logo" />
+            android:src="@drawable/napwr_logo" 
+            android:visibility="gone"/>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -36,8 +38,7 @@
                     android:padding="@dimen/default_margin"
                     android:text="@string/menu_juwenalia"
                     android:textColor="@color/text_white"
-                    android:textSize="@dimen/default_text_medium"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/default_text_medium"/>
 
                 <View
                     android:id="@+id/stroke_juwenalia"
@@ -52,8 +53,7 @@
                     android:padding="@dimen/default_margin"
                     android:text="@string/menu_user"
                     android:textColor="@color/text_white"
-                    android:textSize="@dimen/default_text_medium"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/default_text_medium"/>
 
                 <TextView
                     android:id="@+id/menu_user_plan"
@@ -62,10 +62,9 @@
                     android:paddingLeft="30sp"
                     android:paddingTop="@dimen/default_margin_small"
                     android:paddingBottom="@dimen/default_margin_small"
-                    android:text="@string/menu_user_plan"
+                    android:text="@string/menu_user_plan_sub"
                     android:textSize="@dimen/default_text_medium" 
-                    android:textColor="@color/text_white"
-                    android:textStyle="bold"/>
+                    android:textColor="@color/text_white"/>
                 
                 <TextView
                     android:id="@+id/menu_user_favourities"
@@ -76,8 +75,7 @@
                     android:paddingBottom="@dimen/default_margin_small"
                     android:text="@string/menu_user_favourities"
                     android:textSize="@dimen/default_text_medium" 
-                    android:textColor="@color/text_white"
-                    android:textStyle="bold"/>
+                    android:textColor="@color/text_white"/>
                 
                 <TextView
                     android:id="@+id/menu_user_facultity"
@@ -88,8 +86,7 @@
                     android:paddingBottom="@dimen/default_margin_small"
                     android:text="@string/menu_user_facultity"
                     android:textSize="@dimen/default_text_medium" 
-                    android:textColor="@color/text_white"
-                    android:textStyle="bold"/>
+                    android:textColor="@color/text_white"/>
 
                 <View
                     android:id="@+id/stroke_user"
@@ -104,8 +101,7 @@
                     android:padding="@dimen/default_margin"
                     android:text="@string/menu_today"
                     android:textColor="@color/text_white"
-                    android:textSize="@dimen/default_text_medium"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/default_text_medium"/>
 
                 <View
                     android:id="@+id/stroke_today"
@@ -120,8 +116,7 @@
                     android:padding="@dimen/default_margin"
                     android:text="@string/menu_tomorrow"
                     android:textColor="@color/text_white"
-                    android:textSize="@dimen/default_text_medium"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/default_text_medium"/>
 
                 <View
                     android:id="@+id/stroke_tomorrow"
@@ -130,17 +125,46 @@
                     android:background="@color/background_gray" />
 
                 <TextView
-                    android:id="@+id/menu_category"
+                    android:id="@+id/menu_it"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/default_margin"
-                    android:text="@string/menu_category"
+                    android:text="@string/menu_it"
                     android:textColor="@color/text_white"
-                    android:textSize="@dimen/default_text_medium"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/default_text_medium"/>
 
                 <View
-                    android:id="@+id/stroke_category"
+                    android:id="@+id/stroke_it"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_size"
+                    android:background="@color/background_gray" />
+                
+                <TextView
+                    android:id="@+id/menu_kultura"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_margin"
+                    android:text="@string/menu_kultura"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/default_text_medium"/>
+
+                <View
+                    android:id="@+id/stroke_kultura"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_size"
+                    android:background="@color/background_gray" />
+                
+                <TextView
+                    android:id="@+id/menu_sport"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_margin"
+                    android:text="@string/menu_sport"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/default_text_medium"/>
+
+                <View
+                    android:id="@+id/stroke_sport"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/stroke_size"
                     android:background="@color/background_gray" />
@@ -152,8 +176,7 @@
                     android:padding="@dimen/default_margin"
                     android:text="@string/menu_top10"
                     android:textColor="@color/text_white"
-                    android:textSize="@dimen/default_text_medium"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/default_text_medium"/>
 
                 <View
                     android:id="@+id/stroke_top10"
@@ -168,8 +191,7 @@
                     android:padding="@dimen/default_margin"
                     android:text="@string/menu_refresh"
                     android:textColor="@color/text_white"
-                    android:textSize="@dimen/default_text_medium"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/default_text_medium"/>
 
                 <View
                     android:id="@+id/stroke_refresh"
@@ -184,8 +206,7 @@
                     android:padding="@dimen/default_margin"
                     android:text="@string/menu_settings"
                     android:textColor="@color/text_white"
-                    android:textSize="@dimen/default_text_medium"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/default_text_medium"/>
 
                 <View
                     android:id="@+id/stroke_settings"
@@ -200,8 +221,7 @@
                     android:padding="@dimen/default_margin"
                     android:text="@string/menu_login"
                     android:textColor="@color/text_white"
-                    android:textSize="@dimen/default_text_medium"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/default_text_medium"/>
 
                 <View
                     android:id="@+id/stroke_login"
@@ -216,8 +236,7 @@
                     android:padding="@dimen/default_margin"
                     android:text="@string/menu_about"
                     android:textColor="@color/text_white"
-                    android:textSize="@dimen/default_text_medium"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/default_text_medium"/>
 
                 <View
                     android:id="@+id/stroke_about"
@@ -232,8 +251,7 @@
                     android:padding="@dimen/default_margin"
                     android:text="@string/menu_sponsor"
                     android:textColor="@color/text_white"
-                    android:textSize="@dimen/default_text_medium"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/default_text_medium"/>
 
                 <View
                     android:id="@+id/stroke_sponsor"
@@ -248,8 +266,7 @@
                     android:padding="@dimen/default_margin"
                     android:text="@string/menu_exit"
                     android:textColor="@color/text_white"
-                    android:textSize="@dimen/default_text_medium"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/default_text_medium"/>
 
                 <View
                     android:id="@+id/stroke_exit"

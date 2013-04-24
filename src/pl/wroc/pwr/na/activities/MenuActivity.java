@@ -73,8 +73,15 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		mViewPager.setAdapter(mCollectionPagerAdapter);
 
 		findViewById(R.id.left_menu).bringToFront();
-		findViewById(R.id.left_menu).setVisibility(View.VISIBLE);
+		if (!app.started) {
+			findViewById(R.id.left_menu).setVisibility(View.VISIBLE);
+			app.started = true;
+			openMenu = true;
+		} else {
+			openMenu = false;
+		}
 		setMenu();
+		showUserOptions();
 	}
 
 	public void openMenu() {
@@ -177,6 +184,26 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		return haveConnectedWifi || haveConnectedMobile;
 	}
 
+	private boolean isWiFiAvailable() {
+		boolean haveConnectedWifi = false;
+
+		ConnectivityManager cm = (ConnectivityManager) MenuActivity.this
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+		NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+		for (NetworkInfo ni : netInfo) {
+			if (ni.getTypeName().equalsIgnoreCase("WIFI")) {
+				if (ni.isConnected()) {
+					haveConnectedWifi = true;
+					Log.d("Internt Connection", "WIFI CONNECTION AVAILABLE");
+				} else {
+					Log.d("Internt Connection", "WIFI CONNECTION NOT AVAILABLE");
+				}
+			}
+		}
+		return haveConnectedWifi;
+	}
+
 	/*
 	 * ELEMENTY DO POBIERANIA DYNAMICZNEGO
 	 */
@@ -185,10 +212,12 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 	}
 
 	public void addEventItem(String key, ArrayList<EventObject> value) {
-		app.eventList.put(key, value);
-		app.eventListUpdateTime.put(key, System.currentTimeMillis());
-		app.saveEventList();
-		mViewPager.refreshDrawableState();
+		if (app.eventList != null) {
+			app.eventList.put(key, value);
+			app.eventListUpdateTime.put(key, System.currentTimeMillis());
+			app.saveEventList();
+			mViewPager.refreshDrawableState();
+		}
 	}
 
 	public ArrayList<PlanObject> getKalendarz() {
@@ -206,22 +235,40 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 	}
 
 	public boolean haveToDownload(String key) {
-		if (app.eventList.containsKey(key)) {
-			int refreshType = app.getSettingsOdswierzanie();
-			int difference = 3600000;
-			if (refreshType != 0) {
+		if (app.offline) {
+			return false;
+		} else {
+			if (app.eventList != null) {
+				if (app.eventList.containsKey(key)) {
+					int refreshType = app.getSettingsOdswierzanie();
+					int difference = 3600000;
+					if (refreshType != 0) {
 
-				if (refreshType == 2) {
-					difference *= 12;
-				}
+						if (refreshType == 2) {
+							difference *= 12;
+						}
 
-				Log.d("TIME",
-						(System.currentTimeMillis() - app.eventListUpdateTime
-								.get(key)) + "");
-				if ((System.currentTimeMillis() - app.eventListUpdateTime
-						.get(key)) < difference) {
-					return false;
+						Log.d("TIME",
+								(System.currentTimeMillis() - app.eventListUpdateTime
+										.get(key)) + "");
+						if ((System.currentTimeMillis() - app.eventListUpdateTime
+								.get(key)) < difference) {
+							return false;
+						} else {
+							Log.d("EVENTS",
+									"TIME TO UPDATE - "
+											+ (System.currentTimeMillis() - app.eventListUpdateTime
+													.get(key)));
+						}
+					} else {
+						Log.d("EVENTS", "REFRESH == 0");
+						return false;
+					}
+				} else {
+					Log.d("EVENTS", "DOES NOT COINTAIN KEY");
 				}
+			} else {
+				Log.d("EVENTS", "EMPTY EVENT LIST");
 			}
 		}
 		return true;
@@ -235,6 +282,10 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 	public Bitmap saveBitmapToUIS(String key) {
 		PosterController pc = new PosterController();
 		return pc.writePoster(key, getApplicationContext());
+	}
+
+	public boolean haveToDownloadBackground() {
+		return !app.offline && isWiFiAvailable();
 	}
 
 	public int getScreenOrientation() {
@@ -279,7 +330,9 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 	TextView btn_user;
 	TextView btn_today;
 	TextView btn_tomorrow;
-	TextView btn_category;
+	TextView btn_it;
+	TextView btn_kultura;
+	TextView btn_sport;
 	TextView btn_top10;
 	TextView btn_refesh;
 	TextView btn_settings;
@@ -303,35 +356,65 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		 */
 		listItems = new ArrayList<ListItemObject>();
 		listItems.add(new ListItemObject(2, getResources().getString(
-				R.string.menu_juwenalia), 0, ""));
-		listItems.add(new ListItemObject(1, getResources().getString(
-				R.string.menu_juwenalia_sub), 0,
-				"http://www.napwr.pl/rss/20/kategorie/juwenalia/"));
+				R.string.menu_juwenalia), 0, getResources().getString(
+				R.string.cover_juwenalia)));
+		listItems
+				.add(new ListItemObject(1, getResources().getString(
+						R.string.menu_juwenalia_sub), 0,
+						"http://www.napwr.pl/rss/czas/40320/kategorie/juwenalia/?type=mobile"));
 		if (ifLogedin()) {
 			listItems.add(new ListItemObject(2, getResources().getString(
-					R.string.menu_user), 0, ""));
-			listItems
-					.add(new ListItemObject(3, getResources().getString(
-							R.string.menu_user_plan),
-							R.drawable.miniature_calendar, ""));
+					R.string.menu_user_plan), 0, getResources().getString(
+					R.string.cover_user_plan)));
+			listItems.add(new ListItemObject(3, getResources().getString(
+					R.string.menu_user_plan_sub),
+					R.drawable.miniature_calendar, ""));
 			// listItems.add(new ListItemObject(0,
 			// getResources().getString(R.string.menu_user_favourities),R.drawable.miniature_favourites,
 			// ""));
 		}
 		listItems.add(new ListItemObject(2, getResources().getString(
-				R.string.menu_today), 0, ""));
+				R.string.menu_today), 0, getResources().getString(
+				R.string.cover_today)));
 		listItems.add(new ListItemObject(0, getResources().getString(
 				R.string.menu_today_sub), R.drawable.miniature_today,
 				"http://www.napwr.pl/mobile/wydarzenia/dzis"));
 		listItems.add(new ListItemObject(2, getResources().getString(
-				R.string.menu_tomorrow), 0, ""));
+				R.string.menu_tomorrow), 0, getResources().getString(
+				R.string.cover_tomorrow)));
 		listItems.add(new ListItemObject(0, getResources().getString(
 				R.string.menu_tomorrow_sub), R.drawable.miniature_tommorow,
 				"http://www.napwr.pl/mobile/wydarzenia/jutro"));
 		listItems.add(new ListItemObject(2, getResources().getString(
-				R.string.menu_category), 0, ""));
+				R.string.menu_it), 0, getResources().getString(
+				R.string.cover_informatyka)));
+		listItems
+				.add(new ListItemObject(
+						1,
+						getResources().getString(R.string.menu_it_sub),
+						0,
+						"http://www.napwr.pl/rss/czas/40320/kategorie/informatyka,programowanie,grykomputerowe,marketinginternetowy,grafikakomputerowa,technologiemobilne,android,linux,windows,apple/organizacje/asi,kn-temomuko,knsi,google-student-ambassador,osd,polishleaguegaming,knstit,pad-party/?type=mobile"));
 		listItems.add(new ListItemObject(2, getResources().getString(
-				R.string.menu_top10), 0, ""));
+				R.string.menu_kultura), 0, getResources().getString(
+				R.string.cover_kultura)));
+		listItems
+				.add(new ListItemObject(
+						1,
+						getResources().getString(R.string.menu_kultura_sub),
+						0,
+						"http://www.napwr.pl/rss/czas/40320/kategorie/kultura,kino,teatr,sztuka/organizacje/dkf-politechnika,miesiecznik-zak,strefa-kultury-studenckiej/?type=mobile"));
+		listItems.add(new ListItemObject(2, getResources().getString(
+				R.string.menu_sport), 0, getResources().getString(
+				R.string.cover_sport)));
+		listItems
+				.add(new ListItemObject(
+						1,
+						getResources().getString(R.string.menu_sport_sub),
+						0,
+						"http://www.napwr.pl/rss/czas/40320/kategorie/flashmob,gry,grykomputerowe,narty,sport,zawodysportowe,bilard,kajakarstwo,koszykowka,pilkanozna,siatkowka,mecze/organizacje/studencki-klub-turystyczny-pwr,liga-pwr,pwr-racing-team,polishleaguegaming,pad-party,mkk-wrotka,kz-polwiatr,reprezentacja-pwr-koszykowka,ks-pwr/?type=mobile"));
+		listItems.add(new ListItemObject(2, getResources().getString(
+				R.string.menu_top10), 0, getResources().getString(
+				R.string.cover_top10)));
 		listItems.add(new ListItemObject(0, getResources().getString(
 				R.string.menu_top10_sub), R.drawable.miniature_top10,
 				"http://www.napwr.pl/json/topten"));
@@ -347,7 +430,9 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		btn_user = (TextView) findViewById(R.id.menu_user);
 		btn_today = (TextView) findViewById(R.id.menu_today);
 		btn_tomorrow = (TextView) findViewById(R.id.menu_tomorrow);
-		btn_category = (TextView) findViewById(R.id.menu_category);
+		btn_it = (TextView) findViewById(R.id.menu_it);
+		btn_kultura = (TextView) findViewById(R.id.menu_kultura);
+		btn_sport = (TextView) findViewById(R.id.menu_sport);
 		btn_top10 = (TextView) findViewById(R.id.menu_top10);
 		btn_refesh = (TextView) findViewById(R.id.menu_refresh);
 		btn_settings = (TextView) findViewById(R.id.menu_settings);
@@ -369,7 +454,9 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		btn_user.setOnClickListener(this);
 		btn_today.setOnClickListener(this);
 		btn_tomorrow.setOnClickListener(this);
-		btn_category.setOnClickListener(this);
+		btn_it.setOnClickListener(this);
+		btn_kultura.setOnClickListener(this);
+		btn_sport.setOnClickListener(this);
 		btn_top10.setOnClickListener(this);
 		btn_refesh.setOnClickListener(this);
 		btn_settings.setOnClickListener(this);
@@ -405,12 +492,13 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 			btn_user_plan.setVisibility(View.GONE);
 			btn_user_favourities.setVisibility(View.GONE);
 			btn_user_facultity.setVisibility(View.GONE);
-		} else {
+			userOptionsOpen = !userOptionsOpen;
+		} else if (app.logedin) {
 			btn_user_plan.setVisibility(View.VISIBLE);
 			btn_user_favourities.setVisibility(View.VISIBLE);
 			btn_user_facultity.setVisibility(View.GONE);
+			userOptionsOpen = !userOptionsOpen;
 		}
-		userOptionsOpen = !userOptionsOpen;
 	}
 
 	@Override
@@ -422,7 +510,6 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 			break;
 		case R.id.menu_user:
 			showUserOptions();
-			setItem(app.userName);
 			break;
 		case R.id.menu_user_plan:
 			closeMenu();
@@ -444,9 +531,17 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 			closeMenu();
 			setItem(getResources().getString(R.string.menu_tomorrow));
 			break;
-		case R.id.menu_category:
+		case R.id.menu_it:
 			closeMenu();
-			setItem(getResources().getString(R.string.menu_category));
+			setItem(getResources().getString(R.string.menu_it));
+			break;
+		case R.id.menu_kultura:
+			closeMenu();
+			setItem(getResources().getString(R.string.menu_kultura));
+			break;
+		case R.id.menu_sport:
+			closeMenu();
+			setItem(getResources().getString(R.string.menu_sport));
 			break;
 		case R.id.menu_top10:
 			closeMenu();

@@ -6,8 +6,10 @@ import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.activities.MenuActivity;
 import pl.wroc.pwr.na.adapters.PlanAdapter;
 import pl.wroc.pwr.na.objects.PlanObject;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.util.Linkify;
@@ -36,6 +38,7 @@ public class PlanObjectFragment extends Fragment {
 	
 	View rootView;
 	String url;
+	LongOperation asyncTask;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,9 +64,19 @@ public class PlanObjectFragment extends Fragment {
 		eventListView = (ListView) rootView
 				.findViewById(R.id.event_list_events);
 		
-		new LongOperation().execute("");
+		asyncTask = new LongOperation();
+		startMyTask();
 		
 		return rootView;
+	}
+	
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	// API 11
+	void startMyTask() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+			asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		else
+			asyncTask.execute();
 	}
 
 	public void addEvents() {

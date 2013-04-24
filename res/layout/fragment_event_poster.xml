@@ -1,24 +1,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" 
-    android:background="@color/default_NAPWr">
-
+    android:background="@drawable/poster_background">
+    
     <ImageView
         android:id="@+id/fragment_event_poster_poster"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="center"
-        android:src="@drawable/juwenalia_portiat" 
-        android:visibility="gone"/>
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"/>
     
     <ImageView
         android:id="@+id/fragment_event_poster_menu"
-        android:layout_marginRight="8sp"
+        android:layout_marginLeft="8sp"
         android:layout_marginTop="8sp"
-        android:padding="10sp"
         android:layout_width="50sp"
         android:layout_height="50sp"
-        android:layout_alignParentRight="true"
         android:src="@drawable/btn_menu" />
+
+    <TextView
+        android:id="@+id/fragment_event_poster_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="30sp"
+        android:textColor="@color/text_white"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

@@ -81,7 +81,8 @@ public class SplashScreenActivity extends Activity {
 	}
 
 	private void saveJuwenalia() {
-		if (app.getFirstLoad()) {
+		Log.d("APP", app.getFirstLoad() +"");
+		if (!app.getFirstLoad()) {
 			Handler handler = new Handler();
 			handler.postDelayed(new Runnable() {
 
@@ -89,12 +90,12 @@ public class SplashScreenActivity extends Activity {
 					PosterController pc = new PosterController();
 					pc.writePoster(BitmapFactory.decodeResource(getResources(),
 							R.drawable.juwenalia_portiat), getResources()
-							.getString(R.string.menu_juwenalia) + "_portiat",
+							.getString(R.string.cover_juwenalia) + "_portrait",
 							getApplicationContext(), getWidthOfScreen(), 1);
 
 					pc.writePoster(BitmapFactory.decodeResource(getResources(),
 							R.drawable.juwenalia_landscape), getResources()
-							.getString(R.string.menu_juwenalia) + "_landscape",
+							.getString(R.string.cover_juwenalia) + "_landscape",
 							getApplicationContext(), getWidthOfScreen(), 2);
 				}
 
