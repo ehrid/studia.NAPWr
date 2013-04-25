@@ -3,6 +3,7 @@ package pl.wroc.pwr.na.fragments;
 import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.activities.MenuActivity;
 import pl.wroc.pwr.na.objects.EventObject;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -50,6 +51,9 @@ public class EventObjectFragment extends Fragment {
 		organizaer = (TextView) rootView.findViewById(R.id.event_organizer);
 		content = (TextView) rootView.findViewById(R.id.event_content);
 		//likeitSum = (TextView) rootView.findViewById(R.id.event_likeit_sum);
+		
+		Typeface fontType = ((MenuActivity) (MenuActivity.activityMain)).getTypeFace();
+		title.setTypeface(fontType);
 
 		Bundle args = getArguments();
 		event = ((MenuActivity) (MenuActivity.activityMain)).current.get(args

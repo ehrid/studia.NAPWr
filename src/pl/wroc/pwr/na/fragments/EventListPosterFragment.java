@@ -4,6 +4,7 @@ import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.activities.MenuActivity;
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -26,10 +27,10 @@ public class EventListPosterFragment extends Fragment {
 	Bitmap background;
 	String url;
 
-	ImageView menu;
-	ImageView poster;
-	TextView title;
-	View rootView;
+	private ImageView poster;
+	private TextView title;
+	private View rootView;
+	private ImageView menu;
 
 	Bundle args;
 	LongOperation asyncTask;
@@ -43,15 +44,6 @@ public class EventListPosterFragment extends Fragment {
 				container, false);
 
 		this.rootView = rootView;
-		menu = (ImageView) rootView
-				.findViewById(R.id.fragment_event_poster_menu);
-		menu.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				((MenuActivity) (MenuActivity.activityMain)).openMenu();
-			}
-		});
 
 		args = getArguments();
 		url = args.getString(LIST_URL);
@@ -59,9 +51,21 @@ public class EventListPosterFragment extends Fragment {
 		title = (TextView) rootView
 				.findViewById(R.id.fragment_event_poster_title);
 		title.setText(args.getString(LIST_TITLE));
+		
+		Typeface fontType = ((MenuActivity) (MenuActivity.activityMain)).getTypeFace();
+		title.setTypeface(fontType);
 
 		poster = (ImageView) rootView
 				.findViewById(R.id.fragment_event_poster_poster);
+		
+		menu = (ImageView) rootView.findViewById(R.id.btn_menu);
+		menu.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				((MenuActivity) (MenuActivity.activityMain)).clfs.click();
+			}
+		});
 
 		Log.d("ORIENTATION",
 				((MenuActivity) (MenuActivity.activityMain))
@@ -89,6 +93,7 @@ public class EventListPosterFragment extends Fragment {
 	}
 
 	private void addPoster() {
+		boolean openMenu = ((MenuActivity) (MenuActivity.activityMain)).clfs.isOpened();
 		asyncTask.cancel(true);
 		title.setVisibility(View.GONE);
 		poster.setBackgroundDrawable(new BitmapDrawable(background));
@@ -98,8 +103,13 @@ public class EventListPosterFragment extends Fragment {
 		poster.setVisibility(View.VISIBLE);
 		((MenuActivity) (MenuActivity.activityMain)).mViewPager
 				.refreshDrawableState();
-
+		menu.bringToFront();
 		Log.d("POSTER", "ASYNC TASK STATUS - " + asyncTask.isCancelled());
+		
+		if(openMenu){
+			((MenuActivity) (MenuActivity.activityMain)).clfs.close();
+			((MenuActivity) (MenuActivity.activityMain)).clfs.click();
+		}
 	}
 
 	private class LongOperation extends AsyncTask<String, Void, String> {

@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/default_NAPWr"
+    android:background="@color/background_gray"
     android:orientation="vertical" >
 
     <include
@@ -46,18 +46,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
                 android:text="Ustaw swój wydział"
+                android:textColor="@color/text_white"
                 android:textSize="@dimen/default_text_medium" />
 
             <Spinner
                 android:id="@+id/settings_facultity"
-                android:layout_width="match_parent"
+                android:layout_width="200sp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30sp" />
+				android:layout_gravity="right"
+                style="@android:style/ButtonBar"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
+                android:textColor="@color/text_white"
                 android:text="Oszczędzanie transferu danych"
                 android:textSize="@dimen/default_text_medium" 
                 android:visibility="gone"
@@ -68,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
                 android:text="Przycisk Zamknij"
+                android:textColor="@color/text_white"
                 android:textSize="@dimen/default_text_medium" />
 
             <RadioGroup
@@ -80,6 +84,7 @@
                     android:id="@+id/radio0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_white"
                     android:text="Wyłącza aplikację" />
 
                 <RadioButton
@@ -87,6 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
+                    android:textColor="@color/text_white"
                     android:text="Minimalizuje" />
             </RadioGroup>
 
@@ -95,6 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
                 android:text="Powiadomienia"
+                android:textColor="@color/text_white"
                 android:textSize="@dimen/default_text_medium" 
                 android:visibility="gone"/>
 
@@ -103,6 +110,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
                 android:layout_marginLeft="30sp"
+                android:textColor="@color/text_white"
                 android:text="Włącz powiadomienia" 
                 android:visibility="gone"/>
 
@@ -111,6 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
                 android:text="Odświeżanie wydarzeń"
+                android:textColor="@color/text_white"
                 android:textSize="@dimen/default_text_medium" />
 
             <RadioGroup
@@ -124,18 +133,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
+                    android:textColor="@color/text_white"
                     android:text="Podczas uruchamiania" />
 
                 <RadioButton
                     android:id="@+id/radio3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_white"
                     android:text="Co godzinę" />
 
                 <RadioButton
                     android:id="@+id/radio4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_white"
                     android:text="Co 12 godzin" />
 
             </RadioGroup>
@@ -146,7 +158,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:text="Zapisz ustawienie" 
-                android:layout_marginBottom="10sp"/>
+                android:layout_marginBottom="10sp"
+                style="@android:style/ButtonBar"/>
 
         </LinearLayout>
     </ScrollView>

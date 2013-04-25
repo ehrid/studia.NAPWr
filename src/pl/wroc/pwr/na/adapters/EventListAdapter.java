@@ -3,8 +3,10 @@ package pl.wroc.pwr.na.adapters;
 import java.util.List;
 
 import pl.wroc.pwr.na.R;
+import pl.wroc.pwr.na.activities.MenuActivity;
 import pl.wroc.pwr.na.objects.EventObject;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +55,8 @@ public class EventListAdapter extends ArrayAdapter<EventObject> {
 
 		// Assign the appropriate data from our alert object above
 		name.setText(event.name);
+		Typeface fontType = ((MenuActivity) (MenuActivity.activityMain)).getTypeFace();
+		name.setTypeface(fontType);
 
 		// the same for content:
 		// Get the text boxes from the listitem.xml file

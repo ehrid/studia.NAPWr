@@ -3,6 +3,7 @@
     <!-- Default Colors -->
     <color name="default_background">#FFFFFF</color>
     <color name="default_NAPWr">#1f870f</color>
+    <color name="default_menu">#555555</color>
     <!-- #27a7df -->
 
     <!-- Splash Screen Loading -->

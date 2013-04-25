@@ -4,18 +4,18 @@
     android:background="@drawable/poster_background">
     
     <ImageView
-        android:id="@+id/fragment_event_poster_poster"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scaleType="fitXY"/>
-    
-    <ImageView
-        android:id="@+id/fragment_event_poster_menu"
+        android:id="@+id/btn_menu"
         android:layout_marginLeft="8sp"
         android:layout_marginTop="8sp"
         android:layout_width="50sp"
         android:layout_height="50sp"
         android:src="@drawable/btn_menu" />
+    
+    <ImageView
+        android:id="@+id/fragment_event_poster_poster"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"/>
 
     <TextView
         android:id="@+id/fragment_event_poster_title"

@@ -26,59 +26,43 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" 
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_margin_small"
                 android:layout_marginTop="@dimen/default_margin_small"
-                android:layout_marginBottom="@dimen/default_margin_small">
+                android:orientation="vertical" >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/event_fromDate"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:text="@string/event_from"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/default_text_small" />
 
-                    <TextView
-                        android:id="@+id/event_fromDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:text="@string/event_from"
-                        android:textColor="@color/text_black"
-                        android:textSize="@dimen/default_text_small" />
-
-                    <TextView
-                        android:id="@+id/event_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:text="@string/event_address"
-                        android:textColor="@color/text_black"
-                        android:textSize="@dimen/default_text_small" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/event_toDate"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:text="@string/event_to"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/default_text_small" />
 
-                    <TextView
-                        android:id="@+id/event_toDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:text="@string/event_to"
-                        android:textColor="@color/text_black"
-                        android:textSize="@dimen/default_text_small" />
+                <TextView
+                    android:id="@+id/event_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/event_address"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/default_text_small" />
 
-                    <TextView
-                        android:id="@+id/event_organizer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:text="@string/event_organier"
-                        android:textColor="@color/text_black"
-                        android:textSize="@dimen/default_text_small" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/event_organizer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/event_organier"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/default_text_small" />
+
             </LinearLayout>
 
             <TextView

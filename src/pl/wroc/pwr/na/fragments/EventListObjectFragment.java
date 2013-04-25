@@ -12,6 +12,7 @@ import pl.wroc.pwr.na.tools.RSSParser;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,8 +20,8 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
@@ -40,11 +41,11 @@ public class EventListObjectFragment extends Fragment {
 
 	private TextView title;
 	private ImageView miniature;
-	private ImageView menu;
 	private ListView eventListView;
 	private EventListAdapter adapter;
 	private ProgressBar loading;
 	private Context context;
+	private ImageView menu;
 	ArrayList<EventObject> eventList;
 	Bundle args;
 
@@ -65,6 +66,9 @@ public class EventListObjectFragment extends Fragment {
 
 		title = (TextView) rootView.findViewById(R.id.eventlist_title);
 		title.setText(args.getString(LIST_TITLE));
+		
+		Typeface fontType = ((MenuActivity) (MenuActivity.activityMain)).getTypeFace();
+		title.setTypeface(fontType);
 
 		type = args.getInt(LIST_TYPE);
 		url = args.getString(LIST_URL);
@@ -75,17 +79,17 @@ public class EventListObjectFragment extends Fragment {
 		} else {
 			miniature.setVisibility(View.GONE);
 		}
-
-		loading = (ProgressBar) rootView.findViewById(R.id.event_list_loading);
-
-		menu = (ImageView) rootView.findViewById(R.id.eventlist_menu);
+		
+		menu = (ImageView) rootView.findViewById(R.id.btn_menu);
 		menu.setOnClickListener(new OnClickListener() {
-
+			
 			@Override
 			public void onClick(View v) {
-				((MenuActivity) (MenuActivity.activityMain)).openMenu();
+				((MenuActivity) (MenuActivity.activityMain)).clfs.click();
 			}
 		});
+
+		loading = (ProgressBar) rootView.findViewById(R.id.event_list_loading);
 
 		eventListView = (ListView) rootView
 				.findViewById(R.id.event_list_events);
@@ -112,7 +116,7 @@ public class EventListObjectFragment extends Fragment {
 				.get(args.getString(LIST_TITLE));
 
 		if (eventList != null) {
-			adapter = new EventListAdapter(context, R.layout.item_event_list_2,
+			adapter = new EventListAdapter(context, R.layout.item_event_list,
 					eventList,
 					((MenuActivity) (MenuActivity.activityMain))
 							.getApplicationContext());

@@ -160,15 +160,15 @@ public class PlanParser {
 			((MenuActivity) (MenuActivity.activityMain)).savePlanObject(planList);
 		}
 
-		if (planList.size() == 0) {
-			return null;
-		} else {
-			return preparePlan(planList);
-		}
+		return planList;
 	}
 
 	@SuppressWarnings("unchecked")
 	public ArrayList<PlanObject> preparePlan(ArrayList<PlanObject> planList) {
+		
+		if(planList == null){
+			planList = new ArrayList<PlanObject>();
+		}
 
 		// inicjalizowanie
 		Object[] dayOfWeek = new Object[7];

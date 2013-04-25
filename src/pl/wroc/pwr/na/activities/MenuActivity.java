@@ -9,6 +9,7 @@ import pl.wroc.pwr.na.adapters.MenuCollectionPagerAdapter;
 import pl.wroc.pwr.na.objects.EventObject;
 import pl.wroc.pwr.na.objects.ListItemObject;
 import pl.wroc.pwr.na.objects.PlanObject;
+import pl.wroc.pwr.na.tools.MyHorizontalScrollView;
 import pl.wroc.pwr.na.tools.PlanParser;
 import pl.wroc.pwr.na.tools.PosterController;
 import android.annotation.SuppressLint;
@@ -16,6 +17,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -25,20 +27,19 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MenuActivity extends FragmentActivity implements OnClickListener {
 
 	public ArrayList<EventObject> current = new ArrayList<EventObject>();
-
 	public ArrayList<ListItemObject> listItems;
-
-	private boolean openMenu = true;
 
 	MenuCollectionPagerAdapter mCollectionPagerAdapter;
 	public ViewPager mViewPager;
@@ -47,12 +48,33 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 
 	public NAPWrApplication app;
 
+	MyHorizontalScrollView scrollView;
+	public ClickListenerForScrolling clfs;
+	View menu;
+	View application;
+
 	public static MenuActivity activityMain;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
 		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+		LayoutInflater inflater = LayoutInflater.from(this);
+		scrollView = (MyHorizontalScrollView) inflater.inflate(
+				R.layout.horz_scroll_with_list_menu, null);
+		setContentView(scrollView);
+
+		menu = inflater.inflate(R.layout.menu, null);
+		application = inflater.inflate(R.layout.activity_main, null);
+
+		clfs = new ClickListenerForScrolling(scrollView, menu);
+
+		final View[] children = new View[] { menu, application };
+
+		// Scroll to app (view[1]) when layout finished.
+		int scrollToViewIdx = 1;
+		scrollView.initViews(children, scrollToViewIdx,
+				new SizeCallbackForMenu(menu, getWidthOfScreen()));
 
 		app = (NAPWrApplication) getApplication();
 		activityMain = this;
@@ -69,34 +91,10 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 				getSupportFragmentManager(), listItems);
 
 		// Set up the ViewPager, attaching the adapter.
-		mViewPager = (ViewPager) findViewById(R.id.pager_menu);
+		mViewPager = (ViewPager) application.findViewById(R.id.pager_menu);
 		mViewPager.setAdapter(mCollectionPagerAdapter);
-
-		findViewById(R.id.left_menu).bringToFront();
-		if (!app.started) {
-			findViewById(R.id.left_menu).setVisibility(View.VISIBLE);
-			app.started = true;
-			openMenu = true;
-		} else {
-			openMenu = false;
-		}
 		setMenu();
 		showUserOptions();
-	}
-
-	public void openMenu() {
-		findViewById(R.id.left_menu).bringToFront();
-		if (openMenu) {
-			findViewById(R.id.left_menu).setVisibility(View.GONE);
-		} else {
-			findViewById(R.id.left_menu).setVisibility(View.VISIBLE);
-		}
-		openMenu = !openMenu;
-	}
-
-	public void closeMenu() {
-		findViewById(R.id.left_menu).setVisibility(View.GONE);
-		openMenu = false;
 	}
 
 	@Override
@@ -106,13 +104,11 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 
 	public boolean onKeyDown(int keyCode, android.view.KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_MENU) {
-			openMenu();
+			clfs.click();
 			return true;
 		}
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (openMenu) {
-				closeMenu();
-			} else {
+			if (!clfs.close()) {
 				if (mViewPager.getCurrentItem() == 0) {
 					closeApplication();
 				} else {
@@ -219,23 +215,29 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 			mViewPager.refreshDrawableState();
 		}
 	}
-
+	
+	public boolean isOffline(){
+		return !isNetworkAvailable();
+	}
+	
 	public ArrayList<PlanObject> getKalendarz() {
 		return app.kalendarz;
 	}
 
-	public void addPlanItem(ArrayList<PlanObject> value) {
-		app.kalendarz = value;
+	public void getPlan() {
+		PlanParser planParser = new PlanParser();
+		savePlanObject(planParser.getPlan(app));
+		preparePlan();
+	}
+	
+	public void preparePlan() {
+		PlanParser planParser = new PlanParser();
+		app.kalendarz = planParser.preparePlan(getPlanObject());
 		mViewPager.refreshDrawableState();
 	}
 
-	public void getPlan() {
-		PlanParser planParser = new PlanParser();
-		addPlanItem(planParser.getPlan(app));
-	}
-
 	public boolean haveToDownload(String key) {
-		if (app.offline) {
+		if (isOffline()) {
 			return false;
 		} else {
 			if (app.eventList != null) {
@@ -285,7 +287,7 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 	}
 
 	public boolean haveToDownloadBackground() {
-		return !app.offline && isWiFiAvailable();
+		return isWiFiAvailable();
 	}
 
 	public int getScreenOrientation() {
@@ -425,25 +427,53 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		startActivity(new Intent(this, MenuActivity.class));
 	}
 
-	private void setMenu() {
-		btn_juwenalia = (TextView) findViewById(R.id.menu_juwenalia);
-		btn_user = (TextView) findViewById(R.id.menu_user);
-		btn_today = (TextView) findViewById(R.id.menu_today);
-		btn_tomorrow = (TextView) findViewById(R.id.menu_tomorrow);
-		btn_it = (TextView) findViewById(R.id.menu_it);
-		btn_kultura = (TextView) findViewById(R.id.menu_kultura);
-		btn_sport = (TextView) findViewById(R.id.menu_sport);
-		btn_top10 = (TextView) findViewById(R.id.menu_top10);
-		btn_refesh = (TextView) findViewById(R.id.menu_refresh);
-		btn_settings = (TextView) findViewById(R.id.menu_settings);
-		btn_login = (TextView) findViewById(R.id.menu_login);
-		btn_about = (TextView) findViewById(R.id.menu_about);
-		btn_sponsor = (TextView) findViewById(R.id.menu_sponsor);
-		btn_exit = (TextView) findViewById(R.id.menu_exit);
+	public Typeface getTypeFace() {
+		return Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
+	}
 
-		btn_user_plan = (TextView) findViewById(R.id.menu_user_plan);
-		btn_user_favourities = (TextView) findViewById(R.id.menu_user_favourities);
-		btn_user_facultity = (TextView) findViewById(R.id.menu_user_facultity);
+	private void setFont() {
+		Typeface type = getTypeFace();
+
+		btn_juwenalia.setTypeface(type);
+		btn_user.setTypeface(type);
+		btn_today.setTypeface(type);
+		btn_tomorrow.setTypeface(type);
+		btn_it.setTypeface(type);
+		btn_kultura.setTypeface(type);
+		btn_sport.setTypeface(type);
+		btn_top10.setTypeface(type);
+		btn_refesh.setTypeface(type);
+		btn_settings.setTypeface(type);
+		btn_login.setTypeface(type);
+		btn_about.setTypeface(type);
+		btn_sponsor.setTypeface(type);
+		btn_exit.setTypeface(type);
+		btn_user_plan.setTypeface(type);
+		btn_user_favourities.setTypeface(type);
+		btn_user_facultity.setTypeface(type);
+	}
+
+	private void setMenu() {
+		btn_juwenalia = (TextView) menu.findViewById(R.id.menu_juwenalia);
+		btn_user = (TextView) menu.findViewById(R.id.menu_user);
+		btn_today = (TextView) menu.findViewById(R.id.menu_today);
+		btn_tomorrow = (TextView) menu.findViewById(R.id.menu_tomorrow);
+		btn_it = (TextView) menu.findViewById(R.id.menu_it);
+		btn_kultura = (TextView) menu.findViewById(R.id.menu_kultura);
+		btn_sport = (TextView) menu.findViewById(R.id.menu_sport);
+		btn_top10 = (TextView) menu.findViewById(R.id.menu_top10);
+		btn_refesh = (TextView) menu.findViewById(R.id.menu_refresh);
+		btn_settings = (TextView) menu.findViewById(R.id.menu_settings);
+		btn_login = (TextView) menu.findViewById(R.id.menu_login);
+		btn_about = (TextView) menu.findViewById(R.id.menu_about);
+		btn_sponsor = (TextView) menu.findViewById(R.id.menu_sponsor);
+		btn_exit = (TextView) menu.findViewById(R.id.menu_exit);
+
+		btn_user_plan = (TextView) menu.findViewById(R.id.menu_user_plan);
+		btn_user_favourities = (TextView) menu
+				.findViewById(R.id.menu_user_favourities);
+		btn_user_facultity = (TextView) menu
+				.findViewById(R.id.menu_user_facultity);
 
 		if (ifLogedin()) {
 			btn_user.setText(app.userName);
@@ -471,20 +501,15 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 
 		if (!ifLogedin()) {
 			btn_user.setVisibility(View.GONE);
-			findViewById(R.id.stroke_user).setVisibility(View.GONE);
 		}
 		btn_user_plan.setVisibility(View.GONE);
 		btn_user_favourities.setVisibility(View.GONE);
 		btn_user_facultity.setVisibility(View.GONE);
-
 		btn_refesh.setVisibility(View.GONE);
-		findViewById(R.id.stroke_refresh).setVisibility(View.GONE);
-
 		btn_about.setVisibility(View.GONE);
-		findViewById(R.id.stroke_about).setVisibility(View.GONE);
-
 		btn_sponsor.setVisibility(View.GONE);
-		findViewById(R.id.stroke_sponsor).setVisibility(View.GONE);
+
+		setFont();
 	}
 
 	public void showUserOptions() {
@@ -495,67 +520,116 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 			userOptionsOpen = !userOptionsOpen;
 		} else if (app.logedin) {
 			btn_user_plan.setVisibility(View.VISIBLE);
-			btn_user_favourities.setVisibility(View.VISIBLE);
+			btn_user_favourities.setVisibility(View.GONE);
 			btn_user_facultity.setVisibility(View.GONE);
 			userOptionsOpen = !userOptionsOpen;
 		}
+	}
+	
+	private void markMenuOption(TextView toMark){
+		btn_juwenalia.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.menu_left_gradient_button_gray));
+		btn_user.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.menu_left_gradient_button_gray));
+		btn_today.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.menu_left_gradient_button_gray));
+		btn_tomorrow.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.menu_left_gradient_button_gray));
+		btn_it.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.menu_left_gradient_button_gray));
+		btn_kultura.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.menu_left_gradient_button_gray));
+		btn_sport.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.menu_left_gradient_button_gray));
+		btn_top10.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.menu_left_gradient_button_gray));
+		btn_refesh.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.menu_left_gradient_button_gray));
+		btn_settings.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.menu_left_gradient_button_gray));
+		btn_login.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.menu_left_gradient_button_gray));
+		btn_about.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.menu_left_gradient_button_gray));
+		btn_sponsor.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.menu_left_gradient_button_gray));
+		btn_exit.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.menu_left_gradient_button_gray));
+
+		btn_user_plan.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.menu_left_gradient_button_gray_sub));
+		btn_user_favourities.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.menu_left_gradient_button_gray_sub));
+		btn_user_facultity.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.menu_left_gradient_button_gray_sub));
+		
+		toMark.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.menu_left_gradient_selected_green));
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.menu_juwenalia:
-			closeMenu();
+			clfs.close();
 			setItem(getResources().getString(R.string.menu_juwenalia));
+			markMenuOption(btn_juwenalia);
 			break;
 		case R.id.menu_user:
 			showUserOptions();
+			markMenuOption(btn_user);
 			break;
 		case R.id.menu_user_plan:
-			closeMenu();
+			clfs.close();
 			setItem(getResources().getString(R.string.menu_user_plan));
+			markMenuOption(btn_user_plan);
 			break;
 		case R.id.menu_user_favourities:
-			closeMenu();
+			clfs.close();
 			setItem(getResources().getString(R.string.menu_user_favourities));
+			markMenuOption(btn_user_favourities);
 			break;
 		case R.id.menu_user_facultity:
-			closeMenu();
+			clfs.close();
 			setItem(getResources().getString(R.string.menu_user_facultity));
+			markMenuOption(btn_user_facultity);
 			break;
 		case R.id.menu_today:
-			closeMenu();
+			clfs.close();
 			setItem(getResources().getString(R.string.menu_today));
+			markMenuOption(btn_today);
 			break;
 		case R.id.menu_tomorrow:
-			closeMenu();
+			clfs.close();
 			setItem(getResources().getString(R.string.menu_tomorrow));
+			markMenuOption(btn_tomorrow);
 			break;
 		case R.id.menu_it:
-			closeMenu();
+			clfs.close();
 			setItem(getResources().getString(R.string.menu_it));
+			markMenuOption(btn_it);
 			break;
 		case R.id.menu_kultura:
-			closeMenu();
+			clfs.close();
 			setItem(getResources().getString(R.string.menu_kultura));
+			markMenuOption(btn_kultura);
 			break;
 		case R.id.menu_sport:
-			closeMenu();
+			clfs.close();
 			setItem(getResources().getString(R.string.menu_sport));
+			markMenuOption(btn_sport);
 			break;
 		case R.id.menu_top10:
-			closeMenu();
+			clfs.close();
 			setItem(getResources().getString(R.string.menu_top10));
+			markMenuOption(btn_top10);
 			break;
 		case R.id.menu_refresh:
-			closeMenu();
 			break;
 		case R.id.menu_settings:
-			closeMenu();
 			startActivity(new Intent(this, SettingsActivity.class));
 			break;
 		case R.id.menu_login:
-			closeMenu();
 			if (ifLogedin()) {
 				logoff();
 				btn_login
@@ -568,13 +642,10 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 			}
 			break;
 		case R.id.menu_about:
-			closeMenu();
 			break;
 		case R.id.menu_sponsor:
-			closeMenu();
 			break;
 		case R.id.menu_exit:
-			closeMenu();
 			closeApplication();
 			break;
 		}
@@ -584,6 +655,111 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		for (int i = 0; i < listItems.size(); i++) {
 			if (listItems.get(i).title.equals(name)) {
 				mViewPager.setCurrentItem(i);
+			}
+		}
+	}
+
+	/**
+	 * Helper for examples with a HSV that should be scrolled by a menu View's
+	 * width.
+	 */
+	public static class ClickListenerForScrolling implements OnClickListener {
+		HorizontalScrollView scrollView;
+		View menu;
+		/**
+		 * Menu must NOT be out/shown to start with.
+		 */
+		boolean menuOut = false;
+
+		public ClickListenerForScrolling(HorizontalScrollView scrollView,
+				View menu) {
+			super();
+			this.scrollView = scrollView;
+			this.menu = menu;
+		}
+
+		@Override
+		public void onClick(View v) {
+			int menuWidth = menu.getMeasuredWidth();
+
+			// Ensure menu is visible
+			menu.setVisibility(View.VISIBLE);
+
+			if (!menuOut) {
+				// Scroll to 0 to reveal menu
+				int left = 0;
+				scrollView.smoothScrollTo(left, 0);
+			} else {
+				// Scroll to menuWidth so menu isn't on screen.
+				int left = menuWidth;
+				scrollView.smoothScrollTo(left, 0);
+			}
+			menuOut = !menuOut;
+		}
+
+		public void click() {
+			int menuWidth = menu.getMeasuredWidth();
+
+			// Ensure menu is visible
+			menu.setVisibility(View.VISIBLE);
+
+			if (!menuOut) {
+				// Scroll to 0 to reveal menu
+				int left = 0;
+				scrollView.smoothScrollTo(left, 0);
+			} else {
+				// Scroll to menuWidth so menu isn't on screen.
+				int left = menuWidth;
+				scrollView.smoothScrollTo(left, 0);
+			}
+			menuOut = !menuOut;
+		}
+
+		public boolean close() {
+			if (menuOut) {
+				int menuWidth = menu.getMeasuredWidth();
+				// Scroll to 0 to reveal menu
+				int left = menuWidth;
+				scrollView.smoothScrollTo(left, 0);
+				menuOut = false;
+				return true;
+			}
+			return false;
+		}
+		
+		public boolean isOpened(){
+			return menuOut;
+		}
+	}
+
+	/**
+	 * Helper that remembers the width of the 'slide' button, so that the
+	 * 'slide' button remains in view, even when the menu is showing.
+	 */
+	static class SizeCallbackForMenu implements
+			pl.wroc.pwr.na.tools.MyHorizontalScrollView.SizeCallback {
+		int btnWidth;
+		View menu;
+		int screenSize;
+
+		public SizeCallbackForMenu(View menu, int screenSize) {
+			super();
+			this.menu = menu;
+			this.screenSize = screenSize;
+		}
+
+		@Override
+		public void onGlobalLayout() {
+			btnWidth = screenSize - menu.getMeasuredWidth();
+		}
+
+		@Override
+		public void getViewSize(int idx, int w, int h, int[] dims) {
+			dims[0] = w;
+			dims[1] = h;
+			final int menuIdx = 0;
+			if (idx == menuIdx) {
+				dims[0] = w - btnWidth;
 			}
 		}
 	}

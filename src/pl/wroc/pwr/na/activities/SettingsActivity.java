@@ -6,6 +6,7 @@ import java.util.List;
 import pl.wroc.pwr.na.NAPWrApplication;
 import pl.wroc.pwr.na.R;
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,10 +22,10 @@ public class SettingsActivity extends Activity implements OnClickListener {
 
 	private TextView title;
 	private ImageView miniature;
-	private ImageView menu;
 	NAPWrApplication app;
 
 	private TextView plan;
+	private ImageView menu;
 	private Spinner facultity;
 	private RadioGroup exit;
 	private RadioGroup refresh;
@@ -40,11 +41,14 @@ public class SettingsActivity extends Activity implements OnClickListener {
 
 		title = (TextView) findViewById(R.id.eventlist_title);
 		title.setText("Ustawienia");
+		
+		Typeface type = Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"); 
+		title.setTypeface(type);
 
 		miniature = (ImageView) findViewById(R.id.eventlist_miniature);
 		miniature.setImageResource(R.drawable.miniature_settings);
-
-		menu = (ImageView) findViewById(R.id.eventlist_menu);
+		
+		menu = (ImageView) findViewById(R.id.btn_menu);
 		menu.setVisibility(View.GONE);
 
 		plan = (TextView) findViewById(R.id.settings_plan);
