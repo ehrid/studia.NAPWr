@@ -2,6 +2,7 @@ package pl.wroc.pwr.na.fragments;
 
 import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.activities.MenuActivity;
+import pl.wroc.pwr.na.activities.MenuActivity.ClickListenerForScrolling;
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
@@ -10,7 +11,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,95 +21,84 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class EventListPosterFragment extends Fragment {
+	/***/
 	public static final String LIST_TITLE = "listName";
+
+	/***/
 	public static final String LIST_URL = "url";
 
-	Bitmap background;
-	String url;
-
+	private MenuActivity menuActivity = (MenuActivity) MenuActivity.activityMain;
+	private Bitmap background;
+	private String url;
 	private ImageView poster;
-	private TextView title;
-	private View rootView;
-	private ImageView menu;
-
-	Bundle args;
-	LongOperation asyncTask;
+	private TextView posterTitle;
+	private View _rootView;
+	private ImageView menuButton;
+	private LongOperation _asyncTask;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		// The last two arguments ensure LayoutParams are inflated
-		// properly.
-		final View rootView = inflater.inflate(R.layout.fragment_event_poster,
-				container, false);
-
-		this.rootView = rootView;
-
-		args = getArguments();
-		url = args.getString(LIST_URL);
-
-		title = (TextView) rootView
-				.findViewById(R.id.fragment_event_poster_title);
-		title.setText(args.getString(LIST_TITLE));
-		
-		Typeface fontType = ((MenuActivity) (MenuActivity.activityMain)).getTypeFace();
-		title.setTypeface(fontType);
-
-		poster = (ImageView) rootView
-				.findViewById(R.id.fragment_event_poster_poster);
-		
-		menu = (ImageView) rootView.findViewById(R.id.btn_menu);
-		menu.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				((MenuActivity) (MenuActivity.activityMain)).clfs.click();
-			}
-		});
-
-		Log.d("ORIENTATION",
-				((MenuActivity) (MenuActivity.activityMain))
-						.getScreenOrientation() + "");
-		if (((MenuActivity) (MenuActivity.activityMain)).getScreenOrientation() == 1) {
-			url += "_portrait";
-		} else {
-			url += "_landscape";
-		}
-
-		Log.d("POSTER", "STARTING ASYNC TASK");
-		asyncTask = new LongOperation();
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		_rootView = getRootView(inflater, container);
+		setUrl();
+		setPosterTitle();
+		setPosterTitelFont();
+		setPoster();
+		setMenuButton();
+		setUrlSufix();
 		startMyTask();
 
-		return rootView;
+		return _rootView;
+	}
+
+	private View getRootView(LayoutInflater inflater, ViewGroup container) {
+		return inflater.inflate(R.layout.fragment_event_poster, container, false);
+	}
+
+	private void setUrl() {
+		Bundle args = getArguments();
+		url = args.getString(LIST_URL);
+	}
+
+	private void setPosterTitle() {
+		Bundle args = getArguments();
+		posterTitle = (TextView) _rootView.findViewById(R.id.fragment_event_poster_title);
+		posterTitle.setText(args.getString(LIST_TITLE));
+	}
+
+	private void setPosterTitelFont() {
+		Typeface fontType = menuActivity.getTypeFace();
+		posterTitle.setTypeface(fontType);
+	}
+
+	private void setPoster() {
+		poster = (ImageView) _rootView.findViewById(R.id.fragment_event_poster_poster);
+	}
+
+	private void setMenuButton() {
+		menuButton = (ImageView) _rootView.findViewById(R.id.btn_menu);
+		menuButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				menuActivity.menuSlider.click();
+			}
+		});
+	}
+
+	private void setUrlSufix() {
+		if (menuActivity.getScreenOrientation() == 1)
+			url += "_portrait";
+		else
+			url += "_landscape";
 	}
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	// API 11
 	void startMyTask() {
+		_asyncTask = new LongOperation();
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-			asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			_asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		else
-			asyncTask.execute();
-	}
-
-	private void addPoster() {
-		boolean openMenu = ((MenuActivity) (MenuActivity.activityMain)).clfs.isOpened();
-		asyncTask.cancel(true);
-		title.setVisibility(View.GONE);
-		poster.setBackgroundDrawable(new BitmapDrawable(background));
-		Animation myFadeInAnimation = AnimationUtils.loadAnimation(
-				rootView.getContext(), R.anim.fadein);
-		poster.startAnimation(myFadeInAnimation);
-		poster.setVisibility(View.VISIBLE);
-		((MenuActivity) (MenuActivity.activityMain)).mViewPager
-				.refreshDrawableState();
-		menu.bringToFront();
-		Log.d("POSTER", "ASYNC TASK STATUS - " + asyncTask.isCancelled());
-		
-		if(openMenu){
-			((MenuActivity) (MenuActivity.activityMain)).clfs.close();
-			((MenuActivity) (MenuActivity.activityMain)).clfs.click();
-		}
+			_asyncTask.execute();
 	}
 
 	private class LongOperation extends AsyncTask<String, Void, String> {
@@ -118,17 +107,11 @@ public class EventListPosterFragment extends Fragment {
 		@Override
 		protected String doInBackground(String... params) {
 			while (running) {
-				Log.d("POSTER", "ENTERED BACKGROUND - ASYNC TASK");
-				background = ((MenuActivity) (MenuActivity.activityMain))
-						.getBitmapFromUIS(url);
+				background = menuActivity.getBitmapFromUIS(url);
 
-				Log.d("TLO", (background != null) + "/" + url);
-				if (background == null
-						&& ((MenuActivity) (MenuActivity.activityMain))
-								.haveToDownloadBackground()) {
-					background = ((MenuActivity) (MenuActivity.activityMain))
-							.saveBitmapToUIS(url);
-				}
+				if (background == null && menuActivity.haveToDownloadBackground())
+					background = menuActivity.saveBitmapToUIS(url);
+
 				running = false;
 				if (isCancelled())
 					break;
@@ -139,17 +122,48 @@ public class EventListPosterFragment extends Fragment {
 
 		@Override
 		protected void onPostExecute(String result) {
-			if (background != null) {
+			if (background != null)
 				addPoster();
-			}
 		}
+	}
 
-		@Override
-		protected void onPreExecute() {
-		}
+	private void addPoster() {
+		cancelAsynchPosterDownlaodTask();
+		resetPoster();
+		animatePosterIn();
+		refreshStateOFView();
+		bringMenuButtonToFront();
+		closeSlider();
+	}
 
-		@Override
-		protected void onProgressUpdate(Void... values) {
+	private void cancelAsynchPosterDownlaodTask() {
+		_asyncTask.cancel(true);
+	}
+
+	private void resetPoster() {
+		posterTitle.setVisibility(View.GONE);
+		poster.setBackgroundDrawable(new BitmapDrawable(background));
+	}
+
+	private void animatePosterIn() {
+		Animation myFadeInAnimation = AnimationUtils.loadAnimation(_rootView.getContext(), R.anim.fadein);
+		poster.startAnimation(myFadeInAnimation);
+		poster.setVisibility(View.VISIBLE);
+	}
+
+	private void refreshStateOFView() {
+		menuActivity.mViewPager.refreshDrawableState();
+	}
+
+	private void bringMenuButtonToFront() {
+		menuButton.bringToFront();
+	}
+
+	private void closeSlider() {
+		ClickListenerForScrolling menuSlider = menuActivity.menuSlider;
+		if (menuSlider.isOpened()) {
+			menuSlider.close();
+			menuSlider.click();
 		}
 	}
 }

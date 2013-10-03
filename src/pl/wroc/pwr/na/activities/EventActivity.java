@@ -40,8 +40,8 @@ public class EventActivity extends FragmentActivity {
     public boolean onKeyDown(int keyCode, android.view.KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_MENU) {
 			finish();
-			((MenuActivity) (MenuActivity.activityMain)).clfs.close();
-			((MenuActivity) (MenuActivity.activityMain)).clfs.click();
+			((MenuActivity) (MenuActivity.activityMain)).menuSlider.close();
+			((MenuActivity) (MenuActivity.activityMain)).menuSlider.click();
 			return true;
 		} else {
 			return super.onKeyDown(keyCode, event);

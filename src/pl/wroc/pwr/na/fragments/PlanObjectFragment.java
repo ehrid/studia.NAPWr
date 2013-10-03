@@ -79,7 +79,7 @@ public class PlanObjectFragment extends Fragment {
 		menuButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				menuActivity.clfs.click();
+				menuActivity.menuSlider.click();
 			}
 		});
 	}
@@ -134,10 +134,6 @@ public class PlanObjectFragment extends Fragment {
 		@Override
 		protected void onPreExecute() {
 			showLoadingView();
-		}
-
-		@Override
-		protected void onProgressUpdate(Void... values) {
 		}
 	}
 

@@ -85,7 +85,7 @@ public class EventListObjectFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				((MenuActivity) (MenuActivity.activityMain)).clfs.click();
+				((MenuActivity) (MenuActivity.activityMain)).menuSlider.click();
 			}
 		});
 

@@ -49,7 +49,7 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 	public NAPWrApplication app;
 
 	MyHorizontalScrollView scrollView;
-	public ClickListenerForScrolling clfs;
+	public ClickListenerForScrolling menuSlider;
 	View menu;
 	View application;
 
@@ -67,7 +67,7 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		menu = inflater.inflate(R.layout.menu, null);
 		application = inflater.inflate(R.layout.activity_main, null);
 
-		clfs = new ClickListenerForScrolling(scrollView, menu);
+		menuSlider = new ClickListenerForScrolling(scrollView, menu);
 
 		final View[] children = new View[] { menu, application };
 
@@ -104,11 +104,11 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 
 	public boolean onKeyDown(int keyCode, android.view.KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_MENU) {
-			clfs.click();
+			menuSlider.click();
 			return true;
 		}
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (!clfs.close()) {
+			if (!menuSlider.close()) {
 				if (mViewPager.getCurrentItem() == 0) {
 					closeApplication();
 				} else {
@@ -563,47 +563,47 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 			markMenuOption(btn_user);
 			break;
 		case R.id.menu_user_plan:
-			clfs.close();
+			menuSlider.close();
 			setItem(getResources().getString(R.string.menu_user_plan));
 			markMenuOption(btn_user_plan);
 			break;
 		case R.id.menu_user_favourities:
-			clfs.close();
+			menuSlider.close();
 			setItem(getResources().getString(R.string.menu_user_favourities));
 			markMenuOption(btn_user_favourities);
 			break;
 		case R.id.menu_user_facultity:
-			clfs.close();
+			menuSlider.close();
 			setItem(getResources().getString(R.string.menu_user_facultity));
 			markMenuOption(btn_user_facultity);
 			break;
 		case R.id.menu_today:
-			clfs.close();
+			menuSlider.close();
 			setItem(getResources().getString(R.string.menu_today));
 			markMenuOption(btn_today);
 			break;
 		case R.id.menu_tomorrow:
-			clfs.close();
+			menuSlider.close();
 			setItem(getResources().getString(R.string.menu_tomorrow));
 			markMenuOption(btn_tomorrow);
 			break;
 		case R.id.menu_it:
-			clfs.close();
+			menuSlider.close();
 			setItem(getResources().getString(R.string.menu_it));
 			markMenuOption(btn_it);
 			break;
 		case R.id.menu_kultura:
-			clfs.close();
+			menuSlider.close();
 			setItem(getResources().getString(R.string.menu_kultura));
 			markMenuOption(btn_kultura);
 			break;
 		case R.id.menu_sport:
-			clfs.close();
+			menuSlider.close();
 			setItem(getResources().getString(R.string.menu_sport));
 			markMenuOption(btn_sport);
 			break;
 		case R.id.menu_top10:
-			clfs.close();
+			menuSlider.close();
 			setItem(getResources().getString(R.string.menu_top10));
 			markMenuOption(btn_top10);
 			break;
