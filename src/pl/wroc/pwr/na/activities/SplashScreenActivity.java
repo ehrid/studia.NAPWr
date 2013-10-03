@@ -4,13 +4,11 @@ import pl.wroc.pwr.na.NAPWrApplication;
 import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.tools.JSONParser;
 import pl.wroc.pwr.na.tools.PlanParser;
-import pl.wroc.pwr.na.tools.PosterController;
 import pl.wroc.pwr.na.tools.RSSParser;
 import pl.wroc.pwr.na.tools.UseInternalStorage;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -62,7 +60,6 @@ public class SplashScreenActivity extends Activity {
 		} else {
 			downloadEvents();
 		}
-		saveJuwenalia();
 	}
 
 	private void goRobot() {
@@ -78,29 +75,6 @@ public class SplashScreenActivity extends Activity {
 			}
 
 		}, 1500);
-	}
-
-	private void saveJuwenalia() {
-		Log.d("APP", app.getFirstLoad() +"");
-		if (!app.getFirstLoad()) {
-			Handler handler = new Handler();
-			handler.postDelayed(new Runnable() {
-
-				public void run() {
-					PosterController pc = new PosterController();
-					pc.writePoster(BitmapFactory.decodeResource(getResources(),
-							R.drawable.juwenalia_portiat), getResources()
-							.getString(R.string.cover_juwenalia) + "_portrait",
-							getApplicationContext(), getWidthOfScreen(), 1);
-
-					pc.writePoster(BitmapFactory.decodeResource(getResources(),
-							R.drawable.juwenalia_landscape), getResources()
-							.getString(R.string.cover_juwenalia) + "_landscape",
-							getApplicationContext(), getWidthOfScreen(), 2);
-				}
-
-			}, 100);
-		}
 	}
 
 	private void downloadEvents() {

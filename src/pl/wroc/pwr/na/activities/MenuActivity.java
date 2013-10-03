@@ -215,11 +215,11 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 			mViewPager.refreshDrawableState();
 		}
 	}
-	
-	public boolean isOffline(){
+
+	public boolean isOffline() {
 		return !isNetworkAvailable();
 	}
-	
+
 	public ArrayList<PlanObject> getKalendarz() {
 		return app.kalendarz;
 	}
@@ -229,7 +229,7 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		savePlanObject(planParser.getPlan(app));
 		preparePlan();
 	}
-	
+
 	public void preparePlan() {
 		PlanParser planParser = new PlanParser();
 		app.kalendarz = planParser.preparePlan(getPlanObject());
@@ -357,23 +357,16 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		 * new ListItemObject(type, title, miniature)
 		 */
 		listItems = new ArrayList<ListItemObject>();
-		listItems.add(new ListItemObject(2, getResources().getString(
-				R.string.menu_juwenalia), 0, getResources().getString(
-				R.string.cover_juwenalia)));
-		listItems
-				.add(new ListItemObject(1, getResources().getString(
-						R.string.menu_juwenalia_sub), 0,
-						"http://www.napwr.pl/rss/czas/40320/kategorie/juwenalia/?type=mobile"));
 		if (ifLogedin()) {
 			listItems.add(new ListItemObject(2, getResources().getString(
 					R.string.menu_user_plan), 0, getResources().getString(
 					R.string.cover_user_plan)));
-			listItems.add(new ListItemObject(3, getResources().getString(
-					R.string.menu_user_plan_sub),
-					R.drawable.miniature_calendar, ""));
-			// listItems.add(new ListItemObject(0,
-			// getResources().getString(R.string.menu_user_favourities),R.drawable.miniature_favourites,
-			// ""));
+			// listItems.add(new ListItemObject(3, getResources().getString(
+			// R.string.menu_user_plan_sub),
+			// R.drawable.miniature_calendar, ""));
+			listItems.add(new ListItemObject(0, getResources().getString(
+					R.string.menu_user_favourities),
+					R.drawable.miniature_favourites, ""));
 		}
 		listItems.add(new ListItemObject(2, getResources().getString(
 				R.string.menu_today), 0, getResources().getString(
@@ -434,7 +427,6 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 	private void setFont() {
 		Typeface type = getTypeFace();
 
-		btn_juwenalia.setTypeface(type);
 		btn_user.setTypeface(type);
 		btn_today.setTypeface(type);
 		btn_tomorrow.setTypeface(type);
@@ -454,7 +446,6 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 	}
 
 	private void setMenu() {
-		btn_juwenalia = (TextView) menu.findViewById(R.id.menu_juwenalia);
 		btn_user = (TextView) menu.findViewById(R.id.menu_user);
 		btn_today = (TextView) menu.findViewById(R.id.menu_today);
 		btn_tomorrow = (TextView) menu.findViewById(R.id.menu_tomorrow);
@@ -480,7 +471,6 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 			btn_login.setText(getResources().getString(R.string.menu_logout));
 		}
 
-		btn_juwenalia.setOnClickListener(this);
 		btn_user.setOnClickListener(this);
 		btn_today.setOnClickListener(this);
 		btn_tomorrow.setOnClickListener(this);
@@ -525,10 +515,8 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 			userOptionsOpen = !userOptionsOpen;
 		}
 	}
-	
-	private void markMenuOption(TextView toMark){
-		btn_juwenalia.setBackgroundDrawable(getResources().getDrawable(
-				R.drawable.menu_left_gradient_button_gray));
+
+	private void markMenuOption(TextView toMark) {
 		btn_user.setBackgroundDrawable(getResources().getDrawable(
 				R.drawable.menu_left_gradient_button_gray));
 		btn_today.setBackgroundDrawable(getResources().getDrawable(
@@ -562,7 +550,7 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 				R.drawable.menu_left_gradient_button_gray_sub));
 		btn_user_facultity.setBackgroundDrawable(getResources().getDrawable(
 				R.drawable.menu_left_gradient_button_gray_sub));
-		
+
 		toMark.setBackgroundDrawable(getResources().getDrawable(
 				R.drawable.menu_left_gradient_selected_green));
 	}
@@ -570,11 +558,6 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.menu_juwenalia:
-			clfs.close();
-			setItem(getResources().getString(R.string.menu_juwenalia));
-			markMenuOption(btn_juwenalia);
-			break;
 		case R.id.menu_user:
 			showUserOptions();
 			markMenuOption(btn_user);
@@ -726,8 +709,8 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 			}
 			return false;
 		}
-		
-		public boolean isOpened(){
+
+		public boolean isOpened() {
 			return menuOut;
 		}
 	}

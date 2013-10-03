@@ -8,117 +8,130 @@
 package pl.wroc.pwr.na;
 
 public final class R {
+    public static final class anim {
+        public static final int fadein=0x7f040000;
+        public static final int push_left_in=0x7f040001;
+        public static final int push_left_out=0x7f040002;
+    }
     public static final class attr {
     }
     public static final class color {
-        public static final int background_black=0x7f04000c;
-        public static final int background_blue=0x7f04000f;
-        public static final int background_event_title=0x7f040014;
-        public static final int background_gray=0x7f04000d;
-        public static final int background_lightgray=0x7f04000e;
-        public static final int background_plan=0x7f040013;
-        public static final int background_today=0x7f040011;
-        public static final int background_tomorrow=0x7f040012;
-        public static final int background_top10=0x7f040010;
+        public static final int background_black=0x7f06000d;
+        public static final int background_blue=0x7f060011;
+        public static final int background_event_title=0x7f060016;
+        public static final int background_gray=0x7f06000e;
+        public static final int background_lightgray=0x7f06000f;
+        public static final int background_lightgray2=0x7f060010;
+        public static final int background_plan=0x7f060015;
+        public static final int background_today=0x7f060013;
+        public static final int background_tomorrow=0x7f060014;
+        public static final int background_top10=0x7f060012;
         /**  Backgrounds 
          */
-        public static final int background_white=0x7f04000b;
+        public static final int background_white=0x7f06000c;
         /**  Buttons 
          */
-        public static final int button_active=0x7f040005;
-        public static final int button_stroke=0x7f040007;
-        public static final int button_unactive=0x7f040006;
-        public static final int default_NAPWr=0x7f040001;
+        public static final int button_active=0x7f060006;
+        public static final int button_stroke=0x7f060008;
+        public static final int button_unactive=0x7f060007;
+        public static final int default_NAPWr=0x7f060001;
         /**  Default Colors 
          */
-        public static final int default_background=0x7f040000;
+        public static final int default_background=0x7f060000;
+        public static final int default_menu=0x7f060002;
         /**  Dialogs 
          */
-        public static final int dialog_background=0x7f040018;
-        public static final int dialog_stroke=0x7f040019;
-        public static final int dialog_title=0x7f04001a;
-        public static final int overlay_black=0x7f040016;
-        public static final int overlay_gray=0x7f040017;
+        public static final int dialog_background=0x7f06001a;
+        public static final int dialog_stroke=0x7f06001b;
+        public static final int dialog_title=0x7f06001c;
+        public static final int overlay_black=0x7f060018;
+        public static final int overlay_gray=0x7f060019;
         /**  Overlays 
          */
-        public static final int overlay_white=0x7f040015;
-        public static final int plan_cwiczenia_border=0x7f04001e;
-        public static final int plan_cwiczenia_inside=0x7f04001f;
-        public static final int plan_inne_border=0x7f040026;
-        public static final int plan_inne_inside=0x7f040027;
-        public static final int plan_laborki_border=0x7f040022;
-        public static final int plan_laborki_inside=0x7f040023;
-        public static final int plan_projekt_border=0x7f040024;
-        public static final int plan_projekt_inside=0x7f040025;
-        public static final int plan_seminarium_border=0x7f040020;
-        public static final int plan_seminarium_inside=0x7f040021;
+        public static final int overlay_white=0x7f060017;
+        public static final int plan_cwiczenia_border=0x7f060020;
+        public static final int plan_cwiczenia_inside=0x7f060021;
+        public static final int plan_inne_border=0x7f060028;
+        public static final int plan_inne_inside=0x7f060029;
+        public static final int plan_laborki_border=0x7f060024;
+        public static final int plan_laborki_inside=0x7f060025;
+        public static final int plan_projekt_border=0x7f060026;
+        public static final int plan_projekt_inside=0x7f060027;
+        public static final int plan_seminarium_border=0x7f060022;
+        public static final int plan_seminarium_inside=0x7f060023;
         /**  Plan 
          */
-        public static final int plan_wyklad_border=0x7f04001c;
-        public static final int plan_wyklad_inside=0x7f04001d;
+        public static final int plan_wyklad_border=0x7f06001e;
+        public static final int plan_wyklad_inside=0x7f06001f;
         /**  Shadows 
          */
-        public static final int shadow_blue=0x7f04001b;
-        /**  Splash Screen Loading 
+        public static final int shadow_blue=0x7f06001d;
+        /**  #27a7df 
+ Splash Screen Loading 
          */
-        public static final int splash_loading1=0x7f040002;
-        public static final int splash_loading2=0x7f040003;
-        public static final int splash_loading3=0x7f040004;
-        public static final int text_black=0x7f040009;
-        public static final int text_gray=0x7f04000a;
+        public static final int splash_loading1=0x7f060003;
+        public static final int splash_loading2=0x7f060004;
+        public static final int splash_loading3=0x7f060005;
+        public static final int text_black=0x7f06000a;
+        public static final int text_gray=0x7f06000b;
         /**  Text colors 
          */
-        public static final int text_white=0x7f040008;
+        public static final int text_white=0x7f060009;
     }
     public static final class dimen {
-        public static final int btn_default_margin=0x7f050014;
+        public static final int btn_default_margin=0x7f070015;
         /**  Buttons 
          */
-        public static final int btn_default_text_size=0x7f050013;
-        public static final int default_margin=0x7f050000;
-        public static final int default_margin_small=0x7f050001;
-        public static final int default_text=0x7f050002;
-        public static final int default_text_small=0x7f050003;
-        public static final int dialog_margins=0x7f050010;
-        public static final int dialog_padding=0x7f05000f;
-        public static final int dialog_space_between_buttons=0x7f050012;
+        public static final int btn_default_text_size=0x7f070014;
+        public static final int connection_error_margin_bottom=0x7f07001f;
+        /**  connection_error 
+         */
+        public static final int connection_error_margin_robot=0x7f07001e;
+        public static final int default_margin=0x7f070000;
+        public static final int default_margin_small=0x7f070001;
+        public static final int default_text=0x7f070002;
+        public static final int default_text_medium=0x7f070003;
+        public static final int default_text_small=0x7f070004;
+        public static final int dialog_margins=0x7f070011;
+        public static final int dialog_padding=0x7f070010;
+        public static final int dialog_space_between_buttons=0x7f070013;
         /**  Dialogs 
          */
-        public static final int dialog_stroke=0x7f05000d;
-        public static final int dialog_title_size=0x7f050011;
-        public static final int dialog_width=0x7f05000e;
+        public static final int dialog_stroke=0x7f07000e;
+        public static final int dialog_title_size=0x7f070012;
+        public static final int dialog_width=0x7f07000f;
         /**  Events 
          */
-        public static final int event_button_poster=0x7f050015;
-        public static final int event_list_item_button_star_height=0x7f05000c;
-        public static final int event_list_item_button_star_width=0x7f05000b;
+        public static final int event_button_poster=0x7f070016;
+        public static final int event_list_item_button_star_height=0x7f07000d;
+        public static final int event_list_item_button_star_width=0x7f07000c;
         /**  Item Event List (wyswietlanie wydarzenia) 
          */
-        public static final int event_list_item_content_width=0x7f05000a;
-        public static final int event_poster_preview=0x7f050016;
-        public static final int event_view_dimension_a=0x7f050017;
+        public static final int event_list_item_content_width=0x7f07000b;
+        public static final int event_poster_preview=0x7f070017;
+        public static final int event_view_dimension_a=0x7f070018;
         /**  a = 2*b+c 
          */
-        public static final int event_view_dimension_b=0x7f050018;
-        public static final int event_view_dimension_c=0x7f050019;
-        public static final int event_view_dimension_d=0x7f05001a;
-        public static final int horizontal_button_margin=0x7f050005;
+        public static final int event_view_dimension_b=0x7f070019;
+        public static final int event_view_dimension_c=0x7f07001a;
+        public static final int event_view_dimension_d=0x7f07001b;
+        public static final int horizontal_button_margin=0x7f070006;
         /**  Horizontal 
          */
-        public static final int horizontal_button_size=0x7f050004;
-        public static final int margin_bot_horizontal=0x7f050008;
-        public static final int plan_corners=0x7f05001c;
+        public static final int horizontal_button_size=0x7f070005;
+        public static final int margin_bot_horizontal=0x7f070009;
+        public static final int plan_corners=0x7f07001d;
         /**  d = b+c 
  Plan 
          */
-        public static final int plan_padding=0x7f05001b;
+        public static final int plan_padding=0x7f07001c;
         /**  Simple items 
          */
-        public static final int stroke_size=0x7f050009;
-        public static final int vertical_button_margin=0x7f050007;
+        public static final int stroke_size=0x7f07000a;
+        public static final int vertical_button_margin=0x7f070008;
         /**  Vertical 
          */
-        public static final int vertical_button_size=0x7f050006;
+        public static final int vertical_button_size=0x7f070007;
     }
     public static final class drawable {
         public static final int arrow_date=0x7f020000;
@@ -149,180 +162,307 @@ public final class R {
         public static final int btn_main_top10_default=0x7f020019;
         public static final int btn_main_top10_focused=0x7f02001a;
         public static final int btn_main_top10_pressed=0x7f02001b;
-        public static final int dialog_body=0x7f02001c;
-        public static final int event_border=0x7f02001d;
-        public static final int ic_action_search=0x7f02001e;
-        public static final int ic_launcher=0x7f02001f;
-        public static final int img_tab=0x7f020020;
-        public static final int like_star_off=0x7f020021;
-        public static final int like_star_on=0x7f020022;
-        public static final int liked_star=0x7f020023;
-        public static final int loading_off=0x7f020024;
-        public static final int loading_on=0x7f020025;
-        public static final int logo_splashscreen=0x7f020026;
-        public static final int menu_exit=0x7f020027;
-        public static final int menu_refresh=0x7f020028;
-        public static final int napwr_logo=0x7f020029;
-        public static final int plan_cwiczenia=0x7f02002a;
-        public static final int plan_inne=0x7f02002b;
-        public static final int plan_laborki=0x7f02002c;
-        public static final int plan_projekt=0x7f02002d;
-        public static final int plan_seminarium=0x7f02002e;
-        public static final int plan_wyklad=0x7f02002f;
-        public static final int unliked_star=0x7f020030;
+        public static final int btn_menu=0x7f02001c;
+        public static final int dialog_body=0x7f02001d;
+        public static final int drop_shadow=0x7f02001e;
+        public static final int event_border=0x7f02001f;
+        public static final int event_lit_item_body=0x7f020020;
+        public static final int header_top_blue=0x7f020021;
+        public static final int header_top_green=0x7f020022;
+        public static final int ic_action_search=0x7f020023;
+        public static final int ic_launcher=0x7f020024;
+        public static final int img_tab=0x7f020025;
+        public static final int like_star_off=0x7f020026;
+        public static final int like_star_on=0x7f020027;
+        public static final int liked_star=0x7f020028;
+        public static final int loading_off=0x7f020029;
+        public static final int loading_on=0x7f02002a;
+        public static final int logo_splashscreen=0x7f02002b;
+        public static final int menu_exit=0x7f02002c;
+        public static final int menu_left_gradient_button_gray=0x7f02002d;
+        public static final int menu_left_gradient_button_gray_sub=0x7f02002e;
+        public static final int menu_left_gradient_selected_blue=0x7f02002f;
+        public static final int menu_left_gradient_selected_green=0x7f020030;
+        public static final int menu_refresh=0x7f020031;
+        public static final int miniature_calendar=0x7f020032;
+        public static final int miniature_category_down=0x7f020033;
+        public static final int miniature_category_up=0x7f020034;
+        public static final int miniature_close=0x7f020035;
+        public static final int miniature_favourites=0x7f020036;
+        public static final int miniature_login=0x7f020037;
+        public static final int miniature_settings=0x7f020038;
+        public static final int miniature_today=0x7f020039;
+        public static final int miniature_tommorow=0x7f02003a;
+        public static final int miniature_top10=0x7f02003b;
+        public static final int napwr_logo=0x7f02003c;
+        public static final int plan_cwiczenia=0x7f02003d;
+        public static final int plan_inne=0x7f02003e;
+        public static final int plan_laborki=0x7f02003f;
+        public static final int plan_projekt=0x7f020040;
+        public static final int plan_seminarium=0x7f020041;
+        public static final int plan_wyklad=0x7f020042;
+        public static final int poster_background=0x7f020043;
+        public static final int poster_background_napwr=0x7f020044;
+        public static final int robot=0x7f020045;
+        public static final int unliked_star=0x7f020046;
     }
     public static final class id {
-        public static final int dialog_logout_no=0x7f080011;
-        public static final int dialog_logout_yes=0x7f080010;
-        public static final int dialog_poster_poster=0x7f080012;
-        public static final int dialog_title=0x7f08000f;
-        public static final int event_address=0x7f08001b;
-        public static final int event_content=0x7f08001d;
-        public static final int event_fromDate=0x7f080019;
-        public static final int event_likeit=0x7f080017;
-        public static final int event_likeit_sum=0x7f080018;
-        public static final int event_list_events=0x7f080020;
-        public static final int event_list_header=0x7f08001f;
-        public static final int event_list_item_content=0x7f080030;
-        public static final int event_list_item_date=0x7f080031;
-        public static final int event_list_item_name=0x7f08002e;
-        public static final int event_list_item_poster=0x7f08002f;
-        public static final int event_organizer=0x7f08001c;
-        public static final int event_poster=0x7f08001e;
-        public static final int event_title=0x7f080016;
-        public static final int event_toDate=0x7f08001a;
-        public static final int eventlist_title=0x7f08002d;
-        public static final int imageView1=0x7f080008;
-        public static final int layout_root=0x7f08000e;
-        public static final int linearLayout1=0x7f080015;
-        public static final int login_button_login=0x7f080005;
-        public static final int login_editText_login=0x7f080003;
-        public static final int login_editText_password=0x7f080004;
-        public static final int main_button_calendar=0x7f080029;
-        public static final int main_button_favourites=0x7f08002a;
-        public static final int main_button_login=0x7f08002b;
-        public static final int main_button_today=0x7f080027;
-        public static final int main_button_tomorrow=0x7f080028;
-        public static final int main_button_top10=0x7f080026;
-        public static final int main_layout_buttons=0x7f080025;
-        public static final int main_textView_login=0x7f08002c;
-        public static final int menu_exit=0x7f080014;
-        public static final int menu_refresh=0x7f080013;
-        public static final int no_events_popup=0x7f080021;
-        public static final int no_plan_popup=0x7f080022;
-        public static final int no_plan_popup_link=0x7f080023;
-        public static final int no_plan_popup_link2=0x7f080024;
-        public static final int pager=0x7f080000;
-        public static final int pager_menu=0x7f080006;
-        public static final int pager_title_strip=0x7f080001;
-        public static final int plan_date=0x7f080039;
-        public static final int plan_item=0x7f080032;
-        public static final int plan_place=0x7f080035;
-        public static final int plan_separator=0x7f080038;
-        public static final int plan_teacher=0x7f080036;
-        public static final int plan_time=0x7f080033;
-        public static final int plan_title=0x7f080034;
-        public static final int plan_type=0x7f080037;
-        public static final int popup_event_img=0x7f08003a;
-        public static final int splash_loading1=0x7f080009;
-        public static final int splash_loading2=0x7f08000a;
-        public static final int splash_loading3=0x7f08000b;
-        public static final int splash_loading4=0x7f08000c;
-        public static final int splash_loading5=0x7f08000d;
-        public static final int splashscreen=0x7f080007;
-        public static final int textView1=0x7f080002;
+        public static final int aplication_layout=0x7f0b0009;
+        public static final int back=0x7f0b0041;
+        public static final int btn_menu=0x7f0b0036;
+        public static final int connectionError_offline=0x7f0b0002;
+        public static final int connectionError_reconnect=0x7f0b0001;
+        public static final int connection_error_box=0x7f0b0000;
+        public static final int dialog_logout_no=0x7f0b0023;
+        public static final int dialog_logout_yes=0x7f0b0022;
+        public static final int dialog_poster_poster=0x7f0b0024;
+        public static final int dialog_title=0x7f0b0021;
+        public static final int event_address=0x7f0b002a;
+        public static final int event_content=0x7f0b002c;
+        public static final int event_fromDate=0x7f0b0028;
+        public static final int event_likeit=0x7f0b002e;
+        public static final int event_likeit_sum=0x7f0b002f;
+        public static final int event_list_events=0x7f0b0030;
+        public static final int event_list_header=0x7f0b000d;
+        public static final int event_list_item_content=0x7f0b0049;
+        public static final int event_list_item_date=0x7f0b0048;
+        public static final int event_list_item_name=0x7f0b0047;
+        public static final int event_list_loading=0x7f0b0035;
+        public static final int event_organizer=0x7f0b002b;
+        public static final int event_title=0x7f0b0027;
+        public static final int event_toDate=0x7f0b0029;
+        public static final int eventlist_miniature=0x7f0b0043;
+        public static final int eventlist_title=0x7f0b0044;
+        public static final int fragment_event_poster_poster=0x7f0b0037;
+        public static final int fragment_event_poster_title=0x7f0b0038;
+        public static final int imageView1=0x7f0b001a;
+        public static final int layout_root=0x7f0b0020;
+        public static final int left_menu=0x7f0b000a;
+        public static final int linearLayout1=0x7f0b002d;
+        public static final int listView1=0x7f0b000c;
+        public static final int login_button_login=0x7f0b0008;
+        public static final int login_editText_login=0x7f0b0006;
+        public static final int login_editText_password=0x7f0b0007;
+        public static final int main_button_calendar=0x7f0b003d;
+        public static final int main_button_favourites=0x7f0b003e;
+        public static final int main_button_login=0x7f0b003f;
+        public static final int main_button_today=0x7f0b003b;
+        public static final int main_button_tomorrow=0x7f0b003c;
+        public static final int main_button_top10=0x7f0b003a;
+        public static final int main_layout_buttons=0x7f0b0039;
+        public static final int main_textView_login=0x7f0b0040;
+        public static final int menu=0x7f0b0053;
+        public static final int menu_about=0x7f0b0061;
+        public static final int menu_exit=0x7f0b0026;
+        public static final int menu_it=0x7f0b005b;
+        public static final int menu_juwenalia=0x7f0b0054;
+        public static final int menu_kultura=0x7f0b005c;
+        public static final int menu_login=0x7f0b0060;
+        public static final int menu_refresh=0x7f0b0025;
+        public static final int menu_settings=0x7f0b005f;
+        public static final int menu_sponsor=0x7f0b0062;
+        public static final int menu_sport=0x7f0b005d;
+        public static final int menu_today=0x7f0b0059;
+        public static final int menu_tomorrow=0x7f0b005a;
+        public static final int menu_top10=0x7f0b005e;
+        public static final int menu_user=0x7f0b0055;
+        public static final int menu_user_facultity=0x7f0b0058;
+        public static final int menu_user_favourities=0x7f0b0057;
+        public static final int menu_user_plan=0x7f0b0056;
+        public static final int no_events_popup=0x7f0b0031;
+        public static final int no_plan_popup=0x7f0b0032;
+        public static final int no_plan_popup_link=0x7f0b0033;
+        public static final int no_plan_popup_link2=0x7f0b0034;
+        public static final int pager=0x7f0b0003;
+        public static final int pager_menu=0x7f0b000b;
+        public static final int pager_title_strip=0x7f0b0004;
+        public static final int plan_date=0x7f0b0051;
+        public static final int plan_item=0x7f0b004a;
+        public static final int plan_place=0x7f0b004d;
+        public static final int plan_separator=0x7f0b0050;
+        public static final int plan_teacher=0x7f0b004e;
+        public static final int plan_time=0x7f0b004b;
+        public static final int plan_title=0x7f0b004c;
+        public static final int plan_type=0x7f0b004f;
+        public static final int popup_event_img=0x7f0b0052;
+        public static final int radio0=0x7f0b0011;
+        public static final int radio1=0x7f0b0012;
+        public static final int radio2=0x7f0b0015;
+        public static final int radio3=0x7f0b0016;
+        public static final int radio4=0x7f0b0017;
+        public static final int settings_exit=0x7f0b0010;
+        public static final int settings_facultity=0x7f0b000f;
+        public static final int settings_notifications=0x7f0b0013;
+        public static final int settings_plan=0x7f0b000e;
+        public static final int settings_refresh=0x7f0b0014;
+        public static final int settings_save=0x7f0b0018;
+        public static final int share=0x7f0b0042;
+        public static final int splash_loading1=0x7f0b001b;
+        public static final int splash_loading2=0x7f0b001c;
+        public static final int splash_loading3=0x7f0b001d;
+        public static final int splash_loading4=0x7f0b001e;
+        public static final int splash_loading5=0x7f0b001f;
+        public static final int splashscreen=0x7f0b0019;
+        public static final int textView1=0x7f0b0005;
+        public static final int textView2=0x7f0b0045;
+        public static final int top=0x7f0b0046;
     }
     public static final class layout {
-        public static final int activity_event=0x7f030000;
-        public static final int activity_login=0x7f030001;
-        public static final int activity_main=0x7f030002;
-        public static final int activity_splash=0x7f030003;
-        public static final int dialog_basic=0x7f030004;
-        public static final int dialog_poster=0x7f030005;
-        public static final int dialog_settings=0x7f030006;
-        public static final int fragment_event=0x7f030007;
-        public static final int fragment_event_list=0x7f030008;
-        public static final int fragment_menu=0x7f030009;
-        public static final int header_event_list=0x7f03000a;
-        public static final int item_event_list=0x7f03000b;
-        public static final int item_plan=0x7f03000c;
-        public static final int item_popup_img=0x7f03000d;
+        public static final int activity_connection_error=0x7f030000;
+        public static final int activity_event=0x7f030001;
+        public static final int activity_login=0x7f030002;
+        public static final int activity_main=0x7f030003;
+        public static final int activity_plan=0x7f030004;
+        public static final int activity_settings=0x7f030005;
+        public static final int activity_splash=0x7f030006;
+        public static final int dialog_basic=0x7f030007;
+        public static final int dialog_poster=0x7f030008;
+        public static final int dialog_settings=0x7f030009;
+        public static final int fragment_event=0x7f03000a;
+        public static final int fragment_event_2=0x7f03000b;
+        public static final int fragment_event_list=0x7f03000c;
+        public static final int fragment_event_poster=0x7f03000d;
+        public static final int fragment_menu=0x7f03000e;
+        public static final int header_event=0x7f03000f;
+        public static final int header_event_list=0x7f030010;
+        public static final int header_plan=0x7f030011;
+        public static final int horz_scroll_with_list_menu=0x7f030012;
+        public static final int item_event_list=0x7f030013;
+        public static final int item_event_list_2=0x7f030014;
+        public static final int item_plan=0x7f030015;
+        public static final int item_popup_img=0x7f030016;
+        public static final int menu=0x7f030017;
+        public static final int spinner_item=0x7f030018;
+    }
+    public static final class menu {
+        public static final int main=0x7f0a0000;
     }
     public static final class string {
-        public static final int app_name=0x7f060000;
-        public static final int button_login2=0x7f06000d;
-        /**   Images Content Description 
+        public static final int app_name=0x7f080000;
+        public static final int button_login2=0x7f08000b;
+        public static final int connection_error_info=0x7f080035;
+        public static final int connection_error_offline=0x7f080034;
+        /**  connection_error 
          */
-        public static final int content_description_logo_napwr=0x7f06002d;
-        public static final int dialog_cancel=0x7f06002a;
-        public static final int dialog_close=0x7f060028;
-        public static final int dialog_close_text=0x7f06002c;
-        public static final int dialog_hide=0x7f060029;
-        public static final int dialog_no=0x7f060027;
-        public static final int dialog_text=0x7f06002b;
+        public static final int connection_error_reconnect=0x7f080033;
+        /**  Images Content Description 
+         */
+        public static final int content_description_logo_napwr=0x7f08002c;
+        public static final int cover_imprezy=0x7f08005e;
+        public static final int cover_informatyka=0x7f080052;
+        public static final int cover_juwenalia=0x7f080053;
+        public static final int cover_kalendarz=0x7f08005d;
+        public static final int cover_kariera=0x7f080060;
+        public static final int cover_kultura=0x7f080054;
+        public static final int cover_sport=0x7f080055;
+        public static final int cover_szkolenia=0x7f08005f;
+        public static final int cover_teki=0x7f080061;
+        public static final int cover_today=0x7f080056;
+        public static final int cover_tomorrow=0x7f080057;
+        public static final int cover_top10=0x7f080058;
+        public static final int cover_user=0x7f08005c;
+        public static final int cover_user_facultity=0x7f080059;
+        public static final int cover_user_favourities=0x7f08005a;
+        public static final int cover_user_plan=0x7f08005b;
+        public static final int dialog_cancel=0x7f080029;
+        public static final int dialog_close=0x7f080027;
+        public static final int dialog_close_text=0x7f08002b;
+        public static final int dialog_hide=0x7f080028;
+        public static final int dialog_no=0x7f080026;
+        public static final int dialog_text=0x7f08002a;
         /**  Dialogs 
          */
-        public static final int dialog_yes=0x7f060026;
-        public static final int event_address=0x7f060017;
-        public static final int event_button_share=0x7f06001c;
-        public static final int event_content=0x7f06001b;
-        public static final int event_date=0x7f060018;
-        public static final int event_from=0x7f060015;
+        public static final int dialog_yes=0x7f080025;
+        public static final int event_address=0x7f080015;
+        public static final int event_button_back=0x7f08001c;
+        public static final int event_button_share=0x7f08001a;
+        public static final int event_content=0x7f080019;
+        public static final int event_date=0x7f080016;
+        public static final int event_from=0x7f080013;
         /**  Event List 
          */
-        public static final int event_list_name=0x7f06001e;
-        public static final int event_list_no_events=0x7f06001f;
-        public static final int event_list_no_plan=0x7f060020;
-        public static final int event_list_no_plan2=0x7f060021;
-        public static final int event_list_no_plan3=0x7f060022;
-        public static final int event_list_no_plan4=0x7f060023;
-        public static final int event_list_no_plan5=0x7f060024;
-        public static final int event_list_no_plan6=0x7f060025;
-        public static final int event_organier=0x7f060019;
-        public static final int event_poster_description=0x7f06001d;
-        public static final int event_star=0x7f06001a;
+        public static final int event_list_name=0x7f08001d;
+        public static final int event_list_no_events=0x7f08001e;
+        public static final int event_list_no_plan=0x7f08001f;
+        public static final int event_list_no_plan2=0x7f080020;
+        public static final int event_list_no_plan3=0x7f080021;
+        public static final int event_list_no_plan4=0x7f080022;
+        public static final int event_list_no_plan5=0x7f080023;
+        public static final int event_list_no_plan6=0x7f080024;
+        public static final int event_organier=0x7f080017;
+        public static final int event_poster_description=0x7f08001b;
+        public static final int event_star=0x7f080018;
         /**  Event 
          */
-        public static final int event_title=0x7f060014;
-        public static final int event_to=0x7f060016;
-        public static final int label_callendar=0x7f060006;
-        public static final int label_favourites=0x7f060007;
-        public static final int label_login=0x7f06000b;
-        public static final int label_login2=0x7f060008;
-        public static final int label_logout=0x7f060009;
-        public static final int label_password=0x7f06000c;
-        public static final int label_today=0x7f060004;
-        public static final int label_tomorrow=0x7f060005;
-        /**  Main 
+        public static final int event_title=0x7f080012;
+        public static final int event_to=0x7f080014;
+        public static final int label_callendar=0x7f080004;
+        public static final int label_favourites=0x7f080005;
+        public static final int label_login=0x7f080009;
+        public static final int label_login2=0x7f080006;
+        public static final int label_logout=0x7f080007;
+        public static final int label_password=0x7f08000a;
+        public static final int label_today=0x7f080002;
+        public static final int label_tomorrow=0x7f080003;
+        /**  ACTIVITIES 
+ Main 
          */
-        public static final int label_top10=0x7f060003;
-        public static final int login_email_error=0x7f06000e;
-        public static final int login_password_error=0x7f06000f;
+        public static final int label_top10=0x7f080001;
+        public static final int login_email_error=0x7f08000c;
+        public static final int login_password_error=0x7f08000d;
         /**  Login 
          */
-        public static final int login_title=0x7f06000a;
-        public static final int menu_exit=0x7f060002;
-        /**  ACTIVITIES 
- Menu 
+        public static final int login_title=0x7f080008;
+        public static final int menu_about=0x7f08004f;
+        public static final int menu_exit=0x7f080051;
+        public static final int menu_it=0x7f080043;
+        public static final int menu_it_sub=0x7f080044;
+        public static final int menu_item=0x7f080037;
+        public static final int menu_juwenalia=0x7f080038;
+        public static final int menu_juwenalia_sub=0x7f080039;
+        public static final int menu_kultura=0x7f080045;
+        public static final int menu_kultura_sub=0x7f080046;
+        public static final int menu_login=0x7f08004d;
+        /**  MENU 
          */
-        public static final int menu_refresh=0x7f060001;
-        public static final int plan_date=0x7f060033;
-        public static final int plan_place=0x7f060030;
-        public static final int plan_teacher=0x7f060031;
+        public static final int menu_logo=0x7f080036;
+        public static final int menu_logout=0x7f08004e;
+        public static final int menu_refresh=0x7f08004b;
+        public static final int menu_settings=0x7f08004c;
+        public static final int menu_sponsor=0x7f080050;
+        public static final int menu_sport=0x7f080047;
+        public static final int menu_sport_sub=0x7f080048;
+        public static final int menu_today=0x7f08003f;
+        public static final int menu_today_sub=0x7f080040;
+        public static final int menu_tomorrow=0x7f080041;
+        public static final int menu_tomorrow_sub=0x7f080042;
+        public static final int menu_top10=0x7f080049;
+        public static final int menu_top10_sub=0x7f08004a;
+        public static final int menu_user=0x7f08003a;
+        public static final int menu_user_facultity=0x7f08003e;
+        public static final int menu_user_favourities=0x7f08003d;
+        public static final int menu_user_plan=0x7f08003b;
+        public static final int menu_user_plan_sub=0x7f08003c;
+        public static final int plan_date=0x7f080032;
+        public static final int plan_place=0x7f08002f;
+        public static final int plan_teacher=0x7f080030;
         /**  Plan 
          */
-        public static final int plan_time=0x7f06002e;
-        public static final int plan_title=0x7f06002f;
-        public static final int plan_type=0x7f060032;
-        public static final int prefs_fullscreen_summary_off=0x7f060011;
-        public static final int prefs_fullscreen_summary_on=0x7f060012;
+        public static final int plan_time=0x7f08002d;
+        public static final int plan_title=0x7f08002e;
+        public static final int plan_type=0x7f080031;
+        public static final int prefs_fullscreen_summary_off=0x7f08000f;
+        public static final int prefs_fullscreen_summary_on=0x7f080010;
         /**  Preferences 
          */
-        public static final int prefs_fullscreen_title=0x7f060010;
-        public static final int today_events=0x7f060013;
+        public static final int prefs_fullscreen_title=0x7f08000e;
+        public static final int today_events=0x7f080011;
     }
     public static final class style {
-        public static final int AppTheme=0x7f070000;
-        public static final int MyButtonStyle=0x7f070001;
+        public static final int AppTheme=0x7f090000;
+        public static final int MyButtonStyle=0x7f090001;
+    }
+    public static final class xml {
+        public static final int settings=0x7f050000;
     }
 }

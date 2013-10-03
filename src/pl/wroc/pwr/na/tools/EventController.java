@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import android.util.Log;
 
 import pl.wroc.pwr.na.NAPWrApplication;
+import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.objects.AddressObject;
 import pl.wroc.pwr.na.objects.EventObject;
 import pl.wroc.pwr.na.objects.OrganizationObject;
@@ -370,9 +371,11 @@ public class EventController {
 								"http://www.napwr.pl/mobile/wydarzenia/ulubione/"
 										+ app.userId).get());
 
-				app.ulubione = getEventsUlubione(completeJSONArr);
+				app.eventList.put(app.getResources().getString(
+						R.string.menu_user_favourities), getEventsUlubione(completeJSONArr));
 			} else {
-				app.ulubione = new ArrayList<EventObject>();
+				app.eventList.put(app.getResources().getString(
+						R.string.menu_user_favourities), new ArrayList<EventObject>());
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -390,7 +393,8 @@ public class EventController {
 					.execute("http://www.napwr.pl/mobile/wydarzenia/dzis")
 					.get());
 
-			app.dzisiaj = getEvents(completeJSONArr);
+			app.eventList.put(app.getResources().getString(
+					R.string.menu_today_sub), getEvents(completeJSONArr));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
@@ -407,7 +411,8 @@ public class EventController {
 					.execute("http://www.napwr.pl/mobile/wydarzenia/jutro")
 					.get());
 
-			app.jutro = getEvents(completeJSONArr);
+			app.eventList.put(app.getResources().getString(
+					R.string.menu_tomorrow_sub), getEvents(completeJSONArr));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
@@ -442,12 +447,12 @@ public class EventController {
 
 	public void addTop(NAPWrApplication app) {
 		JSONArray completeJSONArr = null;
-		EventController ep = new EventController();
 		try {
 			completeJSONArr = new JSONArray((String) new RequestTaskString()
 					.execute("http://www.napwr.pl/json/topten").get());
 
-			app.top10 = ep.getEvents(completeJSONArr);
+			app.eventList.put(app.getResources().getString(
+					R.string.menu_top10_sub), getEvents(completeJSONArr));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {

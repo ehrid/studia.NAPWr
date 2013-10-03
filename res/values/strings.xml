@@ -38,6 +38,7 @@
     <string name="event_content">Treść wydarzenia</string>
     <string name="event_button_share">SHARE</string>
     <string name="event_poster_description">plakt wydarzenia</string>
+	<string name="event_button_back">Wstecz</string>
 
     <!-- Event List -->
     <string name="event_list_name">Nazwa listy</string>
