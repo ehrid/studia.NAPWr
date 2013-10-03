@@ -9,96 +9,112 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class EventObjectFragment extends Fragment {
+	/***/
 	public static final String ARG_OBJECT = "object";
 
-	// Header
-	// Button back;
-	// Button share;
-
-	// Event
-	//ImageView likeit;
-	//TextView likeitSum;
-	TextView title;
-	TextView fromDate;
-	TextView toDate;
-	TextView address;
-	TextView organizaer;
-	TextView content;
-	ImageView poster;
-
-	EventObject event;
+	private View _rootView;
+	private MenuActivity _menuActivity = (MenuActivity) MenuActivity.activityMain;
+	private EventObject _event;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		// The last two arguments ensure LayoutParams are inflated
-		// properly.
-		final View rootView = inflater.inflate(R.layout.fragment_event,
-				container, false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		_rootView = getRootView(inflater, container);
+		TextView titleView = getTitleView();
+		TextView fromDateView = getFromDateView();
+		TextView toDateView = getToDateView();
+		TextView addressView = getAddressView();
+		TextView organizationView = getOrganizationView();
+		TextView contentView = getContentView();
 
-		// back = (Button) rootView.findViewById(R.id.back);
-		// share = (Button) rootView.findViewById(R.id.share);
+		setFontOf(titleView);
 
-		title = (TextView) rootView.findViewById(R.id.event_title);
-		//likeit = (ImageView) rootView.findViewById(R.id.event_likeit);
-		fromDate = (TextView) rootView.findViewById(R.id.event_fromDate);
-		toDate = (TextView) rootView.findViewById(R.id.event_toDate);
-		address = (TextView) rootView.findViewById(R.id.event_address);
-		organizaer = (TextView) rootView.findViewById(R.id.event_organizer);
-		content = (TextView) rootView.findViewById(R.id.event_content);
-		//likeitSum = (TextView) rootView.findViewById(R.id.event_likeit_sum);
-		
-		Typeface fontType = ((MenuActivity) (MenuActivity.activityMain)).getTypeFace();
-		title.setTypeface(fontType);
+		_event = getSelectedEvent();
+		setNameIn(titleView);
+		setStartDateIn(fromDateView);
+		setEndDateIn(toDateView);
+		setAddressIn(addressView);
+		serOrganizationIn(organizationView);
+		setContentIn(contentView);
 
+		return _rootView;
+	}
+
+	private View getRootView(LayoutInflater inflater, ViewGroup container) {
+		return inflater.inflate(R.layout.fragment_event, container, false);
+	}
+
+	private TextView getTitleView() {
+		return (TextView) _rootView.findViewById(R.id.event_title);
+	}
+
+	private TextView getFromDateView() {
+		return (TextView) _rootView.findViewById(R.id.event_fromDate);
+	}
+
+	private TextView getToDateView() {
+		return (TextView) _rootView.findViewById(R.id.event_toDate);
+	}
+
+	private TextView getAddressView() {
+		return (TextView) _rootView.findViewById(R.id.event_address);
+	}
+
+	private TextView getOrganizationView() {
+		return (TextView) _rootView.findViewById(R.id.event_organizer);
+	}
+
+	private TextView getContentView() {
+		return (TextView) _rootView.findViewById(R.id.event_content);
+	}
+
+	private void setFontOf(TextView titleView) {
+		Typeface fontType = _menuActivity.getTypeFace();
+		titleView.setTypeface(fontType);
+	}
+
+	private EventObject getSelectedEvent() {
 		Bundle args = getArguments();
-		event = ((MenuActivity) (MenuActivity.activityMain)).current.get(args
-				.getInt(ARG_OBJECT));
-		
-		//likeitSum.setText(event.likeSum + "");
-		if (event._name != null)
-			title.setText(event._name.toString());
-		if (event._startDate != null) {
-			fromDate.setText("Od: " + event._startDate.toString());
-		} else {
-			fromDate.setVisibility(View.GONE);
-		}
-		if (event._endDate != null) {
-			toDate.setText("Do: " + event._endDate.toString());
-		} else {
-			toDate.setVisibility(View.GONE);
-		}
-		if (event._address != null) {
-			address.setText("Adres: " + event._address._address);
-		} else {
-			address.setVisibility(View.GONE);
-		}
-		if (event._organization != null) {
-			organizaer.setText("Organizator: " + event._organization._name);
-		} else {
-			organizaer.setVisibility(View.GONE);
-		}
-		if (event._content != null)
-			content.setText(event._content.toString());
+		return _menuActivity.current.get(args.getInt(ARG_OBJECT));
+	}
 
-//		poster.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				Bundle args = getArguments();
-//
-//				new ShowPosterDialog(
-//						((EventActivity) (EventActivity.activityMain)), args
-//								.getInt(ARG_OBJECT), ((MenuActivity) (MenuActivity.activityMain)).getApplicationContext()).show();
-//			}
-//		});
-//		
-//		event.setImagePoster(((MenuActivity) (MenuActivity.activityMain)).getApplicationContext());
+	private void setNameIn(TextView titleView) {
+		if (_event._name != null)
+			titleView.setText(_event._name.toString());
+	}
 
-		return rootView;
+	private void setStartDateIn(TextView fromDateView) {
+		if (_event._startDate != null)
+			fromDateView.setText("Od: " + _event._startDate.toString());
+		else
+			fromDateView.setVisibility(View.GONE);
+	}
+
+	private void setEndDateIn(TextView toDateView) {
+		if (_event._endDate != null)
+			toDateView.setText("Do: " + _event._endDate.toString());
+		else
+			toDateView.setVisibility(View.GONE);
+	}
+
+	private void setAddressIn(TextView addressView) {
+		if (_event._address != null)
+			addressView.setText("Adres: " + _event._address._address);
+		else
+			addressView.setVisibility(View.GONE);
+	}
+
+	private void serOrganizationIn(TextView organizaerView) {
+		if (_event._organization != null)
+			organizaerView.setText("Organizator: " + _event._organization._name);
+		else
+			organizaerView.setVisibility(View.GONE);
+	}
+
+	private void setContentIn(TextView contentView) {
+		if (_event._content != null)
+			contentView.setText(_event._content.toString());
 	}
 }
