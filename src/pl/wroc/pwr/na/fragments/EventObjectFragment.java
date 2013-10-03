@@ -60,30 +60,30 @@ public class EventObjectFragment extends Fragment {
 				.getInt(ARG_OBJECT));
 		
 		//likeitSum.setText(event.likeSum + "");
-		if (event.name != null)
-			title.setText(event.name.toString());
-		if (event.startDate != null) {
-			fromDate.setText("Od: " + event.startDate.toString());
+		if (event._name != null)
+			title.setText(event._name.toString());
+		if (event._startDate != null) {
+			fromDate.setText("Od: " + event._startDate.toString());
 		} else {
 			fromDate.setVisibility(View.GONE);
 		}
-		if (event.endDate != null) {
-			toDate.setText("Do: " + event.endDate.toString());
+		if (event._endDate != null) {
+			toDate.setText("Do: " + event._endDate.toString());
 		} else {
 			toDate.setVisibility(View.GONE);
 		}
-		if (event.address != null) {
-			address.setText("Adres: " + event.address.address);
+		if (event._address != null) {
+			address.setText("Adres: " + event._address._address);
 		} else {
 			address.setVisibility(View.GONE);
 		}
-		if (event.organization != null) {
-			organizaer.setText("Organizator: " + event.organization.name);
+		if (event._organization != null) {
+			organizaer.setText("Organizator: " + event._organization._name);
 		} else {
 			organizaer.setVisibility(View.GONE);
 		}
-		if (event.content != null)
-			content.setText(event.content.toString());
+		if (event._content != null)
+			content.setText(event._content.toString());
 
 //		poster.setOnClickListener(new OnClickListener() {
 //

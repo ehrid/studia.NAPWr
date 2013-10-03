@@ -31,25 +31,25 @@ public class MenuCollectionPagerAdapter extends FragmentStatePagerAdapter {
 		
 		ListItemObject obj = listItems.get(i);
 		
-		switch(obj.type){
+		switch(obj._type){
 		case 0:
 			fragment = new EventListObjectFragment();
-			args.putString(EventListObjectFragment.LIST_TITLE, obj.title);
-			args.putInt(EventListObjectFragment.LIST_MINIATURE, obj.miniature);
-			args.putInt(EventListObjectFragment.LIST_TYPE, obj.type);
-			args.putString(EventListObjectFragment.LIST_URL, obj.url);
+			args.putString(EventListObjectFragment.LIST_TITLE, obj._title);
+			args.putInt(EventListObjectFragment.LIST_MINIATURE, obj._miniature);
+			args.putInt(EventListObjectFragment.LIST_TYPE, obj._type);
+			args.putString(EventListObjectFragment.LIST_URL, obj._url);
 			break;
 		case 1:
 			fragment = new EventListObjectFragment();
-			args.putString(EventListObjectFragment.LIST_TITLE, obj.title);
-			args.putInt(EventListObjectFragment.LIST_MINIATURE, obj.miniature);
-			args.putInt(EventListObjectFragment.LIST_TYPE, obj.type);
-			args.putString(EventListObjectFragment.LIST_URL, obj.url);
+			args.putString(EventListObjectFragment.LIST_TITLE, obj._title);
+			args.putInt(EventListObjectFragment.LIST_MINIATURE, obj._miniature);
+			args.putInt(EventListObjectFragment.LIST_TYPE, obj._type);
+			args.putString(EventListObjectFragment.LIST_URL, obj._url);
 			break;
 		case 2:
 			fragment = new EventListPosterFragment();
-			args.putString(EventListPosterFragment.LIST_TITLE, obj.title);
-			args.putString(EventListPosterFragment.LIST_URL, obj.url);
+			args.putString(EventListPosterFragment.LIST_TITLE, obj._title);
+			args.putString(EventListPosterFragment.LIST_URL, obj._url);
 			break;
 		case 3: 
 			return new PlanObjectFragment();

@@ -54,7 +54,7 @@ public class EventListAdapter extends ArrayAdapter<EventObject> {
 				.findViewById(R.id.event_list_item_name);
 
 		// Assign the appropriate data from our alert object above
-		name.setText(event.name);
+		name.setText(event._name);
 		Typeface fontType = ((MenuActivity) (MenuActivity.activityMain)).getTypeFace();
 		name.setTypeface(fontType);
 
@@ -65,7 +65,7 @@ public class EventListAdapter extends ArrayAdapter<EventObject> {
 
 		// Assign the appropriate data from our alert object above
 
-		String eventContent = (String) event.content;
+		String eventContent = (String) event._content;
 
 		if (eventContent.length() > 153) {
 			eventContent = eventContent.substring(0, 150);
@@ -80,7 +80,7 @@ public class EventListAdapter extends ArrayAdapter<EventObject> {
 				.findViewById(R.id.event_list_item_date);
 
 		// Assign the appropriate data from our alert object above
-		dateAndPlace.setText(event.startDate.toString());
+		dateAndPlace.setText(event._startDate.toString());
 
 		return alertView;
 	}

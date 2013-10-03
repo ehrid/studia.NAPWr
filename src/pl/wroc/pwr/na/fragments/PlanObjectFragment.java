@@ -16,151 +16,160 @@ import android.support.v4.app.Fragment;
 import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class PlanObjectFragment extends Fragment {
-
+	/***/
 	public static final String LIST_URL = "list_url";
 
-	private TextView title;
-	private ImageView miniature;
-	private ProgressBar loading;
-	private ListView eventListView;
+	private MenuActivity menuActivity = (MenuActivity) MenuActivity.activityMain;
+	private ProgressBar _progresBar;
+	private ListView _eventListView;
 	private PlanAdapter adapter;
-	private Context context;
-	private ImageView menu;
-	ArrayList<PlanObject> eventList;
-	Bundle args;
-
-	View rootView;
-	String url;
-	LongOperation asyncTask;
+	private Context _context;
+	private ArrayList<PlanObject> _eventList;
+	private View _rootView;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		// The last two arguments ensure LayoutParams are inflated
-		// properly.
-		final View rootView = inflater.inflate(R.layout.fragment_event_list,
-				container, false);
-		this.rootView = rootView;
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		getRootView(inflater, container);
+		getContext();
+		TextView headerTitle = prepareHeaderTitle();
+		setHeaderTitleFont(headerTitle);
+		prepareHeaderMiniature();
+		prepareMenuButton();
+		loadProgresBar();
+		loadEventListView();
+		startAsyncTask();
+		return _rootView;
+	}
 
-		args = getArguments();
+	private void getRootView(LayoutInflater inflater, ViewGroup container) {
+		_rootView = inflater.inflate(R.layout.fragment_event_list, container, false);
+	}
 
-		context = rootView.getContext();
+	private void getContext() {
+		_context = _rootView.getContext();
+	}
 
-		title = (TextView) rootView.findViewById(R.id.eventlist_title);
-		title.setText("Plan zajęć");
+	private TextView prepareHeaderTitle() {
+		TextView headerTitle = (TextView) _rootView.findViewById(R.id.eventlist_title);
+		headerTitle.setText("Plan zajęć");
+		return headerTitle;
+	}
 
-		Typeface fontType = ((MenuActivity) (MenuActivity.activityMain))
-				.getTypeFace();
-		title.setTypeface(fontType);
+	private void setHeaderTitleFont(TextView headerTitle) {
+		Typeface fontType = menuActivity.getTypeFace();
+		headerTitle.setTypeface(fontType);
+	}
 
-		miniature = (ImageView) rootView.findViewById(R.id.eventlist_miniature);
-		miniature.setImageResource(R.drawable.miniature_calendar);
+	private void prepareHeaderMiniature() {
+		ImageView headerMiniature = (ImageView) _rootView.findViewById(R.id.eventlist_miniature);
+		headerMiniature.setImageResource(R.drawable.miniature_calendar);
+	}
 
-		menu = (ImageView) rootView.findViewById(R.id.btn_menu);
-		menu.setOnClickListener(new OnClickListener() {
+	private void prepareMenuButton() {
+		ImageView menuButton = (ImageView) _rootView.findViewById(R.id.btn_menu);
 
+		menuButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				((MenuActivity) (MenuActivity.activityMain)).clfs.click();
+				menuActivity.clfs.click();
 			}
 		});
+	}
 
-		loading = (ProgressBar) rootView.findViewById(R.id.event_list_loading);
+	private void loadProgresBar() {
+		_progresBar = (ProgressBar) _rootView.findViewById(R.id.event_list_loading);
+	}
 
-		eventListView = (ListView) rootView
-				.findViewById(R.id.event_list_events);
+	private void loadEventListView() {
+		_eventListView = (ListView) _rootView.findViewById(R.id.event_list_events);
+	}
 
-		asyncTask = new LongOperation();
-		startMyTask();
-
-		return rootView;
+	private void startAsyncTask() {
+		LongOperation asyncTask = new LongOperation();
+		startMyTask(asyncTask);
 	}
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	// API 11
-	void startMyTask() {
+	private void startMyTask(LongOperation asyncTask) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
 			asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		else
 			asyncTask.execute();
 	}
 
-	public void addEvents() {
-		eventList = ((MenuActivity) (MenuActivity.activityMain)).getKalendarz();
-
-		if (eventList != null) {
-			adapter = new PlanAdapter(context, R.layout.item_plan, eventList);
-			eventListView.setAdapter(adapter);
-		}
-	}
-
-	private void addListeners() {
-		if (eventList != null) {
-			if (eventList.isEmpty()) {
-				rootView.findViewById(R.id.no_plan_popup).setVisibility(
-						View.VISIBLE);
-				Linkify.addLinks((TextView) rootView
-						.findViewById(R.id.no_plan_popup_link), Linkify.ALL);
-				Linkify.addLinks((TextView) rootView
-						.findViewById(R.id.no_plan_popup_link2), Linkify.ALL);
-			}
-		} else {
-			rootView.findViewById(R.id.no_plan_popup).setVisibility(
-					View.VISIBLE);
-			Linkify.addLinks((TextView) rootView
-					.findViewById(R.id.no_plan_popup_link), Linkify.ALL);
-			Linkify.addLinks((TextView) rootView
-					.findViewById(R.id.no_plan_popup_link2), Linkify.ALL);
-		}
-
-	}
-
-	private void showLoading() {
-		loading.setVisibility(View.VISIBLE);
-	}
-
-	private void hideLoading() {
-		loading.setVisibility(View.GONE);
-	}
-
 	private class LongOperation extends AsyncTask<String, Void, String> {
 
 		@Override
 		protected String doInBackground(String... params) {
-			if (((MenuActivity) (MenuActivity.activityMain)).getKalendarz() == null) {
-				if(!((MenuActivity) (MenuActivity.activityMain))
-							.isOffline()) {
-					((MenuActivity) (MenuActivity.activityMain)).getPlan();
-				} else {
-					((MenuActivity) (MenuActivity.activityMain)).preparePlan();
-				}
-				
+			MenuActivity menuActivity = (MenuActivity) MenuActivity.activityMain;
+			if (menuActivity.getPlanEvents() == null) {
+				downloadPlan(menuActivity);
 			}
 			return "Executed";
 		}
 
+		private void downloadPlan(MenuActivity menuActivity) {
+			if (!menuActivity.isOffline())
+				menuActivity.getPlan();
+			else
+				menuActivity.preparePlan();
+		}
+
 		@Override
 		protected void onPostExecute(String result) {
-			hideLoading();
-			addEvents();
-			addListeners();
+			hideLoadingView();
+			addPlanEvents();
+			showAlertIfNoPlanPresent();
 		}
 
 		@Override
 		protected void onPreExecute() {
-			showLoading();
+			showLoadingView();
 		}
 
 		@Override
 		protected void onProgressUpdate(Void... values) {
 		}
+	}
+
+	private void addPlanEvents() {
+		_eventList = menuActivity.getPlanEvents();
+
+		if (_eventList != null) {
+			adapter = new PlanAdapter(_context, R.layout.item_plan, _eventList);
+			_eventListView.setAdapter(adapter);
+		}
+	}
+
+	private void showAlertIfNoPlanPresent() {
+		if (_eventList == null || _eventList.isEmpty())
+			showNoPlanAlert();
+	}
+
+	private void showNoPlanAlert() {
+		TextView link = (TextView) _rootView.findViewById(R.id.no_plan_popup_link);
+		TextView link2 = (TextView) _rootView.findViewById(R.id.no_plan_popup_link2);
+		View alert = _rootView.findViewById(R.id.no_plan_popup);
+
+		alert.setVisibility(View.VISIBLE);
+		Linkify.addLinks(link, Linkify.ALL);
+		Linkify.addLinks(link2, Linkify.ALL);
+	}
+
+	private void showLoadingView() {
+		_progresBar.setVisibility(View.VISIBLE);
+	}
+
+	private void hideLoadingView() {
+		_progresBar.setVisibility(View.GONE);
 	}
 }

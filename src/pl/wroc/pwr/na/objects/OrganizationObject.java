@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class OrganizationObject implements Serializable {
 	private static final long serialVersionUID = 2199900062677829827L;
 	
-	public String name;
+	public String _name;
 
 	public OrganizationObject(String name) {
 		super();
-		this.name = name;
+		_name = name;
 	}
 
 }

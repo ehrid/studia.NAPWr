@@ -67,7 +67,7 @@ public class PlanParser {
 			} else {
 				boolean added = false;
 				for (int i = 0; i < sorted.size(); i++) {
-					if (po.startHour < sorted.get(i).startHour && !added) {
+					if (po._startHour < sorted.get(i)._startHour && !added) {
 						sorted.add(i, po);
 						added = true;
 					}
@@ -128,7 +128,7 @@ public class PlanParser {
 	private int vaildDaysInPlanDay(ArrayList<PlanObject> planDay, int week) {
 		int vaildDays = 0;
 		for (PlanObject po : planDay) {
-			if (po.week == 0 || po.week == week || po.week % 2 == week) {
+			if (po._week == 0 || po._week == week || po._week % 2 == week) {
 				vaildDays++;
 			}
 		}
@@ -182,7 +182,7 @@ public class PlanParser {
 
 		// dzielenie do tablic z dniami
 		for (PlanObject po : planList) {
-			switch (po.day) {
+			switch (po._day) {
 			case 0:
 				((ArrayList<PlanObject>) dayOfWeek[1]).add(po);
 				break;
@@ -248,7 +248,7 @@ public class PlanParser {
 				plan.add(new PlanObject("separator", getSeparatorName(day,
 						week, dayIncremented)));
 				for (PlanObject po : ((ArrayList<PlanObject>) dayOfWeek[day])) {
-					if (po.week == 0 || po.week == week || po.week % 2 == week) {
+					if (po._week == 0 || po._week == week || po._week % 2 == week) {
 						plan.add(po);
 					}
 				}

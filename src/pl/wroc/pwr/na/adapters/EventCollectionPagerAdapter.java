@@ -28,7 +28,7 @@ public class EventCollectionPagerAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-		String title = (String) ((MenuActivity) (MenuActivity.activityMain)).current.get(position).name;
+		String title = (String) ((MenuActivity) (MenuActivity.activityMain)).current.get(position)._name;
 		
 		if(title.length() > 18){
 			title = title.substring(0, 15);

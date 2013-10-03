@@ -220,7 +220,7 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 		return !isNetworkAvailable();
 	}
 
-	public ArrayList<PlanObject> getKalendarz() {
+	public ArrayList<PlanObject> getPlanEvents() {
 		return app.kalendarz;
 	}
 
@@ -636,7 +636,7 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
 
 	private void setItem(String name) {
 		for (int i = 0; i < listItems.size(); i++) {
-			if (listItems.get(i).title.equals(name)) {
+			if (listItems.get(i)._title.equals(name)) {
 				mViewPager.setCurrentItem(i);
 			}
 		}

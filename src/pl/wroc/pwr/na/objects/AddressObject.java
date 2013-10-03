@@ -5,12 +5,10 @@ import java.io.Serializable;
 public class AddressObject implements Serializable{
 	private static final long serialVersionUID = -1130811590154913844L;
 	
-	public String address;
+	public String _address;
 
 	public AddressObject(String address) {
 		super();
-		this.address = address;
+		_address = address;
 	}
-	
-
 }

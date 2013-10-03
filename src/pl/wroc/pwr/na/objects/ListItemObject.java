@@ -7,17 +7,17 @@ public class ListItemObject {
 	 * 2 - POSTER
 	 * 3 - PLAN ZAJĘĆ
 	 */
-	public int type;
-	public String title;
-	public int miniature;
-	public String url;
+	public int _type;
+	public String _title;
+	public int _miniature;
+	public String _url;
 	
 	public ListItemObject(int type, String title, int miniature, String url) {
 		super();
-		this.type = type;
-		this.title = title;
-		this.miniature = miniature;
-		this.url = url;
+		_type = type;
+		_title = title;
+		_miniature = miniature;
+		_url = url;
 	}
 	
 }

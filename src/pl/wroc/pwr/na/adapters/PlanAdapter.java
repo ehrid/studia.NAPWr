@@ -61,20 +61,20 @@ public class PlanAdapter extends ArrayAdapter<PlanObject> {
 		LinearLayout separator = (LinearLayout) alertView
 				.findViewById(R.id.plan_separator);
 
-		if (event.type.equals("separator")) {
+		if (event._type.equals("separator")) {
 			separator.setVisibility(View.VISIBLE);
 			item.setVisibility(View.GONE);
 
-			date.setText(event.date);
+			date.setText(event._date);
 		} else {
 			separator.setVisibility(View.GONE);
 			item.setVisibility(View.VISIBLE);
-			time.setText(event.time);
-			title.setText(event.title);
-			place.setText(event.place);
-			teacher.setText(event.lecturer);
+			time.setText(event._time);
+			title.setText(event._title);
+			place.setText(event._place);
+			teacher.setText(event._lecturer);
 
-			String sType = event.type;
+			String sType = event._type;
 			type.setText(sType);
 
 			if (sType.equals("W")) {
