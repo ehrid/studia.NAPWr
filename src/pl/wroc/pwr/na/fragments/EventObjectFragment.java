@@ -11,110 +11,117 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+/**
+ * Class manages creating view for single event
+ * 
+ * @author horodysk
+ */
 public class EventObjectFragment extends Fragment {
-	/***/
-	public static final String ARG_OBJECT = "object";
+    /***/
+    public static final String ARG_OBJECT = "object";
 
-	private View _rootView;
-	private MenuActivity _menuActivity = (MenuActivity) MenuActivity.activityMain;
-	private EventObject _event;
+    private View _rootView;
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		_rootView = getRootView(inflater, container);
-		TextView titleView = getTitleView();
-		TextView fromDateView = getFromDateView();
-		TextView toDateView = getToDateView();
-		TextView addressView = getAddressView();
-		TextView organizationView = getOrganizationView();
-		TextView contentView = getContentView();
+    private MenuActivity _menuActivity = MenuActivity.activityMain;
 
-		setFontOf(titleView);
+    private EventObject _event;
 
-		_event = getSelectedEvent();
-		setNameIn(titleView);
-		setStartDateIn(fromDateView);
-		setEndDateIn(toDateView);
-		setAddressIn(addressView);
-		serOrganizationIn(organizationView);
-		setContentIn(contentView);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, @SuppressWarnings("unused") Bundle savedInstanceState) {
+        _rootView = getRootView(inflater, container);
+        TextView titleView = getTitleView();
+        TextView fromDateView = getFromDateView();
+        TextView toDateView = getToDateView();
+        TextView addressView = getAddressView();
+        TextView organizationView = getOrganizationView();
+        TextView contentView = getContentView();
 
-		return _rootView;
-	}
+        setFontOf(titleView);
 
-	private View getRootView(LayoutInflater inflater, ViewGroup container) {
-		return inflater.inflate(R.layout.fragment_event, container, false);
-	}
+        _event = getSelectedEvent();
+        setNameIn(titleView);
+        setStartDateIn(fromDateView);
+        setEndDateIn(toDateView);
+        setAddressIn(addressView);
+        serOrganizationIn(organizationView);
+        setContentIn(contentView);
 
-	private TextView getTitleView() {
-		return (TextView) _rootView.findViewById(R.id.event_title);
-	}
+        return _rootView;
+    }
 
-	private TextView getFromDateView() {
-		return (TextView) _rootView.findViewById(R.id.event_fromDate);
-	}
+    private View getRootView(LayoutInflater inflater, ViewGroup container) {
+        return inflater.inflate(R.layout.fragment_event, container, false);
+    }
 
-	private TextView getToDateView() {
-		return (TextView) _rootView.findViewById(R.id.event_toDate);
-	}
+    private TextView getTitleView() {
+        return (TextView) _rootView.findViewById(R.id.event_title);
+    }
 
-	private TextView getAddressView() {
-		return (TextView) _rootView.findViewById(R.id.event_address);
-	}
+    private TextView getFromDateView() {
+        return (TextView) _rootView.findViewById(R.id.event_fromDate);
+    }
 
-	private TextView getOrganizationView() {
-		return (TextView) _rootView.findViewById(R.id.event_organizer);
-	}
+    private TextView getToDateView() {
+        return (TextView) _rootView.findViewById(R.id.event_toDate);
+    }
 
-	private TextView getContentView() {
-		return (TextView) _rootView.findViewById(R.id.event_content);
-	}
+    private TextView getAddressView() {
+        return (TextView) _rootView.findViewById(R.id.event_address);
+    }
 
-	private void setFontOf(TextView titleView) {
-		Typeface fontType = _menuActivity.getTypeFace();
-		titleView.setTypeface(fontType);
-	}
+    private TextView getOrganizationView() {
+        return (TextView) _rootView.findViewById(R.id.event_organizer);
+    }
 
-	private EventObject getSelectedEvent() {
-		Bundle args = getArguments();
-		return _menuActivity.current.get(args.getInt(ARG_OBJECT));
-	}
+    private TextView getContentView() {
+        return (TextView) _rootView.findViewById(R.id.event_content);
+    }
 
-	private void setNameIn(TextView titleView) {
-		if (_event._name != null)
-			titleView.setText(_event._name.toString());
-	}
+    private void setFontOf(TextView titleView) {
+        Typeface fontType = _menuActivity.getTypeFace();
+        titleView.setTypeface(fontType);
+    }
 
-	private void setStartDateIn(TextView fromDateView) {
-		if (_event._startDate != null)
-			fromDateView.setText("Od: " + _event._startDate.toString());
-		else
-			fromDateView.setVisibility(View.GONE);
-	}
+    private EventObject getSelectedEvent() {
+        Bundle args = getArguments();
+        return _menuActivity.current.get(args.getInt(ARG_OBJECT));
+    }
 
-	private void setEndDateIn(TextView toDateView) {
-		if (_event._endDate != null)
-			toDateView.setText("Do: " + _event._endDate.toString());
-		else
-			toDateView.setVisibility(View.GONE);
-	}
+    private void setNameIn(TextView titleView) {
+        if (_event._name != null)
+            titleView.setText(_event._name.toString());
+    }
 
-	private void setAddressIn(TextView addressView) {
-		if (_event._address != null)
-			addressView.setText("Adres: " + _event._address._address);
-		else
-			addressView.setVisibility(View.GONE);
-	}
+    private void setStartDateIn(TextView fromDateView) {
+        if (_event._startDate != null)
+            fromDateView.setText("Od: " + _event._startDate.toString());
+        else
+            fromDateView.setVisibility(View.GONE);
+    }
 
-	private void serOrganizationIn(TextView organizaerView) {
-		if (_event._organization != null)
-			organizaerView.setText("Organizator: " + _event._organization._name);
-		else
-			organizaerView.setVisibility(View.GONE);
-	}
+    private void setEndDateIn(TextView toDateView) {
+        if (_event._endDate != null)
+            toDateView.setText("Do: " + _event._endDate.toString());
+        else
+            toDateView.setVisibility(View.GONE);
+    }
 
-	private void setContentIn(TextView contentView) {
-		if (_event._content != null)
-			contentView.setText(_event._content.toString());
-	}
+    private void setAddressIn(TextView addressView) {
+        if (_event._address != null)
+            addressView.setText("Adres: " + _event._address._address);
+        else
+            addressView.setVisibility(View.GONE);
+    }
+
+    private void serOrganizationIn(TextView organizaerView) {
+        if (_event._organization != null)
+            organizaerView.setText("Organizator: " + _event._organization._name);
+        else
+            organizaerView.setVisibility(View.GONE);
+    }
+
+    private void setContentIn(TextView contentView) {
+        if (_event._content != null)
+            contentView.setText(_event._content.toString());
+    }
 }

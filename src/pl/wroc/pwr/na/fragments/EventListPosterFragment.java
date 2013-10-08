@@ -20,150 +20,165 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * Class manages creating view for event list poster
+ * 
+ * @author horodysk
+ */
 public class EventListPosterFragment extends Fragment {
-	/***/
-	public static final String LIST_TITLE = "listName";
+    /***/
+    public static final String LIST_TITLE = "listName";
 
-	/***/
-	public static final String LIST_URL = "url";
+    /***/
+    public static final String LIST_URL = "url";
 
-	private MenuActivity menuActivity = (MenuActivity) MenuActivity.activityMain;
-	private Bitmap background;
-	private String url;
-	private ImageView poster;
-	private TextView posterTitle;
-	private View _rootView;
-	private ImageView menuButton;
-	private LongOperation _asyncTask;
+    MenuActivity menuActivity = MenuActivity.activityMain;
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		_rootView = getRootView(inflater, container);
-		setUrl();
-		setPosterTitle();
-		setPosterTitelFont();
-		setPoster();
-		setMenuButton();
-		setUrlSufix();
-		startMyTask();
+    Bitmap background;
 
-		return _rootView;
-	}
+    String url;
 
-	private View getRootView(LayoutInflater inflater, ViewGroup container) {
-		return inflater.inflate(R.layout.fragment_event_poster, container, false);
-	}
+    private ImageView poster;
 
-	private void setUrl() {
-		Bundle args = getArguments();
-		url = args.getString(LIST_URL);
-	}
+    private TextView posterTitle;
 
-	private void setPosterTitle() {
-		Bundle args = getArguments();
-		posterTitle = (TextView) _rootView.findViewById(R.id.fragment_event_poster_title);
-		posterTitle.setText(args.getString(LIST_TITLE));
-	}
+    private View _rootView;
 
-	private void setPosterTitelFont() {
-		Typeface fontType = menuActivity.getTypeFace();
-		posterTitle.setTypeface(fontType);
-	}
+    private ImageView menuButton;
 
-	private void setPoster() {
-		poster = (ImageView) _rootView.findViewById(R.id.fragment_event_poster_poster);
-	}
+    private LongOperation _asyncTask;
 
-	private void setMenuButton() {
-		menuButton = (ImageView) _rootView.findViewById(R.id.btn_menu);
-		menuButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				menuActivity.menuSlider.click();
-			}
-		});
-	}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, @SuppressWarnings("unused") Bundle savedInstanceState) {
+        _rootView = getRootView(inflater, container);
+        setUrl();
+        setPosterTitle();
+        setPosterTitelFont();
+        setPoster();
+        setMenuButton();
+        setUrlSufix();
+        startMyTask();
 
-	private void setUrlSufix() {
-		if (menuActivity.getScreenOrientation() == 1)
-			url += "_portrait";
-		else
-			url += "_landscape";
-	}
+        return _rootView;
+    }
 
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	// API 11
-	void startMyTask() {
-		_asyncTask = new LongOperation();
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-			_asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		else
-			_asyncTask.execute();
-	}
+    private View getRootView(LayoutInflater inflater, ViewGroup container) {
+        return inflater.inflate(R.layout.fragment_event_poster, container, false);
+    }
 
-	private class LongOperation extends AsyncTask<String, Void, String> {
-		boolean running = true;
+    private void setUrl() {
+        Bundle args = getArguments();
+        url = args.getString(LIST_URL);
+    }
 
-		@Override
-		protected String doInBackground(String... params) {
-			while (running) {
-				background = menuActivity.getBitmapFromUIS(url);
+    private void setPosterTitle() {
+        Bundle args = getArguments();
+        posterTitle = (TextView) _rootView.findViewById(R.id.fragment_event_poster_title);
+        posterTitle.setText(args.getString(LIST_TITLE));
+    }
 
-				if (background == null && menuActivity.haveToDownloadBackground())
-					background = menuActivity.saveBitmapToUIS(url);
+    private void setPosterTitelFont() {
+        Typeface fontType = menuActivity.getTypeFace();
+        posterTitle.setTypeface(fontType);
+    }
 
-				running = false;
-				if (isCancelled())
-					break;
-			}
+    private void setPoster() {
+        poster = (ImageView) _rootView.findViewById(R.id.fragment_event_poster_poster);
+    }
 
-			return "Executed";
-		}
+    private void setMenuButton() {
+        menuButton = (ImageView) _rootView.findViewById(R.id.btn_menu);
+        menuButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                menuActivity.menuSlider.click();
+            }
+        });
+    }
 
-		@Override
-		protected void onPostExecute(String result) {
-			if (background != null)
-				addPoster();
-		}
-	}
+    private void setUrlSufix() {
+        if (menuActivity.getScreenOrientation() == 1)
+            url += "_portrait";
+        else
+            url += "_landscape";
+    }
 
-	private void addPoster() {
-		cancelAsynchPosterDownlaodTask();
-		resetPoster();
-		animatePosterIn();
-		refreshStateOFView();
-		bringMenuButtonToFront();
-		closeSlider();
-	}
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    // API 11
+    void startMyTask() {
+        _asyncTask = new LongOperation();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+            _asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        else
+            _asyncTask.execute();
+    }
 
-	private void cancelAsynchPosterDownlaodTask() {
-		_asyncTask.cancel(true);
-	}
+    private class LongOperation extends AsyncTask<String, Void, String> {
+        boolean running = true;
 
-	private void resetPoster() {
-		posterTitle.setVisibility(View.GONE);
-		poster.setBackgroundDrawable(new BitmapDrawable(background));
-	}
+        public LongOperation() {
+        }
 
-	private void animatePosterIn() {
-		Animation myFadeInAnimation = AnimationUtils.loadAnimation(_rootView.getContext(), R.anim.fadein);
-		poster.startAnimation(myFadeInAnimation);
-		poster.setVisibility(View.VISIBLE);
-	}
+        @Override
+        protected String doInBackground(String... params) {
+            while (running) {
+                background = menuActivity.getBitmapFromUIS(url);
 
-	private void refreshStateOFView() {
-		menuActivity.mViewPager.refreshDrawableState();
-	}
+                if (background == null && menuActivity.haveToDownloadBackground())
+                    background = menuActivity.saveBitmapToUIS(url);
 
-	private void bringMenuButtonToFront() {
-		menuButton.bringToFront();
-	}
+                running = false;
+                if (isCancelled())
+                    break;
+            }
 
-	private void closeSlider() {
-		ClickListenerForScrolling menuSlider = menuActivity.menuSlider;
-		if (menuSlider.isOpened()) {
-			menuSlider.close();
-			menuSlider.click();
-		}
-	}
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(@SuppressWarnings("unused") String result) {
+            if (background != null)
+                addPoster();
+        }
+    }
+
+    void addPoster() {
+        cancelAsynchPosterDownlaodTask();
+        resetPoster();
+        animatePosterIn();
+        refreshStateOFView();
+        bringMenuButtonToFront();
+        closeSlider();
+    }
+
+    private void cancelAsynchPosterDownlaodTask() {
+        _asyncTask.cancel(true);
+    }
+
+    private void resetPoster() {
+        posterTitle.setVisibility(View.GONE);
+        poster.setBackgroundDrawable(new BitmapDrawable(background));
+    }
+
+    private void animatePosterIn() {
+        Animation myFadeInAnimation = AnimationUtils.loadAnimation(_rootView.getContext(), R.anim.fadein);
+        poster.startAnimation(myFadeInAnimation);
+        poster.setVisibility(View.VISIBLE);
+    }
+
+    private void refreshStateOFView() {
+        menuActivity.mViewPager.refreshDrawableState();
+    }
+
+    private void bringMenuButtonToFront() {
+        menuButton.bringToFront();
+    }
+
+    private void closeSlider() {
+        ClickListenerForScrolling menuSlider = menuActivity.menuSlider;
+        if (menuSlider.isOpened()) {
+            menuSlider.close();
+            menuSlider.click();
+        }
+    }
 }
