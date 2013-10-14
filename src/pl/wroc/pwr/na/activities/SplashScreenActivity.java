@@ -20,163 +20,166 @@ import android.widget.ImageView;
 
 public class SplashScreenActivity extends Activity {
 
-	ImageView loading1;
-	ImageView loading2;
-	ImageView loading3;
-	ImageView loading4;
-	ImageView loading5;
+    ImageView loading1;
 
-	UseInternalStorage uis;
-	NAPWrApplication app;
+    ImageView loading2;
 
-	JSONParser jsonParser;
-	RSSParser rssParser;
-	PlanParser planParser;
-	boolean shouldStartAleready = false;
+    ImageView loading3;
 
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_splash);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    ImageView loading4;
 
-		loading1 = (ImageView) findViewById(R.id.splash_loading1);
-		loading2 = (ImageView) findViewById(R.id.splash_loading2);
-		loading3 = (ImageView) findViewById(R.id.splash_loading3);
-		loading4 = (ImageView) findViewById(R.id.splash_loading4);
-		loading5 = (ImageView) findViewById(R.id.splash_loading5);
+    ImageView loading5;
 
-		uis = new UseInternalStorage(getApplicationContext());
+    UseInternalStorage uis;
 
-		jsonParser = new JSONParser();
-		rssParser = new RSSParser();
-		planParser = new PlanParser();
+    NAPWrApplication app;
 
-		app = (NAPWrApplication) getApplication();
-		loading1.setImageResource(R.drawable.loading_on);
+    JSONParser jsonParser;
 
-		if (!isNetworkAvailable()) {
-			shouldStartAleready = true;
-			goRobot();
-		} else {
-			downloadEvents();
-		}
-	}
+    RSSParser rssParser;
 
-	private void goRobot() {
+    PlanParser planParser;
 
-		Handler handler = new Handler();
-		handler.postDelayed(new Runnable() {
+    boolean shouldStartAleready = false;
 
-			public void run() {
-				finish();
-				SplashScreenActivity.this.startActivity(new Intent(
-						SplashScreenActivity.this,
-						ConnectionErrorActivity.class));
-			}
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-		}, 1500);
-	}
+        loading1 = (ImageView) findViewById(R.id.splash_loading1);
+        loading2 = (ImageView) findViewById(R.id.splash_loading2);
+        loading3 = (ImageView) findViewById(R.id.splash_loading3);
+        loading4 = (ImageView) findViewById(R.id.splash_loading4);
+        loading5 = (ImageView) findViewById(R.id.splash_loading5);
 
-	private void downloadEvents() {
-		if (!shouldStartAleready) {
-			Handler handler = new Handler();
-			handler.postDelayed(new Runnable() {
-				public void run() {
-					loading2.setImageResource(R.drawable.loading_on);
-					Handler handler = new Handler();
-					handler.postDelayed(new Runnable() {
+        uis = new UseInternalStorage(getApplicationContext());
 
-						@Override
-						public void run() {
-							loading3.setImageResource(R.drawable.loading_on);
-							Handler handler = new Handler();
-							handler.postDelayed(new Runnable() {
+        jsonParser = new JSONParser();
+        rssParser = new RSSParser();
+        planParser = new PlanParser();
 
-								@Override
-								public void run() {
-									loading4.setImageResource(R.drawable.loading_on);
-									Handler handler = new Handler();
-									handler.postDelayed(new Runnable() {
+        app = (NAPWrApplication) getApplication();
+        loading1.setImageResource(R.drawable.loading_on);
 
-										@Override
-										public void run() {
-											loading5.setImageResource(R.drawable.loading_on);
-											Handler handler = new Handler();
-											handler.postDelayed(new Runnable() {
+        if (!isNetworkAvailable()) {
+            shouldStartAleready = true;
+            goRobot();
+        }
+        else {
+            downloadEvents();
+        }
+    }
 
-												@Override
-												public void run() {
-													finish();
-													
-													app.makeFirstLoad();
+    private void goRobot() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
 
-													SplashScreenActivity.this
-															.startActivity(new Intent(
-																	SplashScreenActivity.this,
-																	MenuActivity.class));
-												}
+            public void run() {
+                finish();
+                SplashScreenActivity.this.startActivity(new Intent(SplashScreenActivity.this, ConnectionErrorActivity.class));
+            }
 
-											}, 400);
-										}
+        }, 1500);
+    }
 
-									}, 400);
-								}
+    private void downloadEvents() {
+        if (!shouldStartAleready) {
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    loading2.setImageResource(R.drawable.loading_on);
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
 
-							}, 400);
-						}
+                        @Override
+                        public void run() {
+                            loading3.setImageResource(R.drawable.loading_on);
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
 
-					}, 400);
+                                @Override
+                                public void run() {
+                                    loading4.setImageResource(R.drawable.loading_on);
+                                    Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
 
-				}
+                                        @Override
+                                        public void run() {
+                                            loading5.setImageResource(R.drawable.loading_on);
+                                            Handler handler = new Handler();
+                                            handler.postDelayed(new Runnable() {
 
-			}, 400);
+                                                @Override
+                                                public void run() {
+                                                    finish();
 
-		}
-	}
+                                                    app.makeFirstLoad();
 
-	private boolean isNetworkAvailable() {
-		boolean haveConnectedWifi = false;
-		boolean haveConnectedMobile = false;
+                                                    SplashScreenActivity.this
+                                                        .startActivity(new Intent(SplashScreenActivity.this, MenuActivity.class));
+                                                }
 
-		ConnectivityManager cm = (ConnectivityManager) SplashScreenActivity.this
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
+                                            }, 400);
+                                        }
 
-		NetworkInfo[] netInfo = cm.getAllNetworkInfo();
-		for (NetworkInfo ni : netInfo) {
-			if (ni.getTypeName().equalsIgnoreCase("WIFI")) {
-				if (ni.isConnected()) {
-					haveConnectedWifi = true;
-					Log.d("Internt Connection", "WIFI CONNECTION AVAILABLE");
-				} else {
-					Log.d("Internt Connection", "WIFI CONNECTION NOT AVAILABLE");
-				}
-			}
-			if (ni.getTypeName().equalsIgnoreCase("MOBILE")) {
-				if (ni.isConnected()) {
-					haveConnectedMobile = true;
-					Log.d("Internt Connection",
-							"MOBILE INTERNET CONNECTION AVAILABLE");
-				} else {
-					Log.d("Internt Connection",
-							"MOBILE INTERNET CONNECTION NOT AVAILABLE");
-				}
-			}
-		}
-		return haveConnectedWifi || haveConnectedMobile;
-	}
+                                    }, 400);
+                                }
 
-	public int getWidthOfScreen() {
-		DisplayMetrics metrics = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                            }, 400);
+                        }
 
-		return metrics.widthPixels;
-	}
+                    }, 400);
 
-	public int getHeightOfScreen() {
-		DisplayMetrics metrics = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                }
 
-		return metrics.heightPixels;
-	}
+            }, 400);
+
+        }
+    }
+
+    private boolean isNetworkAvailable() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) SplashScreenActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI")) {
+                if (ni.isConnected()) {
+                    haveConnectedWifi = true;
+                    Log.d("Internt Connection", "WIFI CONNECTION AVAILABLE");
+                }
+                else {
+                    Log.d("Internt Connection", "WIFI CONNECTION NOT AVAILABLE");
+                }
+            }
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE")) {
+                if (ni.isConnected()) {
+                    haveConnectedMobile = true;
+                    Log.d("Internt Connection", "MOBILE INTERNET CONNECTION AVAILABLE");
+                }
+                else {
+                    Log.d("Internt Connection", "MOBILE INTERNET CONNECTION NOT AVAILABLE");
+                }
+            }
+        }
+        return haveConnectedWifi || haveConnectedMobile;
+    }
+
+    public int getWidthOfScreen() {
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        return metrics.widthPixels;
+    }
+
+    public int getHeightOfScreen() {
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        return metrics.heightPixels;
+    }
 
 }
