@@ -7,14 +7,10 @@ import pl.wroc.pwr.na.tools.PlanParser;
 import pl.wroc.pwr.na.tools.RSSParser;
 import pl.wroc.pwr.na.tools.UseInternalStorage;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
@@ -40,8 +36,6 @@ public class SplashScreenActivity extends Activity {
 
     PlanParser planParser;
 
-    boolean shouldStartAleready = false;
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
@@ -62,13 +56,7 @@ public class SplashScreenActivity extends Activity {
         app = (NAPWrApplication) getApplication();
         loading1.setImageResource(R.drawable.loading_on);
 
-        if (!isNetworkAvailable()) {
-            shouldStartAleready = true;
-            goRobot();
-        }
-        else {
-            downloadEvents();
-        }
+        downloadEvents();
     }
 
     private void goRobot() {
@@ -84,88 +72,55 @@ public class SplashScreenActivity extends Activity {
     }
 
     private void downloadEvents() {
-        if (!shouldStartAleready) {
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    loading2.setImageResource(R.drawable.loading_on);
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                loading2.setImageResource(R.drawable.loading_on);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
 
-                        @Override
-                        public void run() {
-                            loading3.setImageResource(R.drawable.loading_on);
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loading3.setImageResource(R.drawable.loading_on);
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
 
-                                @Override
-                                public void run() {
-                                    loading4.setImageResource(R.drawable.loading_on);
-                                    Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                loading4.setImageResource(R.drawable.loading_on);
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
 
-                                        @Override
-                                        public void run() {
-                                            loading5.setImageResource(R.drawable.loading_on);
-                                            Handler handler = new Handler();
-                                            handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        loading5.setImageResource(R.drawable.loading_on);
+                                        Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
 
-                                                @Override
-                                                public void run() {
-                                                    finish();
+                                            @Override
+                                            public void run() {
+                                                finish();
 
-                                                    app.makeFirstLoad();
+                                                app.makeFirstLoad();
 
-                                                    SplashScreenActivity.this
-                                                        .startActivity(new Intent(SplashScreenActivity.this, MenuActivity.class));
-                                                }
+                                                SplashScreenActivity.this.startActivity(new Intent(SplashScreenActivity.this, MenuActivity.class));
+                                            }
 
-                                            }, 400);
-                                        }
+                                        }, 400);
+                                    }
 
-                                    }, 400);
-                                }
+                                }, 400);
+                            }
 
-                            }, 400);
-                        }
+                        }, 400);
+                    }
 
-                    }, 400);
+                }, 400);
 
-                }
-
-            }, 400);
-
-        }
-    }
-
-    private boolean isNetworkAvailable() {
-        boolean haveConnectedWifi = false;
-        boolean haveConnectedMobile = false;
-
-        ConnectivityManager cm = (ConnectivityManager) SplashScreenActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
-        for (NetworkInfo ni : netInfo) {
-            if (ni.getTypeName().equalsIgnoreCase("WIFI")) {
-                if (ni.isConnected()) {
-                    haveConnectedWifi = true;
-                    Log.d("Internt Connection", "WIFI CONNECTION AVAILABLE");
-                }
-                else {
-                    Log.d("Internt Connection", "WIFI CONNECTION NOT AVAILABLE");
-                }
             }
-            if (ni.getTypeName().equalsIgnoreCase("MOBILE")) {
-                if (ni.isConnected()) {
-                    haveConnectedMobile = true;
-                    Log.d("Internt Connection", "MOBILE INTERNET CONNECTION AVAILABLE");
-                }
-                else {
-                    Log.d("Internt Connection", "MOBILE INTERNET CONNECTION NOT AVAILABLE");
-                }
-            }
-        }
-        return haveConnectedWifi || haveConnectedMobile;
+
+        }, 400);
+
     }
 
     public int getWidthOfScreen() {

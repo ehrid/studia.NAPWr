@@ -101,10 +101,6 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
     public boolean onKeyDown(int keyCode, android.view.KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
             menuSlider.click();
@@ -121,9 +117,7 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
             }
             return true;
         }
-        else {
-            return super.onKeyDown(keyCode, event);
-        }
+        return super.onKeyDown(keyCode, event);
     };
 
     public void closeApplication() {
@@ -149,7 +143,7 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
     public boolean isLoginAvailable() {
         boolean networkAvailable = isNetworkAvailable();
         if (!networkAvailable) {
-            Toast.makeText(getApplicationContext(), "Brak aktywnego poÅ‚Ä…czenia", 2000).show();
+            Toast.makeText(getApplicationContext(), "Brak aktywnego połączenia", 2000).show();
         }
         return networkAvailable;
     }

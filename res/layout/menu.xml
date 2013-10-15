@@ -23,16 +23,6 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/menu_juwenalia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/default_margin"
-                android:text="@string/menu_juwenalia"
-                android:textColor="@color/text_white"
-                android:textSize="@dimen/default_text_medium" 
-                android:background="@drawable/menu_left_gradient_button_gray"/>
-
-            <TextView
                 android:id="@+id/menu_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
