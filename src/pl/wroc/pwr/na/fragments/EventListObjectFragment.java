@@ -9,19 +9,17 @@ import pl.wroc.pwr.na.adapters.EventListAdapter;
 import pl.wroc.pwr.na.objects.EventObject;
 import pl.wroc.pwr.na.tools.JSONParser;
 import pl.wroc.pwr.na.tools.RSSParser;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
@@ -66,8 +64,9 @@ public class EventListObjectFragment extends Fragment {
 
 		title = (TextView) rootView.findViewById(R.id.eventlist_title);
 		title.setText(args.getString(LIST_TITLE));
-		
-		Typeface fontType = ((MenuActivity) (MenuActivity.activityMain)).getTypeFace();
+
+		Typeface fontType = ((MenuActivity) (MenuActivity.activityMain))
+				.getTypeFace();
 		title.setTypeface(fontType);
 
 		type = args.getInt(LIST_TYPE);
@@ -79,10 +78,10 @@ public class EventListObjectFragment extends Fragment {
 		} else {
 			miniature.setVisibility(View.GONE);
 		}
-		
+
 		menu = (ImageView) rootView.findViewById(R.id.btn_menu);
 		menu.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				((MenuActivity) (MenuActivity.activityMain)).menuSlider.click();
@@ -101,13 +100,13 @@ public class EventListObjectFragment extends Fragment {
 		return rootView;
 	}
 
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	// @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	// API 11
 	void startMyTask() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-			asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		else
-			asyncTask.execute();
+		// if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+		// asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		// else
+		asyncTask.execute();
 	}
 
 	private void addEvents() {
@@ -164,10 +163,17 @@ public class EventListObjectFragment extends Fragment {
 			while (running) {
 				if (((MenuActivity) (MenuActivity.activityMain))
 						.haveToDownload(args.getString(LIST_TITLE))) {
-					Log.d("EVENTS", "DOWNLOADING EVENTS - " +args.getString(LIST_TITLE));
+					Log.d("EVENTS",
+							"DOWNLOADING EVENTS - "
+									+ args.getString(LIST_TITLE));
 					try {
-					Log.d("EVENTS", "SIZE - " + ((MenuActivity) (MenuActivity.activityMain)).getEventList().get(args.getString(LIST_TITLE)).size());
-					} catch (Exception e){
+						Log.d("EVENTS",
+								"SIZE - "
+										+ ((MenuActivity) (MenuActivity.activityMain))
+												.getEventList()
+												.get(args.getString(LIST_TITLE))
+												.size());
+					} catch (Exception e) {
 						Log.d("EVENTS", "SIZE - 0");
 					}
 					if (type == 1) {

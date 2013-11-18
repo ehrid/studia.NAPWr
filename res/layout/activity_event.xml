@@ -11,7 +11,7 @@
         android:layout_gravity="top"
         android:paddingBottom="10sp"
         android:paddingTop="4dp"
-        android:background="@drawable/header_top_green"
+        android:background="@drawable/header_top_blue"
         android:textColor="@color/text_white"
          />
 

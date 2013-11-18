@@ -83,8 +83,10 @@
     <string name="menu_user">user_name</string>
     <string name="menu_user_plan">PLAN ZAJĘĆ</string>
     <string name="menu_user_plan_sub">Plan zajęc</string>
-    <string name="menu_user_favourities">Ulubione</string>
-    <string name="menu_user_facultity">Wydział</string>
+    <string name="menu_user_favourities">ULUBIONE</string>
+    <string name="menu_user_favourities_sub">Ulubione</string>
+    <string name="menu_user_facultity">WYDZIAŁ</string>
+    <string name="menu_user_facultity_sub">Wydział</string>
     <string name="menu_today">DZISIAJ</string>
     <string name="menu_today_sub">Dzisiaj</string>
     <string name="menu_tomorrow">JUTRO</string>

@@ -30,13 +30,11 @@ public class RequestTaskString extends AsyncTask<String, String, String> {
 				responseString = out.toString();
 				out.close();
 			} else {
-				// Closes the connection.
 				response.getEntity().getContent().close();
 				throw new IOException(statusLine.getReasonPhrase() + uri[0]);
 			}
 		} catch (ClientProtocolException e) {
 		} catch (IOException e) {
-
 		}
 		return responseString;
 	}

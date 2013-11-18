@@ -118,7 +118,7 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
             return true;
         }
         return super.onKeyDown(keyCode, event);
-    };
+    }
 
     public void closeApplication() {
         if (app.getSettingsZamknij() == 0) {
@@ -365,49 +365,67 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
     boolean userOptionsOpen = false;
 
     private void makeItemList() {
-        /*
-         * TYPE: 0 - LISTA WYDARZEÅƒ JSON 1 - LISTA WYDARZEÅƒ RSS 2 - POSTER 3 -
-         * PLAN ZAJÄ˜Ä† new ListItemObject(type, title, miniature)
-         */
+        int noMiniature = 0;
+        int json = 0;
+        int rss = 1;
+        int poster = 2;
+        int plan = 3;
+
+        String planTitle = getResources().getString(R.string.menu_user_plan);
+        String planTitleSub = getResources().getString(R.string.menu_user_plan_sub);
+        String favouritesTitle = getResources().getString(R.string.menu_user_favourities);
+        String facultityTitle = getResources().getString(R.string.menu_user_facultity);
+        String todayTitle = getResources().getString(R.string.menu_today);
+        String todayTitleSub = getResources().getString(R.string.menu_today_sub);
+        String tomorrowTitle = getResources().getString(R.string.menu_tomorrow);
+        String tommorowTitleSub = getResources().getString(R.string.menu_tomorrow_sub);
+        String itTitle = getResources().getString(R.string.menu_it);
+        String itTitleSub = getResources().getString(R.string.menu_it_sub);
+        String cultureTitle = getResources().getString(R.string.menu_kultura);
+        String cultureTitelSub = getResources().getString(R.string.menu_kultura_sub);
+        String sportTitle = getResources().getString(R.string.menu_sport);
+        String sportTitleSub = getResources().getString(R.string.menu_sport_sub);
+        String top10Title = getResources().getString(R.string.menu_top10);
+        String top10TitleSub = getResources().getString(R.string.menu_top10_sub);
+
+        String planCover = getResources().getString(R.string.cover_user_plan);
+        String favouritesCover = getResources().getString(R.string.cover_user_favourities);
+        String facultityCover = getResources().getString(R.string.cover_user_facultity);
+        String todayCover = getResources().getString(R.string.cover_today);
+        String tommorowCover = getResources().getString(R.string.cover_tomorrow);
+        String itCover = getResources().getString(R.string.cover_informatyka);
+        String cultureCover = getResources().getString(R.string.cover_kultura);
+        String sportCover = getResources().getString(R.string.cover_sport);
+        String top10Cover = getResources().getString(R.string.cover_top10);
+
+        String noUrl = "";
+        String todayUrl = "http://www.napwr.pl/mobile/wydarzenia/dzis";
+        String tommorowUrl = "http://www.napwr.pl/mobile/wydarzenia/jutro";
+        String itUrl = "http://www.napwr.pl/rss/czas/40320/kategorie/informatyka,programowanie,grykomputerowe,marketinginternetowy,grafikakomputerowa,technologiemobilne,android,linux,windows,apple/organizacje/asi,kn-temomuko,knsi,google-student-ambassador,osd,polishleaguegaming,knstit,pad-party/?type=mobile";
+        String cultureUrl = "http://www.napwr.pl/rss/czas/40320/kategorie/kultura,kino,teatr,sztuka/organizacje/dkf-politechnika,miesiecznik-zak,strefa-kultury-studenckiej/?type=mobile";
+        String sportUrl = "http://www.napwr.pl/rss/czas/40320/kategorie/flashmob,gry,grykomputerowe,narty,sport,zawodysportowe,bilard,kajakarstwo,koszykowka,pilkanozna,siatkowka,mecze/organizacje/studencki-klub-turystyczny-pwr,liga-pwr,pwr-racing-team,polishleaguegaming,pad-party,mkk-wrotka,kz-polwiatr,reprezentacja-pwr-koszykowka,ks-pwr/?type=mobile";
+        String top10Url = "http://www.napwr.pl/json/topten";
+
         listItems = new ArrayList<ListItemObject>();
         if (ifLogedin()) {
-            listItems.add(new ListItemObject(2, getResources().getString(R.string.menu_user_plan), 0, getResources().getString(
-                R.string.cover_user_plan)));
-            // listItems.add(new ListItemObject(3, getResources().getString(
-            // R.string.menu_user_plan_sub),
-            // R.drawable.miniature_calendar, ""));
-            listItems.add(new ListItemObject(0, getResources().getString(R.string.menu_user_favourities), R.drawable.miniature_favourites, ""));
+            listItems.add(new ListItemObject(poster, planTitle, 0, planCover));
+            listItems.add(new ListItemObject(plan, planTitleSub, R.drawable.miniature_calendar, noUrl));
+            listItems.add(new ListItemObject(poster, favouritesTitle, noMiniature, favouritesCover));
+            listItems.add(new ListItemObject(poster, facultityTitle, noMiniature, facultityCover));
         }
-        listItems.add(new ListItemObject(2, getResources().getString(R.string.menu_today), 0, getResources().getString(R.string.cover_today)));
-        listItems.add(new ListItemObject(0, getResources().getString(R.string.menu_today_sub), R.drawable.miniature_today,
-            "http://www.napwr.pl/mobile/wydarzenia/dzis"));
-        listItems.add(new ListItemObject(2, getResources().getString(R.string.menu_tomorrow), 0, getResources().getString(R.string.cover_tomorrow)));
-        listItems.add(new ListItemObject(0, getResources().getString(R.string.menu_tomorrow_sub), R.drawable.miniature_tommorow,
-            "http://www.napwr.pl/mobile/wydarzenia/jutro"));
-        listItems.add(new ListItemObject(2, getResources().getString(R.string.menu_it), 0, getResources().getString(R.string.cover_informatyka)));
-        listItems
-            .add(new ListItemObject(
-                1,
-                getResources().getString(R.string.menu_it_sub),
-                0,
-                "http://www.napwr.pl/rss/czas/40320/kategorie/informatyka,programowanie,grykomputerowe,marketinginternetowy,grafikakomputerowa,technologiemobilne,android,linux,windows,apple/organizacje/asi,kn-temomuko,knsi,google-student-ambassador,osd,polishleaguegaming,knstit,pad-party/?type=mobile"));
-        listItems.add(new ListItemObject(2, getResources().getString(R.string.menu_kultura), 0, getResources().getString(R.string.cover_kultura)));
-        listItems
-            .add(new ListItemObject(
-                1,
-                getResources().getString(R.string.menu_kultura_sub),
-                0,
-                "http://www.napwr.pl/rss/czas/40320/kategorie/kultura,kino,teatr,sztuka/organizacje/dkf-politechnika,miesiecznik-zak,strefa-kultury-studenckiej/?type=mobile"));
-        listItems.add(new ListItemObject(2, getResources().getString(R.string.menu_sport), 0, getResources().getString(R.string.cover_sport)));
-        listItems
-            .add(new ListItemObject(
-                1,
-                getResources().getString(R.string.menu_sport_sub),
-                0,
-                "http://www.napwr.pl/rss/czas/40320/kategorie/flashmob,gry,grykomputerowe,narty,sport,zawodysportowe,bilard,kajakarstwo,koszykowka,pilkanozna,siatkowka,mecze/organizacje/studencki-klub-turystyczny-pwr,liga-pwr,pwr-racing-team,polishleaguegaming,pad-party,mkk-wrotka,kz-polwiatr,reprezentacja-pwr-koszykowka,ks-pwr/?type=mobile"));
-        listItems.add(new ListItemObject(2, getResources().getString(R.string.menu_top10), 0, getResources().getString(R.string.cover_top10)));
-        listItems.add(new ListItemObject(0, getResources().getString(R.string.menu_top10_sub), R.drawable.miniature_top10,
-            "http://www.napwr.pl/json/topten"));
+
+        listItems.add(new ListItemObject(poster, todayTitle, noMiniature, todayCover));
+        listItems.add(new ListItemObject(json, todayTitleSub, R.drawable.miniature_today, todayUrl));
+        listItems.add(new ListItemObject(poster, tomorrowTitle, noMiniature, tommorowCover));
+        listItems.add(new ListItemObject(json, tommorowTitleSub, R.drawable.miniature_tommorow, tommorowUrl));
+        listItems.add(new ListItemObject(poster, itTitle, noMiniature, itCover));
+        listItems.add(new ListItemObject(rss, itTitleSub, noMiniature, itUrl));
+        listItems.add(new ListItemObject(poster, cultureTitle, noMiniature, cultureCover));
+        listItems.add(new ListItemObject(rss, cultureTitelSub, noMiniature, cultureUrl));
+        listItems.add(new ListItemObject(poster, sportTitle, noMiniature, sportCover));
+        listItems.add(new ListItemObject(rss, sportTitleSub, noMiniature, sportUrl));
+        listItems.add(new ListItemObject(poster, top10Title, json, top10Cover));
+        listItems.add(new ListItemObject(json, top10TitleSub, R.drawable.miniature_top10, top10Url));
     }
 
     void addItemsOnLogIn() {
@@ -529,7 +547,7 @@ public class MenuActivity extends FragmentActivity implements OnClickListener {
         btn_user_favourities.setBackgroundDrawable(getResources().getDrawable(R.drawable.menu_left_gradient_button_gray_sub));
         btn_user_facultity.setBackgroundDrawable(getResources().getDrawable(R.drawable.menu_left_gradient_button_gray_sub));
 
-        toMark.setBackgroundDrawable(getResources().getDrawable(R.drawable.menu_left_gradient_selected_green));
+        toMark.setBackgroundDrawable(getResources().getDrawable(R.drawable.menu_left_gradient_selected_blue));
     }
 
     @Override

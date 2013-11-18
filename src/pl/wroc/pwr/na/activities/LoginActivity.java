@@ -10,10 +10,7 @@ import pl.wroc.pwr.na.NAPWrApplication;
 import pl.wroc.pwr.na.R;
 import pl.wroc.pwr.na.tools.RequestTaskString;
 import pl.wroc.pwr.na.tools.UseInternalStorage;
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -63,16 +60,16 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 	}
 
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	// @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	// API 11
 	String startMyTask(String s) {
 		try {
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-				return (String) new RequestTaskString().executeOnExecutor(
-						AsyncTask.THREAD_POOL_EXECUTOR, s).get();
-			else
+			// if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+			// return (String) new RequestTaskString().executeOnExecutor(
+			// AsyncTask.THREAD_POOL_EXECUTOR, s).get();
+			// else
 
-				return (String) new RequestTaskString().execute(s).get();
+			return new RequestTaskString().execute(s).get();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {
